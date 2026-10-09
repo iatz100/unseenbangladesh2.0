@@ -179,35 +179,8 @@ h2 small{color:var(--mut);font-weight:400;font-size:.8rem}
 <link rel="stylesheet" href="../assets/css/components.css">
 </head>
 <body>
-<!-- sc:header:start -->
-<header class="sc-header">
-  <div class="sc-header-in">
-    <button class="sc-menu-btn" id="sc-menu-btn" type="button" aria-label="মেনু খুলুন" aria-controls="sc-side" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    <a class="sc-logo" href="/#top"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</a>
-    <nav class="sc-header-nav" aria-label="প্রধান মেনু">
-      <a href="/#top" data-k="home">আমার ম্যাপ</a>
-      <span class="sc-menu-divider">|</span>
-      <a href="../guide/">ভ্রমণ গাইড</a>
-    </nav>
-  </div>
-</header>
-<!-- sc:header:end -->
-<!-- sc:side-menu:start -->
-<div class="sc-scrim" id="sc-scrim"></div>
-<aside class="sc-side" id="sc-side" aria-label="মেনু">
-  <div class="sc-side-h">
-    <span class="sc-logo"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</span>
-    <button class="sc-menu-btn" id="sc-menu-x" type="button" aria-label="মেনু বন্ধ করুন"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  </div>
-  <nav class="sc-side-nav">
-    <a href="/#top">হোম</a>
-    <a href="../guide/">ভ্রমণ গাইড</a>
-    <button type="button" id="sc-side-about">সম্পর্কে</button>
-    <a href="../privacy.html">গোপনীয়তা নীতি</a>
-  </nav>
-  <p class="sc-side-f">৬৪ জেলা · ৮ বিভাগ</p>
-</aside>
-<!-- sc:side-menu:end -->
+<div data-component="header"></div>
+<div data-component="side-menu"></div>
 <main class="wrap">
   <section id="home"><div class="pop" id="popwrap"><p class="pop-story">৬৪ জেলার পরিচিত ও অল্পচেনা দর্শনীয় স্থান ঘুরে দেখুন। কীভাবে যাবেন, কখন যাবেন, আনুমানিক খরচ ও থাকার ব্যবস্থা সব তথ্য একসাথে।</p><h2>জনপ্রিয় গন্তব্য</h2><div class="pop-track" id="pop" aria-label="জনপ্রিয় জেলা"></div></div><h2>জেলা সমূহ <small id="cnt">(64টি)</small></h2><div class="tools"><input id="q" type="search" placeholder="জেলা বা দর্শনীয় স্থানের নাম খুঁজুন…" aria-label="অনুসন্ধান" autocomplete="off"><select id="dv" aria-label="বিভাগ ফিল্টার"><option value="">সব বিভাগ</option></select></div><div id="grid" class="acc"></div>
   <aside class="cta">
@@ -216,35 +189,7 @@ h2 small{color:var(--mut);font-weight:400;font-size:.8rem}
   </aside></section>
   <section id="det" hidden><div id="body"></div><div id="pd" hidden><div id="pbody"></div></div></section>
 </main>
-<!-- sc:footer:start -->
-<footer class="sc-footer">
-  <div class="sc-f-top">
-    <div class="sc-f-inner">
-      <div class="sc-f-brand">
-        <div class="sc-f-logo"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</div>
-        <p class="sc-tagline">সৌন্দর্যে ভরা প্রিয় বাংলাদেশ</p>
-      </div>
-    </div>
-  </div>
-  <div class="sc-f-bar">
-    <div class="sc-f-inner">
-      <div class="sc-f-links">
-        <a href="../privacy.html"><span class="sc-bn">গোপনীয়তা নীতি</span><span class="sc-en">Privacy Policy</span></a>
-        <button type="button" id="sc-footer-about"><span class="sc-bn">সম্পর্কে</span><span class="sc-en">About</span></button>
-      </div>
-      © ২০২৬ Unseen Bangladesh 2.0 — সর্বস্বত্ব সংরক্ষিত।
-    </div>
-  </div>
-</footer>
-<dialog class="sc-about" id="sc-about" aria-labelledby="sc-about-t">
-  <button class="sc-about-x" type="button" aria-label="বন্ধ করুন" data-close>×</button>
-  <img class="sc-about-hero" decoding="async" src="../assets/images/about_image.webp" alt="অদেখা বাংলাদেশ ২.০" loading="lazy" width="800" height="640">
-  <div class="sc-about-body">
-    <h2 id="sc-about-t"><span class="sc-bn">অদেখা বাংলাদেশ ২.০</span><span class="sc-en">Unseen Bangladesh 2.0</span></h2>
-    <p class="sc-about-desc">🇧🇩 Unseen Bangladesh 2.0<span class="sc-bn"> নিজের দেশকে নতুন করে আবিষ্কারের গল্প। অজানা সৌন্দর্য খুঁজে বের করুন, ভ্রমণের স্মৃতি ধরে রাখুন! ভালোবাসায় চিনে নিন আমাদের বাংলাদেশ।</span><span class="sc-en"> a story of rediscovering our own country. Find hidden beauty, keep your travel memories alive, and get to know our Bangladesh with love.</span></p>
-  </div>
-</dialog>
-<!-- sc:footer:end -->
+<div data-component="footer"></div>
 
 
 <script>
