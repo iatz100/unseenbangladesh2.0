@@ -73,7 +73,7 @@ h2 small{font-size:13px;color:var(--muted);font-weight:500}
     <div class="grid" id="hot"></div>
     <div id="divs"></div>
     <p class="empty" id="empty" hidden>কিছু পাওয়া যায়নি।</p>
-    <p class="note">নম্বরগুলো emergency.json ফাইল থেকে আসে। ব্যবহারের আগে সরকারি সূত্র থেকে যাচাই করে নিন। ট্যাপ করলে ফোনের ডায়ালারে নম্বর বসে যায়।</p>
+    <p class="note">নম্বরগুলো assets/data/emergency.json ফাইল থেকে আসে। ব্যবহারের আগে সরকারি সূত্র থেকে যাচাই করে নিন। ট্যাপ করলে ফোনের ডায়ালারে নম্বর বসে যায়।</p>
   </div>
   <div id="detail" hidden></div>
   <p class="msg" id="msg" hidden></p>
@@ -96,13 +96,13 @@ const fix=h=>h.replace(/<a class="call([^"]*)" href="tel:"/g,'<a class="call$1" 
 $("cats").innerHTML=["সব",...DIVS.map(d=>d[0])].map(c=>`<button type="button" class="cat" aria-pressed="${c===div}" data-c="${esc(c)}">${c==="সব"?c:esc(c)+" বিভাগ"}</button>`).join("");
 
 // ---- নম্বর ও বিস্তারিত তথ্য পরে JSON থেকে লোড হয় ----
-fetch("emergency.json",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{
+fetch("/assets/data/emergency.json",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{
   (d.national||[]).forEach(x=>{const t=DB.national.find(y=>y.name===x.name);if(t)Object.assign(t,x)});
   (d.divisions||[]).forEach(dv=>(dv.districts||[]).forEach(x=>{
     for(const g of DB.divisions){const t=g.districts.find(y=>y.name===x.name);if(t){Object.assign(t,x);break}}}));
   DB.common=d.common||{};
   route();
-}).catch(()=>{$("msg").hidden=false;$("msg").textContent="নম্বর লোড করা যায়নি: emergency.json ফাইলটি এই পেজের পাশে রাখুন এবং ওয়েব সার্ভার/হোস্টিং থেকে পেজটি খুলুন (সরাসরি ফাইল খুললে কাজ করে না)."});
+}).catch(()=>{$("msg").hidden=false;$("msg").textContent="নম্বর লোড করা যায়নি: assets/data/emergency.json ফাইলটি আছে কি না দেখুন এবং ওয়েব সার্ভার/হোস্টিং থেকে পেজটি খুলুন (সরাসরি ফাইল খুললে কাজ করে না)."});
 
 $("cats").onclick=e=>{const b=e.target.closest(".cat");if(!b)return;div=b.dataset.c;
   document.querySelectorAll(".cat").forEach(x=>x.setAttribute("aria-pressed",x===b));renderList()};
