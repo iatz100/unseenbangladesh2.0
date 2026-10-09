@@ -1,0 +1,16 @@
+<!-- ub-theme:start -->
+<script>
+(function () {
+  var t = null;
+  try { t = localStorage.getItem("ub-theme"); } catch (e) {}
+  if (t !== "dark" && t !== "light") {
+    t = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  document.documentElement.setAttribute("data-theme", t);
+})();
+</script>
+<style>
+html[data-theme="dark"]{background:#0d1512;color-scheme:dark}
+html[data-theme="dark"] body{background:#0d1512;color:#e8efe9}
+</style>
+<!-- ub-theme:end -->
