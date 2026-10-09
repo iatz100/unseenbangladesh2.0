@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/images/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="96x96" href="../assets/images/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="../assets/images/icon-192.png">
+<title>বাংলাদেশ ট্যুরিস্ট গাইড</title>
+<link rel="preload" href="../assets/data/tourist.json" as="fetch" crossorigin="anonymous">
+<script>window.__TJ=fetch('../assets/data/tourist.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()});</script>
+<style>
+:root{--g1:#14532d;--g2:#16a34a;--g3:#dcfce7;--g4:#f0fdf4;--ink:#1f2937;--mut:#6b7280;--warn:#b45309}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Hind Siliguri","Noto Sans Bengali",system-ui,sans-serif;color:var(--ink);background:var(--g4);line-height:1.7;padding-top:env(safe-area-inset-top, 0px);padding-bottom:env(safe-area-inset-bottom, 0px)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+.tools{position:relative;display:block;margin:0 0 14px}
+main{padding:22px 16px 40px;padding-top:max(22px, env(safe-area-inset-top, 0px))}
+h2{color:var(--g1);margin:8px 0 12px}
+h2 small{color:var(--mut);font-weight:400;font-size:.8rem}
+.grid,.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tools input,.tools select{border:1px solid #bbf7d0;background:#fff;padding:12px 16px;border-radius:99px;border:0;font:inherit;min-width:0}
+.tools input{display:block;width:100%;box-sizing:border-box;padding-right:150px}
+.tools select{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:132px;padding:6px 10px;background:var(--g3);color:var(--g1);cursor:pointer;font-size:.85rem}
+.tools input,.tools select{outline:0}.tools input{box-shadow:0 2px 8px rgba(20,83,45,.1)}.tools select{box-shadow:none}
+.tools input:focus{box-shadow:0 0 0 2px var(--g2)}.tools select:focus{box-shadow:0 0 0 2px var(--g2)}
+.acc{display:flex;flex-direction:column;gap:12px}
+.ac{background:#fff;border:1px solid #bbf7d0;border-radius:18px;box-shadow:0 4px 14px rgba(20,83,45,.08);overflow:hidden;transition:box-shadow .25s,border-color .25s}
+.ac.open{border-color:var(--g2);box-shadow:0 8px 24px rgba(20,83,45,.14)}
+.ah{width:100%;display:flex;align-items:center;gap:12px;padding:14px 16px;border:0;background:#fff;font:inherit;color:var(--g1);cursor:pointer;text-align:left;transition:background .25s,color .25s}
+.ah:focus-visible{outline:2px solid var(--g2);outline-offset:-2px}
+.ac.open .ah{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff}
+.ah .no{flex:0 0 auto;width:34px;height:34px;border-radius:50%;background:var(--g3);color:var(--g1);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;transition:.25s}
+.ac.open .ah .no{background:rgba(255,255,255,.22);color:#fff}
+.ah .nm{flex:1 1 auto;font-size:1.1rem;font-weight:600;line-height:1.3;min-width:0}
+.ah .ct{flex:0 0 auto;font-size:.78rem;padding:2px 10px;border-radius:99px;background:var(--g3);color:var(--g1);transition:.25s}
+.ac.open .ah .ct{background:rgba(255,255,255,.22);color:#fff}
+.ah .cv{flex:0 0 auto;width:10px;height:10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translate(-2px,-2px);transition:transform .25s}
+.ac.open .ah .cv{transform:rotate(-135deg) translate(-2px,-2px)}
+.ap{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.ac.open .ap{grid-template-rows:1fr}
+.ap>.in{overflow:hidden;min-height:0;visibility:hidden;transition:visibility 0s .3s}
+.ac.open .ap>.in{visibility:visible;transition-delay:0s}
+.ap .grid{padding:12px}
+@media(prefers-reduced-motion:reduce){.ap,.ah,.cv{transition:none}}
+.dc{position:relative;background:linear-gradient(135deg,#0ea5e9,#06b6d4);background-size:cover;background-position:center;border:none;border-radius:20px;padding:0;text-align:center;cursor:pointer;font:inherit;color:inherit;transition:.3s;overflow:hidden;aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-height:0;box-shadow:0 8px 20px rgba(20,83,45,.12)}
+.dc::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0) 40%,rgba(0,0,0,.4) 100%);z-index:1}
+.dc:hover,.dc:focus-visible{transform:scale(1.04);box-shadow:0 12px 32px rgba(20,83,45,.18);outline:0}
+.dc b{display:block;font-size:clamp(.95rem,3.6vw,1.25rem);color:#fff;font-weight:600;z-index:2;position:relative;word-break:break-word;line-height:1.3}
+.dc span{display:none}
+.dc b{text-shadow:0 1px 4px rgba(0,0,0,.45)}
+.dc i{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-style:normal;font-size:clamp(.58rem,2vw,.68rem);line-height:1.35;font-weight:400;padding:0;border-radius:0;background:none;color:rgba(255,255,255,.88);z-index:2;position:relative;margin:0;width:100%;text-shadow:0 1px 3px rgba(0,0,0,.55)}
+.dc__content{position:relative;z-index:2;padding:3px;display:flex;flex-direction:column;gap:2px;min-height:0;height:100%;justify-content:flex-end;align-items:center;text-align:center;width:100%}
+.dc b{text-align:center !important;width:100%}
+.btn{background:var(--g1);color:#fff;border:0;border-radius:99px;padding:10px 20px;font:inherit;cursor:pointer}
+.btn:hover{background:var(--g2)}
+.dh{padding-bottom:16px}
+.dh h2{font-size:1.9rem;margin:0 0 8px}
+.dh p{margin:0;color:var(--mut)}
+.upa{background:#fff;border-radius:16px;margin:16px 0;padding:4px 16px 16px;border-left:6px solid var(--g2)}
+.upa>h3{color:var(--g1);margin:12px 0 2px}
+.upa>p{margin:0 0 10px;color:var(--mut)}
+.places{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.pl{border:1px solid #d1fae5;border-radius:16px;overflow:hidden}
+.pic{height:150px;background:linear-gradient(135deg,#86efac,#16a34a);display:flex;align-items:center;justify-content:center;font-size:3rem}
+.pic img{width:100%;height:100%;object-fit:cover}
+.pb{padding:14px 16px}
+.pb h4{margin:0 0 6px;font-size:1.2rem;color:var(--g1)}
+.pb p{margin:0 0 8px}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.f{background:var(--g4);border-radius:10px;padding:8px 10px;font-size:.88rem}
+.f b{display:block;color:var(--g1);font-size:.78rem}
+.f.w{grid-column:1/-1}
+.sec{margin:10px 0}
+.sec h5{margin:0 0 2px;color:var(--g1);font-size:.95rem}
+.sec ul{margin:0;padding-left:20px}
+.sec.warn h5,.sec.warn li{color:var(--warn)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--g3);color:var(--g1);padding:2px 12px;border-radius:99px;font-size:.85rem}
+.src{font-size:.82rem;color:var(--mut);margin-top:8px}
+.src a{color:var(--g2)}
+.map{display:inline-block;margin-top:6px;background:var(--g2);color:#fff;text-decoration:none;padding:8px 16px;border-radius:99px;font-size:.9rem}
+.map:hover{background:var(--g1)}
+.empty{background:#fff;border:2px dashed #86efac;border-radius:16px;padding:26px;text-align:center;color:var(--mut);margin-top:14px}
+.cards{margin-top:14px}
+.tc{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 14px rgba(20,83,45,.1);display:flex;flex-direction:column;transition:.2s}
+.tc:hover{transform:translateY(-4px);box-shadow:0 14px 28px rgba(20,83,45,.18)}
+.tw{position:relative}
+.tpic{height:150px}
+.bdg{position:absolute;top:12px;left:12px;background:#f59e0b;color:#fff;font-size:.78rem;font-weight:700;padding:3px 12px;border-radius:99px}
+.tb{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.tb h4{margin:6px 0;font-size:1.05rem;line-height:1.35;color:var(--g1)}
+.tb p{margin:0 0 12px;color:var(--mut);font-size:.85rem;line-height:1.55}
+.up{align-self:flex-start;font-size:.75rem;background:var(--g3);color:var(--g1);padding:1px 10px;border-radius:99px}
+.act{margin-top:auto;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.more{background:none;border:0;color:var(--g2);font:inherit;font-weight:700;cursor:pointer;padding:0}
+.more:hover{color:var(--g1)}
+.act .map{margin:0;padding:6px 14px}
+.dtl{margin-top:14px;background:#fff}
+.dtl .pic{height:300px}
+@media(min-width:700px){.grid,.cards{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:900px){.grid,.cards{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1100px){.grid,.cards{grid-template-columns:repeat(5,1fr)}.tpic{height:160px}}
+@media(max-width:560px){.dtl .pic{height:200px}.act .map{padding:5px 10px;font-size:.8rem}.more{font-size:.85rem}}
+
+/* ---- জনপ্রিয় স্লাইডার ---- */
+.pop{margin:0 0 22px}
+.pop h2{margin:0 0 10px}
+.pop-track{display:flex;gap:14px;overflow-x:auto;padding:4px 2px 12px;scroll-snap-type:none;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.pop-track::-webkit-scrollbar{display:none}
+.pop-track .dc{flex:0 0 min(260px,72vw);aspect-ratio:16/9}
+.pop-track .dc .bdg{top:8px;left:8px;font-size:.7rem;padding:1px 10px;z-index:3}
+/* ---- জেলার স্থান কার্ড: মোবাইলে ১টি, ডেস্কটপে ৩টি ---- */
+.cards{grid-template-columns:1fr!important}
+@media(min-width:768px){.cards{grid-template-columns:repeat(3,1fr)!important}}
+.tc{cursor:pointer}
+.tc .tpic,.dtl .pic{height:auto;aspect-ratio:16/9}
+.tc .tpic{width:100%}
+.dtl .pic{aspect-ratio:16/9}
+.pw{position:relative}
+.cr{position:absolute;bottom:10px;right:10px;z-index:3;max-width:70%;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;line-height:1.4;padding:2px 10px;border-radius:99px;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.act{flex-wrap:nowrap!important}
+.act .more{white-space:nowrap}
+.act .map{white-space:nowrap;flex:0 0 auto}
+.tb h4,.tb p{cursor:pointer}
+.mapbox{position:relative;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;margin:10px 0;background:var(--g3)}
+.mapbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+</style>
+<style>
+/* Anek Bangla (SIL OFL 1.1, see assets/fonts/OFL.txt), self-hosted so the page has no third-party requests */
+/* bengali */
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-bengali.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* ---- জেলার তথ্য আসার আগে বিভাগের ভিতরে ছোট বার্তা (skeleton নয়) ---- */
+
+.ldn{grid-column:1/-1;padding:18px 8px;text-align:center;color:var(--mut);font-size:.9rem}
+/* ---- জেলা কার্ড: ছবি + নিচে কালো overlay-র উপর নাম, স্থানের সংখ্যা ও স্থানের নাম ---- */
+.dc b small{display:inline-block;margin-left:6px;font-size:.62em;font-weight:400;color:rgba(255,255,255,.92);white-space:nowrap}
+/* ---- জনপ্রিয় গন্তব্যের উপরের ছোট গল্প ---- */
+.pop-story{margin:0 auto 16px;padding:2px 0;color:var(--mut);font-size:.98rem;line-height:1.8;max-width:760px;text-align:center}
+/* ---- "কতগুলো জেলা ঘুরেছেন?" কার্ড (index.html-এর মতো) ---- */
+.cta{display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;background:#fff;border:1px solid #ebe6dc;border-radius:16px;padding:20px 24px;margin:28px 0 0;color:#17201c}
+.cta b{display:block;color:#0f6b4f;font-size:1.15rem}
+.cta p{margin:4px 0 0;color:#6b716d;font-size:.92rem;max-width:620px}
+.cta .btn{display:inline-block;background:#0f6b4f;color:#fff;text-decoration:none;white-space:nowrap}
+.cta .btn:hover{background:var(--g1)}
+/* ---- জনপ্রিয় স্লাইডার: মাউস ড্র্যাগ ও টাচ স্ক্রল ---- */
+.pop-track{cursor:grab;overscroll-behavior-x:contain}
+.pop-track.drag{cursor:grabbing;user-select:none}
+.pop-track.drag .dc{pointer-events:none}
+</style>
+<link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+<!-- sc:header:start -->
+<header class="sc-header">
+  <div class="sc-header-in">
+    <button class="sc-menu-btn" id="sc-menu-btn" type="button" aria-label="মেনু খুলুন" aria-controls="sc-side" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="sc-logo" href="/#top"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</a>
+    <nav class="sc-header-nav" aria-label="প্রধান মেনু">
+      <a href="/#top" data-k="home">আমার ম্যাপ</a>
+      <span class="sc-menu-divider">|</span>
+      <a href="../guide/">ভ্রমণ গাইড</a>
+    </nav>
+  </div>
+</header>
+<!-- sc:header:end -->
+<!-- sc:side-menu:start -->
+<div class="sc-scrim" id="sc-scrim"></div>
+<aside class="sc-side" id="sc-side" aria-label="মেনু">
+  <div class="sc-side-h">
+    <span class="sc-logo"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</span>
+    <button class="sc-menu-btn" id="sc-menu-x" type="button" aria-label="মেনু বন্ধ করুন"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav class="sc-side-nav">
+    <a href="/#top">হোম</a>
+    <a href="../guide/">ভ্রমণ গাইড</a>
+    <button type="button" id="sc-side-about">সম্পর্কে</button>
+    <a href="../privacy.html">গোপনীয়তা নীতি</a>
+  </nav>
+  <p class="sc-side-f">৬৪ জেলা · ৮ বিভাগ</p>
+</aside>
+<!-- sc:side-menu:end -->
+<main class="wrap">
+  <section id="home"><div class="pop" id="popwrap"><p class="pop-story">৬৪ জেলার পরিচিত ও অল্পচেনা দর্শনীয় স্থান ঘুরে দেখুন। কীভাবে যাবেন, কখন যাবেন, আনুমানিক খরচ ও থাকার ব্যবস্থা সব তথ্য একসাথে।</p><h2>জনপ্রিয় গন্তব্য</h2><div class="pop-track" id="pop" aria-label="জনপ্রিয় জেলা"></div></div><h2>জেলা সমূহ <small id="cnt">(64টি)</small></h2><div class="tools"><input id="q" type="search" placeholder="জেলা বা দর্শনীয় স্থানের নাম খুঁজুন…" aria-label="অনুসন্ধান" autocomplete="off"><select id="dv" aria-label="বিভাগ ফিল্টার"><option value="">সব বিভাগ</option></select></div><div id="grid" class="acc"></div>
+  <aside class="cta">
+    <div><b>কতগুলো জেলা ঘুরেছেন?</b><p>ঘোরা জেলাগুলো বাছাই করে নিজের ভ্রমণ ম্যাপ বানান, আর ট্রিপ প্ল্যানারে পরের ভ্রমণ সাজান। সাইন-আপ লাগে না।</p></div>
+    <a class="btn" href="../#map">আমার ম্যাপ বানান</a>
+  </aside></section>
+  <section id="det" hidden><div id="body"></div><div id="pd" hidden><div id="pbody"></div></div></section>
+</main>
+<!-- sc:footer:start -->
+<footer class="sc-footer">
+  <div class="sc-f-top">
+    <div class="sc-f-inner">
+      <div class="sc-f-brand">
+        <div class="sc-f-logo"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</div>
+        <p class="sc-tagline">সৌন্দর্যে ভরা প্রিয় বাংলাদেশ</p>
+      </div>
+    </div>
+  </div>
+  <div class="sc-f-bar">
+    <div class="sc-f-inner">
+      <div class="sc-f-links">
+        <a href="../privacy.html"><span class="sc-bn">গোপনীয়তা নীতি</span><span class="sc-en">Privacy Policy</span></a>
+        <button type="button" id="sc-footer-about"><span class="sc-bn">সম্পর্কে</span><span class="sc-en">About</span></button>
+      </div>
+      © ২০২৬ Unseen Bangladesh 2.0 — সর্বস্বত্ব সংরক্ষিত।
+    </div>
+  </div>
+</footer>
+<dialog class="sc-about" id="sc-about" aria-labelledby="sc-about-t">
+  <button class="sc-about-x" type="button" aria-label="বন্ধ করুন" data-close>×</button>
+  <img class="sc-about-hero" decoding="async" src="../assets/images/about_image.webp" alt="অদেখা বাংলাদেশ ২.০" loading="lazy" width="800" height="640">
+  <div class="sc-about-body">
+    <h2 id="sc-about-t"><span class="sc-bn">অদেখা বাংলাদেশ ২.০</span><span class="sc-en">Unseen Bangladesh 2.0</span></h2>
+    <p class="sc-about-desc">🇧🇩 Unseen Bangladesh 2.0<span class="sc-bn"> নিজের দেশকে নতুন করে আবিষ্কারের গল্প। অজানা সৌন্দর্য খুঁজে বের করুন, ভ্রমণের স্মৃতি ধরে রাখুন! ভালোবাসায় চিনে নিন আমাদের বাংলাদেশ।</span><span class="sc-en"> a story of rediscovering our own country. Find hidden beauty, keep your travel memories alive, and get to know our Bangladesh with love.</span></p>
+  </div>
+</dialog>
+<!-- sc:footer:end -->
+
+
+<script>
+(function () {
+  'use strict';
+  // ৮টি বিভাগ static UI — tourist.json-এর উপর নির্ভর করে না (নাম + জেলার সংখ্যা)
+  var DIVS = [['ঢাকা', 13], ['চট্টগ্রাম', 11], ['রাজশাহী', 8], ['খুলনা', 10], ['বরিশাল', 6], ['সিলেট', 4], ['রংপুর', 8], ['ময়মনসিংহ', 4]];
+  // ৬৪ জেলার নাম ও জনপ্রিয় তালিকা static (UI আগে render হয়); tourist.json শুধু ডেটার উৎস
+  var D = [["ঢাকা", "ঢাকা"], ["গাজীপুর", "ঢাকা"], ["কিশোরগঞ্জ", "ঢাকা"], ["মানিকগঞ্জ", "ঢাকা"], ["মুন্সিগঞ্জ", "ঢাকা"], ["নারায়ণগঞ্জ", "ঢাকা"], ["নরসিংদী", "ঢাকা"], ["টাঙ্গাইল", "ঢাকা"], ["ফরিদপুর", "ঢাকা"], ["গোপালগঞ্জ", "ঢাকা"], ["মাদারীপুর", "ঢাকা"], ["রাজবাড়ী", "ঢাকা"], ["শরীয়তপুর", "ঢাকা"], ["চট্টগ্রাম", "চট্টগ্রাম"], ["কক্সবাজার", "চট্টগ্রাম"], ["রাঙ্গামাটি", "চট্টগ্রাম"], ["বান্দরবান", "চট্টগ্রাম"], ["খাগড়াছড়ি", "চট্টগ্রাম"], ["ফেনী", "চট্টগ্রাম"], ["লক্ষ্মীপুর", "চট্টগ্রাম"], ["নোয়াখালী", "চট্টগ্রাম"], ["কুমিল্লা", "চট্টগ্রাম"], ["চাঁদপুর", "চট্টগ্রাম"], ["ব্রাহ্মণবাড়িয়া", "চট্টগ্রাম"], ["রাজশাহী", "রাজশাহী"], ["চাঁপাইনবাবগঞ্জ", "রাজশাহী"], ["নওগাঁ", "রাজশাহী"], ["নাটোর", "রাজশাহী"], ["পাবনা", "রাজশাহী"], ["সিরাজগঞ্জ", "রাজশাহী"], ["বগুড়া", "রাজশাহী"], ["জয়পুরহাট", "রাজশাহী"], ["খুলনা", "খুলনা"], ["বাগেরহাট", "খুলনা"], ["সাতক্ষীরা", "খুলনা"], ["যশোর", "খুলনা"], ["নড়াইল", "খুলনা"], ["মাগুরা", "খুলনা"], ["ঝিনাইদহ", "খুলনা"], ["কুষ্টিয়া", "খুলনা"], ["চুয়াডাঙ্গা", "খুলনা"], ["মেহেরপুর", "খুলনা"], ["বরিশাল", "বরিশাল"], ["ভোলা", "বরিশাল"], ["পটুয়াখালী", "বরিশাল"], ["পিরোজপুর", "বরিশাল"], ["বরগুনা", "বরিশাল"], ["ঝালকাঠি", "বরিশাল"], ["সিলেট", "সিলেট"], ["মৌলভীবাজার", "সিলেট"], ["হবিগঞ্জ", "সিলেট"], ["সুনামগঞ্জ", "সিলেট"], ["রংপুর", "রংপুর"], ["দিনাজপুর", "রংপুর"], ["গাইবান্ধা", "রংপুর"], ["কুড়িগ্রাম", "রংপুর"], ["লালমনিরহাট", "রংপুর"], ["নীলফামারী", "রংপুর"], ["পঞ্চগড়", "রংপুর"], ["ঠাকুরগাঁও", "রংপুর"], ["ময়মনসিংহ", "ময়মনসিংহ"], ["জামালপুর", "ময়মনসিংহ"], ["নেত্রকোণা", "ময়মনসিংহ"], ["শেরপুর", "ময়মনসিংহ"]];
+  var POPD = ["কক্সবাজার", "সিলেট", "বান্দরবান", "রাঙ্গামাটি", "মৌলভীবাজার", "সুনামগঞ্জ", "পটুয়াখালী", "খুলনা", "খাগড়াছড়ি"];
+  var T = {}, SPOTS = {}, IMGS = {}, loaded = false;
+  var conv = function (p) {
+    return { n: p.name, e: p.emoji || '📍', img: p.image || '', cr: p.image_credit || '', popular: !!p.popular,
+      i: p.intro || '', h: p.history || '', w: p.why_famous || '', g: p.how_to_go || '', d: p.distance || '',
+      c: p.cost || '', s: p.best_time || '', m: p.map || p.name, t: p.tips || [], x: p.warnings || [], nb: p.nearby || [],
+      src: (p.source || []).map(function (x) { return { t: x.title, u: x.url }; }) };
+  };
+  // JSON লোড হলে ডেটা বসায়
+  function ingest(J) {
+    if (J.popular_districts && J.popular_districts.length) POPD = J.popular_districts;
+    (J.divisions || []).forEach(function (dv) {
+      (dv.districts || []).forEach(function (ds) {
+        var areas = [], names = [];
+        (ds.areas || []).forEach(function (a) {
+          var ready = [];
+          (a.places || []).forEach(function (p) {
+            names.push(p.name);
+            if (!IMGS[ds.name] && /^(https?:)?\/|^[\w.-]+\/[\w.\/-]+\.\w+$/.test(p.image || '')) IMGS[ds.name] = p.image;
+            if (p.status === 'ready') ready.push(conv(p));
+          });
+          if (ready.length) areas.push({ n: a.name || '', a: a.about || '', p: ready });
+        });
+        if (areas.length) T[ds.name] = areas;
+        if (names.length) SPOTS[ds.name] = names;
+      });
+    });
+    loaded = true;
+  }
+
+  var $ = function (id) { return document.getElementById(id); };
+  var bn = function (n) { return String(n).replace(/\d/g, function (c) { return '০১২৩৪৫৬৭৮৯'[c]; }); };
+  var esc = function (s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  };
+  var cnt = function (name) {
+    return (T[name] || []).reduce(function (n, u) { return n + u.p.length; }, 0);
+  };
+  var ul = function (title, a, cls) {
+    if (!a || !a.length) return '';
+    return '<div class="sec ' + cls + '"><h5>' + title + '</h5><ul>' +
+      a.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>';
+  };
+  var sec = function (t, x) { return x ? '<div class="sec"><h5>' + t + '</h5><p>' + esc(x) + '</p></div>' : ''; };
+  var fact = function (t, x, w) { return x ? '<div class="f' + (w ? ' w' : '') + '"><b>' + t + '</b>' + esc(x) + '</div>' : ''; };
+
+  var gradients = [
+    'linear-gradient(135deg,#667eea 0%,#764ba2 100%)',
+    'linear-gradient(135deg,#f093fb 0%,#f5576c 100%)',
+    'linear-gradient(135deg,#4facfe 0%,#00f2fe 100%)',
+    'linear-gradient(135deg,#43e97b 0%,#38f9d7 100%)',
+    'linear-gradient(135deg,#fa709a 0%,#fee140 100%)',
+    'linear-gradient(135deg,#30cfd0 0%,#330867 100%)',
+    'linear-gradient(135deg,#a8edea 0%,#fed6e3 100%)',
+    'linear-gradient(135deg,#ff9a56 0%,#ff6a88 100%)',
+    'linear-gradient(135deg,#2e2e78 0%,#662d8c 100%)',
+    'linear-gradient(135deg,#0093E9 0%,#80D0C7 100%)'
+  ];
+
+  function getGradient(idx) {
+    return gradients[idx % gradients.length];
+  }
+
+  // ঢাকা কার্ডের ছবি: নিজের ছবির লিংক বসাতে চাইলে নিচের DHAKA_IMG এ দিন (যেমন 'https://.../dhaka.jpg')।
+  // খালি রাখলে ভেতরের হালকা SVG ছবি (কোনো নেটওয়ার্ক লাগে না) ব্যবহার হবে।
+  var DHAKA_IMG = '';
+  function dhakaBg() {
+    if (DHAKA_IMG) return "url('" + DHAKA_IMG.replace(/'/g, '%27') + "') center/cover no-repeat";
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice">' +
+      '<defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1e3a8a"/><stop offset=".55" stop-color="#f59e0b"/><stop offset="1" stop-color="#fde68a"/></linearGradient>' +
+      '<linearGradient id="w" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0e7490"/><stop offset="1" stop-color="#164e63"/></linearGradient></defs>' +
+      '<rect width="640" height="360" fill="url(#s)"/><circle cx="470" cy="190" r="44" fill="#fff7d6" opacity=".9"/>' +
+      '<g fill="#0f172a" opacity=".9"><rect x="20" y="170" width="46" height="130"/><rect x="72" y="140" width="38" height="160"/><rect x="116" y="190" width="52" height="110"/>' +
+      '<rect x="176" y="120" width="34" height="180"/><rect x="216" y="160" width="60" height="140"/><rect x="284" y="95" width="30" height="205"/><rect x="320" y="150" width="48" height="150"/>' +
+      '<rect x="376" y="130" width="40" height="170"/><rect x="424" y="180" width="56" height="120"/><rect x="488" y="150" width="36" height="150"/><rect x="530" y="110" width="42" height="190"/><rect x="578" y="170" width="46" height="130"/></g>' +
+      '<g fill="#fde68a" opacity=".85"><rect x="82" y="156" width="6" height="8"/><rect x="94" y="176" width="6" height="8"/><rect x="186" y="140" width="6" height="8"/><rect x="294" y="116" width="6" height="8"/><rect x="294" y="146" width="6" height="8"/><rect x="540" y="130" width="6" height="8"/><rect x="552" y="160" width="6" height="8"/><rect x="386" y="150" width="6" height="8"/></g>' +
+      '<rect y="300" width="640" height="60" fill="url(#w)"/><path d="M0 322 Q80 314 160 322 T320 322 T480 322 T640 322" stroke="#a5f3fc" stroke-width="2" fill="none" opacity=".6"/>' +
+      '<path d="M120 336 h60 l-10 10 h-40 z" fill="#0f172a"/><path d="M150 336 v-26 l22 26 z" fill="#fef3c7"/></svg>';
+    return "url('data:image/svg+xml;utf8," + encodeURIComponent(svg) + "') center/cover no-repeat";
+  }
+
+  // প্রতি জেলার পরিচিত দর্শনীয় স্থানের নাম (কার্ডে দেখানোর জন্য)। যে জেলার বিস্তারিত তথ্য (T) আছে সেখানে T থেকেই নাম আসে।
+  function spotList(name) {
+    if (!loaded) return [];
+    var t = [];
+    (T[name] || []).forEach(function (u) { u.p.forEach(function (p) { t.push(p.n); }); });
+    if (t.length) return t.slice(0, 3);
+    if (SPOTS[name]) return SPOTS[name];
+    var d = D.filter(function (x) { return x[0] === name; })[0];
+    return [d ? d[1] + ' বিভাগ' : ''];
+  }
+  // বিভাগ ফিল্টারের তালিকা
+  (function () {
+    var sel = $('dv');
+    DIVS.forEach(function (d) {
+      var o = document.createElement('option'); o.value = d[0]; o.textContent = d[0] + ' বিভাগ'; sel.appendChild(o);
+    });
+  })();
+
+  function imgBg(u) { return "url('" + u.replace(/'/g, '%27') + "') center/cover no-repeat"; }
+
+  function grid() {
+    var q = $('q').value.trim();
+    var dv = $('dv').value;
+    var groups = [], idx = {};
+    if (!loaded) {
+      // JSON আসার আগে: ৮টি বিভাগ + শুধু "লোড হচ্ছে..."
+      DIVS.forEach(function (x) { if (!dv || x[0] === dv) groups.push({ v: x[0], n: x[1], a: null }); });
+      if (dv && groups.length) openDiv = groups[0].v;
+      $('grid').innerHTML = groups.map(function (g) {
+        var open = g.v === openDiv;
+        return '<section class="ac' + (open ? ' open' : '') + '" data-v="' + esc(g.v) + '">' +
+          '<button class="ah" type="button" aria-expanded="' + open + '"><span class="nm">' + esc(g.v) + ' বিভাগ</span><span class="ct">' + g.n + 'টি জেলা</span><span class="cv"></span></button>' +
+          '<div class="ap"><div class="in"><div class="grid"><div class="ldn">লোড হচ্ছে...</div></div></div></div></section>';
+      }).join('');
+      return;
+    }
+    var l = D.filter(function (d) {
+      var hit = !q || d[0].indexOf(q) !== -1 || spotList(d[0]).some(function (n) { return n.indexOf(q) !== -1; }) || (T[d[0]] || []).some(function (u) {
+        return u.n.indexOf(q) !== -1 || u.p.some(function (p) { return p.n.indexOf(q) !== -1; });
+      });
+      return hit && (!dv || d[1] === dv);
+    });
+    $('cnt').textContent = '(' + l.length + 'টি)';
+    l.forEach(function (d) {
+      if (!(d[1] in idx)) { idx[d[1]] = groups.length; groups.push({ v: d[1], a: [] }); }
+      groups[idx[d[1]]].a.push(d);
+    });
+    // সার্চ/ফিল্টার চললে, খোলা বিভাগে ফল না থাকলে প্রথম ফলাফল-বিভাগ খুলবে
+    if ((q || dv) && groups.length && !groups.some(function (g) { return g.v === openDiv; })) openDiv = groups[0].v;
+    $('grid').innerHTML = groups.map(function (g, gi) {
+      var open = g.v === openDiv;
+      var cards = g.a.map(function (d) {
+        var isDhaka = d[0] === 'ঢাকা';
+        var grad = getGradient(D.indexOf(d));
+        var total = (SPOTS[d[0]] || []).length;
+        return '<button class="dc' + (isDhaka ? ' has-img' : '') + '" type="button" data-n="' + esc(d[0]) + '" style="background:' + (IMGS[d[0]] ? imgBg(IMGS[d[0]]) : isDhaka ? dhakaBg() : grad) + '"><div class="dc__content"><b>' + esc(d[0]) +
+          (total ? '<small>' + bn(total) + 'টি স্থান</small>' : '') + '</b>' +
+          '<i>' + esc(spotList(d[0]).join(', ')) + '</i></div></button>';
+      }).join('');
+      return '<section class="ac' + (open ? ' open' : '') + '" data-v="' + esc(g.v) + '">' +
+        '<button class="ah" type="button" aria-expanded="' + open + '"><span class="nm">' + esc(g.v) + ' বিভাগ</span><span class="ct">' + g.a.length + 'টি জেলা</span><span class="cv"></span></button>' +
+        '<div class="ap"><div class="in"><div class="grid">' + cards + '</div></div></div></section>';
+    }).join('') || '<div class="empty">কিছু পাওয়া যায়নি।</div>';
+  }
+
+  // JSON এলে বিদ্যমান card-এর ভিতরে ডেটা/ছবি বসায় (card পুনরায় তৈরি হয় না)
+  function fill() {
+    Array.prototype.forEach.call(document.querySelectorAll('#pop .dc'), function (b) {
+      var n = b.getAttribute('data-n'), i = b.querySelector('i');
+      if (i) i.textContent = spotList(n).join(' · ');
+      if (IMGS[n]) b.style.background = imgBg(IMGS[n]);
+    });
+  }
+
+  // একসাথে একটি বিভাগই খোলা থাকবে; অন্যটিতে ক্লিক করলে আগেরটি বন্ধ হবে
+  var openDiv = 'ঢাকা';
+  $('grid').addEventListener('click', function (e) {
+    var h = e.target.closest('.ah');
+    if (!h) return;
+    var sec = h.parentNode, willOpen = !sec.classList.contains('open');
+    Array.prototype.forEach.call($('grid').querySelectorAll('.ac.open'), function (x) {
+      x.classList.remove('open'); x.firstChild.setAttribute('aria-expanded', 'false');
+    });
+    openDiv = '';
+    if (willOpen) {
+      sec.classList.add('open'); h.setAttribute('aria-expanded', 'true');
+      openDiv = sec.getAttribute('data-v');
+      if (sec.getBoundingClientRect().top < 0) sec.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    }
+  });
+
+
+  // জনপ্রিয় জেলা কার্ড (অটো ডান-বাম স্ক্রল) — JSON আসার পর দেখাবে
+  function renderPop() {
+    $('pop').innerHTML = POPD.map(function (n) {
+      var di = -1; D.forEach(function (d, k) { if (d[0] === n) di = k; });
+      if (di < 0) return '';
+      return '<button class="dc" type="button" data-n="' + esc(n) + '" style="background:' + getGradient(di) + '"><span class="bdg">⭐ জনপ্রিয়</span><div class="dc__content"><b>' + esc(n) + '</b><i>' + esc(spotList(n).join(' · ')) + '</i></div></button>';
+    }).join('');
+  }
+  renderPop();
+  (function () {
+    var tr = $('pop'), dir = 1, paused = false, acc = 0, resumeT;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+    function pause() { paused = true; clearTimeout(resumeT); }
+    function resume() { clearTimeout(resumeT); resumeT = setTimeout(function () { paused = false; acc = tr.scrollLeft; }, 2500); }
+    ['mouseenter', 'touchstart', 'pointerdown', 'focusin', 'wheel'].forEach(function (ev) { tr.addEventListener(ev, pause, { passive: true }); });
+    ['mouseleave', 'touchend', 'pointerup', 'focusout'].forEach(function (ev) { tr.addEventListener(ev, resume, { passive: true }); });
+    var last = 0;
+    function step(t) {
+      var dt = Math.min(t - last, 50); last = t;
+      var max = tr.scrollWidth - tr.clientWidth;
+      if (!paused && max > 0 && !document.hidden && $('home').offsetParent !== null) {
+        acc += dir * 0.04 * dt;
+        if (acc >= max) { acc = max; dir = -1; } else if (acc <= 0) { acc = 0; dir = 1; }
+        tr.scrollLeft = acc;
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  })();
+
+  // জনপ্রিয় স্লাইডার: মাউস দিয়ে টেনে/হুইলে স্ক্রল (টাচে নিজে থেকেই স্ক্রল হয়)
+  (function () {
+    var tr = $('pop'), down = false, drag = false, sx = 0, sl = 0, pid = null, moved = false;
+    tr.addEventListener('pointerdown', function (e) {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      down = true; drag = false; moved = false; sx = e.clientX; sl = tr.scrollLeft; pid = e.pointerId;
+    });
+    tr.addEventListener('pointermove', function (e) {
+      if (!down || e.pointerId !== pid) return;
+      var dx = e.clientX - sx;
+      if (!drag && Math.abs(dx) > 5) { drag = true; moved = true; tr.classList.add('drag'); try { tr.setPointerCapture(pid); } catch (x) {} }
+      if (drag) tr.scrollLeft = sl - dx;
+    });
+    function end(e) {
+      if (!down || (e && e.pointerId !== pid)) return;
+      down = false; drag = false; tr.classList.remove('drag');
+      try { tr.releasePointerCapture(pid); } catch (x) {}
+    }
+    tr.addEventListener('pointerup', end);
+    tr.addEventListener('pointercancel', end);
+    // টানার পর ভুলে কার্ড খুলে যাওয়া ঠেকায়
+    tr.addEventListener('click', function (e) {
+      if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
+    }, true);
+    // মাউস হুইল (উপর-নিচ) → ডান-বাম; দুই প্রান্তে পৌঁছালে পেজ স্ক্রল হবে
+    tr.addEventListener('wheel', function (e) {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+      var max = tr.scrollWidth - tr.clientWidth;
+      if ((e.deltaY < 0 && tr.scrollLeft <= 0) || (e.deltaY > 0 && tr.scrollLeft >= max - 1)) return;
+      tr.scrollLeft += e.deltaY; e.preventDefault();
+    }, { passive: false });
+  })();
+
+  var crOf = function (p) { return '<span class="cr">' + esc(p.cr || 'ছবি') + '</span>'; };
+  function place(p) {
+    var img = p.img ? '<img src="' + esc(p.img) + '" alt="' + esc(p.n) + '" loading="lazy" onerror="this.parentNode.textContent=\'' + p.e + '\'">' : p.e;
+    var map = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.m);
+    return '<article class="pl"><div class="pw"><div class="pic">' + img + '</div>' + crOf(p) + '</div><div class="pb"><h4>' + esc(p.n) + '</h4>' +
+      (p.i ? '<p>' + esc(p.i) + '</p>' : '') +
+      sec('ইতিহাস', p.h) + sec('কেন বিখ্যাত', p.w) +
+      (p.g || p.d || p.c || p.s ? '<div class="facts">' + fact('কীভাবে যাবেন', p.g, 1) + fact('দূরত্ব', p.d) + fact('খরচ', p.c) + fact('উপযুক্ত সময়', p.s, 1) + '</div>' : '') +
+      ul('ভ্রমণ টিপস', p.t, '') + ul('সতর্কতা', p.x, 'warn') +
+      (p.nb.length ? '<div class="sec"><h5>কাছাকাছি স্থান</h5><div class="chips">' +
+      p.nb.map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join('') + '</div></div>' : '') +
+      '<div class="sec"><h5>ম্যাপ</h5><div class="mapbox"><iframe src="https://www.google.com/maps?q=' + encodeURIComponent(p.m) + '&output=embed" title="' + esc(p.n) + ' ম্যাপ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div>' +
+      (p.src.length ? '<div class="src">তথ্যসূত্র: ' + p.src.map(function (s) {
+        return '<a href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">' + esc(s.t) + '</a>';
+      }).join(', ') + '</div>' : '') + '</div></article>';
+  }
+
+  var cur = [];
+
+  function card(x, i) {
+    var p = x.p;
+    var img = p.img ? '<img src="' + esc(p.img) + '" alt="' + esc(p.n) + '" loading="lazy" onerror="this.parentNode.textContent=\'' + p.e + '\'">' : p.e;
+    var map = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.m);
+    return '<article class="tc" data-i="' + i + '"><div class="tw"><div class="pic tpic">' + img + '</div>' + crOf(p) +
+      (p.popular ? '<span class="bdg">জনপ্রিয়</span>' : '') + '</div>' +
+      '<div class="tb"><span class="up">' + esc(x.u) + '</span><h4>' + esc(p.n) + '</h4><p>' + esc(p.i) + '</p>' +
+      '<div class="act"><button class="more" type="button" data-i="' + i + '">বিস্তারিত দেখুন →</button>' +
+      '<a class="map" href="' + esc(map) + '" target="_blank" rel="noopener noreferrer">📍 ম্যাপ</a></div></div></article>';
+  }
+
+  var curName = '';
+
+  function show(list) {
+    $('body').hidden = !list; $('pd').hidden = !!list;
+    window.scrollTo(0, 0);
+  }
+
+  function build(name) {
+    var d = D.filter(function (x) { return x[0] === name; })[0];
+    if (!d) return false;
+    curName = name;
+    cur = [];
+    (T[name] || []).forEach(function (u) { u.p.forEach(function (p) { cur.push({ p: p, u: u.n }); }); });
+    var h = '<div class="dh"><h2>' + esc(d[0]) + ' জেলার দর্শনীয় স্থান</h2><p>' + esc(d[1]) + ' বিভাগ' +
+      (cur.length ? ' · মোট ' + cur.length + 'টি স্থান' : '') + '</p></div>';
+    h += cur.length
+      ? '<div class="cards">' + cur.map(card).join('') + '</div>'
+      : '<div class="empty">🌱 এই জেলার দর্শনীয় স্থানের তথ্য এখনো যোগ করা হয়নি।</div>';
+    $('body').innerHTML = h;
+    return true;
+  }
+
+  // st: {v:'h'} হোম | {v:'d', n} জেলা | {v:'p', n, i} স্থানের বিস্তারিত
+  function encodeSt(st) {
+    if (st.v === 'h') return location.pathname + location.search;
+    return location.pathname + location.search + '#' + st.v + '/' + encodeURIComponent(st.n) + (st.v === 'p' ? '/' + st.i : '');
+  }
+  function decodeSt() {
+    var m = location.hash.slice(1).split('/');
+    if (m[0] === 'd' && m[1]) return { v: 'd', n: decodeURIComponent(m[1]) };
+    if (m[0] === 'p' && m[1] && m[2] != null) return { v: 'p', n: decodeURIComponent(m[1]), i: Number(m[2]) };
+    return { v: 'h' };
+  }
+
+  function go(st, push) {
+    if (st.v === 'h' || !build(st.n)) {
+      st = { v: 'h' };
+      $('det').hidden = true; $('home').hidden = false;
+      window.scrollTo(0, 0);
+    } else {
+      $('home').hidden = true; $('det').hidden = false;
+      if (st.v === 'p' && cur[st.i]) {
+        $('pbody').innerHTML = place(cur[st.i].p).replace('class="pl"', 'class="pl dtl"');
+        show(false);
+      } else {
+        st = { v: 'd', n: st.n };
+        show(true);
+      }
+    }
+    if (push) { try { history.pushState(st, '', encodeSt(st)); } catch (e) {} }
+    return st;
+  }
+
+  $('body').addEventListener('click', function (e) {
+    if (e.target.closest('a.map')) return;
+    var b = e.target.closest('.tc');
+    if (b) go({ v: 'p', n: curName, i: Number(b.getAttribute('data-i')) }, true);
+  });
+  var openDist = function (e) {
+    var b = e.target.closest('.dc, li[data-n]');
+    if (!b) return;
+    e.preventDefault();
+    go({ v: 'd', n: b.getAttribute('data-n') }, true);
+  };
+  $('grid').addEventListener('click', openDist);
+  $('pop').addEventListener('click', openDist);
+  window.addEventListener('popstate', function (e) { go(e.state || decodeSt(), false); });
+  var tm;
+  $('q').addEventListener('input', function () { clearTimeout(tm); tm = setTimeout(grid, 120); });
+  $('dv').addEventListener('change', grid);
+  // ১) জনপ্রিয় + ৮ বিভাগ সঙ্গে সঙ্গে render (জেলা card JSON-এর পর)
+  grid();
+  // ২) JSON (head থেকেই fetch শুরু হয়েছে) এলে জেলা card বসবে
+  window.__TJ.then(function (J) {
+    var oldPop = POPD.join('|');
+    ingest(J);
+    if (POPD.join('|') !== oldPop) renderPop();
+    fill();
+    grid();
+    // refresh/সরাসরি লিংক: URL hash থেকে আগের পেজ ফিরিয়ে আনা (ডেটা লোড হওয়ার পরে)
+    var init = go(decodeSt(), false);
+    try { history.replaceState(init, '', encodeSt(init)); } catch (e) {}
+  }).catch(function (err) {
+    var n = document.querySelectorAll('#grid .ldn');
+    Array.prototype.forEach.call(n, function (x) { x.textContent = 'জেলার তথ্য লোড করা যায়নি।'; });
+    if (window.console) console.error(err);
+  });
+})();
+</script>
+<script src="../assets/js/components.js" defer></script>
+</body>
+</html>
