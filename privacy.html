@@ -235,8 +235,6 @@ img,video,canvas{max-width:100%}
 html:not([data-lang=en]) .en,html[data-lang=en] .bn{display:none!important}
 .pvwrap{max-width:1200px;margin:0 auto;padding:8px 0 40px}
 .pvc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:0 2px 10px rgba(0,0,0,.025);line-height:1.75}
-.pvc .seg{margin:0}
-.pvc .seg button{padding:4px 14px}
 .pvc h1{font-size:29px;line-height:1.3;margin:12px 0 4px;letter-spacing:-.2px}
 .pvc h2{font-size:19px;line-height:1.4;margin:26px 0 7px}
 .pvc p{margin:8px 0 12px}
@@ -251,39 +249,11 @@ html:not([data-lang=en]) .en,html[data-lang=en] .bn{display:none!important}
 <link rel="stylesheet" href="./assets/css/components.css">
 </head>
 <body>
-<!-- sc:header:start -->
-<header class="sc-header">
-  <div class="sc-header-in">
-    <button class="sc-menu-btn" id="sc-menu-btn" type="button" aria-label="মেনু খুলুন" aria-controls="sc-side" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    <a class="sc-logo" href="/#top"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</a>
-    <nav class="sc-header-nav" aria-label="প্রধান মেনু">
-      <a href="/#top" data-k="home">আমার ম্যাপ</a>
-      <span class="sc-menu-divider">|</span>
-      <a href="./guide/">ভ্রমণ গাইড</a>
-    </nav>
-  </div>
-</header>
-<!-- sc:header:end -->
-<!-- sc:side-menu:start -->
-<div class="sc-scrim" id="sc-scrim"></div>
-<aside class="sc-side" id="sc-side" aria-label="মেনু">
-  <div class="sc-side-h">
-    <span class="sc-logo"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</span>
-    <button class="sc-menu-btn" id="sc-menu-x" type="button" aria-label="মেনু বন্ধ করুন"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  </div>
-  <nav class="sc-side-nav">
-    <a href="/#top">হোম</a>
-    <a href="./guide/">ভ্রমণ গাইড</a>
-    <button type="button" id="sc-side-about">সম্পর্কে</button>
-    <a href="./privacy.html">গোপনীয়তা নীতি</a>
-  </nav>
-  <p class="sc-side-f">৬৪ জেলা · ৮ বিভাগ</p>
-</aside>
-<!-- sc:side-menu:end -->
+<div data-component="header"></div>
+<div data-component="side-menu"></div>
 <div class="container" id="top">
 <main class="pvwrap">
 <article class="pvc">
-<span class="seg" role="group" aria-label="ভাষা / Language"><button type="button" data-setlang="bn" aria-pressed="true">বাংলা</button><button type="button" data-setlang="en" aria-pressed="false">English</button></span>
 <div class="bn">
 
 <h1>গোপনীয়তা নীতি</h1>
@@ -534,46 +504,7 @@ Unseen Bangladesh 2.0 সব বয়সের মানুষের ব্য�
 </article>
 </main>
 </div>
-<!-- sc:footer:start -->
-<footer class="sc-footer">
-  <div class="sc-f-top">
-    <div class="sc-f-inner">
-      <div class="sc-f-brand">
-        <div class="sc-f-logo"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</div>
-        <p class="sc-tagline">সৌন্দর্যে ভরা প্রিয় বাংলাদেশ</p>
-      </div>
-    </div>
-  </div>
-  <div class="sc-f-bar">
-    <div class="sc-f-inner">
-      <div class="sc-f-links">
-        <a href="./privacy.html"><span class="sc-bn">গোপনীয়তা নীতি</span><span class="sc-en">Privacy Policy</span></a>
-        <button type="button" id="sc-footer-about"><span class="sc-bn">সম্পর্কে</span><span class="sc-en">About</span></button>
-      </div>
-      © ২০২৬ Unseen Bangladesh 2.0 — সর্বস্বত্ব সংরক্ষিত।
-    </div>
-  </div>
-</footer>
-<dialog class="sc-about" id="sc-about" aria-labelledby="sc-about-t">
-  <button class="sc-about-x" type="button" aria-label="বন্ধ করুন" data-close>×</button>
-  <img class="sc-about-hero" decoding="async" src="./assets/images/about_image.webp" alt="অদেখা বাংলাদেশ ২.০" loading="lazy" width="800" height="640">
-  <div class="sc-about-body">
-    <h2 id="sc-about-t"><span class="sc-bn">অদেখা বাংলাদেশ ২.০</span><span class="sc-en">Unseen Bangladesh 2.0</span></h2>
-    <p class="sc-about-desc">🇧🇩 Unseen Bangladesh 2.0<span class="sc-bn"> নিজের দেশকে নতুন করে আবিষ্কারের গল্প। অজানা সৌন্দর্য খুঁজে বের করুন, ভ্রমণের স্মৃতি ধরে রাখুন! ভালোবাসায় চিনে নিন আমাদের বাংলাদেশ।</span><span class="sc-en"> a story of rediscovering our own country. Find hidden beauty, keep your travel memories alive, and get to know our Bangladesh with love.</span></p>
-  </div>
-</dialog>
-<!-- sc:footer:end -->
-<script>
-(()=>{
-const d=document,h=d.documentElement;
-const L=d.querySelectorAll("[data-setlang]");
-const T={bn:"গোপনীয়তা নীতি — Unseen Bangladesh 2.0",en:"Privacy Policy — Unseen Bangladesh 2.0"};
-const setLang=l=>{h.dataset.lang=l;h.lang=l;d.title=T[l];L.forEach(x=>x.setAttribute("aria-pressed",x.dataset.setlang===l));try{localStorage.setItem("bdmap.lang",l)}catch(e){}};
-L.forEach(x=>x.onclick=()=>setLang(x.dataset.setlang));
-let sv="bn";try{sv=localStorage.getItem("bdmap.lang")==="en"?"en":"bn"}catch(e){}
-setLang(sv);
-})();
-</script>
+<div data-component="footer"></div>
 <script type="module" src="assets/js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362_7d77c9.js" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"abd3853f56ce4115afe9554ae1697c2f","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="./assets/js/components.js" defer></script>
 </body>
