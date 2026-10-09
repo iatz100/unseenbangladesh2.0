@@ -1,0 +1,98 @@
+/*
+ * Unseen Bangladesh 2.0 — shared components: header, side menu, footer, about dialog.
+ * MASTER DESIGN FILE. Edit only here, then run the build. Never override from page CSS.
+ *
+ * Rules that keep these components identical on every page:
+ *  - Every value is written out here. No CSS variables, so a page's :root tokens cannot change them.
+ *  - Every selector uses the sc- prefix, so page CSS cannot collide with them by accident.
+ *  - Every property the components depend on is set explicitly, so global/element rules on a page
+ *    (body font, button font, nav/footer/header element rules) cannot leak in.
+ */
+
+/* ---------- language switch (components follow html[data-lang]; default Bengali) ---------- */
+html:not([data-lang="en"]) .sc-en{display:none!important}
+html[data-lang="en"] .sc-bn{display:none!important}
+
+/* ---------- header ---------- */
+.sc-header{position:sticky;top:0;z-index:60;margin:0;padding:0;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid #ebe6dc;color:#17201c;font-family:"Anek Bangla",system-ui,sans-serif;font-size:16px;line-height:1.6}
+.sc-header *,.sc-side *,.sc-footer *,.sc-about *{box-sizing:border-box}
+.sc-header-in{max-width:1200px;margin:0 auto;padding:0 16px;height:64px;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;justify-items:center}
+
+/* logo (shared by header, side menu) */
+.sc-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em;color:#17201c;text-decoration:none;white-space:nowrap}
+.sc-logo-mark{width:28px;height:28px;border-radius:7px;display:block;flex:none;max-width:none}
+.sc-header .sc-logo{grid-column:2;justify-self:start;font-size:18px}
+
+/* menu button (header + side menu) */
+.sc-menu-btn{flex:none;width:44px;height:44px;margin:0;padding:0;border-radius:12px;border:1px solid #ebe6dc;background:#fff;display:grid;place-items:center;cursor:pointer;color:#17201c;font:inherit;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.sc-menu-btn::before{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(15,107,79,.15) 0%,transparent 70%);opacity:0;transform:scale(0);transition:all .4s ease}
+.sc-menu-btn:hover{border-color:#0f6b4f;background:rgba(15,107,79,.05);box-shadow:0 0 20px rgba(15,107,79,.12),0 4px 12px rgba(15,107,79,.08);transform:translateY(-2px)}
+.sc-menu-btn:hover::before{opacity:1;transform:scale(1.8)}
+.sc-menu-btn svg{transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.sc-menu-btn:hover svg{transform:rotate(5deg) scale(1.05)}
+.sc-menu-btn:focus-visible{outline:2px solid #0f6b4f;outline-offset:2px}
+
+/* header nav (desktop only; the menu button handles mobile) */
+.sc-header-nav{display:none;grid-column:3;justify-self:end;gap:4px;align-items:center}
+.sc-header-nav a{border:0;background:none;padding:9px 18px;border-radius:99px;font:inherit;font-size:15px;font-weight:600;color:#6b716d;text-decoration:none;cursor:pointer;white-space:nowrap;transition:all .3s cubic-bezier(.4,0,.2,1);position:relative}
+.sc-header-nav a:hover{color:#17201c;transform:translateY(-3px) scale(1.02)}
+.sc-header-nav a::before{content:"";position:absolute;inset:0;border-radius:99px;background:radial-gradient(circle at center,rgba(15,107,79,.1) 0%,transparent 70%);opacity:0;transform:scale(.8);transition:all .4s ease;z-index:-1}
+.sc-header-nav a:hover::before{opacity:1;transform:scale(1.1)}
+.sc-header-nav a:focus-visible{outline:2px solid #0f6b4f;outline-offset:-2px}
+.sc-menu-divider{color:#6b716d;font-weight:400}
+
+/* ---------- side menu ---------- */
+.sc-scrim{position:fixed;inset:0;z-index:90;background:rgba(10,15,12,.55);opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+html:not(.sc-components-ready) .sc-side{transition:none!important}
+.sc-side{position:fixed;top:0;left:0;bottom:0;z-index:100;width:min(310px,86vw);margin:0;background:#fff;box-shadow:8px 0 40px rgba(0,0,0,.2);transform:translateX(-102%);visibility:hidden;transition:transform .28s ease,visibility 0s .28s;display:flex;flex-direction:column;padding:12px 14px calc(16px + env(safe-area-inset-bottom));overflow-y:auto;color:#17201c;font-family:"Anek Bangla",system-ui,sans-serif;font-size:16px;line-height:1.6}
+.sc-side-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 0 14px;border-bottom:1px solid #ebe6dc}
+.sc-side-nav{display:flex;flex-direction:column;gap:4px;padding:14px 0;justify-content:flex-start;align-items:stretch}
+.sc-side-nav a,.sc-side-nav button{position:relative;display:block;width:100%;margin:0;text-align:left;border:0;background:none;padding:13px 14px;border-radius:12px;font:inherit;font-size:16px;font-weight:600;color:#17201c;text-decoration:none;cursor:pointer}
+.sc-side-nav a:hover,.sc-side-nav button:hover{background:#f3efe7}
+.sc-side-nav>:not(:last-child)::after{content:"";position:absolute;left:14px;right:14px;bottom:-2px;height:1px;background:#ebe6dc;opacity:.7}
+.sc-side-f{margin:auto 0 0;color:#6b716d;font-size:13px;text-align:center}
+body.sc-menu-open{overflow:hidden}
+body.sc-menu-open .sc-scrim{opacity:1;visibility:visible;transition-delay:0s}
+body.sc-menu-open .sc-side{transform:none;visibility:visible;transition-delay:0s}
+body.sc-menu-open .sc-header{box-shadow:0 4px 12px rgba(0,0,0,.08)}
+body.sc-menu-open #sc-menu-btn{border-color:#0f6b4f}
+body.sc-menu-open #sc-menu-btn svg{transform:rotate(-5deg) scale(.95)}
+
+/* ---------- footer ---------- */
+.sc-footer{margin:8px 0 0;padding:0;border:0;text-align:left;background:#0b2a1f;color:rgba(255,255,255,.78);font-family:"Anek Bangla",system-ui,sans-serif;font-size:14px;line-height:1.6}
+.sc-f-inner{max-width:1200px;margin:0 auto;padding:0 24px}
+.sc-f-top{padding-top:28px;padding-bottom:36px}
+.sc-f-logo{display:flex;align-items:center;justify-content:center;text-align:center;gap:10px;font-weight:800;letter-spacing:-.01em;color:#fff;font-size:19px}
+.sc-tagline{margin:12px 0 0;line-height:1.7;text-align:center}
+.sc-f-bar{border-top:1px solid rgba(255,255,255,.14);padding:16px 0 calc(16px + env(safe-area-inset-bottom));font-size:13px;color:rgba(255,255,255,.6);text-align:center}
+.sc-f-links{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 22px;margin-bottom:8px}
+.sc-f-links a,.sc-f-links button{background:none;border:0;padding:0;margin:0;font:inherit;color:rgba(255,255,255,.82);text-decoration:none;cursor:pointer}
+.sc-f-links a:hover,.sc-f-links button:hover{color:#fff;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- about dialog ---------- */
+.sc-about{border:0;padding:0;margin:auto;border-radius:20px;width:min(420px,94vw);max-height:92vh;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 30px 80px rgba(0,0,0,.35);background:#fff;color:#17201c;font-family:"Anek Bangla",system-ui,sans-serif;font-size:16px;line-height:1.6}
+.sc-about::backdrop{background:rgba(10,15,12,.65)}
+.sc-about-hero{display:block;width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;background:#f3efe7}
+.sc-about-body{padding:18px 22px 22px}
+.sc-about h2{margin:0;font-size:25px;line-height:1.3;color:#17201c}
+.sc-about-desc{margin:0 0 16px;font-size:15.5px;line-height:1.75;color:#17201c}
+.sc-about-x{position:absolute;top:12px;right:12px;z-index:2;width:40px;height:40px;padding:0;border-radius:50%;border:0;background:rgba(255,255,255,.92);font:inherit;font-size:22px;line-height:1;color:#17201c;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+
+/* ---------- responsive ---------- */
+@media (min-width:1024px){
+  .sc-header-in{padding:0 24px;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;position:relative}
+  .sc-header .sc-logo{font-size:19px}
+  .sc-header-nav{display:flex;gap:4px;padding:0;background:none;border-radius:0;position:absolute;inset:0;grid-column:1/-1;margin:auto;width:max-content;height:fit-content}
+  #sc-menu-btn{display:none}
+}
+@media (max-width:760px){.sc-f-top{padding-top:18px}}
+@media (max-width:560px){
+  .sc-header-in{padding:0 14px;height:58px}
+  .sc-header .sc-logo{font-size:16px}
+  .sc-f-inner{padding:0 16px}
+  .sc-about-hero{aspect-ratio:16/9;object-position:50% 0}
+  .sc-about-body{padding:14px 18px 18px}
+  .sc-about h2{font-size:22px}
+  .sc-about-desc{font-size:14.5px;line-height:1.6;margin:0 0 12px}
+}
+@media (prefers-reduced-motion:reduce){.sc-side,.sc-scrim{transition:none}}
