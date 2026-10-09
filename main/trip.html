@@ -10,136 +10,167 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;600;700;800&display=swap" rel="stylesheet">
 <title>ট্রিপ প্ল্যানার | Unseen Bangladesh 2.0</title>
-<meta name="description" content="জেলা বেছে নিন, রুট ও আনুমানিক বাজেট দেখুন, তারপর ভ্রমণ পরিকল্পনা PDF হিসেবে নামান বা শেয়ার করুন।">
+<meta name="description" content="জেলা বেছে নিন, রুট ও আনুমানিক বাজেট দেখুন, তারপর ভ্রমণ কার্ড PDF হিসেবে নামান বা শেয়ার করুন।">
 <style>
-:root{--bg:#faf8f4;--surface:#fff;--text:#17201c;--muted:#6b716d;--line:#ebe6dc;--green:#0f6b4f;--green-d:#0b5a42;--green2:#e8f5ee;--shadow:0 8px 28px rgba(25,60,42,.07)}
+:root{
+  --bg:#f6f4ee;--surface:#fff;--text:#14201a;--muted:#6a736d;--line:#e6e1d5;
+  --green:#0d5f47;--green-2:#137a5c;--green-soft:#e9f4ee;--gold:#b8892b;--gold-soft:#fbf4e4;
+  --shadow:0 1px 2px rgba(20,40,30,.04),0 10px 30px rgba(20,60,45,.07);
+  --danger:#b42318
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Anek Bangla",system-ui,-apple-system,"Noto Sans Bengali",sans-serif}
+body{margin:0;background:
+  radial-gradient(1100px 420px at 85% -120px,rgba(13,95,71,.10),transparent 60%),
+  radial-gradient(900px 380px at -10% 0,rgba(184,137,43,.08),transparent 60%),
+  var(--bg);color:var(--text);font:15px/1.6 "Anek Bangla",system-ui,-apple-system,"Noto Sans Bengali",sans-serif;min-height:100vh}
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
-.app{max-width:1080px;margin:0 auto;padding:22px 16px 42px}
-.hero{margin-bottom:18px}
-.eyebrow{font-size:13px;font-weight:700;color:var(--green)}
-.hero h1{font-size:clamp(24px,4vw,34px);line-height:1.25;margin:4px 0 8px}
-.hero p{color:var(--muted);margin:0;max-width:700px}
+.app{max-width:1100px;margin:0 auto;padding:26px 16px 48px}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:26px 26px 24px;margin-bottom:20px;background:linear-gradient(135deg,#0b4f3b 0%,#127553 60%,#1a8c66 100%);color:#fff;box-shadow:0 18px 40px rgba(11,79,59,.25)}
+.hero::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%)}
+.eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;padding:3px 10px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25)}
+.hero h1{font-size:clamp(22px,3.6vw,30px);line-height:1.25;margin:10px 0 6px;font-weight:800}
+.hero p{margin:0;opacity:.9;max-width:640px;font-size:14px}
+
 .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.86fr);gap:18px;align-items:start}
 .stack{display:grid;gap:16px;min-width:0}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);min-width:0}
-.card h2{font-size:17px;margin:0 0 14px}
-.card h2.center{text-align:center}
-.field{display:grid;gap:6px;margin-bottom:13px}
-.field label{font-size:13px;font-weight:700;color:var(--muted)}
+.card{background:rgba(255,255,255,.92);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow);min-width:0}
+.card h2{font-size:16px;margin:0 0 14px;display:flex;align-items:center;gap:8px;font-weight:800}
+.card h2.center{justify-content:center}
+.field{display:grid;gap:5px;margin-bottom:12px}
+.field label{font-size:12.5px;font-weight:700;color:var(--muted)}
 
-/* ---------- Form controls ---------- */
-select,input[type=number],input[type=date]{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;outline:none;min-width:0;transition:border-color .2s,box-shadow .2s}
-select{appearance:none;-webkit-appearance:none;padding-right:42px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230f6b4f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
-select:hover,input:hover{border-color:#cfd9d2}
-select:focus,input:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green2)}
-select:disabled{opacity:.6;cursor:not-allowed}
+/* ---------- Form controls (compact) ---------- */
+select,input[type=number],input[type=date]{width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;outline:none;min-width:0;font-size:14.5px;line-height:1.4;transition:border-color .2s,box-shadow .2s}
+select{appearance:none;-webkit-appearance:none;padding-right:34px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230d5f47' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center}
+select:hover,input:hover{border-color:#cfd8d1}
+select:focus,input:focus{border-color:var(--green-2);box-shadow:0 0 0 3px var(--green-soft)}
 select option[disabled]{color:var(--muted)}
-.row-inline{display:flex;gap:8px;align-items:stretch}
-.row-inline select{flex:1}
+input[type=checkbox]{accent-color:var(--green);width:16px;height:16px;margin:0}
 
 /* ---------- Buttons ---------- */
-.btn,.btn-primary,.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 16px;border-radius:12px;font-weight:700;border:1px solid var(--line);background:#fff;transition:background .2s,border-color .2s,color .2s,transform .1s,box-shadow .2s;white-space:nowrap}
-.btn:hover{border-color:var(--green);color:var(--green);background:var(--green2)}
-.btn:active,.btn-primary:active,.btn-ghost:active{transform:scale(.98)}
-.btn:focus-visible,.btn-primary:focus-visible,.btn-ghost:focus-visible,.chip button:focus-visible{outline:3px solid var(--green2);outline-offset:2px}
-.btn-primary{background:var(--green);border-color:var(--green);color:#fff;width:100%;box-shadow:0 6px 16px rgba(15,107,79,.2)}
-.btn-primary:hover{background:var(--green-d);border-color:var(--green-d)}
+.btn,.btn-primary,.btn-ghost,.btn-gold{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 14px;border-radius:11px;font-weight:700;font-size:14.5px;border:1px solid var(--line);background:#fff;transition:background .2s,border-color .2s,color .2s,transform .12s,box-shadow .2s;white-space:nowrap;line-height:1.3}
+.btn:hover{border-color:var(--green-2);color:var(--green);background:var(--green-soft)}
+.btn:active,.btn-primary:active,.btn-gold:active,.btn-ghost:active{transform:scale(.98)}
+.btn:focus-visible,.btn-primary:focus-visible,.btn-gold:focus-visible,.btn-ghost:focus-visible,.chip button:focus-visible,.cd-x:focus-visible{outline:3px solid var(--green-soft);outline-offset:2px}
+.btn-primary{background:linear-gradient(135deg,var(--green),var(--green-2));border-color:transparent;color:#fff;box-shadow:0 8px 18px rgba(13,95,71,.22)}
+.btn-primary:hover{filter:brightness(1.06)}
+.btn-gold{background:linear-gradient(135deg,#c99a3a,#a97a20);border-color:transparent;color:#fff;box-shadow:0 8px 18px rgba(184,137,43,.25)}
+.btn-gold:hover{filter:brightness(1.06)}
 .btn-ghost{background:transparent;border-color:transparent;color:var(--muted)}
-.btn-ghost:hover{color:var(--green);background:var(--green2)}
+.btn-ghost:hover{color:var(--green);background:var(--green-soft)}
+.btn-block{width:100%}
 .btn-row{display:flex;gap:8px;flex-wrap:wrap}
 .btn-row>*{flex:1 1 auto}
-.btn-row .btn-primary{flex:1 1 180px}
-.btn:disabled,.btn-primary:disabled{opacity:.5;cursor:not-allowed}
+.btn:disabled,.btn-primary:disabled,.btn-gold:disabled{opacity:.5;cursor:not-allowed;filter:none}
+.add-stack{display:grid;gap:8px}
 
 /* ---------- Chips ---------- */
-.destinations{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-.chip{display:inline-flex;align-items:center;gap:4px;padding:4px 6px 4px 14px;border-radius:999px;background:var(--green2);color:var(--green);font-size:14px;font-weight:700}
-.chip button{border:0;background:transparent;color:var(--green);padding:3px 6px;font-size:12px;line-height:1;border-radius:999px;transition:background .15s}
-.chip button:hover:not(:disabled){background:rgba(15,107,79,.15)}
+.destinations{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.chip{display:inline-flex;align-items:center;gap:3px;padding:3px 4px 3px 12px;border-radius:999px;background:var(--green-soft);color:var(--green);font-size:13.5px;font-weight:700;border:1px solid #d4e9dd}
+.chip button{border:0;background:transparent;color:var(--green);padding:2px 5px;font-size:11px;line-height:1;border-radius:999px;transition:background .15s}
+.chip button:hover:not(:disabled){background:rgba(13,95,71,.14)}
 .chip button:disabled{opacity:.3;cursor:default}
 .hint{font-size:12px;color:var(--muted);margin:6px 0 0}
 .empty{color:var(--muted);font-size:13px;margin:0}
-.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:200;display:none;padding:11px 18px;background:var(--text);color:#fff;border-radius:12px;font-size:14px;font-weight:700;box-shadow:0 10px 30px rgba(0,0,0,.2);max-width:calc(100% - 32px)}
-.toast.show{display:block}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(20px);z-index:300;opacity:0;pointer-events:none;padding:10px 18px;background:#14201a;color:#fff;border-radius:12px;font-size:14px;font-weight:700;box-shadow:0 12px 30px rgba(0,0,0,.25);max-width:calc(100% - 32px);transition:opacity .25s,transform .25s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ---------- Map ---------- */
-.map{position:relative;border-radius:15px;overflow:hidden;border:1px solid var(--line);background:#eaf3ed;margin-top:12px}
-#mapSvg{width:100%;height:auto;max-height:460px;display:block}
-path.dist{fill:#dcebe2;stroke:#9fc3ad;stroke-width:.6}
-path.dist.on{fill:#9ed4b8;stroke:#137653;stroke-width:1.2}
-path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
-.map-pill{position:absolute;top:12px;background:rgba(255,255,255,.94);color:#174b35;padding:6px 10px;border-radius:10px;font-size:12px;font-weight:700;box-shadow:0 3px 12px #153b2a22}
+.map{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg,#eef6f1,#e2efe7)}
+#mapSvg{width:100%;height:auto;max-height:440px;display:block}
+path.dist{fill:#d6e9de;stroke:#a5c8b3;stroke-width:.6}
+path.dist.on{fill:#9fd6bb;stroke:#137a5c;stroke-width:1.2}
+path.dist.origin{fill:#0d5f47;stroke:#083b2c;stroke-width:1.2}
+.map-pill{position:absolute;top:12px;background:rgba(255,255,255,.95);color:#174b35;padding:5px 10px;border-radius:9px;font-size:12px;font-weight:700;box-shadow:0 3px 12px #153b2a22}
 .map-pill.l{left:12px}.map-pill.r{right:12px}
-.map-fallback{min-height:260px;display:grid;place-items:center;text-align:center;padding:30px 16px;font-size:26px;font-weight:800;color:var(--green)}
-.map-fallback span{display:block;font-size:14px;font-weight:600;color:var(--muted);margin-top:6px}
-.map-note{font-size:12px;color:var(--muted);margin:10px 0 0}
+.map-fallback{min-height:200px;display:grid;place-items:center;font-size:24px;font-weight:800;color:var(--green)}
+.map-brand{font-size:11px;color:var(--muted);text-align:center;margin:8px 0 0;letter-spacing:.03em}
+.map-note{font-size:12px;color:var(--muted);margin:8px 0 0}
 
-/* ---------- Summary & costs ---------- */
+/* ---------- Summary & budget ---------- */
 .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.stat{border:1px solid var(--line);border-radius:14px;padding:13px;text-align:center}
+.stat{border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center;background:linear-gradient(180deg,#fff,#fbfaf6)}
 .stat .label{color:var(--muted);font-size:12px;display:block}
-.stat strong{display:block;font-size:20px;margin-top:4px}
+.stat strong{display:block;font-size:19px;margin-top:2px;color:var(--green)}
 .stat .sub{font-size:11px;color:var(--muted)}
-.cost-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.cost-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
 .cost-row:last-of-type{border-bottom:0}
-.cost-icon{width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:11px;background:var(--green2);font-size:18px}
+.cost-icon{width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:10px;background:var(--green-soft);font-size:16px}
 .cost-name{flex:1;min-width:0}
 .cost-name strong{display:block;font-size:14px}
 .cost-name small{color:var(--muted);font-size:12px}
 .cost-amount{font-weight:800;white-space:nowrap}
-.total{margin-top:12px;padding:14px;border-radius:14px;background:var(--green2);display:flex;justify-content:space-between;gap:10px;align-items:center}
+.total{margin-top:12px;padding:14px 16px;border-radius:16px;background:linear-gradient(135deg,var(--green-soft),#f4faf6);border:1px solid #d4e9dd;display:flex;justify-content:space-between;gap:10px;align-items:center}
 .total strong{font-size:22px;color:var(--green)}
 .total .hint{margin:0}
-.field input{max-width:100%}
+.opt{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;margin:4px 0 12px;cursor:pointer}
 
-/* ---------- Itinerary ---------- */
-.itinerary{display:grid;gap:10px}
-.day{display:grid;grid-template-columns:86px 1fr;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px}
-.day-badge{background:var(--green2);color:var(--green);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px 4px;font-weight:800;font-size:14px;line-height:1.3}
-.day-badge small{font-weight:600;font-size:11px;color:var(--muted);margin-top:2px}
-.day h3{font-size:15px;margin:0 0 3px}
-.day p{font-size:13px;color:var(--muted);margin:0}
-.day .places{margin-top:4px;color:var(--text)}
+/* ---------- Itinerary (timeline) ---------- */
+.tl{position:relative;display:grid;gap:12px}
+.tl-item{position:relative;display:grid;grid-template-columns:92px 1fr;gap:14px}
+.tl-item:not(:last-child)::before{content:"";position:absolute;left:45px;top:58px;bottom:-14px;width:2px;background:repeating-linear-gradient(to bottom,#bcd9c8 0 5px,transparent 5px 9px)}
+.tl-marker{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center}
+.tl-day{width:90px;padding:7px 4px;border-radius:14px;background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff;font-weight:800;font-size:13.5px;box-shadow:0 6px 14px rgba(13,95,71,.2)}
+.tl-date{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.3}
+.tl-body{border:1px solid var(--line);border-radius:16px;padding:12px 14px;background:linear-gradient(180deg,#fff,#fcfbf7)}
+.tl-body h3{font-size:15px;margin:0 0 4px;font-weight:800}
+.tl-desc{font-size:13px;color:var(--muted);margin:0}
+.tl-km{display:inline-block;margin-bottom:6px;padding:2px 9px;border-radius:99px;background:var(--gold-soft);color:#8a6418;font-size:12px;font-weight:700;border:1px solid #f1e2b8}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--green-soft);color:var(--green);font-weight:600}
 
 /* ---------- Checklist ---------- */
-.checklist{display:grid;gap:9px}
+.checklist{display:grid;gap:8px}
 .checklist label{display:flex;gap:10px;align-items:center;font-size:14px;cursor:pointer}
-.checklist input{accent-color:var(--green);width:18px;height:18px;margin:0;flex:none}
 
-/* ---------- Trip card (PDF + share) ---------- */
-.card-wrap{display:grid;gap:14px;justify-items:center}
-.tc{width:100%;max-width:440px;background:#fff;border-radius:22px;overflow:hidden;border:1px solid var(--line);box-shadow:0 14px 40px rgba(15,107,79,.12);text-align:center}
-.tc-head{background:linear-gradient(135deg,#0f6b4f 0%,#17905f 100%);color:#fff;padding:24px 22px 22px}
-.tc-brand{font-size:12px;font-weight:700;letter-spacing:.06em;opacity:.85}
-.tc-title{font-size:24px;font-weight:800;margin:6px 0 4px;line-height:1.3}
-.tc-route{font-size:14px;opacity:.95;line-height:1.5}
-.tc-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}
-.tc-stat{padding:14px 6px}
-.tc-stat+.tc-stat{border-left:1px solid var(--line)}
-.tc-stat b{display:block;font-size:16px;color:var(--green)}
+/* ---------- Trip card (preview, PDF, PNG) ---------- */
+.tc{width:100%;max-width:420px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;border:1px solid #e3ddcd;box-shadow:0 18px 44px rgba(13,95,71,.16);text-align:center}
+.tc-hero{position:relative;height:150px;overflow:hidden;background:#0d5f47}
+.tc-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tc-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,40,30,.25),rgba(6,40,30,.78))}
+.tc-hero-in{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 18px;color:#fff}
+.tc-title{font-size:23px;font-weight:800;line-height:1.25}
+.tc-gold{width:46px;height:3px;border-radius:3px;background:#d9a945;margin:8px auto 0}
+.tc-route{padding:14px 18px 6px;font-size:14.5px;font-weight:700;color:var(--green)}
+.tc-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:6px 14px 10px;border:1px solid #e6e1d5;border-radius:14px;overflow:hidden}
+.tc-stat{padding:10px 4px;background:#fbfaf6}
+.tc-stat+.tc-stat{border-left:1px solid #e6e1d5}
+.tc-stat b{display:block;font-size:14px;color:var(--green);line-height:1.3}
 .tc-stat span{font-size:11px;color:var(--muted)}
-.tc-days{padding:14px 20px;text-align:left;display:grid;gap:8px}
-.tc-day{display:grid;grid-template-columns:auto 1fr;gap:10px;font-size:13px;align-items:start}
-.tc-day b{background:var(--green2);color:var(--green);border-radius:8px;padding:2px 8px;font-size:12px;white-space:nowrap}
-.tc-foot{background:#faf8f4;padding:12px 18px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.tc-foot strong{color:var(--green)}
+.tc-map{padding:0 14px}
+.tc-map img{display:block;width:100%;max-height:300px;object-fit:contain}
+.tc-brand{padding:12px 14px 14px;font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+
+/* ---------- Card dialog ---------- */
+.cd{border:0;border-radius:24px;padding:22px 18px 18px;width:min(480px,calc(100% - 24px));background:#f6f4ee;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.cd::backdrop{background:rgba(10,25,18,.6);backdrop-filter:blur(3px)}
+.cd-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cd-head strong{font-size:15px}
+.cd-x{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:18px;line-height:1;display:grid;place-items:center}
+.cd-x:hover{color:var(--green);border-color:var(--green-2)}
+.cd-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+#cardSlot{display:block}
+.offscreen{position:fixed;left:-10000px;top:0;width:420px;pointer-events:none}
 
 @media(max-width:780px){
   .layout{grid-template-columns:minmax(0,1fr)}
   .app{padding:16px 12px 30px}
   .card{padding:15px}
+  .hero{padding:20px}
 }
 @media(max-width:390px){
   .stats{gap:8px}
   .stat{padding:10px}
-  .stat strong{font-size:18px}
+  .stat strong{font-size:17px}
+  .tl-item{grid-template-columns:80px 1fr;gap:10px}
+  .tl-item:not(:last-child)::before{left:39px}
+  .tl-day{width:76px}
   .tc-stats{grid-template-columns:repeat(2,1fr)}
   .tc-stat:nth-child(3){border-left:0}
-  .tc-stat:nth-child(n+3){border-top:1px solid var(--line)}
-  .day{grid-template-columns:76px 1fr}
+  .tc-stat:nth-child(n+3){border-top:1px solid #e6e1d5}
 }
 @media print{
   body{background:#fff}
@@ -185,9 +216,9 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
 <main class="app">
   <section class="hero">
-    <div class="eyebrow">আপনার পরবর্তী ভ্রমণ</div>
+    <span class="eyebrow">আপনার পরবর্তী ভ্রমণ</span>
     <h1>নিজের মতো করে ভ্রমণ পরিকল্পনা করুন</h1>
-    <p>জেলা বেছে নিন, রুট ও আনুমানিক বাজেট দেখুন। সব পরিবর্তন সাথে সাথে আপডেট হয়।</p>
+    <p>জেলা বেছে নিন, মানচিত্রে রুট ও দূরত্ব দেখুন, আনুমানিক বাজেট দেখুন। সব পরিবর্তন সাথে সাথে আপডেট হয়।</p>
   </section>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -202,9 +233,9 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
         </div>
         <div class="field">
           <label for="destination">গন্তব্য জেলা</label>
-          <div class="row-inline">
-            <select id="destination"></select>
-            <button class="btn" id="addDest" type="button">+ যোগ করুন</button>
+          <select id="destination"></select>
+          <div class="add-stack" style="margin-top:8px">
+            <button class="btn btn-block" id="addDest" type="button">+ যোগ করুন</button>
           </div>
           <div class="destinations" id="chips"></div>
           <p class="hint">প্রথম গন্তব্য বেছে নিলেই যোগ হবে। পরের গন্তব্যের জন্য "+ যোগ করুন" চাপুন।</p>
@@ -231,6 +262,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
           <svg id="mapSvg" viewBox="0 0 600 828" role="img" aria-label="বাংলাদেশের মানচিত্রে ভ্রমণ রুট"></svg>
           <div class="map-fallback" id="mapFallback" hidden>Unseen Bangladesh 2.0</div>
         </div>
+        <p class="map-brand">Unseen Bangladesh 2.0</p>
         <p class="map-note" id="mapNote"></p>
         <div class="btn-row no-print" style="margin-top:12px">
           <button class="btn" id="googleMaps" type="button">Google Maps-এ রুট খুলুন ↗</button>
@@ -239,7 +271,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
       <section class="card">
         <h2 class="center">🗓️ দিনভিত্তিক ভ্রমণসূচি</h2>
-        <div class="itinerary" id="itinerary"></div>
+        <div class="tl" id="itinerary"></div>
       </section>
     </div>
 
@@ -247,7 +279,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
       <section class="card">
         <h2 class="center">📊 ভ্রমণের সারসংক্ষেপ</h2>
         <div class="stats">
-          <div class="stat"><span class="label">মোট দূরত্ব</span><strong id="summaryDistance">—</strong><span class="sub" id="summaryDistanceSub">আনুমানিক</span></div>
+          <div class="stat"><span class="label">মোট দূরত্ব</span><strong id="summaryDistance">—</strong><span class="sub" id="summaryDistanceSub">গন্তব্য যোগ করুন</span></div>
           <div class="stat"><span class="label">মোট দিন</span><strong id="summaryDays">১ দিন</strong><span class="sub">আপনার নির্বাচন অনুযায়ী</span></div>
           <div class="stat"><span class="label">মোট গন্তব্য</span><strong id="summaryPlaces">০টি</strong><span class="sub">নির্বাচিত জেলা</span></div>
           <div class="stat"><span class="label">ভ্রমণকারী</span><strong id="summaryPeople">১ জন</strong><span class="sub">দলগত হিসাব</span></div>
@@ -256,12 +288,13 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
       <section class="card">
         <h2>💰 আনুমানিক বাজেট</h2>
-        <div class="field"><label for="transport">মোট যাতায়াত খরচ (৳)</label><input id="transport" type="number" min="0" value="3000"></div>
+        <div class="field"><label for="rate">যাতায়াত ভাড়া (৳ প্রতি কিমি, জনপ্রতি)</label><input id="rate" type="number" min="0" step="0.5" value="3"></div>
+        <label class="opt"><input id="roundTrip" type="checkbox" checked> ফেরত যাত্রা সহ হিসাব করুন</label>
         <div class="field"><label for="food">জনপ্রতি দৈনিক খাবার (৳)</label><input id="food" type="number" min="0" value="500"></div>
         <div class="field"><label for="hotel">প্রতি রুম প্রতি রাত (৳)</label><input id="hotel" type="number" min="0" value="1500"></div>
         <div class="field"><label for="rooms">হোটেল রুম সংখ্যা</label><input id="rooms" type="number" min="0" value="1"></div>
         <div class="field"><label for="tickets">টিকিট ও অন্যান্য খরচ (৳)</label><input id="tickets" type="number" min="0" value="1000"></div>
-        <div class="cost-row"><div class="cost-icon">🚌</div><div class="cost-name"><strong>যাতায়াত</strong><small>Transport</small></div><span class="cost-amount" id="transportOut">৳ ০</span></div>
+        <div class="cost-row"><div class="cost-icon">🚌</div><div class="cost-name"><strong>যাতায়াত</strong><small id="transportFormula"></small></div><span class="cost-amount" id="transportOut">৳ ০</span></div>
         <div class="cost-row"><div class="cost-icon">🍲</div><div class="cost-name"><strong>খাবার</strong><small id="foodFormula"></small></div><span class="cost-amount" id="foodOut">৳ ০</span></div>
         <div class="cost-row"><div class="cost-icon">🏨</div><div class="cost-name"><strong>হোটেল</strong><small id="hotelFormula"></small></div><span class="cost-amount" id="hotelOut">৳ ০</span></div>
         <div class="cost-row"><div class="cost-icon">🎟️</div><div class="cost-name"><strong>টিকিট ও অন্যান্য</strong><small>পুরো দলের জন্য</small></div><span class="cost-amount" id="ticketsOut">৳ ০</span></div>
@@ -269,7 +302,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
           <div><div>মোট আনুমানিক খরচ</div><div class="hint" id="perPerson"></div></div>
           <strong id="grandTotal">৳ ০</strong>
         </div>
-        <p class="hint">খরচগুলো আপনার দেওয়া অনুমান; প্রকৃত ভাড়া ও দাম ভিন্ন হতে পারে।</p>
+        <p class="hint">যাতায়াত খরচ মানচিত্রের দূরত্ব থেকে হিসাব হয়। ভাড়ার হার বদলে নিজের হিসাব দিতে পারেন। বাকি খরচ আপনার দেওয়া অনুমান।</p>
       </section>
 
       <section class="card">
@@ -284,27 +317,10 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
       </section>
 
       <section class="card">
-        <h2 class="center">🎫 ভ্রমণ কার্ড</h2>
-        <div class="card-wrap">
-          <div class="tc" id="tripCard">
-            <div class="tc-head">
-              <div class="tc-brand">UNSEEN BANGLADESH 2.0</div>
-              <div class="tc-title" id="tcTitle">ভ্রমণ পরিকল্পনা</div>
-              <div class="tc-route" id="tcRoute"></div>
-            </div>
-            <div class="tc-stats">
-              <div class="tc-stat"><b id="tcDistance">—</b><span>দূরত্ব</span></div>
-              <div class="tc-stat"><b id="tcDays">১ দিন</b><span>দিন</span></div>
-              <div class="tc-stat"><b id="tcPeople">১ জন</b><span>ভ্রমণকারী</span></div>
-              <div class="tc-stat"><b id="tcTotal">৳ ০</b><span>আনুমানিক খরচ</span></div>
-            </div>
-            <div class="tc-days" id="tcDaysList"></div>
-            <div class="tc-foot"><span>জনপ্রতি <strong id="tcPerPerson">৳ ০</strong></span><span>© Unseen Bangladesh 2.0</span></div>
-          </div>
-          <div class="btn-row no-print" style="width:100%;max-width:440px">
-            <button class="btn-primary" id="pdfBtn" type="button">⬇ PDF ডাউনলোড</button>
-            <button class="btn" id="shareBtn" type="button">↗ শেয়ার করুন</button>
-          </div>
+        <h2 class="center">🎫 ভ্রমণ কার্ড ও PDF</h2>
+        <div class="btn-row">
+          <button class="btn-gold" id="pdfBtn" type="button">⬇ PDF</button>
+          <button class="btn-primary" id="cardBtn" type="button">🎫 Card</button>
         </div>
       </section>
 
@@ -316,6 +332,18 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     </div>
   </div>
 </main>
+
+<dialog class="cd" id="cardDialog" aria-labelledby="cdTitle">
+  <div class="cd-head">
+    <strong id="cdTitle">ভ্রমণ কার্ড</strong>
+    <button class="cd-x" id="cdClose" type="button" aria-label="বন্ধ করুন">×</button>
+  </div>
+  <div id="cardSlot"></div>
+  <div class="cd-actions">
+    <button class="btn" id="cdShare" type="button">↗ শেয়ার</button>
+    <button class="btn-primary" id="cdSave" type="button">⬇ Save</button>
+  </div>
+</dialog>
 
 <!-- sc:footer:start -->
 <footer class="sc-footer">
@@ -353,6 +381,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   const NS = "http://www.w3.org/2000/svg";
   const JSPDF_URL = "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js";
   const H2C_URL = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+  const CARD_IMG = "../assets/images/travel-1.webp";
 
   /* ---------- Data ----------
      [district key matching assets/data/districts.json, Bengali name, lat, lng, division]
@@ -397,20 +426,21 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   const byEn = Object.fromEntries(GEO.map(g => [g[0], byBn[g[1]]]));
 
   /* Verified road distances (km), keyed "Start|End" with Bengali names. Either order works.
-     Leave empty until values are checked against a real route source; when a pair is here
-     it is used instead of the estimate. */
+     Leave empty until values are checked against a real route source. */
   const ROAD_KM = {};
   const ROAD_FACTOR = 1.3; // straight-line distance × 1.3 ≈ road distance (estimate only)
-  const DEFAULTS = { origin: "ঢাকা", people: 1, days: 1, transport: 3000, food: 500, hotel: 1500, rooms: 1, tickets: 1000 };
+  const DEFAULTS = { origin: "ঢাকা", people: 1, days: 1, rate: 3, roundTrip: true, food: 500, hotel: 1500, rooms: 1, tickets: 1000 };
 
-  let cents = {};          // English district name -> [x, y] map centroid (from districts.json)
-  let touristByName = {};  // Bengali district name -> ready places
+  let cents = {};
+  let touristByName = {};
   let mapReady = false;
+  let destinations = [];
 
   /* ---------- Helpers ---------- */
   const bnDigits = n => new Intl.NumberFormat("bn-BD", { maximumFractionDigits: 0 }).format(Math.round(n || 0));
   const money = n => "৳ " + new Intl.NumberFormat("bn-BD", { maximumFractionDigits: 0 }).format(Math.round(n || 0));
   const clamp = (v, min, max, fb) => { const n = Math.floor(+v); return Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : fb; };
+  const fmtDate = d => d.toLocaleDateString("bn-BD", { day: "numeric", month: "short", year: "numeric" });
   function toast(msg) {
     const t = $("toast");
     t.textContent = msg; t.classList.add("show");
@@ -432,9 +462,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     return { km: Math.round(hav(A, B) * ROAD_FACTOR), exact: false };
   }
 
-  /* ---------- State ---------- */
-  let destinations = [];
-
+  /* ---------- Route state ---------- */
   const points = () => [$("origin").value, ...destinations];
   const legList = pts => pts.slice(1).map((b, i) => ({ from: pts[i], to: b, ...legKm(pts[i], b) }));
   const totalKm = pts => legList(pts).reduce((s, l) => s + l.km, 0);
@@ -473,7 +501,6 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     renderChips(); update();
   });
 
-  // returns true if added
   function addDestination(d) {
     if (!d) { toast("আগে একটি গন্তব্য জেলা বেছে নিন।"); return false; }
     if (d === $("origin").value) { toast("শুরুর জেলাকে গন্তব্য হিসেবে যোগ করা যাবে না।"); return false; }
@@ -483,7 +510,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     return true;
   }
 
-  /* ---------- Map (real district shapes from districts.json) ---------- */
+  /* ---------- Map ---------- */
   function initMap(data) {
     const svg = $("mapSvg");
     svg.setAttribute("viewBox", `0 0 ${data.w} ${data.h}`);
@@ -537,17 +564,34 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
     const line = xy.map((v, i) => (i ? "L" : "M") + v.x + " " + v.y).join(" ");
     const dots = xy.map((v, i) =>
-      `<circle cx="${v.x}" cy="${v.y}" r="${i === 0 ? 9 : 7}" fill="#fff" stroke="#0f6b4f" stroke-width="4"/>`).join("");
+      `<circle cx="${v.x}" cy="${v.y}" r="${i === 0 ? 9 : 7}" fill="#fff" stroke="#0d5f47" stroke-width="4"/>`).join("");
     const names = xy.map(v =>
       `<text x="${v.x + 10}" y="${v.y - 9}" font-size="15" font-weight="700" fill="#173f2c" stroke="#fff" stroke-width="4" paint-order="stroke">${v.bn}</text>`).join("");
     const labels = legs.map((l, i) => {
       const a = xy[i], b = xy[i + 1];
       if (!a || !b) return "";
       const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-      return `<text x="${mx}" y="${my}" font-size="13" font-weight="800" fill="#0f6b4f" stroke="#fff" stroke-width="4" paint-order="stroke">${bnDigits(l.km)} km</text>`;
+      return `<text x="${mx}" y="${my}" font-size="13" font-weight="800" fill="#0d5f47" stroke="#fff" stroke-width="4" paint-order="stroke">${bnDigits(l.km)} km</text>`;
     }).join("");
 
-    layer.innerHTML = `<path d="${line}" fill="none" stroke="#0f6b4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>${dots}${labels}${names}`;
+    layer.innerHTML = `<path d="${line}" fill="none" stroke="#0d5f47" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>${dots}${labels}${names}`;
+  }
+
+  // Current map as a self-contained SVG image (used by the trip card)
+  function mapDataUri() {
+    if (!mapReady) return "";
+    const svg = $("mapSvg").cloneNode(true);
+    svg.removeAttribute("hidden");
+    svg.setAttribute("width", "600");
+    svg.setAttribute("height", "828");
+    const st = document.createElementNS(NS, "style");
+    st.textContent = "text{font-family:'Anek Bangla',sans-serif}" +
+      "path.dist{fill:#d6e9de;stroke:#a5c8b3;stroke-width:.6}" +
+      "path.dist.on{fill:#9fd6bb;stroke:#137a5c;stroke-width:1.2}" +
+      "path.dist.origin{fill:#0d5f47;stroke:#083b2c;stroke-width:1.2}";
+    svg.insertBefore(st, svg.firstChild);
+    const xml = new XMLSerializer().serializeToString(svg);
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(xml);
   }
 
   /* ---------- Tourist places ---------- */
@@ -574,21 +618,21 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     for (let i = 0; i < n; i++) {
       const stopIdx = D ? Math.min(D - 1, Math.floor(i * D / n)) : -1;
       const stop = stopIdx >= 0 ? destinations[stopIdx] : pts[0];
-      let title, desc;
+      let title, desc, km = null;
       if (!D) {
         title = pts[0]; desc = "গন্তব্য যোগ করলে এখানে ভ্রমণসূচি দেখাবে।";
       } else if (stop !== prev) {
         const from = prev ?? pts[0];
-        const km = legKm(from, stop);
+        km = legKm(from, stop);
         title = `${from} → ${stop}`;
-        desc = `যাত্রা · ${bnDigits(km.km)} km${km.exact ? "" : " (আনুমানিক)"}`;
+        desc = "যাত্রা";
       } else if (i === n - 1) {
         title = stop; desc = "ফেরার প্রস্তুতি বা পরবর্তী যাত্রা।";
       } else {
         title = stop; desc = "দর্শনীয় স্থান ঘুরে দেখা ও রাতযাপন।";
       }
       out.push({
-        n: i + 1, title, desc, stop,
+        n: i + 1, title, desc, km, stop,
         date: start ? new Date(start.getTime() + i * 864e5) : null,
         places: D ? placesOf(stop).slice(0, 4) : []
       });
@@ -596,26 +640,39 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     }
     return out;
   }
-  const fmtDate = d => d.toLocaleDateString("bn-BD", { day: "numeric", month: "short", year: "numeric" });
 
   function renderItinerary(days) {
+    if (!days.length) return;
     $("itinerary").innerHTML = days.map(d => `
-      <div class="day">
-        <div class="day-badge">দিন ${bnDigits(d.n)}${d.date ? `<small>${fmtDate(d.date)}</small>` : ""}</div>
-        <div><h3>${d.title}</h3><p>${d.desc}</p>${d.places.length ? `<p class="places">দর্শনীয়: ${d.places.join("، ")}</p>` : ""}</div>
+      <div class="tl-item">
+        <div class="tl-marker">
+          <div class="tl-day">দিন ${bnDigits(d.n)}</div>
+          ${d.date ? `<div class="tl-date">${fmtDate(d.date)}</div>` : ""}
+        </div>
+        <div class="tl-body">
+          <h3>${d.title}</h3>
+          ${d.km ? `<span class="tl-km">${bnDigits(d.km.km)} km${d.km.exact ? "" : " · আনুমানিক"}</span>` : ""}
+          <p class="tl-desc">${d.desc}</p>
+          ${d.places.length ? `<div class="tags">${d.places.map(p => `<span class="tag">${p}</span>`).join("")}</div>` : ""}
+        </div>
       </div>`).join("");
   }
 
-  /* ---------- Budget ---------- */
+  /* ---------- Budget (transport driven by map distance) ---------- */
   function budget() {
+    const pts = points();
     const people = peopleN(), days = daysN(), nights = Math.max(0, days - 1);
     const v = id => Math.max(0, +$(id).value || 0);
-    const transport = v("transport");
+    const km = totalKm(pts);
+    const trips = $("roundTrip").checked ? 2 : 1;
+    const rate = v("rate");
+    const transport = destinations.length ? km * rate * people * trips : 0;
     const food = v("food") * people * days;
     const rooms = v("rooms");
     const hotel = v("hotel") * rooms * nights;
     const tickets = v("tickets");
-    return { people, days, nights, rooms, transport, food, hotel, tickets, total: transport + food + hotel + tickets };
+    return { km, trips, rate, people, days, nights, rooms, transport, food, hotel, tickets,
+             total: transport + food + hotel + tickets };
   }
 
   function updateBudget() {
@@ -626,60 +683,66 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     $("ticketsOut").textContent = money(b.tickets);
     $("grandTotal").textContent = money(b.total);
     $("perPerson").textContent = "জনপ্রতি " + money(b.total / b.people);
+    $("transportFormula").textContent = destinations.length
+      ? `${bnDigits(b.km)} km × ৳${bnDigits(b.rate)} × ${bnDigits(b.people)} জন${b.trips === 2 ? " × ২ (ফেরত)" : ""}`
+      : "গন্তব্য যোগ করুন";
     $("foodFormula").textContent = `${bnDigits(b.people)} জন × ${bnDigits(b.days)} দিন`;
     $("hotelFormula").textContent = `${bnDigits(b.rooms)} রুম × ${bnDigits(b.nights)} রাত`;
     $("summaryDays").textContent = bnDigits(b.days) + " দিন";
     $("summaryPeople").textContent = bnDigits(b.people) + " জন";
   }
 
-  /* ---------- Trip card ---------- */
-  function renderCard(days) {
-    const pts = points(), b = budget();
+  function updateSummary(pts) {
     const km = totalKm(pts), approx = approxRoute(pts);
-    const distText = destinations.length ? bnDigits(km) + " km" + (approx ? " (আনুমানিক)" : "") : "—";
     $("summaryDistance").textContent = destinations.length ? bnDigits(km) + " km" : "—";
-    $("summaryDistanceSub").textContent = destinations.length ? (approx ? "সরলরেখার দূরত্ব × ১.৩০" : "যাচাইকৃত সড়ক দূরত্ব") : "গন্তব্য যোগ করুন";
-
-    $("tcTitle").textContent = destinations.length ? `${bnDigits(b.days)} দিনের ভ্রমণ` : "ভ্রমণ পরিকল্পনা";
-    $("tcRoute").textContent = pts.join(" → ");
-    $("tcDistance").textContent = destinations.length ? bnDigits(km) + " km" : "—";
-    $("tcDays").textContent = bnDigits(b.days) + " দিন";
-    $("tcPeople").textContent = bnDigits(b.people) + " জন";
-    $("tcTotal").textContent = money(b.total);
-    $("tcPerPerson").textContent = money(b.total / b.people);
-    $("tcDaysList").innerHTML = days.map(d => `
-      <div class="tc-day"><b>দিন ${bnDigits(d.n)}${d.date ? " · " + fmtDate(d.date) : ""}</b><span>${d.title}</span></div>`).join("");
+    $("summaryDistanceSub").textContent = destinations.length
+      ? (approx ? "সরলরেখার দূরত্ব × ১.৩০ (আনুমানিক)" : "যাচাইকৃত সড়ক দূরত্ব")
+      : "গন্তব্য যোগ করুন";
   }
 
-  function shareText() {
-    const b = budget(), pts = points();
-    return `${pts.join(" → ")}\n` +
-      `${bnDigits(b.days)} দিন · ${bnDigits(b.people)} জন · মোট আনুমানিক ${money(b.total)}` +
-      (destinations.length ? `\nমোট দূরত্ব: ${bnDigits(totalKm(pts))} km (আনুমানিক)` : "");
+  /* ---------- Trip card ---------- */
+  function cardHTML() {
+    const pts = points(), b = budget();
+    const map = mapDataUri();
+    const km = b.km;
+    const distText = destinations.length ? bnDigits(km) + " km" : "—";
+    return `
+      <div class="tc">
+        <div class="tc-hero">
+          <img src="${CARD_IMG}" alt="">
+          <div class="tc-hero-in">
+            <div class="tc-title">ভ্রমণ পরিকল্পনা</div>
+            <div class="tc-gold"></div>
+          </div>
+        </div>
+        <div class="tc-route">${pts.join(" → ")}</div>
+        <div class="tc-stats">
+          <div class="tc-stat"><b>${distText}</b><span>দূরত্ব</span></div>
+          <div class="tc-stat"><b>${bnDigits(b.days)} দিন</b><span>দিন</span></div>
+          <div class="tc-stat"><b>${bnDigits(b.people)} জন</b><span>জন</span></div>
+          <div class="tc-stat"><b>${money(b.total)}</b><span>টাকা (আনুমানিক)</span></div>
+        </div>
+        <div class="tc-map">${map ? `<img src="${map}" alt="ভ্রমণ রুটের মানচিত্র">` : ""}</div>
+        <div class="tc-brand">Unseen Bangladesh 2.0</div>
+      </div>`;
   }
 
   /* ---------- Update (everything auto-refreshes) ---------- */
   function update() {
+    const pts = points();
     const days = buildDays();
     renderMap();
+    updateSummary(pts);
     renderItinerary(days);
     updateBudget();
-    renderCard(days);
+    if ($("cardDialog").open) $("cardSlot").innerHTML = cardHTML();
   }
 
-  /* ---------- Google Maps ---------- */
-  function mapsUrl(pts) {
-    if (pts.length < 2) return null;
-    const q = n => encodeURIComponent(n + ", Bangladesh");
-    let u = `https://www.google.com/maps/dir/?api=1&origin=${q(pts[0])}&destination=${q(pts[pts.length - 1])}&travelmode=driving`;
-    const mid = pts.slice(1, -1);
-    if (mid.length) u += "&waypoints=" + mid.map(q).join("%7C");
-    return u;
-  }
-
-  /* ---------- PDF & share ---------- */
+  /* ---------- Card rendering to image ---------- */
   function loadScript(src) {
     return new Promise((res, rej) => {
+      if (window.html2canvas && src === H2C_URL) return res();
+      if (window.jspdf && src === JSPDF_URL) return res();
       if (document.querySelector(`script[src="${src}"]`)) return res();
       const s = document.createElement("script");
       s.src = src; s.onload = res; s.onerror = () => rej(new Error(src));
@@ -687,40 +750,85 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     });
   }
 
+  async function renderCardCanvas() {
+    await loadScript(H2C_URL);
+    const wrap = document.createElement("div");
+    wrap.className = "offscreen";
+    wrap.innerHTML = cardHTML();
+    document.body.appendChild(wrap);
+    try {
+      await Promise.all([...wrap.querySelectorAll("img")].map(img =>
+        img.complete && img.naturalWidth ? Promise.resolve()
+          : new Promise(r => { img.onload = r; img.onerror = r; })));
+      return await window.html2canvas(wrap.querySelector(".tc"), { scale: 2, backgroundColor: "#ffffff", useCORS: true });
+    } finally {
+      wrap.remove();
+    }
+  }
+
+  function canvasToBlob(canvas) {
+    return new Promise(res => canvas.toBlob(res, "image/png"));
+  }
+  function download(blob, name) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+  }
+  const needRoute = () => { if (!destinations.length) { toast("আগে অন্তত একটি গন্তব্য যোগ করুন।"); return true; } return false; };
+
+  async function savePng() {
+    if (needRoute()) return;
+    try {
+      toast("কার্ড তৈরি হচ্ছে...");
+      const blob = await canvasToBlob(await renderCardCanvas());
+      download(blob, "unseen-bangladesh-trip-card.png");
+      toast("কার্ড সেভ হয়েছে।");
+    } catch (e) { toast("কার্ড সেভ করা যায়নি। ইন্টারনেট সংযোগ দেখুন।"); }
+  }
+
   async function downloadPdf() {
-    if (!destinations.length) return toast("PDF বানাতে অন্তত একটি গন্তব্য যোগ করুন।");
+    if (needRoute()) return;
     try {
       toast("PDF তৈরি হচ্ছে...");
       await loadScript(JSPDF_URL);
-      await loadScript(H2C_URL);
-      const canvas = await window.html2canvas($("tripCard"), { scale: 2, backgroundColor: "#ffffff", useCORS: true });
+      const canvas = await renderCardCanvas();
       const w = canvas.width / 2, h = canvas.height / 2, m = 24;
       const pdf = new window.jspdf.jsPDF({ unit: "px", format: [w + m * 2, h + m * 2], orientation: w > h ? "l" : "p" });
-      pdf.setFillColor(250, 248, 244);
+      pdf.setFillColor(246, 244, 238);
       pdf.rect(0, 0, w + m * 2, h + m * 2, "F");
       pdf.addImage(canvas.toDataURL("image/png"), "PNG", m, m, w, h);
       pdf.save("unseen-bangladesh-trip.pdf");
       toast("PDF ডাউনলোড শুরু হয়েছে।");
-    } catch (e) {
-      toast("PDF তৈরি করা যায়নি। ইন্টারনেট সংযোগ দেখুন।");
-    }
+    } catch (e) { toast("PDF তৈরি করা যায়নি। ইন্টারনেট সংযোগ দেখুন।"); }
   }
 
-  async function shareTrip() {
-    if (!destinations.length) return toast("শেয়ার করতে অন্তত একটি গন্তব্য যোগ করুন।");
-    const text = shareText(), url = location.href;
+  async function shareCard() {
+    if (needRoute()) return;
+    const pts = points(), b = budget();
+    const title = "Unseen Bangladesh 2.0 · ভ্রমণ পরিকল্পনা";
+    const text = `${pts.join(" → ")}\n${bnDigits(b.days)} দিন · ${bnDigits(b.people)} জন · মোট আনুমানিক ${money(b.total)}`;
+    try {
+      const canvas = await renderCardCanvas();
+      const blob = await canvasToBlob(canvas);
+      const file = new File([blob], "unseen-bangladesh-trip-card.png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ title, text, files: [file] });
+        return;
+      }
+    } catch (e) { /* fall through to text share */ }
     if (navigator.share) {
-      try { await navigator.share({ title: "Unseen Bangladesh 2.0 · ভ্রমণ পরিকল্পনা", text, url }); }
-      catch (e) { /* user cancelled */ }
+      try { await navigator.share({ title, text, url: location.href }); } catch (e) { /* cancelled */ }
     } else {
-      try { await navigator.clipboard.writeText(text + "\n" + url); toast("ভ্রমণের তথ্য কপি হয়েছে।"); }
+      try { await navigator.clipboard.writeText(text + "\n" + location.href); toast("ভ্রমণের তথ্য কপি হয়েছে।"); }
       catch (e) { toast("শেয়ার করা যায়নি।"); }
     }
   }
 
   /* ---------- Events ---------- */
   $("destination").onchange = () => {
-    // first destination is added automatically; later ones need the + button
+    // first destination is added automatically; later ones use the + button
     if (destinations.length === 0 && $("destination").value) {
       if (addDestination($("destination").value)) $("destination").value = "";
     }
@@ -732,16 +840,31 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     destinations = destinations.filter(d => d !== $("origin").value);
     renderChips(); update();
   };
-  ["people", "days", "startDate", "transport", "food", "hotel", "rooms", "tickets"]
+  ["people", "days", "startDate", "rate", "food", "hotel", "rooms", "tickets"]
     .forEach(id => $(id).addEventListener("input", update));
+  $("roundTrip").addEventListener("change", update);
 
   $("googleMaps").onclick = () => {
-    const url = mapsUrl(points());
-    if (!url) return toast("অন্তত একটি গন্তব্য যোগ করুন।");
-    window.open(url, "_blank", "noopener");
+    const pts = points();
+    if (pts.length < 2) return toast("অন্তত একটি গন্তব্য যোগ করুন।");
+    const q = n => encodeURIComponent(n + ", Bangladesh");
+    let u = `https://www.google.com/maps/dir/?api=1&origin=${q(pts[0])}&destination=${q(pts[pts.length - 1])}&travelmode=driving`;
+    const mid = pts.slice(1, -1);
+    if (mid.length) u += "&waypoints=" + mid.map(q).join("%7C");
+    window.open(u, "_blank", "noopener");
   };
+
   $("pdfBtn").onclick = downloadPdf;
-  $("shareBtn").onclick = shareTrip;
+  $("cardBtn").onclick = () => {
+    if (needRoute()) return;
+    $("cardSlot").innerHTML = cardHTML();
+    $("cardDialog").showModal();
+  };
+  $("cdClose").onclick = () => $("cardDialog").close();
+  $("cardDialog").addEventListener("click", e => { if (e.target === $("cardDialog")) $("cardDialog").close(); });
+  $("cdShare").onclick = shareCard;
+  $("cdSave").onclick = savePng;
+
   $("resetBtn").onclick = () => {
     destinations = [];
     $("origin").value = DEFAULTS.origin;
@@ -749,7 +872,8 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     $("startDate").value = "";
     $("people").value = DEFAULTS.people;
     $("days").value = DEFAULTS.days;
-    $("transport").value = DEFAULTS.transport;
+    $("rate").value = DEFAULTS.rate;
+    $("roundTrip").checked = DEFAULTS.roundTrip;
     $("food").value = DEFAULTS.food;
     $("hotel").value = DEFAULTS.hotel;
     $("rooms").value = DEFAULTS.rooms;
