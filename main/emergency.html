@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="bn" translate="no">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google" content="notranslate">
+<title>সেবা খুঁজুন — জরুরি সেবা</title>
+<style>
+:root{--bg:#faf8f4;--surface:#fff;--ink:#17201c;--muted:#6b716d;--line:#ebe6dc;--brand:#0f6b4f;--chip:#f3efe7;--red:#d92d20}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Anek Bangla",system-ui,sans-serif}
+button,input{font:inherit;color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 48px}
+h1{margin:0 0 4px;font-size:26px}
+h2{margin:26px 0 10px;font-size:20px;display:flex;align-items:center;gap:8px}
+h2 small{font-size:13px;color:var(--muted);font-weight:500}
+.sub{margin:0 0 16px;color:var(--muted)}
+.search{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:11px 14px;margin-bottom:12px}
+.search:focus{outline:2px solid var(--brand);border-color:transparent}
+.cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:5px 14px;font-size:14px;font-weight:600;cursor:pointer}
+.cat[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.card:hover,.card:focus-visible{border-color:var(--brand);box-shadow:0 2px 10px rgba(15,107,79,.12);outline:none}
+.card h3{margin:0;font-size:17px}
+.card p{margin:0;color:var(--muted);font-size:13px}
+.tag{align-self:flex-start;background:var(--chip);border-radius:99px;padding:1px 10px;font-size:12px;font-weight:600;color:var(--brand)}
+.btns{margin-top:auto;padding-top:4px}
+.call{display:flex;align-items:center;justify-content:center;gap:6px;background:var(--brand);color:#fff;text-decoration:none;border-radius:10px;padding:8px 14px;font-weight:700;font-size:14px}
+.call:hover{filter:brightness(1.1)}
+.sos{background:var(--red)}
+.empty,.msg{text-align:center;color:var(--muted);padding:30px 0}
+.note{margin-top:22px;font-size:13px;color:var(--muted)}
+/* details page */
+.back{display:inline-flex;align-items:center;gap:6px;color:var(--brand);font-weight:700;text-decoration:none;margin-bottom:14px}
+.big{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:18px}
+.big h1{font-size:28px;margin:6px 0}
+.big .num{font-size:34px;font-weight:800;color:var(--red);margin:6px 0 12px;letter-spacing:1px}
+.big .call{max-width:280px;font-size:17px;padding:12px}
+.row{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}
+.row .i{flex:1}.row b{display:block}.row small{color:var(--muted)}
+.row .call{flex:none}
+.cnum{font-size:26px;font-weight:800;color:var(--red);line-height:1.2;letter-spacing:.5px}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.pill{background:var(--chip);border-radius:99px;padding:1px 10px;font-size:12px;font-weight:600;color:var(--muted)}
+.pill.g{color:var(--brand)}
+.cnum:empty::before,.big .num:empty::before{content:"…";color:var(--muted)}
+.call[aria-disabled="true"]{background:var(--line);color:var(--muted);pointer-events:none}
+.sk{min-height:130px;background:linear-gradient(90deg,var(--chip),#fff,var(--chip));background-size:200% 100%;animation:sh 1.2s infinite;cursor:default}
+@keyframes sh{to{background-position:-200% 0}}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.btn2{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:700;font-size:14px;cursor:pointer}
+.btn2:hover{border-color:var(--brand)}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:14px}
+.sec h2{margin:0 0 8px;font-size:17px}
+.sec ul{margin:0;padding-left:20px}.sec li{margin:3px 0}
+.warn{border-color:#f5c6c2;background:#fff6f5}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips a{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:3px 12px;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none}
+.chips a:hover{border-color:var(--brand);color:var(--brand)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div id="list">
+    <h1>সেবা খুঁজুন</h1>
+    <p class="sub">জরুরি সেবা — বিভাগ ও জেলা অনুযায়ী। যেকোনো কার্ডে ক্লিক করলে বিস্তারিত দেখাবে।</p>
+    <input class="search" id="q" type="search" placeholder="জেলা বা সেবা খুঁজুন… (যেমন: সিলেট, ফায়ার, বিদ্যুৎ)" aria-label="খুঁজুন">
+    <div class="cats" id="cats" role="group" aria-label="বিভাগ"></div>
+    <h2 id="hotH">জাতীয় হটলাইন <small>সারা দেশে</small></h2>
+    <div class="grid" id="hot"></div>
+    <div id="divs"></div>
+    <p class="empty" id="empty" hidden>কিছু পাওয়া যায়নি।</p>
+    <p class="note">নম্বরগুলো emergency.json ফাইল থেকে আসে। ব্যবহারের আগে সরকারি সূত্র থেকে যাচাই করে নিন। ট্যাপ করলে ফোনের ডায়ালারে নম্বর বসে যায়।</p>
+  </div>
+  <div id="detail" hidden></div>
+  <p class="msg" id="msg" hidden></p>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const bn=s=>String(s).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const tel=n=>String(n).replace(/[^\d+]/g,"");
+let div="সব",term="";
+// ---- কার্ডের কাঠামো (শুধু নাম) পেজেই আছে, তাই কার্ড সঙ্গে সঙ্গে দেখায় ----
+const NAT=[["জাতীয় জরুরি সেবা", "পুলিশ/ফায়ার/অ্যাম্বুলেন্স"], ["ফায়ার সার্ভিস", "আগুন/উদ্ধার"], ["স্বাস্থ্য বাতায়ন", "স্বাস্থ্য"], ["নারী ও শিশু নির্যাতন প্রতিরোধ", "নিরাপত্তা"], ["চাইল্ড হেল্পলাইন", "নিরাপত্তা"], ["জাতীয় আইনগত সহায়তা", "আইন"], ["দুর্নীতি দমন কমিশন", "আইন"], ["জাতীয় তথ্য বাতায়ন", "তথ্য"], ["ডেসকো", "বিদ্যুৎ"], ["ডিপিডিসি", "বিদ্যুৎ"], ["তিতাস গ্যাস", "গ্যাস"], ["ঢাকা ওয়াসা", "পানি"]];
+const DIVS=[["ঢাকা", ["ঢাকা", "গাজীপুর", "কিশোরগঞ্জ", "মানিকগঞ্জ", "মুন্সীগঞ্জ", "নারায়ণগঞ্জ", "নরসিংদী", "টাঙ্গাইল", "ফরিদপুর", "গোপালগঞ্জ", "মাদারীপুর", "রাজবাড়ী", "শরীয়তপুর"]], ["চট্টগ্রাম", ["চট্টগ্রাম", "কক্সবাজার", "বান্দরবান", "রাঙ্গামাটি", "খাগড়াছড়ি", "কুমিল্লা", "ব্রাহ্মণবাড়িয়া", "চাঁদপুর", "নোয়াখালী", "ফেনী", "লক্ষ্মীপুর"]], ["সিলেট", ["সিলেট", "মৌলভীবাজার", "হবিগঞ্জ", "সুনামগঞ্জ"]], ["বরিশাল", ["বরিশাল", "ঝালকাঠি", "পিরোজপুর", "পটুয়াখালী", "বরগুনা", "ভোলা"]], ["খুলনা", ["খুলনা", "বাগেরহাট", "সাতক্ষীরা", "যশোর", "ঝিনাইদহ", "মাগুরা", "নড়াইল", "কুষ্টিয়া", "চুয়াডাঙ্গা", "মেহেরপুর"]], ["রাজশাহী", ["রাজশাহী", "নওগাঁ", "নাটোর", "চাঁপাইনবাবগঞ্জ", "পাবনা", "সিরাজগঞ্জ", "বগুড়া", "জয়পুরহাট"]], ["রংপুর", ["রংপুর", "দিনাজপুর", "ঠাকুরগাঁও", "পঞ্চগড়", "নীলফামারী", "লালমনিরহাট", "কুড়িগ্রাম", "গাইবান্ধা"]], ["ময়মনসিংহ", ["ময়মনসিংহ", "জামালপুর", "নেত্রকোণা", "শেরপুর"]]];
+let DB={national:NAT.map(([name,type])=>({name,type,number:"",desc:""})),
+  divisions:DIVS.map(([name,ds])=>({name,districts:ds.map(n=>({name:n,number:"",services:[]}))})),common:{}};
+const fix=h=>h.replace(/<a class="call([^"]*)" href="tel:"/g,'<a class="call$1" aria-disabled="true"');
+
+
+$("cats").innerHTML=["সব",...DIVS.map(d=>d[0])].map(c=>`<button type="button" class="cat" aria-pressed="${c===div}" data-c="${esc(c)}">${c==="সব"?c:esc(c)+" বিভাগ"}</button>`).join("");
+
+// ---- নম্বর ও বিস্তারিত তথ্য পরে JSON থেকে লোড হয় ----
+fetch("emergency.json",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{
+  (d.national||[]).forEach(x=>{const t=DB.national.find(y=>y.name===x.name);if(t)Object.assign(t,x)});
+  (d.divisions||[]).forEach(dv=>(dv.districts||[]).forEach(x=>{
+    for(const g of DB.divisions){const t=g.districts.find(y=>y.name===x.name);if(t){Object.assign(t,x);break}}}));
+  DB.common=d.common||{};
+  route();
+}).catch(()=>{$("msg").hidden=false;$("msg").textContent="নম্বর লোড করা যায়নি: emergency.json ফাইলটি এই পেজের পাশে রাখুন এবং ওয়েব সার্ভার/হোস্টিং থেকে পেজটি খুলুন (সরাসরি ফাইল খুললে কাজ করে না)."});
+
+$("cats").onclick=e=>{const b=e.target.closest(".cat");if(!b)return;div=b.dataset.c;
+  document.querySelectorAll(".cat").forEach(x=>x.setAttribute("aria-pressed",x===b));renderList()};
+$("q").oninput=e=>{term=e.target.value.trim().toLowerCase();renderList()};
+const hit=(...a)=>!term||a.join(" ").toLowerCase().includes(term);
+
+// ---- তালিকা ----
+function renderList(){
+  const hot=DB.national.map((s,i)=>({s,i})).filter(({s})=>div==="সব"&&hit(s.name,s.type,s.desc,s.number));
+  $("hotH").hidden=!hot.length;
+  $("hot").innerHTML=fix(hot.map(({s,i})=>`<div class="card" tabindex="0" role="link" data-go="n:${i}"><span class="tag">${esc(s.type)}</span><h3>${esc(s.name)}</h3><div class="cnum">${bn(esc(s.number))}</div><p>${esc(s.desc)}</p><div class="meta">${s.hours?`<span class="pill g">🕒 ${esc(s.hours)}</span>`:""}</div><div class="btns"><a class="call" href="tel:${tel(s.number)}">📞 কল করুন</a></div></div>`).join(""));
+  let html="",total=hot.length;
+  DB.divisions.forEach(dv=>{
+    if(div!=="সব"&&div!==dv.name)return;
+    const list=dv.districts.filter(d=>hit(d.name,dv.name,"জেলা"));
+    if(!list.length)return;
+    total+=list.length;
+    html+=`<h2>${esc(dv.name)} বিভাগ <small>${bn(list.length)}টি জেলা</small></h2><div class="grid">`+
+      list.map(d=>`<div class="card" tabindex="0" role="link" data-go="d:${esc(d.name)}"><span class="tag">${esc(dv.name)} বিভাগ</span><h3>${esc(d.name)} জেলা</h3><div class="cnum">${bn(esc(d.number))}</div><div class="meta"><span class="pill">জরুরি নম্বর</span>${(d.services||[]).length?`<span class="pill g">${bn((d.services||[]).length)}টি স্থানীয় সেবা</span>`:""}</div><div class="btns"><a class="call" href="tel:${tel(d.number)}">📞 কল করুন</a></div></div>`).join("")+`</div>`;
+  });
+  $("divs").innerHTML=fix(html);
+  $("empty").hidden=total>0;
+}
+
+// ---- বিস্তারিত পেজ ----
+const row=(s)=>`<div class="row"><div class="i"><b>${esc(s.name)}</b><small>${esc(s.desc||"")}</small></div><a class="call" href="tel:${tel(s.number)}">📞 ${bn(esc(s.number))}</a></div>`;
+const lis=a=>"<ul>"+a.map(x=>`<li>${esc(x)}</li>`).join("")+"</ul>";
+function head(tag,title,sub,num,sos,hours){
+  return `<div class="big"><span class="tag">${esc(tag)}</span><h1>${esc(title)}</h1>${sub?`<p>${esc(sub)}</p>`:""}<div class="num">${bn(esc(num))}</div>
+  ${hours?`<div class="meta"><span class="pill g">🕒 ${esc(hours)}</span></div>`:""}
+  <a class="call ${sos?"sos":""}" href="tel:${tel(num)}" style="margin-top:12px">📞 কল করুন</a>
+  <div class="acts"><button type="button" class="btn2" data-copy="${esc(num)}">📋 নম্বর কপি</button><button type="button" class="btn2" data-share="${esc(title)}|${esc(num)}" hidden>📤 শেয়ার</button></div></div>`;
+}
+function renderDetail(key){
+  const [k,v]=[key.slice(0,1),key.slice(2)];
+  const tips=(DB.common&&DB.common.callTips)||[];
+  let h=`<a class="back" href="#">← সব তালিকা</a>`;
+  if(k==="n"){
+    const s=DB.national[+v];if(!s)return false;
+    h+=head(s.type,s.name,s.desc,s.number,s.number==="999",s.hours);
+    if((s.tips||[]).length)h+=`<div class="sec warn"><h2>⚠️ জরুরি পরামর্শ</h2>${lis(s.tips)}</div>`;
+    if(tips.length)h+=`<div class="sec"><h2>📞 ফোনে যা বলবেন</h2>${lis(tips)}</div>`;
+    const rel=DB.national.map((x,i)=>({x,i})).filter(({x,i})=>x.type===s.type&&i!==+v);
+    if(rel.length)h+=`<div class="sec"><h2>একই ধরনের সেবা</h2><div class="chips">${rel.map(({x,i})=>`<a href="#${encodeURIComponent("n:"+i)}">${esc(x.name)}</a>`).join("")}</div></div>`;
+  }else{
+    let d=null,dv=null;
+    for(const x of DB.divisions){const f=x.districts.find(y=>y.name===v);if(f){d=f;dv=x;break}}
+    if(!d)return false;
+    h+=head(dv.name+" বিভাগ",d.name+" জেলা","এই জেলার জরুরি নম্বর",d.number,true);
+    if((d.services||[]).length)h+=`<h2>${esc(d.name)} জেলার স্থানীয় সেবা</h2>`+d.services.map(row).join("");
+    if(tips.length)h+=`<div class="sec"><h2>📞 ফোনে যা বলবেন</h2>${lis(tips)}</div>`;
+    h+=`<h2>জাতীয় হটলাইন <small>সারা দেশে</small></h2>`+DB.national.map(row).join("");
+    const near=dv.districts.filter(x=>x.name!==d.name);
+    if(near.length)h+=`<div class="sec" style="margin-top:14px"><h2>${esc(dv.name)} বিভাগের অন্যান্য জেলা</h2><div class="chips">${near.map(x=>`<a href="#${encodeURIComponent("d:"+x.name)}">${esc(x.name)}</a>`).join("")}</div></div>`;
+  }
+  $("detail").innerHTML=fix(h);
+  if(navigator.share)$("detail").querySelectorAll("[data-share]").forEach(b=>b.hidden=false);
+  return true;
+}
+$("detail").addEventListener("click",e=>{
+  const c=e.target.closest("[data-copy]"),sh=e.target.closest("[data-share]");
+  if(c){const t=c.dataset.copy,done=()=>{c.textContent="✅ কপি হয়েছে";setTimeout(()=>c.textContent="📋 নম্বর কপি",1500)};
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(done).catch(()=>{const i=document.createElement("input");i.value=t;document.body.appendChild(i);i.select();try{document.execCommand("copy");done()}catch(_){}i.remove()})}
+  if(sh){const [n,p]=sh.dataset.share.split("|");navigator.share({title:n,text:n+": "+p}).catch(()=>{})}
+});
+
+// ---- রাউটিং (#d:জেলা / #n:০) ----
+function route(){
+  const key=decodeURIComponent(location.hash.slice(1));
+  if(key&&renderDetail(key)){$("list").hidden=true;$("detail").hidden=false;scrollTo(0,0)}
+  else{$("detail").hidden=true;$("list").hidden=false;renderList()}
+}
+addEventListener("hashchange",route);
+function open_(e){
+  if(e.target.closest(".call"))return;                 // কল বাটনে ক্লিক করলে শুধু কল হবে
+  const c=e.target.closest("[data-go]");if(c)location.hash=encodeURIComponent(c.dataset.go);
+}
+$("list").addEventListener("click",open_);
+$("list").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.matches("[data-go]"))open_(e)});
+route();   // কার্ড এখনই দেখায় (নম্বর পরে JSON থেকে আসে)
+</script>
+</body>
+</html>
