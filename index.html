@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="bn" translate="no">
+<head>
+<meta charset="utf-8">
+<!-- opened on the old workers.dev address (shared before the domain moved): hide the page, the script below moves to unseenbangladesh2-0.vercel.app -->
+<script>if(/\.workers\.dev$/.test(location.hostname))document.documentElement.style.visibility="hidden"</script>
+<!-- District map data (assets/data/districts.json) is fetched in parallel with the HTML; the app code (#app-js) starts as soon as it arrives.
+     A copy is kept in Cache Storage so the map still opens offline. -->
+<script>
+(function(){var U="assets/data/districts.json",C="bdmap-data-v1";
+function net(){return fetch(U,{priority:"high"}).then(function(r){if(!r.ok)throw 0;var c=r.clone();if(window.caches)caches.open(C).then(function(k){return k.put(U,c)}).catch(function(){});return r.json()})}
+function off(){return window.caches?caches.match(U).then(function(r){if(!r)throw 0;return r.json()}):Promise.reject()}
+window.__load=function(){return net().catch(off).catch(function(){return new Promise(function(ok){setTimeout(ok,1500)}).then(net)})};
+window.__D=window.__load();
+})();
+</script>
+<!-- the site is Bangla: stop browsers auto-translating it to English -->
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Unseen Bangladesh 2.0 — ভ্রমণ ম্যাপ ও ৬৪ জেলার তথ্য</title>
+<meta name="description" content="বাংলাদেশের ভ্রমণ করা জেলাগুলো নির্বাচন করে নিজের ভ্রমণের স্মৃতির একটি সুন্দর ম্যাপ তৈরি করুন।">
+<!-- Vercel Web Analytics -->
+<script defer src="/_vercel/insights/script.js"></script>
+<!-- Google Site Name -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Unseen Bangladesh 2.0",
+  "alternateName": "Unseen Bangladesh",
+  "url": "https://unseenbangladesh2-0.vercel.app/"
+}
+</script>
+
+<!-- installable web -->
+  <!-- installable web app (also the base for the Play Store app) -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="assets/images/travel-1.webp" as="image" type="image/webp" fetchpriority="high">
+<meta name="theme-color" content="#0f6b4f">
+<link rel="icon" href="assets/images/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-19.png">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Unseen Bangladesh 2.0">
+<!-- link previews (Facebook, Messenger, WhatsApp, X): the share banner, not a random photo from the page -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Unseen Bangladesh 2.0">
+<meta property="og:url" content="https://unseenbangladesh2-0.vercel.app/">
+<meta property="og:title" content="বাংলাদেশ কতটুকু ঘুরে দেখেছেন? — Unseen Bangladesh 2.0">
+<meta property="og:description" content="ভ্রমণ করা জেলাগুলো চিহ্নিত করে নিজের ভ্রমণ ম্যাপ তৈরি করুন এবং ৬৪ জেলার দর্শনীয় স্থান আবিষ্কার করুন।">
+<meta property="og:image" content="https://unseenbangladesh2-0.vercel.app/assets/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Unseen Bangladesh 2.0 — বাংলাদেশ ও বিশ্ব ভ্রমণ ম্যাপ">
+<meta property="og:locale" content="bn_BD">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://unseenbangladesh2-0.vercel.app/assets/og-image.jpg?v=2">
+<link rel="canonical" href="https://unseenbangladesh2-0.vercel.app/">
+<link rel="preload" href="assets/fonts/anek-bangla-bengali.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+/* Anek Bangla (SIL OFL 1.1, see assets/fonts/OFL.txt), self-hosted so the page has no third-party requests */
+/* bengali */
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-bengali.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{
+  --bg:#faf8f4;--surface:#fff;--ink:#17201c;--muted:#6b716d;--line:#ebe6dc;
+  --brand:#0f6b4f;--brand-ink:#fff;--chip:#f3efe7;--radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Anek Bangla",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+.tabs{display:flex;gap:4px;background:var(--chip);padding:4px;border-radius:99px}
+.tab{color:var(--muted);text-decoration:none;font-size:15px;font-weight:600;padding:8px 16px;border-radius:99px;transition:all .15s;white-space:nowrap;position:relative}
+.tab:hover{color:var(--ink);transform:translateY(-1px)}
+.tab::before{content:"";position:absolute;inset:0;border-radius:99px;background:rgba(15,107,79,.08);opacity:0;transition:opacity .25s ease}
+.tab:hover::before{opacity:1}
+.tab[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+
+/* hero */
+.hero{text-align:center;padding:56px 0 40px}
+.hero h1{font-size:clamp(34px,5.5vw,60px);line-height:1.25;letter-spacing:-.03em;margin:18px auto 16px;max-width:780px;font-weight:800}
+.hero h1 span{background:linear-gradient(90deg,#0f6b4f,#1aa37a 40%,#f42a41);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:18px;max-width:560px;margin:0 auto 28px}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:14px 22px;border-radius:99px;font-weight:600;text-decoration:none;transition:transform .15s}
+.cta:hover{transform:translateY(-1px)}
+.steps{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:14px}
+.steps b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--surface);border:1px solid var(--line);font-size:12px;margin-right:8px;color:var(--ink)}
+/* homepage hero over a looping background video (assets/hero, credits in assets/hero/CREDITS.txt) */
+.hero.vid{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;margin:10px 0 clamp(16px,2.4vw,28px) 0;padding:0;color:#fff;background:#0b2a1f;width:100%;aspect-ratio:16/8}
+.hero-bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.hero.vid h1{text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero.vid h1 span{background:linear-gradient(90deg,#8fe9c4,#ffffff 55%,#ff8090);-webkit-background-clip:text;background-clip:text}
+.hero.vid p{color:rgba(255,255,255,.85)}
+.hero.vid .cta{background:#fff;color:var(--ink)}
+.hero.vid .steps{color:rgba(255,255,255,.82)}
+.hero.vid .steps b{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);color:#fff}
+
+/* app */
+.app{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:24px;align-items:start;padding-bottom:64px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.picker{padding:20px;position:sticky;top:16px;max-height:calc(100vh - 32px);display:flex;flex-direction:column}
+.picker-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.picker-head h2{font-size:17px;margin:0}
+.count{font-size:13px;font-weight:600;color:var(--brand);background:#e3f0ea;padding:3px 10px;border-radius:99px;font-variant-numeric:tabular-nums}
+.search{position:relative;margin-bottom:12px}
+.search input{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:11px 14px 11px 38px;outline:none;transition:border-color .15s}
+.search input:focus{border-color:var(--brand)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.tools{display:flex;gap:8px;margin-bottom:10px;flex-wrap:nowrap;align-items:center;overflow-x:auto;overflow-y:hidden;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-top:5px;padding-bottom:5px;min-height:41px}.link{background:none;border:0;padding:0;color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;text-decoration:underline;text-underline-offset:3px}.link:hover{color:var(--ink)}
+.tools::-webkit-scrollbar{display:none}
+.tools.drag{cursor:grabbing;user-select:none;-webkit-user-select:none}
+.tools>*,.seg button{flex:none;white-space:nowrap}
+.tb{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s}
+.tb:hover{background:var(--chip);border-color:var(--brand)}
+.seg{margin-left:auto;flex:none;display:inline-flex;background:var(--chip);padding:2px;border-radius:99px}
+.seg button{border:0;background:none;border-radius:99px;padding:4px 12px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.upa-note{margin:0 0 10px;font-size:12.5px;color:var(--muted);background:var(--chip);border-radius:10px;padding:8px 10px}
+.groups.off{display:none}
+.groups{overflow:auto;margin:0 -20px;padding:0 20px;flex:1}
+.group{padding:12px 0;border-top:1px solid var(--line)}
+.group-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.group-h b{font-size:13px}
+.group-h small{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.group-h .link{font-size:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid transparent;background:var(--chip);border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:#d6cfc1}
+.chip[aria-pressed="true"]{background:var(--sel,var(--brand));color:var(--sel-ink,#fff)}
+.chip[aria-pressed="true"]::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+.stage{padding:20px}
+.stage-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.themes{display:flex;gap:10px;align-items:center}
+.themes span{font-size:13px;color:var(--muted);margin-right:4px}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid var(--surface);outline:2px solid transparent;cursor:pointer;padding:0;position:relative;overflow:hidden;transition:outline-color .15s,transform .15s}
+.sw:hover{transform:scale(1.06)}
+.sw[aria-checked="true"]{outline-color:var(--ink)}
+.sw i{position:absolute;inset:0}
+.sw i:last-child{inset:auto 0 0 auto;width:55%;height:55%;border-radius:50% 0 0 0}
+.opts{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.name{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:8px 12px;width:180px;outline:none}
+.name:focus{border-color:var(--brand)}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;user-select:none}
+.upload{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;cursor:pointer;border:1px dashed #cfc7b8;border-radius:12px;padding:4px 12px 4px 4px;transition:border-color .15s}
+.upload:hover{border-color:var(--ink)}
+.upload:focus-within{outline:2px solid var(--ink);outline-offset:2px}
+.avatar{width:28px;height:28px;border-radius:8px;background:var(--chip);display:grid;place-items:center;color:var(--muted);background-size:cover;background-position:center}
+.toggle input{accent-color:var(--brand);width:16px;height:16px}
+.canvas-wrap{position:relative;border-radius:12px;overflow:hidden;background:var(--chip)}
+canvas#preview{display:block;width:100%;height:auto;cursor:pointer}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:8px;white-space:nowrap;opacity:0;transform:translate(-50%,-140%);transition:opacity .1s}
+.hint{font-size:12px;color:var(--muted);text-align:center;margin:10px 0 0}
+.iab-note{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:14px 0 0;padding:10px 14px;border-radius:12px;background:#fff8ec;border:1px solid #f1e3c8;font-size:14px;line-height:1.5}
+.iab-note a{font-weight:700;color:var(--brand);white-space:nowrap}
+.savesheet{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.78);display:flex;align-items:flex-end;justify-content:center;padding:12px;overflow-y:auto}
+.ss-card{background:var(--surface);color:var(--ink);width:min(480px,100%);border-radius:20px;padding:20px 18px 16px;display:flex;flex-direction:column;gap:10px;text-align:center;margin:auto 0}
+.ss-t{font-size:21px}
+.ss-p,.ss-hint,.ss-or{margin:0;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.ss-hint{font-size:13px}
+.ss-btn{display:block;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;font-size:16px;padding:12px;border-radius:14px;text-decoration:none;cursor:pointer}
+.ss-btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.ss-img{width:100%;border-radius:12px;border:1px solid var(--line);-webkit-touch-callout:default;user-select:auto}
+.ss-x{border:0;background:none;color:var(--muted);font:inherit;font-weight:600;padding:8px;cursor:pointer}
+.dl-title{font-size:17px;font-weight:700;margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+.dl{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+/* "top X% of travellers", shown after the Bangladesh map is downloaded */
+.rank{margin-top:16px;padding:16px 18px;border-radius:14px;background:linear-gradient(135deg,#e3f0ea,#f6f1e4);border:1px solid #cfe3d9}
+.rank-top{display:flex;align-items:center;gap:12px}
+.rank-ic{font-size:34px;line-height:1}
+.rank small{display:block;color:var(--muted);font-size:13px}
+.rank b{display:block;font-size:20px;line-height:1.3;color:var(--brand)}
+.rank-bar{height:8px;border-radius:99px;background:rgba(15,107,79,.14);margin:12px 0 8px;overflow:hidden}
+.rank-bar i{display:block;height:100%;border-radius:inherit;background:var(--brand);transition:width .6s ease}
+.rank p{margin:0;font-size:14px;color:var(--ink)}
+.btn{flex:1;min-width:120px;display:inline-flex;justify-content:center;align-items:center;gap:8px;border-radius:12px;padding:13px 16px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--surface);transition:all .15s}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:#fff;}
+.btn.primary:hover{opacity:.9}
+.btn:disabled{opacity:.5;cursor:wait}
+
+.credit button{border:0;background:none;color:var(--ink);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0}
+
+/* explore */
+/* where to go this month (explore tab) */
+/* what the district is famous for */
+.been{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+.been[aria-pressed="true"]{background:#e3f0ea;border-color:#bfe0d0;color:var(--brand);font-weight:600}
+.box{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px}
+.box h3{font-size:16px;margin:0 0 8px}
+.box + .box{margin-top:0}
+.go{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.go li{display:flex;gap:10px;font-size:15px}
+.go .ic{flex:none;width:30px;height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:16px}
+.go b{display:block;font-size:14px}
+.box p{margin:0;font-size:15px}
+.ph{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#dfeee6,#c7e3d5);display:grid;place-items:center;color:#0f6b4f}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph svg{opacity:.55}
+.pd-note{margin-top:18px;font-size:13px;color:var(--muted)}
+
+
+
+@media (max-width:900px){
+  .app{grid-template-columns:1fr}
+  .picker{position:static;max-height:none}
+  .groups{max-height:none;overflow:visible}
+}
+@media (max-width:560px){
+  .container{padding:0 16px}
+  .hero{padding:36px 0 28px}
+  .hero p{font-size:16px}
+  .stage,.picker{padding:14px}
+  .name{width:100%}
+  .opts{width:100%}
+  .tabs{width:100%}
+  .tab{flex:1;text-align:center;padding:8px 10px}
+  .tab{font-size:14px;padding:8px 6px;flex:auto}
+  .tabs{gap:2px}
+}
+@media (max-width:380px){
+  .tab{font-size:12.5px;padding:8px 4px}
+}
+
+html{scroll-padding-top:calc(var(--hh) + 12px)}
+:root{--hh:65px}
+body{overflow-x:clip}
+button,.chip,.sw{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.hero-dots button:focus-visible,.group-t:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* hero slides over the background video */
+.hero-slides{position:absolute;inset:0;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr)}
+.hslide{grid-area:1/1;position:relative;isolation:isolate;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s .6s;background-size:cover;background-position:center;background-repeat:no-repeat;width:100%;height:100%}
+.hslide::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.50) 0%,rgba(0,0,0,.40) 45%,rgba(0,0,0,.68) 100%)}
+.hslide.on{opacity:1;visibility:visible;transition-delay:0s}
+.hero h2.hh{font-size:clamp(30px,5vw,54px);line-height:1.25;letter-spacing:-.03em;margin:18px auto 16px;max-width:780px;font-weight:800;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero-dots{display:flex;justify-content:center;gap:2px;margin-top:26px}
+.hero-dots button{width:26px;height:26px;padding:8px;border:0;background:rgba(255,255,255,.45);background-clip:content-box;border-radius:99px;cursor:pointer;transition:width .3s cubic-bezier(.4,0,.2,1),background-color .3s ease,transform .2s ease;position:relative}
+.hero-dots button:hover{background-color:rgba(255,255,255,.65);transform:scale(1.1)}
+.hero-dots button[aria-current]{width:44px;background-color:#fff;box-shadow:0 2px 8px rgba(255,255,255,.3)}
+
+/* division cards: one colour border each, one open at a time */
+.groups{padding-bottom:4px}
+.group{border:2px solid var(--dv,var(--line));border-radius:14px;padding:0;margin:0 0 10px;overflow:hidden;background:var(--surface)}
+.group-h{display:flex;align-items:center;gap:6px;margin:0;padding:0 14px 0 0}
+.group-t{flex:1;min-width:0;display:flex;align-items:center;gap:8px;border:0;background:none;padding:13px 8px 13px 14px;cursor:pointer;text-align:left}
+.group-t b{font-size:15px}
+.group-t .dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--dv)}
+.group-t svg{margin-left:auto;flex:none;color:var(--muted);transition:transform .2s}
+.group.open .group-t svg{transform:rotate(180deg)}
+.group.open .group-h{background:color-mix(in srgb,var(--dv) 10%,transparent)}
+.chips{display:none;padding:12px 14px 14px;gap:8px}
+.group.open .chips,.groups.searching .chips{display:flex}
+.chip[hidden],.group[hidden]{display:none!important}
+/* picking a district never changes the chip's size or position */
+.chip{border:1.5px solid color-mix(in srgb,var(--dv,#999) 35%,transparent);transform:none!important;transition:background-color .15s,color .15s,border-color .15s}
+.chip:hover{border-color:var(--dv,#d6cfc1)}
+.chip[aria-pressed="true"]{background:var(--sel,var(--brand));border-color:var(--sel,var(--brand));color:var(--sel-ink,#fff)}
+.chip[aria-pressed="true"]::before{content:none}
+.sw:hover{transform:none}
+@media (min-width:901px){.picker{top:calc(var(--hh) + 14px);max-height:calc(100vh - var(--hh) - 28px)}}
+
+@media (max-width:560px){html{--hh:59px}}
+@media (prefers-reduced-motion:reduce){.hslide{transition:none}}
+
+/* ===== round 2 ===== */
+/* header: logo on left, navigation on right (desktop only) */
+:root{--hh:64px}
+
+/* hero frame is always 16:9; type and spacing scale with the width */
+.hero.vid .hslide{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(10px,3vw,40px) clamp(12px,3vw,40px) clamp(34px,6vw,64px)}
+.hero.vid h1,.hero.vid h2.hh{font-size:clamp(18px,4.2vw,54px);margin:clamp(8px,1.6vw,18px) auto clamp(6px,1.2vw,16px)}
+.hero.vid p{font-size:clamp(12px,1.7vw,18px);margin:0 auto clamp(10px,2vw,28px);max-width:min(560px,88%)}
+.hero.vid .cta{font-size:clamp(12px,1.5vw,16px);padding:clamp(8px,1.2vw,14px) clamp(14px,2vw,22px)}
+.hero-dots{position:absolute;left:0;right:0;bottom:clamp(4px,1.4vw,16px);z-index:2;margin-top:0}
+.hero-dots button{width:clamp(20px,2.4vw,26px);height:clamp(20px,2.4vw,26px);padding:clamp(6px,.8vw,8px)}
+.hero-dots button[aria-current]{width:clamp(34px,4vw,44px)}
+
+/* photo (1:1) with the name field on its right */
+.stage-top{align-items:center}
+.opts{flex:1 1 340px;min-width:0;gap:14px 18px}
+.me{display:flex;align-items:center;gap:12px;flex:1 1 280px;min-width:0}
+.me-r{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.me-r .name{width:100%;min-width:0}
+.upload{position:relative;flex:none;width:104px;height:auto;aspect-ratio:1/1;flex-direction:column;justify-content:center;gap:6px;padding:0;overflow:hidden;border-radius:16px;text-align:center;font-size:12px;line-height:1.3}
+.upload .avatar{width:40px;height:40px;border-radius:12px}
+.upload .avatar[style*="background-image"]{position:absolute;inset:0;width:auto;height:auto;border-radius:0}
+.upload .avatar[style*="background-image"]~span{position:absolute;left:0;right:0;bottom:0;padding:4px 2px;background:rgba(0,0,0,.55);color:#fff}
+@media (max-width:380px){.upload{width:88px}.stage,.picker{padding:12px}}
+
+/* nothing may overflow at any width */
+img,video,canvas{max-width:100%}
+.app>*,.stage-top>*,.opts>*{min-width:0}
+.dl{flex-wrap:wrap}
+.themes{flex-wrap:wrap}
+</style>
+<link rel="stylesheet" href="./assets/css/components.css">
+</head>
+<body>
+<!-- sc:header:start -->
+<header class="sc-header">
+  <div class="sc-header-in">
+    <button class="sc-menu-btn" id="sc-menu-btn" type="button" aria-label="মেনু খুলুন" aria-controls="sc-side" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="sc-logo" href="/"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</a>
+    <nav class="sc-header-nav" aria-label="প্রধান মেনু">
+      <a href="/" data-k="home">আমার ম্যাপ</a>
+      <span class="sc-menu-divider">|</span>
+      <a href="./guide/">ভ্রমণ গাইড</a>
+    </nav>
+  </div>
+</header>
+<!-- sc:header:end -->
+<!-- sc:side-menu:start -->
+<div class="sc-scrim" id="sc-scrim"></div>
+<aside class="sc-side" id="sc-side" aria-label="মেনু">
+  <div class="sc-side-h">
+    <span class="sc-logo"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</span>
+    <button class="sc-menu-btn" id="sc-menu-x" type="button" aria-label="মেনু বন্ধ করুন"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav class="sc-side-nav">
+    <a href="/#top">হোম</a>
+    <a href="./guide/">ভ্রমণ গাইড</a>
+    <button type="button" id="sc-side-about">সম্পর্কে</button>
+    <a href="./privacy.html">গোপনীয়তা নীতি</a>
+  </nav>
+  <p class="sc-side-f">৬৪ জেলা · ৮ বিভাগ</p>
+</aside>
+<!-- sc:side-menu:end -->
+<div class="container" id="top">
+  <div id="view-map">
+
+<header class="hero vid">
+  <div class="hero-slides">
+
+    <div class="hslide on" style="background-image:url('assets/images/travel-1.webp')">
+      <h1><span>বাংলাদেশের</span> পথে পথে</h1>
+      <p>প্রকৃতি, মানুষ আর নতুন অভিজ্ঞতার গল্প খুঁজে নিন দেশের পথে পথে।</p>
+    </div>
+
+    <div class="hslide" data-bg="assets/images/travel-2.webp">
+      <h2 class="hh">অচেনা পথ, নতুন অনুভূতি</h2>
+      <p>প্রতিটি ভ্রমণ রেখে যায় নতুন কিছু স্মৃতি, নতুন কিছু গল্প।</p>
+    </div>
+
+    <div class="hslide" data-bg="assets/images/travel-3.webp">
+      <h2 class="hh">দেশটাকে চিনুন নতুন করে</h2>
+      <p>পাহাড়, নদী, সমুদ্র আর সবুজের মাঝে খুঁজে নিন বাংলাদেশের সৌন্দর্য।</p>
+    </div>
+
+  </div>
+
+  <div class="hero-dots" role="group" aria-label="স্লাইড বদলান">
+    <button type="button" aria-label="স্লাইড ১" aria-current="true"></button>
+    <button type="button" aria-label="স্লাইড ২"></button>
+    <button type="button" aria-label="স্লাইড ৩"></button>
+  </div>
+</header>
+  
+
+  <main class="app" id="make">
+    <aside class="card picker">
+      <div class="picker-head">
+        <h2 id="pTitle">যেসব জেলায় গিয়েছি</h2>
+        <span class="count" id="count">০ / ৬৪</span>
+      </div>
+      <label class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="জেলা খুঁজুন…" aria-label="জেলা খুঁজুন">
+      </label>
+      <div class="tools" role="toolbar" aria-label="জেলা নির্বাচন">
+        <button type="button" class="tb" id="all">সব মার্ক করুন</button>
+        <button type="button" class="tb" id="none">সব মুছে ফেলুন</button>
+        <span class="seg" role="group" aria-label="লোকেশনের ধরন">
+          <button type="button" id="mDist" aria-pressed="true">জেলা</button>
+          <button type="button" id="mUpa" aria-pressed="false">উপজেলা</button>
+          <button type="button" id="mWorld" aria-pressed="false">বিশ্ব ম্যাপ</button>
+        </span>
+      </div>
+      <p class="upa-note" id="worldNote" role="status" hidden>বিশ্ব ম্যাপের ডেটা লোড করা যায়নি। জেলা ও উপজেলা ম্যাপ আগের মতোই কাজ করছে।</p>
+      <p class="upa-note" id="upaNote" hidden>উপজেলা ভিত্তিক ম্যাপ-ডেটা এখনো যুক্ত নেই। ম্যাপ ও ডাউনলোড জেলার নির্বাচনের ভিত্তিতেই তৈরি হয়; নিচের জেলা তালিকা ব্যবহার করুন।</p>
+      <div class="groups" id="groups"></div>
+      <div class="groups off" id="ugroups"></div>
+      <div class="groups off" id="wgroups"></div>
+    </aside>
+
+    <section class="card stage">
+      <div class="stage-top">
+        <div class="themes" role="radiogroup" aria-label="ম্যাপের থিম" id="themes"><span>থিম</span></div>
+        <div class="opts">
+          <div class="me">
+          <label class="upload" id="uploadBtn" title="ম্যাপে আপনার ছবি যোগ করুন">
+            <input type="file" id="photo" data-photo accept="image/*" hidden>
+            <span class="avatar" id="avatar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
+            <span id="uploadTxt" data-upload-txt>ছবি যোগ করুন</span>
+          </label>
+          <div class="me-r"><input class="name" id="name" maxlength="28" placeholder="আপনার নাম (ঐচ্ছিক)" aria-label="আপনার নাম"><button class="link" id="removePhoto" data-rm-photo hidden>সরান</button></div>
+          </div>
+          <label class="toggle"><input type="checkbox" id="labels" checked><span id="lblTxt">জেলার নাম</span></label>
+        </div>
+      </div>
+      <div class="canvas-wrap" id="wrap">
+        <canvas id="preview" aria-label="আপনার বাংলাদেশ ভ্রমণ ম্যাপ"></canvas>
+        <div class="tip" id="tip"></div>
+      </div>
+      <p class="hint" id="hintTxt">টিপস: ম্যাপের জেলায় সরাসরি ক্লিক করেও বাছাই করতে পারেন।</p>
+      <h3 class="dl-title">আপনার ম্যাপ ডাউনলোড করুন</h3>
+      <div class="dl">
+        <button class="btn primary" data-dl="png">PNG</button>
+        <button class="btn" data-dl="jpg">JPG</button>
+      </div>
+      <div class="rank" id="rank" hidden aria-live="polite"></div>
+    </section>
+  </main>
+  </div>
+
+</div>
+<!-- sc:footer:start -->
+<footer class="sc-footer">
+  <div class="sc-f-top">
+    <div class="sc-f-inner">
+      <div class="sc-f-brand">
+        <div class="sc-f-logo"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</div>
+        <p class="sc-tagline">সৌন্দর্যে ভরা প্রিয় বাংলাদেশ</p>
+      </div>
+    </div>
+  </div>
+  <div class="sc-f-bar">
+    <div class="sc-f-inner">
+      <div class="sc-f-links">
+        <a href="./privacy.html"><span class="sc-bn">গোপনীয়তা নীতি</span><span class="sc-en">Privacy Policy</span></a>
+        <button type="button" id="sc-footer-about"><span class="sc-bn">সম্পর্কে</span><span class="sc-en">About</span></button>
+      </div>
+      © ২০২৬ Unseen Bangladesh 2.0 — সর্বস্বত্ব সংরক্ষিত।
+    </div>
+  </div>
+</footer>
+<dialog class="sc-about" id="sc-about" aria-labelledby="sc-about-t">
+  <button class="sc-about-x" type="button" aria-label="বন্ধ করুন" data-close>×</button>
+  <img class="sc-about-hero" decoding="async" src="./assets/images/about_image.webp" alt="অদেখা বাংলাদেশ ২.০" loading="lazy" width="800" height="640">
+  <div class="sc-about-body">
+    <h2 id="sc-about-t"><span class="sc-bn">অদেখা বাংলাদেশ ২.০</span><span class="sc-en">Unseen Bangladesh 2.0</span></h2>
+    <p class="sc-about-desc">🇧🇩 Unseen Bangladesh 2.0<span class="sc-bn"> নিজের দেশকে নতুন করে আবিষ্কারের গল্প। অজানা সৌন্দর্য খুঁজে বের করুন, ভ্রমণের স্মৃতি ধরে রাখুন! ভালোবাসায় চিনে নিন আমাদের বাংলাদেশ।</span><span class="sc-en"> a story of rediscovering our own country. Find hidden beauty, keep your travel memories alive, and get to know our Bangladesh with love.</span></p>
+  </div>
+</dialog>
+<!-- sc:footer:end -->
+
+<!-- Big map data is lazy-loaded: assets/data/upazila.json (upazila mode) and assets/data/world.json (world map); fetched on first use, warmed when the page is idle. -->
+<script type="text/plain" id="app-js">
+const DATA=window.__DATA;delete window.__DATA;
+const __onLoad=f=>document.readyState==="complete"?f():addEventListener("load",f);
+const __idle=window.requestIdleCallback?f=>requestIdleCallback(f,{timeout:4000}):f=>setTimeout(f,500);
+const BN={"Bagerhat": "বাগেরহাট", "Bandarban": "বান্দরবান", "Barguna": "বরগুনা", "Barishal": "বরিশাল", "Bhola": "ভোলা", "Bogura": "বগুড়া", "Brahmanbaria": "ব্রাহ্মণবাড়িয়া", "Chandpur": "চাঁদপুর", "Chattogram": "চট্টগ্রাম", "Chuadanga": "চুয়াডাঙ্গা", "Cumilla": "কুমিল্লা", "Cox's Bazar": "কক্সবাজার", "Dhaka": "ঢাকা", "Dinajpur": "দিনাজপুর", "Faridpur": "ফরিদপুর", "Feni": "ফেনী", "Gaibandha": "গাইবান্ধা", "Gazipur": "গাজীপুর", "Gopalganj": "গোপালগঞ্জ", "Habiganj": "হবিগঞ্জ", "Jamalpur": "জামালপুর", "Jashore": "যশোর", "Jhalokati": "ঝালকাঠি", "Jhenaidah": "ঝিনাইদহ", "Joypurhat": "জয়পুরহাট", "Khagrachhari": "খাগড়াছড়ি", "Khulna": "খুলনা", "Kishorganj": "কিশোরগঞ্জ", "Kurigram": "কুড়িগ্রাম", "Kushtia": "কুষ্টিয়া", "Lakshmipur": "লক্ষ্মীপুর", "Lalmonirhat": "লালমনিরহাট", "Madaripur": "মাদারীপুর", "Magura": "মাগুরা", "Manikganj": "মানিকগঞ্জ", "Moulvibazar": "মৌলভীবাজার", "Meherpur": "মেহেরপুর", "Munshiganj": "মুন্সীগঞ্জ", "Mymensingh": "ময়মনসিংহ", "Naogaon": "নওগাঁ", "Narail": "নড়াইল", "Narayanganj": "নারায়ণগঞ্জ", "Narsingdi": "নরসিংদী", "Natore": "নাটোর", "Chapainawabganj": "চাঁপাইনবাবগঞ্জ", "Netrokona": "নেত্রকোণা", "Nilphamari": "নীলফামারী", "Noakhali": "নোয়াখালী", "Pabna": "পাবনা", "Panchagarh": "পঞ্চগড়", "Patuakhali": "পটুয়াখালী", "Pirojpur": "পিরোজপুর", "Rajbari": "রাজবাড়ী", "Rajshahi": "রাজশাহী", "Rangamati": "রাঙ্গামাটি", "Rangpur": "রংপুর", "Satkhira": "সাতক্ষীরা", "Shariatpur": "শরীয়তপুর", "Sherpur": "শেরপুর", "Sirajganj": "সিরাজগঞ্জ", "Sunamganj": "সুনামগঞ্জ", "Sylhet": "সিলেট", "Tangail": "টাঙ্গাইল", "Thakurgaon": "ঠাকুরগাঁও"};
+// Bangla possessive: নোয়াখালী → নোয়াখালীর, সিলেট → সিলেটের, ঠাকুরগাঁও → ঠাকুরগাঁওয়ের
+const bnOf=w=>/[ািীুূৃেৈোৌঁ]$/.test(w)?w+"র":/[ওআ]$/.test(w)?w+"য়ের":w+"ের";
+const DIV_BN={Dhaka:"ঢাকা",Chattogram:"চট্টগ্রাম",Sylhet:"সিলেট",Barishal:"বরিশাল",Khulna:"খুলনা",Rajshahi:"রাজশাহী",Rangpur:"রংপুর",Mymensingh:"ময়মনসিংহ"};
+const bnNum=n=>String(n).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
+const ORDER=["Dhaka","Chattogram","Sylhet","Barishal","Khulna","Rajshahi","Rangpur","Mymensingh"];
+
+const THEMES=[
+  {id:"emerald",name:"পান্না",bg:"#f6f2ea",land:"#e3dccd",stroke:"#f6f2ea",v1:"#0f6b4f",v2:"#1f9a70",vStroke:"#f6f2ea",ink:"#17201c",muted:"#7a7f78",label:"#0b3d2e",halo:"#f6f2ea",dot:"#f42a41",track:"#e3dccd"},
+  {id:"midnight",name:"নীল-বেগুনি",bg:"#191835",land:"#2a2956",stroke:"#191835",v1:"#7876FD",v2:"#4DB1FF",vStroke:"#d9ecff",ink:"#ffffff",muted:"#9aa3b5",label:"#ffffff",halo:"#191835",dot:"#ffffff",track:"#2a2956",glow:"rgba(120,118,253,.55)"},
+  {id:"sunset",name:"গোধূলি",bg:"#fff5ee",land:"#f5dfd1",stroke:"#fff5ee",v1:"#ff8a3d",v2:"#e63971",vStroke:"#fff5ee",ink:"#3b1f23",muted:"#9b7b73",label:"#5a1428",halo:"#fff5ee",dot:"#3b1f23",track:"#f5dfd1"},
+  {id:"ocean",name:"সাগর",bg:"#eef5fb",land:"#d5e2ee",stroke:"#eef5fb",v1:"#2356e8",v2:"#12b5d4",vStroke:"#eef5fb",ink:"#0f1d33",muted:"#6d7f96",label:"#0c2a66",halo:"#eef5fb",dot:"#ff5a5f",track:"#d5e2ee"},
+  {id:"flag",name:"সবুজ রাত",bg:"#141518",land:"#2a2c33",stroke:"#141518",v1:"#3ddc97",v2:"#17875a",vStroke:"#c9f7e2",ink:"#ffffff",muted:"#7d8290",label:"#ffffff",halo:"#141518",dot:"#ffffff",track:"#2a2c33",glow:"rgba(47,190,125,.45)",chipInk:"#062a1b"},
+];
+
+/* ---------- state ---------- */
+const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const ALL=DATA.f.map(f=>f.n);
+/* A map can arrive in the link (?d=…) when someone taps "open in Chrome/Safari" inside the Facebook,
+   Messenger or Instagram browser: storage isn't shared between apps, so the picks travel in the URL.
+   d = districts as a 64-bit mask (base64url, ALL order), w = countries, t = theme, n = name, l = labels */
+const B64="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+function mapStateQuery(){
+  let bits="";ALL.forEach(n=>bits+=selected.has(n)?"1":"0");bits=bits.padEnd(Math.ceil(bits.length/6)*6,"0");
+  let d="";for(let i=0;i<bits.length;i+=6)d+=B64[parseInt(bits.slice(i,i+6),2)];
+  const q=new URLSearchParams({d,w:store.get("bdmap.world",["BGD"]).join("."),t:theme.id,l:showLabels?"1":"0"});
+  if(userName.trim())q.set("n",userName.trim());
+  if(mode==="w")q.set("m","w");
+  return q.toString();
+}
+let bootWorld=false;
+{
+  const q=new URLSearchParams(location.search);
+  if(q.has("d")){
+    const bits=[...q.get("d")].map(c=>B64.indexOf(c).toString(2).padStart(6,"0")).join("");
+    store.set("bdmap.sel",ALL.filter((n,i)=>bits[i]==="1"));
+    if(q.get("w"))store.set("bdmap.world",q.get("w").split(".").filter(Boolean));
+    if(q.get("t"))store.set("bdmap.theme",q.get("t"));
+    if(q.has("n"))store.set("bdmap.name",q.get("n").slice(0,28));
+    if(q.has("l"))store.set("bdmap.labels",q.get("l")==="1");
+    if(q.get("m")==="w")bootWorld=true;
+    const v=q.get("v");
+    history.replaceState(null,"",location.pathname+(v&&/^\w+$/.test(v)?"#"+v:location.hash));
+  }
+}
+let selected=new Set(store.get("bdmap.sel",[]).filter(n=>ALL.includes(n)));
+let mode=store.get("bdmap.mode","d")==="u"?"u":"d";                       // "d" district / "u" upazila: two separate selections
+let selU=new Set(store.get("bdmap.selu",[]).filter(k=>typeof k==="string"));
+let UPA=null;const UBN={};
+let theme=THEMES.find(t=>t.id===store.get("bdmap.theme","emerald"))||THEMES[0];
+let showLabels=store.get("bdmap.labels",true);
+let userName=store.get("bdmap.name","");
+let rankHist=null;     // travellers per district count, once a map has been downloaded ("top X%")
+let photoImg=null;
+const paths=Object.fromEntries(DATA.f.map(f=>[f.n,new Path2D(f.d)]));
+const FBY=Object.fromEntries(DATA.f.map(f=>[f.n,f]));const nm=n=>BN[n]||UBN[n]||n;
+/* camera for upazila mode: V = zoom + centre (map units); V.a drives which districts are visible while flying */
+let focus=null,raf=0,hoverD=null;
+/* focus = the district being browsed (open in the list). vdist = the districts the camera is showing: every district that has a
+   picked upazila plus the browsed one, so upazilas of several districts stay on the map together. ovr = the person asked for the whole country. */
+let vdist=null,ovr=false,lastSD="",viewInit=false;
+const OV={z:1,cx:DATA.w/2,cy:DATA.h/2},V={z:1,cx:OV.cx,cy:OV.cy,a:{from:null,to:null,e:1}};
+const vis=d=>{const a=V.a,f=x=>x==null?1:(x.includes(d)?1:0);return f(a.from)+(f(a.to)-f(a.from))*a.e};
+let _BB=null;const bboxOf=n=>(_BB||(_BB=Object.fromEntries(DATA.f.map(f=>{const n=f.d.match(/-?\d+\.?\d*/g).map(Number);let a=1e9,b=-1e9,c=1e9,d=-1e9;for(let i=0;i<n.length;i+=2){a=Math.min(a,n[i]);b=Math.max(b,n[i]);c=Math.min(c,n[i+1]);d=Math.max(d,n[i+1])}return[f.n,[a,b,c,d]]}))))[n];   // computed on first use (upazila zoom), not at start-up
+const cur=()=>mode==="w"?selW:mode==="u"?selU:selected,curFeats=()=>mode==="u"?(UPA?UPA.f:[]):DATA.f;
+const save=()=>{store.set("bdmap.sel",[...selected]);store.set("bdmap.selu",[...selU]);store.set("bdmap.mode",mode==="w"?store.get("bdmap.mode","d"):mode);store.set("bdmap.world",[...selW]);store.set("bdmap.theme",theme.id);store.set("bdmap.labels",showLabels);store.set("bdmap.name",userName)};
+// tidy the address bar: drop tracking codes Facebook and others add (?fbclid=…, utm_…)
+{const u=new URL(location.href);let changed=false;for(const k of [...u.searchParams.keys()])if(/^(fbclid|gclid|utm_\w+|mibextid)$/.test(k)){u.searchParams.delete(k);changed=true}
+  if(changed)history.replaceState(null,"",u.pathname+(u.search.length>1?u.search:"")+u.hash)}
+// old workers.dev address: go to unseenbangladesh2-0.vercel.app and take this browser's map along (storage
+// belongs to each address, so the picks travel in the link and are restored there)
+if(/\.workers\.dev$/.test(location.hostname)){
+  const tab=(location.hash||"#map").slice(1).replace(/\W/g,"")||"map";
+  location.replace(`https://unseenbangladesh2-0.vercel.app/?${mapStateQuery()}&v=${tab==="make"?"map":tab}`);
+}
+
+/* ---------- poster renderer (shared by preview + export) ---------- */
+const PW=1200,PH=1600;                       // poster logical size (100 of it for the sponsor strip at the bottom)
+const MAP={x:0,y:250,h:1040};                // map box
+MAP.s=MAP.h/DATA.h; MAP.w=DATA.w*MAP.s; MAP.x=(PW-MAP.w)/2+40;
+const FONT='"Anek Bangla",system-ui,sans-serif';
+
+function placeLabels(ctx,names){
+  ctx.font=`600 20px ${FONT}`;
+  const placed=[],out=[];
+  const byY=names.map(n=>FBY[n]).filter(Boolean).sort((a,b)=>a.c[1]-b.c[1]);
+  const tries=[[0,-14],[0,26],[12,7],[-12,7],[0,-36],[0,48],[30,-14],[-30,-14],[30,26],[-30,26]];
+  for(const f of byY){
+    const cx=MAP.x+MAP.w/2+(f.c[0]-V.cx)*MAP.s*V.z, cy=MAP.y+MAP.h/2+(f.c[1]-V.cy)*MAP.s*V.z;
+    const w=ctx.measureText(nm(f.n)).width+8,h=26;
+    let pick=null;
+    for(const [dx,dy] of tries){
+      const align=dx>0?"left":dx<0?"right":"center";
+      const x0=align==="left"?cx+dx:align==="right"?cx+dx-w:cx-w/2, y0=cy+dy-h+4;
+      const box={x:x0,y:y0,w,h};
+      if(!placed.some(b=>b.x<box.x+box.w&&box.x<b.x+b.w&&b.y<box.y+box.h&&box.y<b.y+b.h)){pick={box,align,tx:cx+dx,ty:cy+dy};break}
+    }
+    if(!pick){const box={x:cx-w/2,y:cy-32,w,h};pick={box,align:"center",tx:cx,ty:cy-14}}
+    placed.push(pick.box,{x:cx-5,y:cy-5,w:10,h:10});
+    out.push({n:nm(f.n),cx,cy,...pick});
+  }
+  return out;
+}
+
+/* Some phone browsers ignore ctx.textAlign (text drawn as if left-aligned, so right-aligned text runs
+   off the canvas). Always draw left-aligned and work out the x offset ourselves. */
+function alignX(ctx,text,x,align){ctx.textAlign="left";const w=ctx.measureText(text).width;return align==="right"?x-w:align==="center"?x-w/2:x}
+function textAt(ctx,text,x,y,align,stroke){const ax=alignX(ctx,text,x,align);if(stroke)ctx.strokeText(text,ax,y);ctx.fillText(text,ax,y)}
+// header shared by the Bangladesh and world posters: photo, subtitle, title, big "n/total" count
+function drawHeader(ctx,t,W,sub,title,n,total){
+  ctx.textBaseline="alphabetic";
+  let tx=80;
+  if(photoImg){
+    // rounded-square photo with a thin gradient frame
+    const x=80,y=52,size=168,rad=32;
+    ctx.save();
+    const rg=ctx.createLinearGradient(x,y,x+size,y+size);rg.addColorStop(0,t.v1);rg.addColorStop(1,t.v2);
+    roundRect(ctx,x-7,y-7,size+14,size+14,rad+7);ctx.fillStyle=rg;ctx.fill();
+    roundRect(ctx,x-2,y-2,size+4,size+4,rad+2);ctx.fillStyle=t.bg;ctx.fill();
+    roundRect(ctx,x+1,y+1,size-2,size-2,rad-1);ctx.clip();
+    const iw=photoImg.naturalWidth,ih=photoImg.naturalHeight,k=Math.max(size/iw,size/ih);
+    ctx.drawImage(photoImg,x+size/2-iw*k/2,y+size/2-ih*k/2,iw*k,ih*k);ctx.restore();
+    tx=x+size+40;
+  }
+  ctx.fillStyle=t.muted;ctx.font=`700 20px ${FONT}`;
+  ctx.font=`600 24px ${FONT}`;ctx.fillText(sub,tx,112);
+  ctx.fillStyle=t.ink;ctx.font=`800 64px ${FONT}`;
+  ctx.font=`700 40px ${FONT}`;const slashW=ctx.measureText("/"+total).width;ctx.font=`800 96px ${FONT}`;
+  const countW=ctx.measureText(bnNum(n)).width+slashW+6, maxW=W-80-countW-40-tx; // keep the title clear of the count
+  ctx.font=`800 64px ${FONT}`;
+  let fs=64;while(ctx.measureText(title).width>maxW&&fs>28){fs-=2;ctx.font=`800 ${fs}px ${FONT}`}
+  ctx.fillText(title,tx,184);
+
+  // big count
+  ctx.textAlign="left";
+  const g=ctx.createLinearGradient(W-300,0,W-80,0);g.addColorStop(0,t.v1);g.addColorStop(1,t.v2);
+  ctx.fillStyle=g;ctx.font=`800 96px ${FONT}`;textAt(ctx,bnNum(n),W-80-slashW-6,184,"right");
+  ctx.fillStyle=t.muted;ctx.font=`700 40px ${FONT}`;textAt(ctx,"/"+total,W-80,184,"right");
+
+}
+// footer shared by both posters: progress bar, summary on the left, details on the right
+// site branding on every downloaded map: logo, name and domain, centred along the bottom edge
+const BRAND_IMG=new Image();BRAND_IMG.src="assets/images/icon-192.png";
+BRAND_IMG.onload=()=>{if(typeof render==="function")render()};
+function drawBrand(ctx,t,W,H){
+  const y=H-42,s=38,name="Unseen Bangladesh 2.0",dom="unseenbangladesh2.0",gap=12,sep="  ·  ";
+  ctx.textBaseline="middle";
+  ctx.font=`800 24px ${FONT}`;const nw=ctx.measureText(name).width;
+  ctx.font=`500 21px ${FONT}`;const sw=ctx.measureText(sep).width,dw=ctx.measureText(dom).width;
+  let x=(W-(s+gap+nw+sw+dw))/2;
+  if(BRAND_IMG.complete&&BRAND_IMG.naturalWidth){ctx.save();roundRect(ctx,x,y-s/2,s,s,10);ctx.clip();ctx.drawImage(BRAND_IMG,x,y-s/2,s,s);ctx.restore()}
+  x+=s+gap;
+  ctx.font=`800 24px ${FONT}`;ctx.fillStyle=t.ink;ctx.textAlign="left";ctx.fillText(name,x,y+1);x+=nw;
+  ctx.font=`500 21px ${FONT}`;ctx.fillStyle=t.muted;ctx.fillText(sep+dom,x,y+1);
+  ctx.textBaseline="alphabetic";
+}
+function drawFooter(ctx,t,W,H,frac,left,right,extra=0){
+  const fy=H-160-extra;                                   // extra: room kept free above the divider (sponsor strip)
+  ctx.fillStyle=t.track;roundRect(ctx,80,fy,W-160,12,6);ctx.fill();
+  if(frac>0){const pg=ctx.createLinearGradient(80,0,W-80,0);pg.addColorStop(0,t.v1);pg.addColorStop(1,t.v2);ctx.fillStyle=pg;roundRect(ctx,80,fy,Math.max(12,(W-160)*Math.min(1,frac)),12,6);ctx.fill()}
+  ctx.font=`700 24px ${FONT}`;ctx.fillStyle=t.ink;ctx.fillText(left,80,fy+52);
+  ctx.font=`500 20px ${FONT}`;ctx.fillStyle=t.muted;textAt(ctx,right,W-80,fy+52,"right");
+  ctx.fillStyle=t.track;ctx.fillRect(80,H-84,W-160,1.5);
+  drawBrand(ctx,t,W,H);
+}
+// sponsor strip on both posters (GoZayaan brand collaboration), kept low: their text on the left, their app
+// icon on the right, as vectors with transparent backgrounds; a light and a dark version (assets/partners/)
+const AD_SPACE=100,AD_ICON=66,AD_TEXT={w:460.18,h:72.14},AD={};    // AD_TEXT: artwork size; icon artwork is 90.91 square
+for(const v of ["light","dark"])for(const k of ["text","icon"]){
+  const img=new Image();img.src=`assets/partners/gz-${k}-${v}.svg`;AD[k+v]=img;
+  img.onload=()=>{if(typeof render==="function")render()};
+}
+function drawAd(ctx,t,W,H){
+  const v=t.ink==="#ffffff"?"dark":"light",text=AD["text"+v],icon=AD["icon"+v];   // dark themes have white text
+  const s=AD_ICON,y=H-112-s,th=66;                        // ends 28px above the divider line
+  ctx.save();ctx.globalAlpha=.88;                         // a little softer than the map's own content
+  if(icon.complete&&icon.naturalWidth)ctx.drawImage(icon,W-80-s,y,s,s);
+  if(text.complete&&text.naturalWidth)ctx.drawImage(text,80,y+(s-th)/2,th*AD_TEXT.w/AD_TEXT.h,th);
+  ctx.restore();
+}
+function draw(ctx,scale){
+  if(mode==="w"){drawWorld(ctx,scale);return}
+  const t=theme;
+  ctx.save();ctx.scale(scale,scale);
+  ctx.fillStyle=t.bg;ctx.fillRect(0,0,PW,PH);
+
+  const U=mode==="u",S=U?(UPA?selU:new Set()):selected,FS=U?(UPA?UPA.f:[]):DATA.f,TOT=U?(UPA?UPA.f.length:0):64,n=S.size,pct=TOT?Math.round(n/TOT*100):0;
+  const dc=U?new Set([...S].map(k=>FBY[k].dist)).size:0;
+  drawHeader(ctx,t,PW,U&&vdist?(vdist.length>1?`${bnNum(vdist.length)}টি জেলা · উপজেলা ম্যাপ`:`${BN[vdist[0]]} জেলা · উপজেলা ম্যাপ`):"বাংলাদেশ ভ্রমণ ম্যাপ",userName.trim()?`${userName.trim()}-এর বাংলাদেশ`:"আমার বাংলাদেশ",n,bnNum(TOT));
+  // map
+  const K=MAP.s*V.z;ctx.save();
+  if(V.z>1.001){ctx.beginPath();ctx.rect(0,MAP.y-8,PW,MAP.h+16);ctx.clip()}   // zoomed shapes must not cover header/footer
+  ctx.translate(MAP.x+MAP.w/2,MAP.y+MAP.h/2);ctx.scale(K,K);ctx.translate(-V.cx,-V.cy);
+  ctx.lineJoin="round";
+  if(U&&!UPA)for(const f of DATA.f){ctx.fillStyle=t.land;ctx.fill(paths[f.n]);ctx.strokeStyle=t.stroke;ctx.lineWidth=1.4/K;ctx.stroke(paths[f.n])}
+  if(U&&UPA){for(const o of UPA.b){const a=vis(o.dist);if(a<.01)continue;ctx.globalAlpha=a;ctx.fillStyle=t.land;ctx.fill(o.p);ctx.strokeStyle=t.stroke;ctx.lineWidth=1.4/K;ctx.stroke(o.p)}ctx.globalAlpha=1}   // city-corporation areas: land only, not selectable
+  for(const f of FS){ if(S.has(f.n))continue;const a=U?vis(f.dist):1;if(a<.01)continue;ctx.globalAlpha=a;
+    ctx.fillStyle=t.land;ctx.fill(paths[f.n]);ctx.strokeStyle=t.stroke;ctx.lineWidth=1.4/K;ctx.stroke(paths[f.n]);}ctx.globalAlpha=1;
+  const vg=ctx.createLinearGradient(0,0,DATA.w,DATA.h);vg.addColorStop(0,t.v1);vg.addColorStop(1,t.v2);
+  if(t.glow){ctx.save();ctx.shadowColor=t.glow;ctx.shadowBlur=24*scale;for(const n of S){const a=U?vis(FBY[n].dist):1;if(a<.01)continue;ctx.globalAlpha=a;ctx.fillStyle=vg;ctx.fill(paths[n])}ctx.restore()}
+  for(const n of S){const a=U?vis(FBY[n].dist):1;if(a<.01)continue;ctx.globalAlpha=a;ctx.fillStyle=vg;ctx.fill(paths[n]);ctx.strokeStyle=t.vStroke;ctx.lineWidth=1.4/K;ctx.stroke(paths[n])}ctx.globalAlpha=1
+  if(U&&UPA){ctx.save();if(hoverD&&!vdist){ctx.globalAlpha=.2;ctx.fillStyle=t.v1;ctx.fill(paths[hoverD])}
+    ctx.strokeStyle=t.ink;ctx.lineWidth=1.6/K;for(const f of DATA.f){const a=vis(f.n);if(a<.01)continue;ctx.globalAlpha=(vdist?.65:.4)*a;ctx.stroke(paths[f.n])}ctx.restore()}   // district outlines for orientation
+  ctx.restore();
+
+  // labels
+  if(showLabels&&n){
+    const L=placeLabels(ctx,[...S].filter(k=>!U||vis(FBY[k].dist)>.5));
+    for(const l of L){ctx.beginPath();ctx.arc(l.cx,l.cy,4.5,0,Math.PI*2);ctx.fillStyle=t.dot;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=t.dotHalo||t.halo;ctx.stroke()}
+    ctx.font=`600 20px ${FONT}`;ctx.lineJoin="round";
+    for(const l of L){ctx.lineWidth=5;ctx.strokeStyle=t.halo;ctx.fillStyle=t.label;textAt(ctx,l.n,l.tx,l.ty,l.align,true)}
+  }
+
+  const divs=ORDER.filter(d=>DATA.f.some(f=>f.dv===d&&selected.has(f.n))).length;
+  drawFooter(ctx,t,PW,PH,TOT?n/TOT:0,`${bnNum(pct)}% বাংলাদেশ ঘোরা হয়েছে`,U?`${bnNum(n)}টি উপজেলা · ${bnNum(dc)}টি জেলা`:`${bnNum(n)}টি জেলা · ৮টির মধ্যে ${bnNum(divs)}টি বিভাগ`,AD_SPACE);
+  drawAd(ctx,t,PW,PH);
+  ctx.restore();
+}
+function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
+
+/* ---------- preview ---------- */
+const cv=document.getElementById("preview"),ctx=cv.getContext("2d");
+const dpr=Math.min(2,window.devicePixelRatio||1);
+cv.width=PW*dpr;cv.height=PH*dpr;
+/* world mode: several quick taps (e.g. "select all", a whole continent) share one repaint per frame */
+let wRaf=0;
+const render=()=>{syncView();if(mode==="w"){if(!wRaf)wRaf=requestAnimationFrame(()=>{wRaf=0;if(mode==="w")draw(ctx,dpr)})}else draw(ctx,dpr);updateUI();save()};
+
+function hitTest(e){
+  if(mode==="w")return worldHit(e);
+  const r=cv.getBoundingClientRect();
+  const x=(e.clientX-r.left)/r.width*PW, y=(e.clientY-r.top)/r.height*PH;
+  const K=MAP.s*V.z,mx=(x-(MAP.x+MAP.w/2))/K+V.cx, my=(y-(MAP.y+MAP.h/2))/K+V.cy;
+  // upazila mode: overview -> pick a district; zoomed in -> pick an upazila of that district
+  if(mode==="u"&&UPA&&vdist){   // zoomed in: an upazila of any district on screen (a district's box rules out most of them cheaply)
+    for(const d of vdist){const b=bboxOf(d);if(b&&(mx<b[0]-3||mx>b[1]+3||my<b[2]-3||my>b[3]+3))continue;
+      for(const f of UPA.by[d]||[])if(ctx.isPointInPath(paths[f.n],mx,my))return f}
+    return null;
+  }
+  const list=mode==="u"?(UPA?DATA.f:[]):DATA.f;
+  for(const f of list) if(ctx.isPointInPath(paths[f.n],mx,my)) return f;
+  return null;
+}
+const distInfo=n=>{const l=(UPA&&UPA.by[n])||[];return `${BN[n]} জেলা · ${bnNum(l.filter(f=>selU.has(f.n)).length)}/${bnNum(l.length)}`};
+const tip=document.getElementById("tip"),wrap=document.getElementById("wrap");
+const redraw=()=>draw(ctx,dpr);
+cv.addEventListener("mousemove",e=>{
+  if(mode==="w"){worldMove(e);return}
+  const f=hitTest(e);
+  const hd=(mode==="u"&&UPA&&!vdist&&f)?f.n:null;
+  if(hd!==hoverD){hoverD=hd;redraw()}
+  if(!f){tip.style.opacity=0;cv.style.cursor="default";return}
+  cv.style.cursor="pointer";
+  const r=wrap.getBoundingClientRect();
+  tip.style.left=(e.clientX-r.left)+"px";tip.style.top=(e.clientY-r.top)+"px";
+  tip.textContent=mode==="u"&&!f.dist?distInfo(f.n):(f.dist?f.bn+", "+BN[f.dist]:BN[f.n])+(cur().has(f.n)?" ✓":"");tip.style.opacity=1;
+});
+cv.addEventListener("mouseleave",()=>{tip.style.opacity=0;if(hoverD){hoverD=null;redraw()}});
+cv.addEventListener("click",e=>{const f=hitTest(e);if(!f)return;if(mode==="u"&&!f.dist)focusDistrict(f.n);else toggle(f.n)});
+
+/* ---------- picker ---------- */
+const groupsEl=document.getElementById("groups"),chipEls={};
+const DV_COLOR={Dhaka:"#0f6b4f",Chattogram:"#2563eb",Sylhet:"#7c3aed",Barishal:"#f59e0b",Khulna:"#db2777",Rajshahi:"#0891b2",Rangpur:"#ea580c",Mymensingh:"#65a30d"};
+// one division open at a time: opening another one closes the previous
+function setOpen(dv){groupsEl.querySelectorAll(".group").forEach(x=>{const o=x.dataset.dv===dv;x.classList.toggle("open",o);x.querySelector("[data-t]").setAttribute("aria-expanded",o)})}
+ORDER.forEach(dv=>{
+  const list=DATA.f.filter(f=>f.dv===dv).map(f=>f.n).sort((a,b)=>BN[a].localeCompare(BN[b],"bn"));
+  const g=document.createElement("div");g.className="group";g.dataset.dv=dv;
+  g.style.setProperty("--dv",DV_COLOR[dv]);
+  g.innerHTML=`<div class="group-h"><button type="button" class="group-t" data-t aria-expanded="false"><i class="dot"></i><b>${DIV_BN[dv]} বিভাগ</b><small data-c></small><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></button><button class="link" data-grp>সব বাছাই</button></div><div class="chips"></div>`;
+  g.querySelector("[data-t]").onclick=()=>setOpen(g.classList.contains("open")?null:dv);
+  const chips=g.querySelector(".chips");
+  list.forEach(n=>{const b=document.createElement("button");b.className="chip";b.textContent=BN[n];b.onclick=()=>toggle(n);chips.appendChild(b);chipEls[n]=b});
+  g.querySelector("[data-grp]").onclick=()=>{const allOn=list.every(n=>selected.has(n));list.forEach(n=>allOn?selected.delete(n):selected.add(n));render()};
+  g._list=list;groupsEl.appendChild(g);
+});
+setOpen("Dhaka");
+function toggle(n){const S=cur();S.has(n)?S.delete(n):S.add(n);render()}
+document.getElementById("all").onclick=()=>{if(mode==="w"){if(WORLD)WORLD.f.forEach(f=>selW.add(f.n))}else if(mode==="u"){if(UPA)UPA.f.forEach(f=>selU.add(f.n))}else ALL.forEach(n=>selected.add(n));render()};
+/* ---------- upazila mode ----------
+   Boundaries come from assets/data/upazila.json (or window.UPAZILA_DATA when inlined), made by build_upazila.py
+   from the official BBS/OCHA ADM3 data. Each upazila key is "District|Upazila"; its selection lives in selU. */
+const ugroupsEl=document.getElementById("ugroups"),upaNote=document.getElementById("upaNote");
+const CHEV='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
+const openOnly=(box,g)=>box.querySelectorAll(".group").forEach(x=>{const o=x===g;x.classList.toggle("open",o);x.querySelector("[data-t]").setAttribute("aria-expanded",o)});
+function buildUpa(D){
+  UPA={f:D.u.map(u=>{const df=FBY[u.dist];return{n:u.dist+"|"+u.n,en:u.n,bn:u.bn||u.n,dist:u.dist,dv:df&&df.dv,c:u.c,d:u.d}}).filter(f=>f.dv)};
+  UPA.b=(D.b||[]).map(o=>({dist:o.dist,p:new Path2D(o.d)}));
+  UPA.f.forEach(f=>{paths[f.n]=new Path2D(f.d);FBY[f.n]=f;UBN[f.n]=f.bn});
+  UPA.by={};UPA.f.forEach(f=>(UPA.by[f.dist]=UPA.by[f.dist]||[]).push(f));
+  selU=new Set([...selU].filter(k=>FBY[k]&&FBY[k].dist));
+  ugroupsEl.innerHTML="";
+  ORDER.forEach(dv=>DATA.f.filter(x=>x.dv===dv).sort((a,b)=>BN[a.n].localeCompare(BN[b.n],"bn")).forEach(df=>{
+    const list=UPA.f.filter(f=>f.dist===df.n).sort((a,b)=>a.bn.localeCompare(b.bn,"bn")).map(f=>f.n);
+    if(!list.length)return;
+    const g=document.createElement("div");g.className="group";g.dataset.dv=dv;g.dataset.dist=df.n;g.style.setProperty("--dv",DV_COLOR[dv]);
+    g.innerHTML=`<div class="group-h"><button type="button" class="group-t" data-t aria-expanded="false"><i class="dot"></i><b>${BN[df.n]} জেলা</b><small data-c></small>${CHEV}</button><button class="link" data-grp>সব বাছাই</button></div><div class="chips"></div>`;
+    g.querySelector("[data-t]").onclick=()=>{if(g.classList.contains("open")){openOnly(ugroupsEl,null);unfocus()}else focusDistrict(df.n)};
+    const chips=g.querySelector(".chips");
+    list.forEach(k=>{const b=document.createElement("button");b.className="chip";b.textContent=UBN[k];b.onclick=()=>toggle(k);chips.appendChild(b);chipEls[k]=b});
+    g.querySelector("[data-grp]").onclick=()=>{const allOn=list.every(k=>selU.has(k));list.forEach(k=>allOn?selU.delete(k):selU.add(k));render()};
+    g._list=list;ugroupsEl.appendChild(g);
+  }));
+  openOnly(ugroupsEl,ugroupsEl.querySelector('[data-dist="Dhaka"]'));
+}
+let upaState=0;   // 0 not requested, 1 loading, 2 ready, 3 failed
+function loadUpa(){
+  if(upaState===1||upaState===2)return;
+  const ok=D=>{if(!D||!Array.isArray(D.u)||!D.u.length)throw 0;buildUpa(D);upaState=2;applyMode(mode);render()};
+  const bad=()=>{upaState=3;applyMode(mode)};
+  upaState=1;applyMode(mode);
+  if(window.UPAZILA_DATA){try{ok(window.UPAZILA_DATA)}catch(e){bad()}return}
+  fetch("assets/data/upazila.json").then(r=>r.ok?r.json():Promise.reject()).then(ok).catch(bad);
+}
+function applyMode(m){
+  mode=m;const up=m==="u",wd=m==="w";if(!up)snapView();sizeCanvas();
+  document.getElementById("mDist").setAttribute("aria-pressed",m==="d");document.getElementById("mUpa").setAttribute("aria-pressed",up);document.getElementById("mWorld").setAttribute("aria-pressed",wd);
+  groupsEl.classList.toggle("off",up||wd);ugroupsEl.classList.toggle("off",!up);wgroupsEl.classList.toggle("off",!wd);if(!wd)worldNote.hidden=true;
+  upaNote.hidden=!(up&&upaState!==2);
+  upaNote.textContent=upaState===3?"উপজেলার সীমানা-ডেটা (assets/data/upazila.json) পাওয়া যায়নি। জেলা মোড আগের মতোই কাজ করছে।":"উপজেলার ম্যাপ-ডেটা লোড হচ্ছে…";
+  document.getElementById("pTitle").textContent=wd?"যেসব দেশে গিয়েছি":up?"যেসব উপজেলায় গিয়েছি":"যেসব জেলায় গিয়েছি";
+  const q=document.getElementById("q");q.placeholder=wd?"দেশ বা মহাদেশ খুঁজুন…":up?"উপজেলা, জেলা বা বিভাগ খুঁজুন…":"জেলা খুঁজুন…";q.setAttribute("aria-label",q.placeholder);
+  document.getElementById("lblTxt").textContent=wd?"দেশের নাম":up?"উপজেলার নাম":"জেলার নাম";
+  setHint();
+  doSearch();
+}
+/* ---------- zoom: Bangladesh -> district -> upazilas ---------- */
+const lerp=(a,b,k)=>a+(b-a)*k,ease=k=>k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2;
+function camFor(names){   // one district or several: fit the union of their bounding boxes
+  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;
+  for(const n of names){const b=bboxOf(n);if(!b)continue;x0=Math.min(x0,b[0]);x1=Math.max(x1,b[1]);y0=Math.min(y0,b[2]);y1=Math.max(y1,b[3])}
+  const bw=x1-x0,bh=y1-y0,Rw=PW-140,Rh=MAP.h-40;
+  const z=Math.min(Rw/(bw*MAP.s),Rh/(bh*MAP.s))*.92;
+  if(!(z>1.05))return OV;   // the districts cover about the whole country: the plain overview fits
+  return{z,cx:(x0+x1)/2-(PW/2-(MAP.x+MAP.w/2))/(MAP.s*z),cy:(y0+y1)/2-((MAP.y+MAP.h/2)-(MAP.y+MAP.h/2))/(MAP.s*z)};
+}
+function flyTo(nf,instant){
+  nf=nf&&nf.length?nf:null;
+  cancelAnimationFrame(raf);
+  const from={z:V.z,cx:V.cx,cy:V.cy},to=nf?camFor(nf):OV,prev=vdist;vdist=nf;setHint();
+  V.a={from:prev,to:nf,e:0};
+  const sw=prev&&nf,dm=Math.hypot(to.cx-from.cx,to.cy-from.cy);
+  // switching district: pull back first, then dive into the new one
+  const dip=sw?Math.max(0,Math.min(Math.log(1+dm/(DATA.w*.1)),Math.log(Math.min(from.z,to.z))-.1)):0;
+  const dur=instant||matchMedia("(prefers-reduced-motion: reduce)").matches?0:sw?1000:750;
+  if(!dur){Object.assign(V,to);V.a={from:nf,to:nf,e:1};redraw();return}
+  const t0=performance.now(),l0=Math.log(from.z),l1=Math.log(to.z);
+  const step=ts=>{const e=Math.min(1,(ts-t0)/dur),k=ease(e);
+    V.z=Math.exp(Math.max(0,lerp(l0,l1,k)-dip*Math.sin(Math.PI*k)));V.cx=lerp(from.cx,to.cx,k);V.cy=lerp(from.cy,to.cy,k);V.a.e=k;
+    redraw();if(e<1)raf=requestAnimationFrame(step);else V.a={from:nf,to:nf,e:1}};
+  raf=requestAnimationFrame(step);
+}
+function setHint(){document.getElementById("hintTxt").textContent=mode==="w"?"টিপস: ম্যাপের দেশে ক্লিক বা ট্যাপ করে বাছাই করতে পারেন। ছোট দেশগুলো তালিকা থেকে বেছে নেওয়া সহজ।":mode!=="u"?"টিপস: ম্যাপের জেলায় সরাসরি ক্লিক করেও বাছাই করতে পারেন।":vdist&&vdist.length>1?"টিপস: একাধিক জেলার উপজেলা একসাথে দেখা যাচ্ছে। যেকোনো উপজেলার সীমানায় ক্লিক করে বাছাই করুন বা বাদ দিন। পুরো বাংলাদেশ দেখতে খোলা জেলার নামে আবার ক্লিক করুন।":vdist?"টিপস: উপজেলার সীমানায় ক্লিক করে বাছাই করুন। অন্য জেলায় যেতে তালিকার জেলার নামে ক্লিক করুন; পুরো বাংলাদেশে ফিরতে খোলা জেলার নামে আবার ক্লিক করুন।":"টিপস: ম্যাপে একটি জেলায় ক্লিক করুন, জেলাটি জুম হয়ে উপজেলাগুলো দেখাবে।"}
+function focusDistrict(name){
+  if(mode!=="u"||!UPA||!UPA.by[name])return;
+  hoverD=null;tip.style.opacity=0;
+  focus=name;ovr=false;syncView(true);setHint();updateUI();
+  const g=ugroupsEl.querySelector(`[data-dist="${name}"]`);if(g)openOnly(ugroupsEl,g);
+}
+function unfocus(){focus=null;ovr=true;syncView(true);setHint()}
+/* The camera follows the picks: one district -> zoom into it; upazilas of two or more districts -> fit them all together
+   (never zoom into just one of them). Picking more never removes anything, and un-picking does not move the camera. */
+const sameList=(a,b)=>a===b||!!(a&&b&&a.length===b.length&&a.every((x,i)=>x===b[i]));
+const selDists=()=>{const d=new Set();for(const k of selU){const f=FBY[k];if(f&&f.dist)d.add(f.dist)}return[...d].sort()};
+function syncView(force){
+  if(mode!=="u"||!UPA)return;
+  const sd=selDists(),key=sd.join("|");
+  if(key!==lastSD){lastSD=key;ovr=false}              // a new district got picks: leave the whole-country view
+  let want=null,any=false;                             // want: districts to show (null = whole country); any: something is picked/browsed
+  if(!ovr){const w=new Set(sd);if(focus)w.add(focus);if(w.size){any=true;want=w.size>=Object.keys(UPA.by).length?null:[...w].sort()}}
+  const inst=!viewInit;viewInit=true;                  // first view after entering the mode: no animation
+  if(force){if(!sameList(want,vdist))flyTo(want,inst);return}
+  if(!any)return;                                      // nothing picked or browsed: leave the camera alone
+  if(want?(vdist&&want.every(d=>vdist.includes(d))):!vdist)return;   // it is all on screen already
+  flyTo(want,inst);
+}
+function snapView(){cancelAnimationFrame(raf);focus=null;vdist=null;ovr=false;viewInit=false;hoverD=null;Object.assign(V,OV);V.a={from:null,to:null,e:1}}
+document.getElementById("mDist").onclick=()=>{applyMode("d");render()};
+/* ---------- world map ----------
+   Data lives in <script id="world-data"> (Natural Earth 1:50m, Equal Earth projection, simplified, 1000 units wide).
+   Nothing is parsed until the visitor opens "বিশ্ব ম্যাপ". The poster is painted with two batched paths
+   (not visited / visited) instead of one fill per country, so it stays smooth on low-end Android phones. */
+const WORLD_CONT=[["Asia","এশিয়া","#2563eb"],["Europe","ইউরোপ","#7c3aed"],["Africa","আফ্রিকা","#f59e0b"],["North America","উত্তর আমেরিকা","#db2777"],["South America","দক্ষিণ আমেরিকা","#0f6b4f"],["Oceania","ওশেনিয়া","#0891b2"]];
+let selW=new Set(store.get("bdmap.world",["BGD"]).filter(k=>typeof k==="string"));   // country codes (ADM0_A3)
+let WORLD=null;const WBY={},wchipEls={};
+const PHW=1020,MW={x:80,y:250,w:1040,s:1.04};                  // world poster height; map box (map units -> poster px)
+const wgroupsEl=document.getElementById("wgroups"),worldNote=document.getElementById("worldNote");
+function sizeCanvas(){const h=Math.round((mode==="w"?PHW:PH)*dpr);if(cv.height!==h)cv.height=h}   // the world poster is wider than tall
+let worldP=null;
+function loadWorld(){                                          // resolves true when the world map is ready (fetched once, on first use)
+  if(WORLD)return Promise.resolve(true);
+  if(worldP)return worldP;
+  return worldP=fetch("assets/data/world.json").then(r=>r.ok?r.json():Promise.reject(new Error("HTTP "+r.status))).then(D=>{
+    if(!D||!Array.isArray(D.f)||!D.f.length)throw 0;
+    D.f.forEach(f=>{f.en=f.n;f.n=f.i;f.P=new Path2D(f.p);f.p=null;WBY[f.n]=f});
+    WORLD=D;MW.s=MW.w/D.w;
+    selW=new Set([...selW].filter(k=>WBY[k]));
+    buildWorld();
+    return true;
+  }).catch(e=>{
+    console.error("World map data failed:",e);
+    worldNote.hidden=false;clearTimeout(loadWorld.t);loadWorld.t=setTimeout(()=>worldNote.hidden=true,4000);
+    return false;
+  }).finally(()=>{worldP=null});
+}
+function buildWorld(){
+  wgroupsEl.innerHTML="";
+  WORLD_CONT.forEach(([en,bn,col],ci)=>{
+    const list=WORLD.f.filter(f=>f.c===ci).sort((a,b)=>a.b.localeCompare(b.b,"bn")).map(f=>f.n);
+    const g=document.createElement("div");g.className="group";g.dataset.cont=en;g.style.setProperty("--dv",col);
+    g.innerHTML=`<div class="group-h"><button type="button" class="group-t" data-t aria-expanded="false"><i class="dot"></i><b>${bn}</b><small data-c></small>${CHEV}</button><button class="link" data-grp>সব বাছাই</button></div><div class="chips"></div>`;
+    g.querySelector("[data-t]").onclick=()=>openOnly(wgroupsEl,g.classList.contains("open")?null:g);
+    const chips=g.querySelector(".chips"),frag=document.createDocumentFragment();
+    list.forEach(id=>{const b=document.createElement("button");b.className="chip";b.textContent=WBY[id].b;b.onclick=()=>toggle(id);frag.appendChild(b);wchipEls[id]=b});
+    chips.appendChild(frag);
+    g.querySelector("[data-grp]").onclick=()=>{const allOn=list.every(k=>selW.has(k));list.forEach(k=>allOn?selW.delete(k):selW.add(k));render()};
+    g._list=list;wgroupsEl.appendChild(g);
+  });
+  openOnly(wgroupsEl,wgroupsEl.querySelector(".group"));
+}
+function updateWorldUI(){
+  if(mode!=="w"||!WORLD)return;
+  for(const f of WORLD.f)wchipEls[f.n].setAttribute("aria-pressed",selW.has(f.n));
+  wgroupsEl.querySelectorAll(".group").forEach(g=>{
+    const c=g._list.filter(k=>selW.has(k)).length;
+    g.querySelector("[data-c]").textContent=`${bnNum(c)}/${bnNum(g._list.length)}`;
+    g.querySelector("[data-grp]").textContent=c===g._list.length?"মুছুন":"সব বাছাই";
+  });
+}
+function searchWorld(q){
+  if(!WORLD)return;
+  wgroupsEl.classList.toggle("searching",!!q);
+  wgroupsEl.querySelectorAll(".group").forEach((g,ci)=>{
+    const [en,bn]=WORLD_CONT[ci],gm=!q||en.toLowerCase().includes(q)||bn.includes(q);
+    let any=false;
+    g._list.forEach(id=>{const f=WBY[id],m=gm||f.en.toLowerCase().includes(q)||f.b.includes(q)||id.toLowerCase().includes(q);wchipEls[id].hidden=!m;any=any||m});
+    g.hidden=!any;
+  });
+}
+/* pointer: tiny countries (shown as dots) are picked by distance, the rest by shape; bounding boxes skip almost every path */
+function worldHit(e){
+  if(!WORLD)return null;
+  const r=cv.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*PW,y=(e.clientY-r.top)/r.height*PHW;
+  const mx=(x-MW.x)/MW.s,my=(y-MW.y)/MW.s,F=WORLD.f;
+  if(mx<-6||my<-6||mx>WORLD.w+6||my>WORLD.h+6)return null;
+  let best=null,bd=36;                                          // 6 map units
+  for(const f of F)if(f.t){const d=(f.x-mx)**2+(f.y-my)**2;if(d<bd){bd=d;best=f}}
+  if(best)return best;
+  for(let i=F.length-1;i>=0;i--){                               // smallest first: an enclave wins over the country around it
+    const f=F[i],k=f.k;
+    if(mx<k[0]-1||mx>k[2]+1||my<k[1]-1||my>k[3]+1)continue;
+    if(ctx.isPointInPath(f.P,mx,my))return f;
+  }
+  return null;
+}
+let wmRaf=0,wmX=0,wmY=0;
+function worldMove(e){
+  wmX=e.clientX;wmY=e.clientY;if(wmRaf)return;                  // at most one hit-test per frame
+  wmRaf=requestAnimationFrame(()=>{
+    wmRaf=0;const f=mode==="w"?worldHit({clientX:wmX,clientY:wmY}):null;
+    if(!f){tip.style.opacity=0;cv.style.cursor="default";return}
+    cv.style.cursor="pointer";const r=wrap.getBoundingClientRect();
+    tip.style.left=(wmX-r.left)+"px";tip.style.top=(wmY-r.top)+"px";
+    tip.textContent=f.b+(selW.has(f.n)?" ✓":"");tip.style.opacity=1;
+  });
+}
+function drawWorld(ctx,scale){
+  const t=theme,W=WORLD,S=selW;
+  ctx.save();ctx.scale(scale,scale);
+  ctx.fillStyle=t.bg;ctx.fillRect(0,0,PW,PHW);
+  const TOT=W?W.f.length:0,sel=W?W.f.filter(f=>S.has(f.n)):[],n=sel.length,pct=TOT?Math.round(n/TOT*100):0;
+  drawHeader(ctx,t,PW,"বিশ্ব ভ্রমণ ম্যাপ",userName.trim()?`${userName.trim()}-এর বিশ্ব ভ্রমণ`:"আমার বিশ্ব ভ্রমণ",n,bnNum(TOT));
+  if(W){
+    const K=MW.s,lw=1.3/K;
+    const paint=(list,fn)=>{                                    // one path for the whole list (falls back to one per country on very old browsers)
+      if(typeof Path2D.prototype.addPath==="function"){const p=new Path2D();for(const f of list)p.addPath(f.P);fn(p)}
+      else for(const f of list)fn(f.P);
+    };
+    ctx.save();ctx.translate(MW.x,MW.y);ctx.scale(K,K);ctx.lineJoin="round";
+    paint(W.f.filter(f=>!S.has(f.n)),p=>{ctx.fillStyle=t.land;ctx.fill(p);ctx.strokeStyle=t.stroke;ctx.lineWidth=lw;ctx.stroke(p)});
+    if(n){
+      const vg=ctx.createLinearGradient(0,0,W.w,W.h);vg.addColorStop(0,t.v1);vg.addColorStop(1,t.v2);
+      if(t.glow)paint(sel,p=>{ctx.save();ctx.shadowColor=t.glow;ctx.shadowBlur=16*scale;ctx.fillStyle=vg;ctx.fill(p);ctx.restore()});   // one blur for all visited countries
+      paint(sel,p=>{ctx.fillStyle=vg;ctx.fill(p);ctx.strokeStyle=t.vStroke;ctx.lineWidth=lw;ctx.stroke(p)});
+      ctx.fillStyle=vg;ctx.strokeStyle=t.vStroke;ctx.lineWidth=lw*1.2;
+      for(const f of sel)if(f.t){ctx.beginPath();ctx.arc(f.x,f.y,4.4,0,Math.PI*2);ctx.fill();ctx.stroke()}   // tiny countries: a dot you can see
+    }
+    ctx.restore();
+    if(showLabels&&n){
+      const fs=n>120?12:n>80?14:n>45?16:n>20?18:20,h=fs+6,placed=[],L=[];
+      ctx.font=`600 ${fs}px ${FONT}`;
+      const tries=[[0,-10],[0,fs+6],[12,5],[-12,5],[0,-fs-12],[0,fs*2+8],[28,-10],[-28,-10],[28,fs+4],[-28,fs+4]];
+      for(const d of [36,62,92])for(const [ux,uy] of [[0,-1],[1,0],[-1,0],[0,1],[.7,-.7],[-.7,-.7],[.7,.7],[-.7,.7]])tries.push([ux*d*1.5,uy*d,1]);   // crowded areas: name placed a little further out, joined by a thin line
+      for(const f of sel){                                      // biggest countries first, they keep the best spot
+        const cx=MW.x+f.x*K,cy=MW.y+f.y*K,w=ctx.measureText(f.b).width+8;
+        let box=null,ty=0,lead=false;
+        for(const [dx,dy,far] of tries){
+          let x0=far?cx+dx-w/2:dx>0?cx+dx:dx<0?cx+dx-w:cx-w/2;
+          const yb=far?cy+dy+fs*.35:cy+dy;
+          x0=Math.max(6,Math.min(PW-6-w,x0));
+          const b={x:x0,y:yb-h+4,w,h};
+          if(!placed.some(o=>o.x<b.x+b.w&&b.x<o.x+o.w&&o.y<b.y+b.h&&b.y<o.y+o.h)){box=b;ty=yb;lead=!!far;break}
+        }
+        placed.push({x:cx-5,y:cy-5,w:10,h:10});
+        if(box)placed.push(box);                                // no free spot: the dot stays, the name is left out instead of overlapping
+        L.push({f,cx,cy,box,ty,lead});
+      }
+      ctx.save();ctx.globalAlpha=.6;ctx.strokeStyle=t.label;ctx.lineWidth=1.2;
+      for(const l of L)if(l.lead){const b=l.box;ctx.beginPath();ctx.moveTo(l.cx,l.cy);ctx.lineTo(Math.max(b.x,Math.min(b.x+b.w,l.cx)),Math.max(b.y,Math.min(b.y+b.h,l.cy)));ctx.stroke()}
+      ctx.restore();
+      for(const l of L){if(l.f.t)continue;ctx.beginPath();ctx.arc(l.cx,l.cy,3.6,0,Math.PI*2);ctx.fillStyle=t.dot;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=t.dotHalo||t.halo;ctx.stroke()}
+      ctx.font=`600 ${fs}px ${FONT}`;ctx.lineJoin="round";
+      for(const l of L){if(!l.box)continue;ctx.lineWidth=Math.max(3,fs*.24);ctx.strokeStyle=t.halo;ctx.fillStyle=t.label;textAt(ctx,l.f.b,l.box.x+4,l.ty,"left",true)}
+    }
+  }
+  const conts=new Set(sel.map(f=>f.c)).size;
+  drawFooter(ctx,t,PW,PHW,TOT?n/TOT:0,`${bnNum(pct)}% বিশ্ব ঘোরা হয়েছে`,`${bnNum(n)}টি দেশ ও অঞ্চল · ${bnNum(conts)}টি মহাদেশ`,AD_SPACE);
+  drawAd(ctx,t,PW,PHW);
+  ctx.restore();
+}
+document.getElementById("mWorld").onclick=()=>{loadWorld().then(ok=>{if(!ok)return;applyMode("w");render()})};
+/* ---------- option row: smooth horizontal auto-scroll every 3 s; mouse wheel / drag and finger swipe scroll it by hand ---------- */
+{
+  const el=document.querySelector(".tools"),reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let resumeAt=0,hover=false,drag=null,moved=false;
+  const max=()=>el.scrollWidth-el.clientWidth,pause=ms=>{resumeAt=Math.max(resumeAt,Date.now()+(ms||6000))};
+  ["touchstart","pointerdown","wheel","keydown","focusin"].forEach(ev=>el.addEventListener(ev,()=>pause(),{passive:true}));
+  el.addEventListener("pointerenter",e=>{hover=e.pointerType==="mouse"});el.addEventListener("pointerleave",()=>{hover=false;pause(2000)});
+  el.addEventListener("wheel",e=>{                         // mouse wheel scrolls the row sideways (page scroll resumes at either end)
+    const m=max(),l=el.scrollLeft;if(m<=1||Math.abs(e.deltaY)<=Math.abs(e.deltaX))return;
+    if((e.deltaY<0&&l<=0)||(e.deltaY>0&&l>=m-1))return;
+    e.preventDefault();el.scrollLeft=l+e.deltaY},{passive:false});
+  el.addEventListener("pointerdown",e=>{if(e.pointerType==="mouse"&&e.button===0){drag={x:e.clientX,l:el.scrollLeft};moved=false}});
+  addEventListener("pointermove",e=>{if(!drag)return;const dx=e.clientX-drag.x;if(!moved&&Math.abs(dx)>5){moved=true;el.classList.add("drag")}if(moved)el.scrollLeft=drag.l-dx});
+  addEventListener("pointerup",()=>{if(!drag)return;drag=null;pause();setTimeout(()=>{moved=false;el.classList.remove("drag")},0)});
+  el.addEventListener("click",e=>{if(moved){e.stopPropagation();e.preventDefault()}},true);   // a drag is not a click
+  setInterval(()=>{
+    if(reduce||hover||drag||document.hidden||Date.now()<resumeAt)return;
+    const m=max();if(m<=2)return;                           // nothing to scroll: stay still
+    const l=el.scrollLeft;
+    el.scrollTo({left:l>=m-2?0:Math.min(m,l+Math.max(120,el.clientWidth*.5)),behavior:"smooth"});
+  },3000);
+}
+document.getElementById("mUpa").onclick=()=>{applyMode("u");loadUpa();render()};
+document.getElementById("none").onclick=()=>{cur().clear();render()};
+function doSearch(){
+  const q=document.getElementById("q").value.trim().toLowerCase();
+  [groupsEl,ugroupsEl].forEach(box=>{
+    box.classList.toggle("searching",!!q);   // while searching, every matching group shows
+    box.querySelectorAll(".group").forEach(g=>{
+      let any=false;const dv=g.dataset.dv,ds=g.dataset.dist;
+      const gm=!q||dv.toLowerCase().includes(q)||DIV_BN[dv].includes(q)||(ds&&(ds.toLowerCase().includes(q)||BN[ds].includes(q)));
+      g._list.forEach(n=>{const f=FBY[n],own=f.dist?(f.en.toLowerCase().includes(q)||f.bn.includes(q)):(n.toLowerCase().includes(q)||BN[n].includes(q));const m=gm||own;chipEls[n].hidden=!m;any=any||m});
+      g.hidden=!any;
+    });
+  });
+  searchWorld(q);
+}
+document.getElementById("q").addEventListener("input",doSearch);
+
+function updateUI(){
+  document.getElementById("count").textContent=mode==="w"?`${bnNum(selW.size)} / ${bnNum(WORLD?WORLD.f.length:0)}`:mode==="u"?`${bnNum(selU.size)} / ${bnNum(UPA?UPA.f.length:0)}`:`${bnNum(selected.size)} / ৬৪`;
+  if(rankHist)showRank();       // already downloaded once: keep the percentage in step with the selection
+  document.documentElement.style.setProperty("--sel",theme.v1);document.documentElement.style.setProperty("--sel-ink",theme.chipInk||"#fff");
+  for(const n of ALL)chipEls[n].setAttribute("aria-pressed",selected.has(n));
+  groupsEl.querySelectorAll(".group").forEach(g=>{
+    const c=g._list.filter(n=>selected.has(n)).length;
+    g.querySelector("[data-c]").textContent=`${bnNum(c)}/${bnNum(g._list.length)}`;
+    g.querySelector("[data-grp]").textContent=c===g._list.length?"মুছুন":"সব বাছাই";
+  });
+  if(UPA){UPA.f.forEach(f=>chipEls[f.n].setAttribute("aria-pressed",selU.has(f.n)));
+    ugroupsEl.querySelectorAll(".group").forEach(g=>{const c=g._list.filter(k=>selU.has(k)).length;
+      g.querySelector("[data-c]").textContent=`${bnNum(c)}/${bnNum(g._list.length)}`;g.querySelector("[data-grp]").textContent=c===g._list.length?"মুছুন":"সব বাছাই"})}
+  document.querySelectorAll(".sw").forEach(s=>s.setAttribute("aria-checked",s.dataset.id===theme.id));
+  updateWorldUI();
+}
+
+/* ---------- themes + options ---------- */
+["themes"].forEach(id=>{const themesEl=document.getElementById(id);THEMES.forEach(t=>{
+  const b=document.createElement("button");b.className="sw";b.dataset.id=t.id;b.setAttribute("role","radio");b.title=t.name;b.setAttribute("aria-label",t.name+" থিম");
+  b.innerHTML=`<i style="background:${t.bg}"></i><i style="background:linear-gradient(135deg,${t.v1},${t.v2})"></i>`;
+  b.onclick=()=>{theme=t;render()};themesEl.appendChild(b);
+})});
+const labelsEl=document.getElementById("labels");labelsEl.checked=showLabels;
+labelsEl.onchange=()=>{showLabels=labelsEl.checked;render()};
+const nameEls=[document.getElementById("name")];
+nameEls.forEach(el=>{el.value=userName;el.oninput=()=>{userName=el.value;nameEls.forEach(o=>{if(o!==el)o.value=userName});render()}});
+
+/* ---------- photo ---------- */
+// the Bangladesh and world tabs each have an upload control; both share one photo
+const $$=sel=>document.querySelectorAll(sel);
+function setPhoto(url){
+  if(!url){photoImg=null;$$(".upload .avatar").forEach(a=>{a.style.backgroundImage="";a.firstElementChild.style.display=""});
+    $$("[data-upload-txt]").forEach(e=>e.textContent="আপনার ছবি যোগ করুন");$$("[data-rm-photo]").forEach(e=>e.hidden=true);try{localStorage.removeItem("bdmap.photo")}catch(e){}render();return}
+  const img=new Image();
+  img.onload=()=>{photoImg=img;$$(".upload .avatar").forEach(a=>{a.style.backgroundImage=`url(${url})`;a.firstElementChild.style.display="none"});
+    $$("[data-upload-txt]").forEach(e=>e.textContent="ছবি বদলান");$$("[data-rm-photo]").forEach(e=>e.hidden=false);render()};
+  img.src=url;
+}
+$$("input[data-photo]").forEach(photoEl=>photoEl.addEventListener("change",()=>{
+  const file=photoEl.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    const src=new Image();
+    src.onload=()=>{ // square-crop and downscale to 480px so it stays light
+      const s=Math.min(src.naturalWidth,src.naturalHeight),c=document.createElement("canvas");c.width=c.height=480;
+      c.getContext("2d").drawImage(src,(src.naturalWidth-s)/2,(src.naturalHeight-s)/2,s,s,0,0,480,480);
+      const url=c.toDataURL("image/jpeg",.9);store.set("bdmap.photo",url);setPhoto(url);
+    };
+    src.onerror=()=>alert("দুঃখিত, ছবিটি পড়া যায়নি। JPG বা PNG ছবি দিয়ে চেষ্টা করুন।");
+    src.src=r.result;
+  };
+  r.readAsDataURL(file);photoEl.value="";
+}));
+$$("[data-rm-photo]").forEach(b=>b.onclick=()=>setPhoto(null));
+{const saved=store.get("bdmap.photo",null);if(saved)setPhoto(saved)}
+
+/* ---------- downloads ---------- */
+function fileBase(target){const n=userName.trim().replace(/[^\p{L}\p{M}\p{N}-]+/gu,"-").replace(/^-+|-+$/g,"");return (n?n+"-":"")+(mode==="w"?"world-map":mode==="u"?"bangladesh-upazila-map":"bangladesh-map")}
+function exportCanvas(){const c=document.createElement("canvas");c.width=PW*2;c.height=(mode==="w"?PHW:PH)*2;draw(c.getContext("2d"),2);return c}
+/* Mobile browsers only download when the save happens inside the tap itself: anything after an await
+   (font loading, async toBlob) makes iOS Safari and in-app browsers open the file in a new tab instead.
+   So the file is built synchronously, then: iPhone/iPad -> share sheet ("Save Image" puts it in Photos),
+   Facebook/Messenger/Instagram in-app browsers -> share sheet if available, else the image is shown on
+   this page to long-press and save; everywhere else -> normal download. */
+const UA=navigator.userAgent;
+const IS_IOS=/iPad|iPhone|iPod/.test(UA)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
+const IN_APP=/FBAN|FBAV|FB_IAB|FBIOS|Instagram|Messenger|Line\/|MicroMessenger|Twitter|; wv\)/i.test(UA);
+const FONTS_READY=()=>["500","600","700","800"].every(w=>document.fonts.check(`${w} 40px ${FONT}`,"বাংলাদেশ"));
+function dataUrlToBytes(u){const bin=atob(u.slice(u.indexOf(",")+1)),a=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)a[i]=bin.charCodeAt(i);return a}
+function dataUrlToBlob(u){return new Blob([dataUrlToBytes(u)],{type:u.slice(5,u.indexOf(";"))})}
+function anchorDownload(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.rel="noopener";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000)}
+// link that reopens this page (with the current map) in the phone's real browser
+function externalURL(){
+  // the tab goes in the query (v=…): an Android intent link can't contain its own "#"
+  const path=`${location.host}/?${mapStateQuery()}&v=${(location.hash||"#map").slice(1)}`;
+  if(IS_IOS)return "x-safari-https://"+path;                     // iOS 17+: opens Safari
+  return `intent://${path}#Intent;scheme=https;package=com.android.chrome;end`;   // Android: opens Chrome
+}
+const BROWSER=IS_IOS?"Safari":"Chrome";
+function showSaveSheet(blob,name){
+  const isImg=blob.type.startsWith("image/");
+  const o=document.createElement("div");o.className="savesheet";o.setAttribute("role","dialog");o.setAttribute("aria-modal","true");
+  const canShare=navigator.canShare&&navigator.canShare({files:[new File([blob],name,{type:blob.type})]});
+  o.innerHTML=`<div class="ss-card">
+    <b class="ss-t">${isImg?"আপনার ম্যাপ তৈরি!":"PDF তৈরি!"}</b>
+    <p class="ss-p">Facebook/Instagram-এর ভেতরের ব্রাউজারে সরাসরি ডাউনলোড হয় না। নিচের যেকোনো একটি উপায়ে সেভ করুন:</p>
+    <a class="ss-btn primary" href="${externalURL()}">🌐 ${BROWSER}-এ খুলে ডাউনলোড করুন</a>
+    
+    ${canShare?`<button type="button" class="ss-btn" data-share>📤 শেয়ার / সেভ করুন</button>`:""}
+    ${isImg?`
+    <img class="ss-img" alt="${esc(name)}">`:""}
+    <button type="button" class="ss-x" data-x aria-label="বন্ধ করুন">বন্ধ করুন</button>
+  </div>`;
+  if(isImg){const r=new FileReader();r.onload=()=>{o.querySelector(".ss-img").src=r.result};r.readAsDataURL(blob)} // data: URL so long-press "save" works
+  o.addEventListener("click",e=>{
+    if(e.target===o||e.target.closest("[data-x]"))o.remove();
+    if(e.target.closest("[data-share]"))navigator.share({files:[new File([blob],name,{type:blob.type})]}).catch(()=>{});
+  });
+  document.body.appendChild(o);
+}
+function saveBlob(blob,name){
+  // Facebook/Messenger/Instagram browsers: their share and download hooks fail silently, so always offer the save screen
+  if(IN_APP){showSaveSheet(blob,name);return}
+  const file=new File([blob],name,{type:blob.type});
+  if(IS_IOS&&navigator.canShare&&navigator.canShare({files:[file]})){
+    navigator.share({files:[file]}).catch(err=>{if(err&&err.name!=="AbortError")anchorDownload(blob,name)});
+    return;
+  }
+  anchorDownload(blob,name);
+}
+
+function buildFile(kind,target){
+  const c=exportCanvas();
+  if(kind==="png")return dataUrlToBlob(c.toDataURL("image/png"));
+  if(kind==="jpg")return dataUrlToBlob(c.toDataURL("image/jpeg",.95));
+  return dataUrlToBlob(c.toDataURL("image/jpeg",.95));
+}
+document.querySelectorAll("[data-dl]").forEach(btn=>btn.addEventListener("click",()=>{
+  const kind=btn.dataset.dl;
+  const target=btn.dataset.target||"bd";
+  const label=btn.textContent;
+  const ext=kind==="jpg"?"jpg":kind;
+
+  btn.disabled=true;
+  btn.textContent="তৈরি হচ্ছে…";
+
+  try{
+    // কোনো await নেই — download সরাসরি user click-এর মধ্যেই হবে
+    const blob=buildFile(kind,target);
+    saveBlob(blob,fileBase(target)+"."+ext);
+
+    if(target==="bd"&&mode==="d") sendRank();
+  }catch(err){
+    console.error("Map download failed:",err);
+    alert("ম্যাপ ডাউনলোড করা যায়নি। আবার চেষ্টা করুন।");
+  }finally{
+    setTimeout(()=>{
+      btn.disabled=false;
+      btn.textContent=label;
+    },400);
+  }
+}));
+
+/* ---------- "top X% of travellers" ----------
+   After a Bangladesh map is downloaded, only the number of districts goes to /api/travel (see worker.js);
+   it answers with how many travellers have each count. Until there are 200 real maps the answer is blended
+   with an estimate (most people have seen a handful of districts, few have seen most), so the first
+   visitors don't all get "top 1%". */
+const RANK_PRIOR=(()=>{const p=[0];for(let n=1;n<=64;n++)p.push((n+2)*Math.exp(-n/7));const t=p.reduce((a,b)=>a+b);return p.map(x=>x/t)})();
+function rankOf(n,hist){
+  const real=hist.reduce((a,b)=>a+b,0),w=Math.max(0,200-real);
+  let atLeast=0,fewer=0;
+  for(let k=1;k<=64;k++){const c=hist[k]+w*RANK_PRIOR[k];if(k>=n)atLeast+=c;else fewer+=c}
+  const all=atLeast+fewer;
+  return{top:Math.min(100,Math.max(1,Math.ceil(atLeast/all*100))),ahead:Math.round(fewer/all*100),real};
+}
+function showRank(){
+  const el=document.getElementById("rank"),n=selected.size;
+  if(mode!=="d"||!rankHist||!n){el.hidden=true;return}
+  const {top,ahead,real}=rankOf(n,rankHist);
+  const ic=top<=10?"🏆":top<=25?"🥇":top<=50?"⭐":"🧭";
+  el.innerHTML=`<div class="rank-top"><span class="rank-ic" aria-hidden="true">${ic}</span><div><small>${bnNum(n)}টি জেলা ঘুরেছেন${real>=100?` · ${bnNum(real)} জন ভ্রমণকারীর মধ্যে`:""}</small><b>আপনি শীর্ষ ${bnNum(top)}% ভ্রমণকারীর মধ্যে আছেন!</b></div></div>
+    <div class="rank-bar"><i></i></div>
+    <p>${ahead>0?`আপনি ${bnNum(ahead)}% ভ্রমণকারীর চেয়ে বেশি জেলা ঘুরেছেন।`:"যাত্রা মাত্র শুরু!"}${n<64?" আরও জেলা ঘুরে ওপরে উঠুন।":" পুরো বাংলাদেশ ঘোরা হয়ে গেছে! 🎉"}</p>`;
+  el.hidden=false;
+  const bar=el.querySelector(".rank-bar i");bar.style.width="0";requestAnimationFrame(()=>requestAnimationFrame(()=>{bar.style.width=Math.max(4,100-top)+"%"}));
+}
+async function sendRank(){
+  const n=selected.size;if(!n)return;
+  try{
+    const r=await fetch("/api/travel",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({did:LB_DID,n})});
+    if(r.ok){rankHist=(await r.json()).hist;showRank()}
+  }catch(e){}
+}
+
+/* ---------- shared helpers ---------- */
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+/* ---------- tabs ---------- */
+function route(){
+  document.getElementById("view-map").hidden=false;
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-current","page"));
+document.title="Unseen Bangladesh 2.0 — ভ্রমণ ম্যাপ ও ৬৪ জেলার তথ্য";
+}
+document.querySelectorAll(".tab").forEach(t=>t.addEventListener("click",()=>setTimeout(()=>window.scrollTo(0,0))));
+window.addEventListener("hashchange",route);
+
+// random device id, used by the "top X% of travellers" rank
+const LB_DID=(()=>{let d=store.get("bdmap.did","");if(!/^[a-z0-9]{12,32}$/.test(d)){d=[...crypto.getRandomValues(new Uint8Array(12))].map(x=>(x%36).toString(36)).join("");store.set("bdmap.did",d)}return d})();
+
+/* ---------- about ---------- */
+const aboutDlg = document.getElementById("sc-about");
+const aboutMenuBtn = document.getElementById("aboutMenuBtn");
+
+aboutMenuBtn?.addEventListener("click", () => {
+  aboutDlg.showModal();
+});
+
+aboutDlg.addEventListener("click", e => {
+  if (e.target === aboutDlg || e.target.closest("[data-close]")) {
+    aboutDlg.close();
+  }
+});
+/* ---------- hero background video ---------- */
+// skipped (poster image only) for reduced motion, data saver and slow connections; smaller file on phones
+{
+  const c=navigator.connection||{},size=innerWidth*Math.min(devicePixelRatio||1,2)>1400?"1080":"720";
+  // only data saver, very slow (2G) connections and "reduce motion" get the still image; many Bangladeshi
+  // mobile networks report "3g" while being fast enough for these 1-2 MB clips
+  const lite=matchMedia("(prefers-reduced-motion: reduce)").matches||c.saveData||/(^|-)2g$/.test(c.effectiveType||"");
+  // each video loads only when its page is shown and on screen. It is downloaded whole, once, and played
+  // from memory: the static file server can't answer the byte-range requests a <video src> makes (iPhones
+  // won't play without them), and answering them from the Worker counted every piece of every play.
+  if(!lite)document.querySelectorAll(".hero-bg").forEach(v=>{
+    let shown=false,loading=null;
+    const start=()=>{
+      if(!shown||!v.src||document.hidden)return;
+      // autoplay can be blocked (iPhone low-power mode): start on the visitor's first touch or scroll instead
+      v.play().catch(()=>{const go=()=>{v.play().catch(()=>{});["touchstart","click","scroll"].forEach(t=>removeEventListener(t,go))};
+        ["touchstart","click","scroll"].forEach(t=>addEventListener(t,go,{once:true,passive:true}))});
+    };
+    new IntersectionObserver(([e])=>{
+      shown=e.isIntersecting;
+      if(!shown)return v.pause();
+      loading=loading||fetch(`assets/hero/${v.dataset.video}-${size}.mp4`).then(r=>r.ok?r.blob():Promise.reject())
+        .then(b=>{v.muted=true;v.defaultMuted=true;v.src=URL.createObjectURL(b)}).catch(()=>{});   // on failure the poster stays
+      loading.then(start);
+    }).observe(v);
+    // opened in a background tab: browsers hold the video back, and nothing changes on screen to start it later
+    document.addEventListener("visibilitychange",()=>{if(!document.hidden&&v.paused)start()});
+  });
+}
+
+/* ---------- Play Store app ---------- */
+// opened from the Play Store app (Trusted Web Activity): Android passes the package as the referrer on launch
+let inApp=document.referrer.startsWith("android-app://com.unseenbangladesh.app");
+try{if(inApp)sessionStorage.setItem("bdmap.inapp","1");else inApp=sessionStorage.getItem("bdmap.inapp")==="1"}catch(e){}
+if(inApp)document.documentElement.classList.add("in-app");
+
+/* ---------- hero auto slides ---------- */
+{
+  const hero=document.querySelector(".hero.vid"),sl=[...hero.querySelectorAll(".hslide")],dots=[...hero.querySelectorAll(".hero-dots button")];
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let i=0,t=null,hold=false,ready=false;const warmed=new Set(),warm=k=>{const b=sl[k]&&sl[k].dataset.bg;if(b&&!warmed.has(b)){warmed.add(b);new Image().src=b}};
+  const show=n=>{i=(n+sl.length)%sl.length;{const b=sl[i].dataset.bg;if(b){sl[i].style.backgroundImage=`url(${b})`;delete sl[i].dataset.bg}}sl.forEach((s,k)=>{s.classList.toggle("on",k===i);s.inert=k!==i});dots.forEach((d,k)=>k===i?d.setAttribute("aria-current","true"):d.removeAttribute("aria-current"));if(ready)warm((i+1)%sl.length)};
+  const stop=()=>{clearInterval(t);t=null};
+  const play=()=>{if(!t&&!reduce&&!hold&&!document.hidden)t=setInterval(()=>show(i+1),5500)};
+  dots.forEach((d,k)=>d.onclick=()=>{show(k);stop();play()});
+  hero.addEventListener("mouseenter",()=>{hold=true;stop()});hero.addEventListener("mouseleave",()=>{hold=false;play()});
+  hero.addEventListener("focusin",()=>{hold=true;stop()});hero.addEventListener("focusout",()=>{hold=false;play()});
+  let sx=null;
+  hero.addEventListener("touchstart",e=>{sx=e.touches[0].clientX},{passive:true});
+  hero.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;sx=null;if(Math.abs(dx)>50){show(i+(dx<0?1:-1));stop();play()}},{passive:true});
+  document.addEventListener("visibilitychange",()=>document.hidden?stop():play());
+  show(0);play();
+  __onLoad(()=>__idle(()=>{const c=navigator.connection||{};if(c.saveData||/(^|-)2g$/.test(c.effectiveType||""))return;ready=true;warm((i+1)%sl.length)}));
+}
+
+/* ---------- animated horizontal menu (PC / laptop) ---------- */
+{
+  const box=document.getElementById("hlinks")||document.querySelector(".sc-header-nav");
+  if(box){
+  const ind=document.getElementById("hind"),items=[...box.querySelectorAll("a,button")];
+  const home=box.querySelector('[data-k="home"]')||items[0],make=box.querySelector('[data-k="make"]'),mk=document.getElementById("make");
+  let cur=home;
+  const mv=el=>{if(!el||!ind||!el.offsetWidth)return;ind.style.width=el.offsetWidth+"px";ind.style.transform=`translateX(${el.offsetLeft}px)`};
+  const spy=()=>{const n=(mk&&make&&mk.getBoundingClientRect().top<innerHeight*.5&&make)||home;if(n&&n!==cur){cur&&cur.classList.remove("on");cur=n;cur.classList.add("on");mv(cur)}};
+  items.forEach(el=>{el.addEventListener("mouseenter",()=>mv(el));el.addEventListener("focus",()=>mv(el))});
+  box.addEventListener("mouseleave",()=>mv(cur));
+  addEventListener("scroll",spy,{passive:true});
+  addEventListener("resize",()=>{mv(cur)});
+  
+  home&&home.classList.add("on");spy();mv(cur);
+  document.fonts.ready.then(()=>mv(cur));
+  }
+}
+
+/* ---------- boot ---------- */
+route();
+applyMode(mode);if(mode==="u")loadUpa();
+render();
+if(bootWorld)loadWorld().then(ok=>{if(ok){applyMode("w");render()}});
+document.fonts.ready.then(()=>Promise.all(["500","600","700","800"].map(w=>document.fonts.load(`${w} 40px ${FONT}`,"বাংলাদেশ ০১২৩")))).then(render);
+/* warm the cache with the two lazy data files once the page is idle, so the first tap on "বিশ্ব ম্যাপ" / upazila is instant; skipped on data saver and 2G */
+__onLoad(()=>{const c=navigator.connection||{};if(c.saveData||/(^|-)2g$/.test(c.effectiveType||""))return;
+  (window.requestIdleCallback||(f=>setTimeout(f,3000)))(()=>["assets/data/world.json","assets/data/upazila.json"].forEach(u=>fetch(u,{priority:"low"}).then(r=>r.ok&&r.arrayBuffer()).catch(()=>{})),{timeout:8000})});
+if("serviceWorker" in navigator) __onLoad(()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+</script>
+<script>
+(function(){
+  var src=document.getElementById("app-js");
+  function run(D){window.__DATA=D;var s=document.createElement("script");s.text=src.text;document.body.appendChild(s)}
+  window.__D.then(run,function(){addEventListener("online",function(){window.__load().then(run)},{once:true})});
+})();
+</script>
+<script type="module" src="assets/js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362_7d77c9.js" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"abd3853f56ce4115afe9554ae1697c2f","r":1,"spa":2}' crossorigin="anonymous"></script>
+<script src="./assets/js/components.js" defer></script>
+</body>
+</html>
