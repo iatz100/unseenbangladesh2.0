@@ -407,7 +407,7 @@ img,video,canvas{max-width:100%}
           <button type="button" id="mUpa" aria-pressed="false">উপজেলা</button>
           <button type="button" id="mWorld" aria-pressed="false">বিশ্ব ম্যাপ</button>
         </span>
-        <button type="button" class="tb snd" id="snd" aria-pressed="true" aria-label="সাউন্ড চালু-বন্ধ" title="সাউন্ড চালু-বন্ধ"><span id="sndIco">🔊</span> <span id="sndTxt">সাউন্ড চালু</span></button>
+        <button type="button" class="tb snd" id="snd" aria-pressed="true" aria-label="সাউন্ড চালু-বন্ধ" title="সাউন্ড চালু-বন্ধ"><span id="sndIco">🔊</span> <span id="sndTxt">চালু</span></button>
       </div>
       <p class="upa-note" id="worldNote" role="status" hidden>বিশ্ব ম্যাপের ডেটা লোড করা যায়নি। জেলা ও উপজেলা ম্যাপ আগের মতোই কাজ করছে।</p>
       <p class="upa-note" id="upaNote" hidden>উপজেলা ভিত্তিক ম্যাপ-ডেটা এখনো যুক্ত নেই। ম্যাপ ও ডাউনলোড জেলার নির্বাচনের ভিত্তিতেই তৈরি হয়; নিচের জেলা তালিকা ব্যবহার করুন।</p>
@@ -799,6 +799,7 @@ function buildUpa(D){
     g.querySelector("[data-grp]").onclick=()=>{const allOn=list.every(k=>selU.has(k));list.forEach(k=>allOn?selU.delete(k):selU.add(k));render()};
     g._list=list;ugroupsEl.appendChild(g);
   }));
+  const dk=ugroupsEl.querySelector('[data-dist="Dhaka"]');if(dk)ugroupsEl.prepend(dk);   // Dhaka district always first
   openOnly(ugroupsEl,ugroupsEl.querySelector('[data-dist="Dhaka"]'));
 }
 let upaState=0;   // 0 not requested, 1 loading, 2 ready, 3 failed
