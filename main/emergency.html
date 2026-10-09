@@ -71,10 +71,8 @@ button,input{font:inherit;color:inherit}
     <h1>সেবা খুঁজুন</h1>
     <p class="sub">জরুরি সেবা — বিভাগ ও জেলা অনুযায়ী। যেকোনো কার্ডে ক্লিক করলে বিস্তারিত দেখাবে।</p>
     <input class="search" id="q" type="search" placeholder="জেলা বা সেবা খুঁজুন… (যেমন: সিলেট, ফায়ার, বিদ্যুৎ)" aria-label="খুঁজুন">
-    <div class="cats" id="cats" role="group" aria-label="বিভাগ"></div>
     <h2 id="hotH">জাতীয় হটলাইন <small>সারা দেশে</small></h2>
     <div class="grid" id="hot"></div>
-    <div id="divs"></div>
     <p class="empty" id="empty" hidden>কিছু পাওয়া যায়নি।</p>
     <p class="note">নম্বরগুলো সরকারি সূত্র থেকে যাচাই করা। ট্যাপ করলে ফোনের ডায়ালারে নম্বর বসে যায়।</p>
   </div>
@@ -104,7 +102,6 @@ let DB={national:NAT.map(([name,type,number,desc])=>({name,type,number,desc})),
 const fix=h=>h.replace(/<a class="call([^"]*)" href="tel:"/g,'<a class="call$1" aria-disabled="true"');
 
 
-$("cats").innerHTML=["সব",...DIVS.map(d=>d[0])].map(c=>`<button type="button" class="cat" aria-pressed="${c===div}" data-c="${esc(c)}">${c==="সব"?c:esc(c)+" বিভাগ"}</button>`).join("");
 
 // ---- জেলার নম্বর ও স্থানীয় সেবা JSON থেকে লোড হয় ----
 fetch("../assets/data/emergency.json",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{
@@ -114,8 +111,6 @@ fetch("../assets/data/emergency.json",{cache:"no-cache"}).then(r=>r.ok?r.json():
   route();
 }).catch(()=>{$("msg").hidden=false;$("msg").textContent="জেলার নম্বর লোড করা যায়নি: assets/data/emergency.json ফাইলটি আছে কি না দেখুন এবং ওয়েব সার্ভার/হোস্টিং থেকে পেজটি খুলুন (সরাসরি ফাইল খুললে কাজ করে না)।"});
 
-$("cats").onclick=e=>{const b=e.target.closest(".cat");if(!b)return;div=b.dataset.c;
-  document.querySelectorAll(".cat").forEach(x=>x.setAttribute("aria-pressed",x===b));renderList()};
 $("q").oninput=e=>{term=e.target.value.trim().toLowerCase();renderList()};
 const hit=(...a)=>!term||a.join(" ").toLowerCase().includes(term);
 
@@ -124,17 +119,7 @@ function renderList(){
   const hot=DB.national.map((s,i)=>({s,i})).filter(({s})=>div==="সব"&&hit(s.name,s.type,s.desc,s.number));
   $("hotH").hidden=!hot.length;
   $("hot").innerHTML=fix(hot.map(({s,i})=>`<div class="card"><span class="tag">${esc(s.type)}</span><h3>${esc(s.name)}</h3><div class="cnum">${bn(esc(s.number))}</div><p>${esc(s.desc)}</p><div class="btns"><a class="call" href="tel:${tel(s.number)}">📞 কল করুন</a></div></div>`).join(""));
-  let html="",total=hot.length;
-  DB.divisions.forEach(dv=>{
-    if(div!=="সব"&&div!==dv.name)return;
-    const list=dv.districts.filter(d=>hit(d.name,dv.name,"জেলা"));
-    if(!list.length)return;
-    total+=list.length;
-    html+=`<h2>${esc(dv.name)} বিভাগ <small>${bn(list.length)}টি জেলা</small></h2><div class="grid">`+
-      list.map(d=>`<div class="card" tabindex="0" role="link" data-go="d:${esc(d.name)}"><span class="tag">${esc(dv.name)} বিভাগ</span><h3>${esc(d.name)} জেলা</h3><div class="cnum">${bn(esc(d.number))}</div><div class="meta"><span class="pill">জরুরি নম্বর</span>${(d.services||[]).length?`<span class="pill g">${bn((d.services||[]).length)}টি স্থানীয় সেবা</span>`:""}</div><div class="btns"><a class="call" href="tel:${tel(d.number)}">📞 কল করুন</a></div></div>`).join("")+`</div>`;
-  });
-  $("divs").innerHTML=fix(html);
-  $("empty").hidden=total>0;
+  $("empty").hidden=hot.length>0;
 }
 
 // ---- বিস্তারিত পেজ ----
