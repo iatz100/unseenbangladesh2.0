@@ -58,7 +58,8 @@
                       "title": "প্রথম আলো: ঐতিহ্যের সান্নিধ্যে রসনাবিলাস",
                       "url": "https://www.prothomalo.com/bangladesh/capital/vd74bb9g80"
                     }
-                  ]
+                  ],
+                  "emoji": "🏰"
                 },
                 {
                   "name": "আহসান মঞ্জিল",
@@ -66,7 +67,7 @@
                   "image": "https://upload.wikimedia.org/wikipedia/commons/1/16/Ahsan_Manzil-Front_View.jpg",
                   "image_credit": "CC BY-SA 4.0",
                   "popular": false,
-                  "status": "ready",
+                  "status": "pending",
                   "intro": "বুড়িগঙ্গার তীরে ঢাকার কুমারটুলী এলাকায় অবস্থিত নবাবদের প্রাসাদ, বর্তমানে জাদুঘর।",
                   "history": "মুঘল আমলে এখানে জমিদার শেখ এনায়েতউল্লাহর বাগানবাড়ি ও রঙমহল ছিল। পরে সম্পত্তিটি ফরাসি বণিকদের হাত ঘুরে খাজা আলীমুল্লাহ কিনে নেন। নওয়াব আবদুল গনি ১৮৫৯ সালে নতুন ভবনের নির্মাণ শুরু করেন, ১৮৭২ সালে কাজ শেষ হয় এবং ছেলে খাজা আহসানউল্লাহর নামে এর নাম রাখেন আহসান মঞ্জিল। ১৯৯২ সালে এটি জাদুঘরে রূপান্তরিত হয়।",
                   "why_famous": "ঢাকার নবাব পরিবারের বাসভবন ও কার্যালয় ছিল এবং প্রায় ১০০ বছর বাংলার একটি প্রধান রাজনৈতিক কেন্দ্র ছিল। ইন্দো-সারাসেনিক স্থাপত্যশৈলীর ভবনটি পুরান ঢাকার ঐতিহ্যস্থান হিসেবে স্বীকৃত।",
@@ -97,7 +98,7 @@
                   "image": "সংগৃহীত",
                   "image_credit": "সংগৃহীত",
                   "popular": false,
-                  "status": "ready",
+                  "status": "pending",
                   "intro": "ঢাকার শেরেবাংলা নগরে অবস্থিত বাংলাদেশের জাতীয় সংসদ ভবন, স্থপতি লুই আই. কান।",
                   "history": "১৯৬১ সালে, তৎকালীন পূর্ব পাকিস্তানে, ঢাকাকে দ্বিতীয় রাজধানী করার উদ্যোগের অংশ হিসেবে নির্মাণ শুরু হয়। স্থপতি মুজহারুল ইসলামের পরামর্শে মার্কিন স্থপতি লুই কানকে নেওয়া হয়। প্রকল্পের প্রায় তিন-চতুর্থাংশ শেষ হওয়ার সময় কান মারা যান; পরে ডেভিড উইজডম কাজ এগিয়ে নেন। ভবনটি ১৯৮২ সালে সম্পন্ন হয়।",
                   "why_famous": "বিশ্বের বৃহত্তম আইনসভা কমপ্লেক্সগুলোর একটি (প্রায় ২১০ একর)। প্রধান ভবনের তিন দিকে কৃত্রিম হ্রদ রয়েছে; আলো ও জ্যামিতির ব্যবহারের জন্য এটি স্থাপত্যজগতে বিখ্যাত।",
@@ -133,9 +134,8 @@
               "places": [
                 {
                   "name": "ভাওয়াল জাতীয় উদ্যান",
-                  "emoji": "🌳",
-                  "image": "সংগৃহীত",
-                  "image_credit": "সংগৃহীত",
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/2/27/Fallen_Leaves_Beauty%2C_Bhawal_National_Park.jpg",
+                  "image_credit": "Shimul Mohammad — CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "গাজীপুরের শালবনঘেরা জাতীয় উদ্যান; ঢাকা শহর থেকে প্রায় ৪০ কিমি উত্তরে অবস্থিত।",
@@ -925,9 +925,8 @@
               "places": [
                 {
                   "name": "কক্সবাজার সমুদ্র সৈকত",
-                  "emoji": "🏖️",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/9/92/Cox%27s_Bazar_sea_beach_01.jpg",
+                  "image_credit": "Tanweer Morshed — CC BY-SA 3.0",
                   "popular": true,
                   "status": "ready",
                   "intro": "প্রায় ১২০ কিলোমিটার দীর্ঘ অবিচ্ছিন্ন প্রাকৃতিক সৈকত।",
@@ -961,9 +960,8 @@
                 },
                 {
                   "name": "হিমছড়ি",
-                  "emoji": "🌊",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/a/a1/Where_hills_meet_sea.jpg",
+                  "image_credit": "Nazia Chowdhury — CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "পাহাড়, সাগর ও ঝরনার মিলনস্থল; হিমছড়ি জাতীয় উদ্যানের অংশ।",
@@ -1001,9 +999,8 @@
               "places": [
                 {
                   "name": "সেন্ট মার্টিন দ্বীপ",
-                  "emoji": "🏝️",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/c/c0/For_those_who_need_Vitamin_SEA.jpg",
+                  "image_credit": "Nawroz Sizan — CC BY-SA 4.0",
                   "popular": true,
                   "status": "ready",
                   "intro": "বাংলাদেশের একমাত্র প্রবাল দ্বীপ; স্বচ্ছ পানি ও নারকেল বাগানে ঘেরা।",
@@ -1045,25 +1042,45 @@
               "about": null,
               "places": [
                 {
-                  "name": "কাপ্তাই লেক",
-                  "emoji": null,
-                  "image": null,
-                  "image_credit": null,
-                  "popular": false,
-                  "status": "pending",
-                  "intro": null,
-                  "history": null,
-                  "why_famous": null,
-                  "how_to_go": null,
-                  "distance": null,
-                  "cost": null,
-                  "best_time": null,
-                  "map": "কাপ্তাই লেক, রাঙ্গামাটি, Bangladesh",
-                  "tips": [],
-                  "warnings": [],
-                  "nearby": [],
-                  "source": []
-                },
+              "name": "কাপ্তাই লেক",
+              "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Hanging_Bridge%2C_Kaptai_Lake.jpg",
+              "image_credit": "Shakhawat Hossen Shafat — CC BY-SA 4.0",
+              "popular": false,
+              "status": "ready",
+              "intro": "কাপ্তাই লেক বাংলাদেশের সবচেয়ে বড় কৃত্রিম হ্রদ। এটি রাঙ্গামাটি জেলার কাপ্তাই উপজেলায় কর্ণফুলী নদীর ওপর কাপ্তাই বাঁধ নির্মাণের ফলে সৃষ্টি হয়েছে।",
+              "history": "কর্ণফুলী জলবিদ্যুৎ কেন্দ্রের জন্য জলাধার নির্মাণের কাজ ১৯৫৬ সালে তৎকালীন পূর্ব পাকিস্তান সরকারের উদ্যোগে শুরু হয়। কাপ্তাই বাঁধ নির্মাণের ফলে ১৯৬১ সালে হ্রদটি সৃষ্টি হয়। হ্রদ সৃষ্টির সময় রাঙ্গামাটি জেলার প্রায় ৫৪,০০০ একর কৃষিজমি পানিতে তলিয়ে যায় এবং প্রায় ১ লাখ মানুষ বাস্তুচ্যুত হয়। চাকমা রাজার প্রাসাদও পানির নিচে তলিয়ে যায়।",
+              "why_famous": "কাপ্তাই লেক বাংলাদেশের সবচেয়ে বড় কৃত্রিম হ্রদ এবং এর বিস্তীর্ণ জলরাশি, পাহাড় ও দ্বীপসমৃদ্ধ প্রাকৃতিক দৃশ্যের জন্য পরিচিত। কর্ণফুলী নদীর ওপর নির্মিত কাপ্তাই বাঁধ ও জলবিদ্যুৎ প্রকল্পের সঙ্গে হ্রদটির ঐতিহাসিক ও ভৌগোলিক গুরুত্ব রয়েছে।",
+              "how_to_go": "রাঙ্গামাটি শহর থেকে বাস, সিএনজি বা নৌপথে কাপ্তাই লেকে যাওয়া যায়। নৌভ্রমণের জন্য রিজার্ভ বাজার, তবলছড়ি ও পর্যটন ঘাট থেকে নৌযান বা স্পিডবোট পাওয়া যায়।",
+              "distance": "রাঙ্গামাটি শহর থেকে প্রায় ৫–১০ কিলোমিটার",
+              "cost": "দেশীয় নৌযান ঘণ্টায় ৫০০–৮০০ টাকা; স্পিডবোট ঘণ্টায় ১,২০০–১,৫০০ টাকা।",
+              "best_time": "নভেম্বর থেকে ফেব্রুয়ারি",
+              "map": "কাপ্তাই লেক, রাঙ্গামাটি, Bangladesh",
+              "tips": [
+              "নৌভ্রমণের সময় লাইফ জ্যাকেট ব্যবহার করুন।",
+              "হ্রদ ও আশপাশের প্রাকৃতিক পরিবেশ পরিষ্কার-পরিচ্ছন্ন রাখুন।"
+              ],
+              "warnings": [
+              "বর্ষাকালে অতিরিক্ত বৃষ্টি ও পানির উচ্চতা বাড়ার কারণে নৌভ্রমণের সময় স্থানীয় কর্তৃপক্ষের নির্দেশনা মেনে চলুন।"
+              ],
+              "nearby": [
+              "ঝুলন্ত সেতু",
+              "সাজেক ভ্যালি"
+              ],
+              "source": [
+              {
+              "title": "Wikipedia: Kaptai Lake",
+              "url": "https://en.wikipedia.org/wiki/Kaptai_Lake"
+              },
+              {
+              "title": "Wikipedia: Kaptai Dam",
+              "url": "https://en.wikipedia.org/wiki/Kaptai_Dam"
+              },
+            {
+              "title": "Wikimedia Commons: Kaptai Lake seen from Berannye Lake",
+              "url": "https://commons.wikimedia.org/wiki/File:Kaptai_Lake_seen_from_Berannye_Lake_(01).jpg"
+            }
+          ] 
+        },
                 {
                   "name": "ঝুলন্ত সেতু",
                   "emoji": null,
@@ -1117,23 +1134,34 @@
               "places": [
                 {
                   "name": "নীলগিরি",
-                  "emoji": null,
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/a/a4/Nilgiri_Hills.jpg",
+                  "image_credit": "Valli Ravindran — CC BY 2.0",
                   "popular": false,
-                  "status": "pending",
-                  "intro": null,
-                  "history": null,
-                  "why_famous": null,
-                  "how_to_go": null,
-                  "distance": null,
-                  "cost": null,
+                  "status": "ready",
+                  "intro": "নীলগিরি বাংলাদেশের বান্দরবান জেলার একটি পাহাড়ি পর্যটনকেন্দ্র (hill resort)।",
+                  "history": "একবিংশ শতাব্দীর শুরু থেকে নীলগিরি ধীরে ধীরে দেশব্যাপী একটি পর্যটনকেন্দ্র হিসেবে পরিচিতি লাভ করে। পুরো পর্যটনকেন্দ্রটি বাংলাদেশ সেনাবাহিনী প্রতিষ্ঠা করে এবং বর্তমানে তারাই এটি পরিচালনা করে।",
+                  "why_famous": "নীলগিরি তার পাহাড়ি প্রাকৃতিক সৌন্দর্য, মেঘে ঢাকা পাহাড়ি পরিবেশ এবং মনোরম দৃশ্যের জন্য পরিচিত।",
+                  "how_to_go": "বান্দরবানের আলীকদম–থানচী সড়ক ধরে পাহাড়ি পথে নীলগিরি পৌঁছানো যায়।",
+                  "distance": "প্রায় ৫০ কিলোমিটার (বান্দরবান জেলা সদর থেকে)",
+                  "cost": "প্রবেশ টিকিট জনপ্রতি ৫০ টাকা; গাড়ির পার্কিং ফি ৩০০ টাকা।",
                   "best_time": null,
                   "map": "নীলগিরি, বান্দরবান, Bangladesh",
-                  "tips": [],
-                  "warnings": [],
-                  "nearby": [],
-                  "source": []
+                  "tips": ["পাহাড়ি পথে ভ্রমণের জন্য আরামদায়ক পোশাক ও জুতা ব্যবহার করুন।",
+                  "মেঘ ও কুয়াশার সৌন্দর্য উপভোগ করতে সকালে যাওয়া ভালো।",
+                  "পাহাড়ি পরিবেশ পরিষ্কার-পরিচ্ছন্ন রাখুন এবং ময়লা নির্দিষ্ট স্থানে ফেলুন।"],
+                  "warnings": ["পাহাড়ি পথে চলাচলের সময় সতর্ক থাকুন এবং নির্ধারিত পথের বাইরে যাবেন না।",
+                  "বৃষ্টির সময় পাহাড়ি রাস্তা পিচ্ছিল হতে পারে, তাই অতিরিক্ত সতর্কতা অবলম্বন করুন।",
+                  "স্থানীয় নিরাপত্তা নির্দেশনা ও কর্তৃপক্ষের নিয়ম মেনে চলুন।"],
+                  "nearby": ["নীলাচল",
+                  "বগা লেক"],
+                  "source": [{
+                  "title": "Wikipedia: Nilgiri",
+                  "url": "https://en.wikipedia.org/wiki/Nilgiri"},
+                {
+                  "title": "Wikimedia Commons: Nilgiri Hill Resort, Nilgiri, Bandarban",
+                  "url": "https://commons.wikimedia.org/wiki/File:Nilgiri_Hill_Resort,_Nilgiri,_Bandarban_(9789).jpg"
+                    }
+                  ]
                 },
                 {
                   "name": "নীলাচল",
@@ -2684,9 +2712,8 @@
               "places": [
                 {
                   "name": "জাফলং",
-                  "emoji": "⛰️",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Zero_Point_at_Zuflong.jpg",
+                  "image_credit": "Mahmudur Rahman Mithun — CC BY-SA 3.0",
                   "popular": true,
                   "status": "ready",
                   "intro": "স্ফটিক স্বচ্ছ পানির পাখোয়া নদী ও সীমান্ত পাহাড়ের মিলন।",
@@ -2733,7 +2760,7 @@
                   "image": null,
                   "image_credit": null,
                   "popular": false,
-                  "status": "ready",
+                  "status": "pending",
                   "intro": "মৌলভীবাজারের কমলগঞ্জ উপজেলায় অবস্থিত জাতীয় উদ্যান ও প্রকৃতি সংরক্ষিত এলাকা; প্রায় ১,২৫০ হেক্টর (১২.৫ বর্গকিমি) জুড়ে আধা-চিরহরিৎ ও মিশ্র পত্রঝরা বন।",
                   "history": "উদ্যানটি ২,৭৪০ হেক্টরের পশ্চিম ভানুগাছ সংরক্ষিত বনের অংশ। ১৯৭৪ সালের বন্যপ্রাণী আইনের অধীনে ১৯৯৬ সালের ৭ জুলাই এটি জাতীয় উদ্যান ঘোষণা করা হয়।",
                   "why_famous": "৪৬০টির বেশি প্রজাতির প্রাণী ও উদ্ভিদের আবাস; বিপন্ন হুলক গিবনসহ নানা প্রাণী আছে এবং বনের ভেতরে ট্রেকিং ও হাঁটার পথ আছে।",
@@ -2768,7 +2795,7 @@
                   "image": null,
                   "image_credit": null,
                   "popular": false,
-                  "status": "ready",
+                  "status": "pending",
                   "intro": "মৌলভীবাজারের বড়লেখা উপজেলায় অবস্থিত জলপ্রপাত ও ইকো-পার্ক; জলপ্রপাতটির উচ্চতা প্রায় ২০০ ফুট (৬১ মিটার)।",
                   "history": null,
                   "why_famous": "দেশের উচ্চতম জলপ্রপাতগুলোর একটি; সবুজ গাছপালা ও কালো পাথরে ঘেরা। ঝরনাটি সংরক্ষণের জন্য এলাকাটিকে ইকো-পার্ক ঘোষণা করা হয়েছে।",
