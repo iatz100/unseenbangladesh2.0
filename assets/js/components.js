@@ -8,13 +8,14 @@
   const THEME_KEY = "ub-theme";
   const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
 
-  const savedTheme = () => {
+  const readSaved = () => {
     try {
       const v = localStorage.getItem(THEME_KEY);
       return v === "dark" || v === "light" ? v : null;
     } catch (e) { return null; }
   };
   const saveTheme = t => { try { localStorage.setItem(THEME_KEY, t); } catch (e) {} };
+  const resolveTheme = () => readSaved() || (mq && mq.matches ? "dark" : "light");
   const isDark = () => root.getAttribute("data-theme") === "dark";
 
   const applyTheme = t => {
@@ -22,20 +23,26 @@
     d.querySelectorAll("[data-theme-toggle]").forEach(b => b.setAttribute("aria-pressed", String(t === "dark")));
   };
 
-  // saved preference wins; otherwise follow the device setting
-  applyTheme(savedTheme() || (mq && mq.matches ? "dark" : "light"));
+  // apply immediately (the <head> snippet already set this; this keeps the toggles in sync)
+  applyTheme(resolveTheme());
+
+  // re-sync when restored from back/forward cache, when another tab changes the saved
+  // preference, and once the DOM is ready (toggles exist)
+  addEventListener("pageshow", () => applyTheme(resolveTheme()));
+  addEventListener("storage", e => { if (e.key === THEME_KEY) applyTheme(resolveTheme()); });
+  if (d.readyState === "loading") d.addEventListener("DOMContentLoaded", () => applyTheme(resolveTheme()));
 
   d.querySelectorAll("[data-theme-toggle]").forEach(b => {
     b.addEventListener("click", () => {
       const next = isDark() ? "light" : "dark";
-      applyTheme(next);
       saveTheme(next);
+      applyTheme(next);
     });
   });
 
   // follow the device setting only while the visitor has not chosen a theme
-  const onSystemChange = e => { if (!savedTheme()) applyTheme(e.matches ? "dark" : "light"); };
   if (mq) {
+    const onSystemChange = e => { if (!readSaved()) applyTheme(e.matches ? "dark" : "light"); };
     if (mq.addEventListener) mq.addEventListener("change", onSystemChange);
     else if (mq.addListener) mq.addListener(onSystemChange);
   }
