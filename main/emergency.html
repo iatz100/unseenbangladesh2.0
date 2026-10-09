@@ -69,6 +69,7 @@ button,input{font:inherit;color:inherit}
 <div class="wrap">
   <div id="list">
     <h1>সেবা খুঁজুন</h1>
+    <p class="sub">জরুরি সেবা — বিভাগ ও জেলা অনুযায়ী। যেকোনো কার্ডে ক্লিক করলে বিস্তারিত দেখাবে।</p>
     <h2 id="hotH">জাতীয় হটলাইন <small>সারা দেশে</small></h2>
     <div class="grid" id="hot"></div>
     <p class="empty" id="empty" hidden>কিছু পাওয়া যায়নি।</p>
@@ -109,7 +110,6 @@ fetch("../assets/data/emergency.json",{cache:"no-cache"}).then(r=>r.ok?r.json():
   route();
 }).catch(()=>{$("msg").hidden=false;$("msg").textContent="জেলার নম্বর লোড করা যায়নি: assets/data/emergency.json ফাইলটি আছে কি না দেখুন এবং ওয়েব সার্ভার/হোস্টিং থেকে পেজটি খুলুন (সরাসরি ফাইল খুললে কাজ করে না)।"});
 
-$("q").oninput=e=>{term=e.target.value.trim().toLowerCase();renderList()};
 const hit=(...a)=>!term||a.join(" ").toLowerCase().includes(term);
 
 // ---- তালিকা ----
