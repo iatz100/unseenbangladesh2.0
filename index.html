@@ -142,6 +142,7 @@ button,input{font:inherit;color:inherit}
 .tools>*,.seg button{flex:none;white-space:nowrap}
 .tb{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s}
 .tb:hover{background:var(--chip);border-color:var(--brand)}
+.snd[aria-pressed="false"]{color:var(--muted);background:var(--chip)}
 .seg{margin-left:auto;flex:none;display:inline-flex;background:var(--chip);padding:2px;border-radius:99px}
 .seg button{border:0;background:none;border-radius:99px;padding:4px 12px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
@@ -406,6 +407,7 @@ img,video,canvas{max-width:100%}
           <button type="button" id="mUpa" aria-pressed="false">উপজেলা</button>
           <button type="button" id="mWorld" aria-pressed="false">বিশ্ব ম্যাপ</button>
         </span>
+        <button type="button" class="tb snd" id="snd" aria-pressed="true" aria-label="সাউন্ড চালু-বন্ধ" title="সাউন্ড চালু-বন্ধ"><span id="sndIco">🔊</span> <span id="sndTxt">সাউন্ড চালু</span></button>
       </div>
       <p class="upa-note" id="worldNote" role="status" hidden>বিশ্ব ম্যাপের ডেটা লোড করা যায়নি। জেলা ও উপজেলা ম্যাপ আগের মতোই কাজ করছে।</p>
       <p class="upa-note" id="upaNote" hidden>উপজেলা ভিত্তিক ম্যাপ-ডেটা এখনো যুক্ত নেই। ম্যাপ ও ডাউনলোড জেলার নির্বাচনের ভিত্তিতেই তৈরি হয়; নিচের জেলা তালিকা ব্যবহার করুন।</p>
@@ -757,7 +759,21 @@ ORDER.forEach(dv=>{
   g._list=list;groupsEl.appendChild(g);
 });
 setOpen("Dhaka");
-function toggle(n){const S=cur();S.has(n)?S.delete(n):S.add(n);render()}
+/* ---------- sound: speaks the name when something is picked (not when it is un-picked) ---------- */
+let soundOn=store.get("bdmap.sound",true)!==false;
+const sndBtn=document.getElementById("snd");
+function paintSound(){sndBtn.setAttribute("aria-pressed",soundOn);document.getElementById("sndIco").textContent=soundOn?"🔊":"🔇";document.getElementById("sndTxt").textContent=soundOn?"সাউন্ড চালু":"সাউন্ড বন্ধ"}
+paintSound();
+sndBtn.onclick=()=>{soundOn=!soundOn;store.set("bdmap.sound",soundOn);paintSound();if(!soundOn&&window.speechSynthesis)speechSynthesis.cancel()};
+let bnVoice=null;
+function pickVoice(){const vs=window.speechSynthesis?speechSynthesis.getVoices():[];bnVoice=vs.find(v=>/^bn[-_]BD/i.test(v.lang))||vs.find(v=>/^bn/i.test(v.lang))||null}
+if(window.speechSynthesis){pickVoice();speechSynthesis.addEventListener&&speechSynthesis.addEventListener("voiceschanged",pickVoice)}
+function speak(text){
+  if(!soundOn||!text||!window.speechSynthesis||!window.SpeechSynthesisUtterance)return;
+  try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=bnVoice?bnVoice.lang:"bn-BD";if(bnVoice)u.voice=bnVoice;u.rate=.9;speechSynthesis.speak(u)}catch(e){}
+}
+const nameOf=n=>mode==="w"?(WBY[n]&&WBY[n].b):mode==="u"?UBN[n]:BN[n];
+function toggle(n){const S=cur();if(S.has(n))S.delete(n);else{S.add(n);speak(nameOf(n))}render()}
 document.getElementById("all").onclick=()=>{if(mode==="w"){if(WORLD)WORLD.f.forEach(f=>selW.add(f.n))}else if(mode==="u"){if(UPA)UPA.f.forEach(f=>selU.add(f.n))}else ALL.forEach(n=>selected.add(n));render()};
 /* ---------- upazila mode ----------
    Boundaries come from assets/data/upazila.json (or window.UPAZILA_DATA when inlined), made by build_upazila.py
@@ -835,7 +851,7 @@ function flyTo(nf,instant){
 function setHint(){document.getElementById("hintTxt").textContent=mode==="w"?"টিপস: ম্যাপের দেশে ক্লিক বা ট্যাপ করে বাছাই করতে পারেন। ছোট দেশগুলো তালিকা থেকে বেছে নেওয়া সহজ।":mode!=="u"?"টিপস: ম্যাপের জেলায় সরাসরি ক্লিক করেও বাছাই করতে পারেন।":vdist&&vdist.length>1?"টিপস: একাধিক জেলার উপজেলা একসাথে দেখা যাচ্ছে। যেকোনো উপজেলার সীমানায় ক্লিক করে বাছাই করুন বা বাদ দিন। পুরো বাংলাদেশ দেখতে খোলা জেলার নামে আবার ক্লিক করুন।":vdist?"টিপস: উপজেলার সীমানায় ক্লিক করে বাছাই করুন। অন্য জেলায় যেতে তালিকার জেলার নামে ক্লিক করুন; পুরো বাংলাদেশে ফিরতে খোলা জেলার নামে আবার ক্লিক করুন।":"টিপস: ম্যাপে একটি জেলায় ক্লিক করুন, জেলাটি জুম হয়ে উপজেলাগুলো দেখাবে।"}
 function focusDistrict(name){
   if(mode!=="u"||!UPA||!UPA.by[name])return;
-  hoverD=null;tip.style.opacity=0;
+  hoverD=null;tip.style.opacity=0;speak(BN[name]);
   focus=name;ovr=false;syncView(true);setHint();updateUI();
   const g=ugroupsEl.querySelector(`[data-dist="${name}"]`);if(g)openOnly(ugroupsEl,g);
 }
