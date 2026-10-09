@@ -76,7 +76,7 @@ button,input{font:inherit;color:inherit}
     <div class="grid" id="hot"></div>
     <div id="divs"></div>
     <p class="empty" id="empty" hidden>কিছু পাওয়া যায়নি।</p>
-    <p class="note">নম্বরগুলো assets/data/emergency.json ফাইল থেকে আসে। ব্যবহারের আগে সরকারি সূত্র থেকে যাচাই করে নিন। ট্যাপ করলে ফোনের ডায়ালারে নম্বর বসে যায়।</p>
+    <p class="note">নম্বরগুলো সরকারি সূত্র থেকে যাচাই করা। ট্যাপ করলে ফোনের ডায়ালারে নম্বর বসে যায়।</p>
   </div>
   <div id="detail" hidden></div>
   <p class="msg" id="msg" hidden></p>
@@ -90,24 +90,29 @@ const bn=s=>String(s).replace(/\d/g,d=>"০১২৩৪৫৬৭৮৯"[d]);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const tel=n=>String(n).replace(/[^\d+]/g,"");
 let div="সব",term="";
-// ---- কার্ডের কাঠামো (শুধু নাম) পেজেই আছে, তাই কার্ড সঙ্গে সঙ্গে দেখায় ----
-const NAT=[["জাতীয় জরুরি সেবা", "পুলিশ/ফায়ার/অ্যাম্বুলেন্স"], ["ফায়ার সার্ভিস", "আগুন/উদ্ধার"], ["স্বাস্থ্য বাতায়ন", "স্বাস্থ্য"], ["নারী ও শিশু নির্যাতন প্রতিরোধ", "নিরাপত্তা"], ["চাইল্ড হেল্পলাইন", "নিরাপত্তা"], ["জাতীয় আইনগত সহায়তা", "আইন"], ["দুর্নীতি দমন কমিশন", "আইন"], ["জাতীয় তথ্য বাতায়ন", "তথ্য"], ["ডেসকো", "বিদ্যুৎ"], ["ডিপিডিসি", "বিদ্যুৎ"], ["তিতাস গ্যাস", "গ্যাস"], ["ঢাকা ওয়াসা", "পানি"]];
+// ---- যাচাই করা জাতীয় সেবা (নম্বর, নাম, বিবরণ একসাথে) ----
+const NAT=[
+  ["জাতীয় জরুরি সেবা","জরুরি সেবা","999","পুলিশ, ফায়ার সার্ভিস ও অ্যাম্বুলেন্সের জরুরি সহায়তা"],
+  ["নারী ও শিশু নির্যাতন প্রতিরোধ","নিরাপত্তা","109","নারী ও শিশু নির্যাতনের শিকার ব্যক্তিদের আইনি পরামর্শ ও মনো-সামাজিক সহায়তা"],
+  ["চাইল্ড হেল্পলাইন","শিশু সহায়তা","1098","শিশু ও শিশু-সংক্রান্ত যেকোনো বিপদে সহায়তা"],
+  ["জাতীয় হেল্পলাইন","সাধারণ হেল্পলাইন","333","বিভিন্ন সামাজিক সমস্যায় সরকারি তথ্য ও সহায়তা"],
+  ["স্বাস্থ্য বাতায়ন","স্বাস্থ্য","16263","স্বাস্থ্যসংক্রান্ত পরামর্শ ও তথ্য"]
+];
 const DIVS=[["ঢাকা", ["ঢাকা", "গাজীপুর", "কিশোরগঞ্জ", "মানিকগঞ্জ", "মুন্সীগঞ্জ", "নারায়ণগঞ্জ", "নরসিংদী", "টাঙ্গাইল", "ফরিদপুর", "গোপালগঞ্জ", "মাদারীপুর", "রাজবাড়ী", "শরীয়তপুর"]], ["চট্টগ্রাম", ["চট্টগ্রাম", "কক্সবাজার", "বান্দরবান", "রাঙ্গামাটি", "খাগড়াছড়ি", "কুমিল্লা", "ব্রাহ্মণবাড়িয়া", "চাঁদপুর", "নোয়াখালী", "ফেনী", "লক্ষ্মীপুর"]], ["সিলেট", ["সিলেট", "মৌলভীবাজার", "হবিগঞ্জ", "সুনামগঞ্জ"]], ["বরিশাল", ["বরিশাল", "ঝালকাঠি", "পিরোজপুর", "পটুয়াখালী", "বরগুনা", "ভোলা"]], ["খুলনা", ["খুলনা", "বাগেরহাট", "সাতক্ষীরা", "যশোর", "ঝিনাইদহ", "মাগুরা", "নড়াইল", "কুষ্টিয়া", "চুয়াডাঙ্গা", "মেহেরপুর"]], ["রাজশাহী", ["রাজশাহী", "নওগাঁ", "নাটোর", "চাঁপাইনবাবগঞ্জ", "পাবনা", "সিরাজগঞ্জ", "বগুড়া", "জয়পুরহাট"]], ["রংপুর", ["রংপুর", "দিনাজপুর", "ঠাকুরগাঁও", "পঞ্চগড়", "নীলফামারী", "লালমনিরহাট", "কুড়িগ্রাম", "গাইবান্ধা"]], ["ময়মনসিংহ", ["ময়মনসিংহ", "জামালপুর", "নেত্রকোণা", "শেরপুর"]]];
-let DB={national:NAT.map(([name,type])=>({name,type,number:"",desc:""})),
+let DB={national:NAT.map(([name,type,number,desc])=>({name,type,number,desc})),
   divisions:DIVS.map(([name,ds])=>({name,districts:ds.map(n=>({name:n,number:"",services:[]}))})),common:{}};
 const fix=h=>h.replace(/<a class="call([^"]*)" href="tel:"/g,'<a class="call$1" aria-disabled="true"');
 
 
 $("cats").innerHTML=["সব",...DIVS.map(d=>d[0])].map(c=>`<button type="button" class="cat" aria-pressed="${c===div}" data-c="${esc(c)}">${c==="সব"?c:esc(c)+" বিভাগ"}</button>`).join("");
 
-// ---- নম্বর ও বিস্তারিত তথ্য পরে JSON থেকে লোড হয় ----
+// ---- জেলার নম্বর ও স্থানীয় সেবা JSON থেকে লোড হয় ----
 fetch("../assets/data/emergency.json",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{
-  (d.national||[]).forEach(x=>{const t=DB.national.find(y=>y.name===x.name);if(t)Object.assign(t,x)});
   (d.divisions||[]).forEach(dv=>(dv.districts||[]).forEach(x=>{
     for(const g of DB.divisions){const t=g.districts.find(y=>y.name===x.name);if(t){Object.assign(t,x);break}}}));
   DB.common=d.common||{};
   route();
-}).catch(()=>{$("msg").hidden=false;$("msg").textContent="নম্বর লোড করা যায়নি: assets/data/emergency.json ফাইলটি আছে কি না দেখুন এবং ওয়েব সার্ভার/হোস্টিং থেকে পেজটি খুলুন (সরাসরি ফাইল খুললে কাজ করে না)."});
+}).catch(()=>{$("msg").hidden=false;$("msg").textContent="জেলার নম্বর লোড করা যায়নি: assets/data/emergency.json ফাইলটি আছে কি না দেখুন এবং ওয়েব সার্ভার/হোস্টিং থেকে পেজটি খুলুন (সরাসরি ফাইল খুললে কাজ করে না)।"});
 
 $("cats").onclick=e=>{const b=e.target.closest(".cat");if(!b)return;div=b.dataset.c;
   document.querySelectorAll(".cat").forEach(x=>x.setAttribute("aria-pressed",x===b));renderList()};
@@ -118,7 +123,7 @@ const hit=(...a)=>!term||a.join(" ").toLowerCase().includes(term);
 function renderList(){
   const hot=DB.national.map((s,i)=>({s,i})).filter(({s})=>div==="সব"&&hit(s.name,s.type,s.desc,s.number));
   $("hotH").hidden=!hot.length;
-  $("hot").innerHTML=fix(hot.map(({s,i})=>`<div class="card" tabindex="0" role="link" data-go="n:${i}"><span class="tag">${esc(s.type)}</span><h3>${esc(s.name)}</h3><div class="cnum">${bn(esc(s.number))}</div><p>${esc(s.desc)}</p><div class="meta">${s.hours?`<span class="pill g">🕒 ${esc(s.hours)}</span>`:""}</div><div class="btns"><a class="call" href="tel:${tel(s.number)}">📞 কল করুন</a></div></div>`).join(""));
+  $("hot").innerHTML=fix(hot.map(({s,i})=>`<div class="card"><span class="tag">${esc(s.type)}</span><h3>${esc(s.name)}</h3><div class="cnum">${bn(esc(s.number))}</div><p>${esc(s.desc)}</p><div class="btns"><a class="call" href="tel:${tel(s.number)}">📞 কল করুন</a></div></div>`).join(""));
   let html="",total=hot.length;
   DB.divisions.forEach(dv=>{
     if(div!=="সব"&&div!==dv.name)return;
@@ -144,15 +149,9 @@ function head(tag,title,sub,num,sos,hours){
 function renderDetail(key){
   const [k,v]=[key.slice(0,1),key.slice(2)];
   const tips=(DB.common&&DB.common.callTips)||[];
-  let h=`<a class="back" href="#">← সব তালিকা</a>`;
-  if(k==="n"){
-    const s=DB.national[+v];if(!s)return false;
-    h+=head(s.type,s.name,s.desc,s.number,s.number==="999",s.hours);
-    if((s.tips||[]).length)h+=`<div class="sec warn"><h2>⚠️ জরুরি পরামর্শ</h2>${lis(s.tips)}</div>`;
-    if(tips.length)h+=`<div class="sec"><h2>📞 ফোনে যা বলবেন</h2>${lis(tips)}</div>`;
-    const rel=DB.national.map((x,i)=>({x,i})).filter(({x,i})=>x.type===s.type&&i!==+v);
-    if(rel.length)h+=`<div class="sec"><h2>একই ধরনের সেবা</h2><div class="chips">${rel.map(({x,i})=>`<a href="#${encodeURIComponent("n:"+i)}">${esc(x.name)}</a>`).join("")}</div></div>`;
-  }else{
+  let h="";
+  if(k!=="d")return false;   // জাতীয় হটলাইনের বিস্তারিত পেজ নেই
+  {
     let d=null,dv=null;
     for(const x of DB.divisions){const f=x.districts.find(y=>y.name===v);if(f){d=f;dv=x;break}}
     if(!d)return false;
@@ -187,7 +186,7 @@ function open_(e){
 }
 $("list").addEventListener("click",open_);
 $("list").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.matches("[data-go]"))open_(e)});
-route();   // কার্ড এখনই দেখায় (নম্বর পরে JSON থেকে আসে)
+route();   // কার্ড এখনই দেখায়; জেলার নম্বর পরে JSON থেকে আসে
 </script>
 <script src="../assets/js/components.js" defer></script>
 </body>
