@@ -1,5 +1,5 @@
 /*
- * Unseen Bangladesh 2.0 — shared components: header, side menu, footer, about dialog.
+ * Unseen Bangladesh 2.0 — shared components: header, side menu, footer, about dialog, theme.
  * MASTER DESIGN FILE. Edit only here, then run the build. Never override from page CSS.
  *
  * Rules that keep these components identical on every page:
@@ -7,16 +7,25 @@
  *  - Every selector uses the sc- prefix, so page CSS cannot collide with them by accident.
  *  - Every property the components depend on is set explicitly, so global/element rules on a page
  *    (body font, button font, nav/footer/header element rules) cannot leak in.
+ *  - Dark mode is html[data-theme="dark"]. The theme is set by components.js (and an early <head> snippet).
  */
 
 /* ---------- language switch (components follow html[data-lang]; default Bengali) ---------- */
 html:not([data-lang="en"]) .sc-en{display:none!important}
 html[data-lang="en"] .sc-bn{display:none!important}
 
+/* ---------- theme: global base ---------- */
+html[data-theme="light"]{color-scheme:light}
+html[data-theme="dark"]{color-scheme:dark;background:#0d1512}
+html[data-theme="dark"] body{background:#0d1512;color:#e8efe9}
+
 /* ---------- header ---------- */
 .sc-header{position:sticky;top:0;z-index:60;margin:0;padding:0;background:rgba(255,255,255,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid #ebe6dc;color:#17201c;font-family:"Anek Bangla",system-ui,sans-serif;font-size:16px;line-height:1.6}
 .sc-header *,.sc-side *,.sc-footer *,.sc-about *{box-sizing:border-box}
 .sc-header-in{max-width:1200px;margin:0 auto;padding:0 16px;height:64px;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:8px;align-items:center;justify-items:center}
+
+/* screen-reader only text (used for icon-only buttons) */
+.sc-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
 /* logo (shared by header, side menu) */
 .sc-logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:-.01em;color:#17201c;text-decoration:none;white-space:nowrap}
@@ -31,6 +40,14 @@ html[data-lang="en"] .sc-bn{display:none!important}
 .sc-menu-btn svg{transition:transform .3s cubic-bezier(.4,0,.2,1)}
 .sc-menu-btn:hover svg{transform:rotate(5deg) scale(1.05)}
 .sc-menu-btn:focus-visible{outline:2px solid #0f6b4f;outline-offset:2px}
+
+/* theme icons: moon in light mode, sun in dark mode */
+.sc-ic-sun{display:none}
+html[data-theme="dark"] .sc-ic-sun{display:block}
+html[data-theme="dark"] .sc-ic-moon{display:none}
+
+/* header theme button: desktop only (mobile uses the side menu) */
+.sc-header-theme{display:none}
 
 /* header nav (desktop only; the menu button handles mobile) */
 .sc-header-nav{display:none;grid-column:3;justify-self:end;gap:4px;align-items:center}
@@ -50,6 +67,20 @@ html:not(.sc-components-ready) .sc-side{transition:none!important}
 .sc-side-nav a,.sc-side-nav button{position:relative;display:block;width:100%;margin:0;text-align:left;border:0;background:none;padding:13px 14px;border-radius:12px;font:inherit;font-size:16px;font-weight:600;color:#17201c;text-decoration:none;cursor:pointer}
 .sc-side-nav a:hover,.sc-side-nav button:hover{background:#f3efe7}
 .sc-side-nav>:not(:last-child)::after{content:"";position:absolute;left:14px;right:14px;bottom:-2px;height:1px;background:#ebe6dc;opacity:.7}
+
+/* side menu theme row (mobile only, sits below the nav links) */
+.sc-side-theme{border-top:1px solid #ebe6dc;padding:10px 0 8px}
+.sc-theme-row{display:flex;align-items:center;gap:12px;width:100%;margin:0;padding:13px 14px;border:0;border-radius:12px;background:none;font:inherit;font-size:16px;font-weight:600;color:#17201c;text-align:left;cursor:pointer;transition:background .2s ease}
+.sc-theme-row:hover{background:#f3efe7}
+.sc-theme-row:focus-visible{outline:2px solid #0f6b4f;outline-offset:2px}
+.sc-theme-ic{flex:none;display:grid;place-items:center;width:24px;height:24px}
+.sc-theme-ic svg{display:block}
+.sc-theme-lbl{flex:1;min-width:0}
+.sc-switch{position:relative;flex:none;width:46px;height:26px;border-radius:99px;background:#d8d2c4;transition:background .25s ease}
+.sc-switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.25);transition:transform .25s ease}
+.sc-theme-row[aria-pressed="true"] .sc-switch{background:#0f6b4f}
+.sc-theme-row[aria-pressed="true"] .sc-switch::after{transform:translateX(20px)}
+
 .sc-side-f{margin:auto 0 0;color:#6b716d;font-size:13px;text-align:center}
 body.sc-menu-open{overflow:hidden}
 body.sc-menu-open .sc-scrim{opacity:1;visibility:visible;transition-delay:0s}
@@ -78,12 +109,48 @@ body.sc-menu-open #sc-menu-btn svg{transform:rotate(-5deg) scale(.95)}
 .sc-about-desc{margin:0 0 16px;font-size:15.5px;line-height:1.75;color:#17201c}
 .sc-about-x{position:absolute;top:12px;right:12px;z-index:2;width:40px;height:40px;padding:0;border-radius:50%;border:0;background:rgba(255,255,255,.92);font:inherit;font-size:22px;line-height:1;color:#17201c;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 
+/* ---------- dark theme: components ---------- */
+html[data-theme="dark"] .sc-header{background:rgba(13,21,18,.9);border-bottom-color:#2a3b33;color:#e8efe9}
+html[data-theme="dark"] .sc-logo{color:#e8efe9}
+html[data-theme="dark"] .sc-menu-btn{background:#141f1a;border-color:#2a3b33;color:#e8efe9}
+html[data-theme="dark"] .sc-menu-btn:hover{background:rgba(47,181,133,.12);border-color:#2fb585;box-shadow:0 0 20px rgba(47,181,133,.15),0 4px 12px rgba(0,0,0,.3)}
+html[data-theme="dark"] .sc-menu-btn:focus-visible{outline-color:#2fb585}
+html[data-theme="dark"] body.sc-menu-open #sc-menu-btn{border-color:#2fb585}
+html[data-theme="dark"] .sc-header-nav a{color:#9db0a4}
+html[data-theme="dark"] .sc-header-nav a:hover{color:#e8efe9}
+html[data-theme="dark"] .sc-header-nav a:focus-visible{outline-color:#2fb585}
+html[data-theme="dark"] .sc-menu-divider{color:#4d5f56}
+
+html[data-theme="dark"] .sc-scrim{background:rgba(0,0,0,.65)}
+html[data-theme="dark"] .sc-side{background:#101a15;color:#e8efe9;box-shadow:8px 0 40px rgba(0,0,0,.6)}
+html[data-theme="dark"] .sc-side-h{border-bottom-color:#2a3b33}
+html[data-theme="dark"] .sc-side-nav a,html[data-theme="dark"] .sc-side-nav button{color:#e8efe9}
+html[data-theme="dark"] .sc-side-nav a:hover,html[data-theme="dark"] .sc-side-nav button:hover{background:#1c2b24}
+html[data-theme="dark"] .sc-side-nav>:not(:last-child)::after{background:#2a3b33}
+html[data-theme="dark"] .sc-side-theme{border-top-color:#2a3b33}
+html[data-theme="dark"] .sc-theme-row{color:#e8efe9}
+html[data-theme="dark"] .sc-theme-row:hover{background:#1c2b24}
+html[data-theme="dark"] .sc-theme-row:focus-visible{outline-color:#2fb585}
+html[data-theme="dark"] .sc-switch{background:#2a3b33}
+html[data-theme="dark"] .sc-theme-row[aria-pressed="true"] .sc-switch{background:#0f6b4f}
+html[data-theme="dark"] .sc-side-f{color:#7f9288}
+
+html[data-theme="dark"] .sc-footer{background:#07150f;color:rgba(255,255,255,.7)}
+html[data-theme="dark"] .sc-f-bar{border-top-color:rgba(255,255,255,.1)}
+
+html[data-theme="dark"] .sc-about{background:#141f1a;color:#e8efe9;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+html[data-theme="dark"] .sc-about::backdrop{background:rgba(0,0,0,.75)}
+html[data-theme="dark"] .sc-about-hero{background:#1c2b24}
+html[data-theme="dark"] .sc-about h2,html[data-theme="dark"] .sc-about-desc{color:#e8efe9}
+html[data-theme="dark"] .sc-about-x{background:rgba(20,31,26,.92);color:#e8efe9;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+
 /* ---------- responsive ---------- */
 @media (min-width:1024px){
   .sc-header-in{padding:0 24px;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;position:relative}
   .sc-header .sc-logo{font-size:19px}
   .sc-header-nav{display:flex;gap:4px;padding:0;background:none;border-radius:0;position:absolute;inset:0;grid-column:1/-1;margin:auto;width:max-content;height:fit-content}
   #sc-menu-btn{display:none}
+  .sc-header-theme{display:grid;grid-column:3;justify-self:end}
 }
 @media (max-width:760px){.sc-f-top{padding-top:18px}}
 @media (max-width:560px){
@@ -95,4 +162,4 @@ body.sc-menu-open #sc-menu-btn svg{transform:rotate(-5deg) scale(.95)}
   .sc-about h2{font-size:22px}
   .sc-about-desc{font-size:14.5px;line-height:1.6;margin:0 0 12px}
 }
-@media (prefers-reduced-motion:reduce){.sc-side,.sc-scrim{transition:none}}
+@media (prefers-reduced-motion:reduce){.sc-side,.sc-scrim,.sc-switch,.sc-switch::after,.sc-theme-row{transition:none}}
