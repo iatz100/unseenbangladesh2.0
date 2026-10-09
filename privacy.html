@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="bn" translate="no">
+<head>
+<meta charset="utf-8">
+<meta name="google" content="notranslate">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>গোপনীয়তা নীতি | Unseen Bangladesh 2.0</title>
+<meta name="description" content="Unseen Bangladesh 2.0 ওয়েবসাইট ও অ্যান্ড্রয়েড অ্যাপের গোপনীয়তা নীতি। Privacy policy of the Unseen Bangladesh 2.0 website and Android app.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f6b4f">
+<link rel="icon" href="assets/images/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-19.png">
+<link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-title" content="Unseen Bangladesh 2.0">
+<link rel="preload" href="assets/fonts/anek-bangla-bengali.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="canonical" href="https://unseenbangladesh.com/privacy.html">
+<style>
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-bengali.woff2) format('woff2');
+  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
+}
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-latin-ext.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Anek Bangla';
+  font-style: normal;
+  font-weight: 400 800;
+  font-stretch: 100%;
+  font-display: swap;
+  src: url(assets/fonts/anek-bangla-latin.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+:root{
+  --bg:#faf8f4;--surface:#fff;--ink:#17201c;--muted:#6b716d;--line:#ebe6dc;
+  --brand:#0f6b4f;--brand-ink:#fff;--chip:#f3efe7;--radius:16px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Anek Bangla",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input{font:inherit;color:inherit}
+.tabs{display:flex;gap:4px;background:var(--chip);padding:4px;border-radius:99px}
+.tab{color:var(--muted);text-decoration:none;font-size:15px;font-weight:600;padding:8px 16px;border-radius:99px;transition:all .15s;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.hero{text-align:center;padding:56px 0 40px}
+.pill{display:inline-block;font-size:14px;font-weight:600;color:var(--brand);background:#e3f0ea;padding:6px 12px;border-radius:99px}
+.hero h1{font-size:clamp(34px,5.5vw,60px);line-height:1.25;letter-spacing:-.03em;margin:18px auto 16px;max-width:780px;font-weight:800}
+.hero h1 span{background:linear-gradient(90deg,#0f6b4f,#1aa37a 40%,#f42a41);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:18px;max-width:560px;margin:0 auto 28px}
+.cta{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;padding:14px 22px;border-radius:99px;font-weight:600;text-decoration:none;transition:transform .15s}
+.cta:hover{transform:translateY(-1px)}
+.steps{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:34px;color:var(--muted);font-size:14px}
+.steps b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--surface);border:1px solid var(--line);font-size:12px;margin-right:8px;color:var(--ink)}
+.hero.vid{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;margin-bottom:28px;padding:96px 24px 64px;color:#fff;background:#0b2a1f url(assets/hero/hero-poster.jpg) center/cover}
+.hero.vid::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(4,22,15,.55),rgba(4,22,15,.32) 45%,rgba(4,22,15,.78))}
+.hero-bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.hero.vid .pill{background:rgba(255,255,255,.14);color:#fff;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.hero.vid h1{text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero.vid h1 span{background:linear-gradient(90deg,#8fe9c4,#ffffff 55%,#ff8090);-webkit-background-clip:text;background-clip:text}
+.hero.vid p{color:rgba(255,255,255,.85)}
+.hero.vid .cta{background:#fff;color:var(--ink)}
+.hero.vid .steps{color:rgba(255,255,255,.82)}
+.hero.vid .steps b{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.28);color:#fff}
+.app{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:24px;align-items:start;padding-bottom:64px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+.picker{padding:20px;position:sticky;top:16px;max-height:calc(100vh - 32px);display:flex;flex-direction:column}
+.picker-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.picker-head h2{font-size:17px;margin:0}
+.count{font-size:13px;font-weight:600;color:var(--brand);background:#e3f0ea;padding:3px 10px;border-radius:99px;font-variant-numeric:tabular-nums}
+.search{position:relative;margin-bottom:12px}
+.search input{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:11px 14px 11px 38px;outline:none;transition:border-color .15s}
+.search input:focus{border-color:var(--brand)}
+.search svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--muted)}
+.tools{display:flex;gap:8px;margin-bottom:10px}
+.link{background:none;border:0;padding:0;color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.link:hover{color:var(--ink)}
+.tools{flex-wrap:nowrap;align-items:center;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+.tools::-webkit-scrollbar{display:none}
+.tools>*,.seg button{flex:none;white-space:nowrap}
+.tb{border:1px solid var(--line);background:var(--bg);border-radius:99px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--ink);cursor:pointer;transition:background .15s,border-color .15s}
+.tb:hover{background:var(--chip);border-color:var(--brand)}
+.seg{margin-left:auto;flex:none;display:inline-flex;background:var(--chip);padding:2px;border-radius:99px}
+.seg button{border:0;background:none;border-radius:99px;padding:4px 12px;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.upa-note{margin:0 0 10px;font-size:12.5px;color:var(--muted);background:var(--chip);border-radius:10px;padding:8px 10px}
+.groups.off{display:none}
+.groups{overflow:auto;margin:0 -20px;padding:0 20px;flex:1}
+.group{padding:12px 0;border-top:1px solid var(--line)}
+.group-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.group-h b{font-size:13px}
+.group-h small{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+.group-h .link{font-size:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid transparent;background:var(--chip);border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:#d6cfc1}
+.chip[aria-pressed="true"]{background:var(--sel,var(--brand));color:var(--sel-ink,#fff)}
+.chip[aria-pressed="true"]::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.stage{padding:20px}
+.stage-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.themes{display:flex;gap:10px;align-items:center}
+.themes span{font-size:13px;color:var(--muted);margin-right:4px}
+.sw{width:34px;height:34px;border-radius:50%;border:2px solid var(--surface);outline:2px solid transparent;cursor:pointer;padding:0;position:relative;overflow:hidden;transition:outline-color .15s,transform .15s}
+.sw:hover{transform:scale(1.06)}
+.sw[aria-checked="true"]{outline-color:var(--ink)}
+.sw i{position:absolute;inset:0}
+.sw i:last-child{inset:auto 0 0 auto;width:55%;height:55%;border-radius:50% 0 0 0}
+.opts{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.name{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:8px 12px;width:180px;outline:none}
+.name:focus{border-color:var(--brand)}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-size:13px;cursor:pointer;user-select:none}
+.upload{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;cursor:pointer;border:1px dashed #cfc7b8;border-radius:12px;padding:4px 12px 4px 4px;transition:border-color .15s}
+.upload:hover{border-color:var(--ink)}
+.upload:focus-within{outline:2px solid var(--ink);outline-offset:2px}
+.avatar{width:28px;height:28px;border-radius:8px;background:var(--chip);display:grid;place-items:center;color:var(--muted);background-size:cover;background-position:center}
+.toggle input{accent-color:var(--brand);width:16px;height:16px}
+.canvas-wrap{position:relative;border-radius:12px;overflow:hidden;background:var(--chip)}
+canvas#preview{display:block;width:100%;height:auto;cursor:pointer}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:8px;white-space:nowrap;opacity:0;transform:translate(-50%,-140%);transition:opacity .1s}
+.hint{font-size:12px;color:var(--muted);text-align:center;margin:10px 0 0}
+.iab-note{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:14px 0 0;padding:10px 14px;border-radius:12px;background:#fff8ec;border:1px solid #f1e3c8;font-size:14px;line-height:1.5}
+.iab-note a{font-weight:700;color:var(--brand);white-space:nowrap}
+.savesheet{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.78);display:flex;align-items:flex-end;justify-content:center;padding:12px;overflow-y:auto}
+.ss-card{background:var(--surface);color:var(--ink);width:min(480px,100%);border-radius:20px;padding:20px 18px 16px;display:flex;flex-direction:column;gap:10px;text-align:center;margin:auto 0}
+.ss-t{font-size:21px}
+.ss-p,.ss-hint,.ss-or{margin:0;font-size:14.5px;line-height:1.55;color:var(--muted)}
+.ss-hint{font-size:13px}
+.ss-btn{display:block;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-weight:700;font-size:16px;padding:12px;border-radius:14px;text-decoration:none;cursor:pointer}
+.ss-btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+.ss-img{width:100%;border-radius:12px;border:1px solid var(--line);-webkit-touch-callout:default;user-select:auto}
+.ss-x{border:0;background:none;color:var(--muted);font:inherit;font-weight:600;padding:8px;cursor:pointer}
+.dl-title{font-size:17px;font-weight:700;margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line)}
+.dl{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.rank{margin-top:16px;padding:16px 18px;border-radius:14px;background:linear-gradient(135deg,#e3f0ea,#f6f1e4);border:1px solid #cfe3d9}
+.rank-top{display:flex;align-items:center;gap:12px}
+.rank-ic{font-size:34px;line-height:1}
+.rank small{display:block;color:var(--muted);font-size:13px}
+.rank b{display:block;font-size:20px;line-height:1.3;color:var(--brand)}
+.rank-bar{height:8px;border-radius:99px;background:rgba(15,107,79,.14);margin:12px 0 8px;overflow:hidden}
+.rank-bar i{display:block;height:100%;border-radius:inherit;background:var(--brand);transition:width .6s ease}
+.rank p{margin:0;font-size:14px;color:var(--ink)}
+.btn{flex:1;min-width:120px;display:inline-flex;justify-content:center;align-items:center;gap:8px;border-radius:12px;padding:13px 16px;font-weight:600;cursor:pointer;border:1px solid var(--line);background:var(--surface);transition:all .15s}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn.primary:hover{opacity:.9}
+.btn:disabled{opacity:.5;cursor:wait}
+.credit button{border:0;background:none;color:var(--ink);font:inherit;font-weight:600;text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:0}
+.been{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+.been[aria-pressed="true"]{background:#e3f0ea;border-color:#bfe0d0;color:var(--brand);font-weight:600}
+.box{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:16px}
+.box h3{font-size:16px;margin:0 0 8px}
+.box + .box{margin-top:0}
+.go{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.go li{display:flex;gap:10px;font-size:15px}
+.go .ic{flex:none;width:30px;height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;font-size:16px}
+.go b{display:block;font-size:14px}
+.box p{margin:0;font-size:15px}
+.ph{position:relative;aspect-ratio:16/10;background:linear-gradient(135deg,#dfeee6,#c7e3d5);display:grid;place-items:center;color:#0f6b4f}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph svg{opacity:.55}
+.pd-note{margin-top:18px;font-size:13px;color:var(--muted)}
+@media (max-width:900px){.app{grid-template-columns:1fr}.picker{position:static;max-height:none}.groups{max-height:none;overflow:visible}}
+@media (max-width:560px){.hero{padding:36px 0 28px}.hero.vid{padding:64px 18px 40px;border-radius:20px;margin-bottom:20px}.hero p{font-size:16px}.stage,.picker{padding:14px}.name{width:100%}.opts{width:100%}.tabs{width:100%}.tab{flex:1;text-align:center;padding:8px 10px}.tab{font-size:14px;padding:8px 6px;flex:auto}.tabs{gap:2px}}
+@media (max-width:380px){.tab{font-size:12.5px;padding:8px 4px}}
+html{scroll-padding-top:calc(var(--hh) + 12px)}
+:root{--hh:65px}
+body{overflow-x:clip}
+button,.chip,.sw{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.hero-slides{display:grid}
+.hslide{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .6s ease,visibility 0s .6s}
+.hslide.on{opacity:1;visibility:visible;transition-delay:0s}
+.hero h2.hh{font-size:clamp(30px,5vw,54px);line-height:1.25;letter-spacing:-.03em;margin:18px auto 16px;max-width:780px;font-weight:800;text-shadow:0 2px 24px rgba(0,0,0,.35)}
+.hero-dots{display:flex;justify-content:center;gap:2px;margin-top:26px}
+.hero-dots button{width:26px;height:26px;padding:8px;border:0;background:rgba(255,255,255,.45);background-clip:content-box;border-radius:99px;cursor:pointer;transition:width .25s,background-color .25s}
+.hero-dots button[aria-current]{width:44px;background-color:#fff}
+.groups{padding-bottom:4px}
+.group{border:2px solid var(--dv,var(--line));border-radius:14px;padding:0;margin:0 0 10px;overflow:hidden;background:var(--surface)}
+.group-h{display:flex;align-items:center;gap:6px;margin:0;padding:0 14px 0 0}
+.group-t{flex:1;min-width:0;display:flex;align-items:center;gap:8px;border:0;background:none;padding:13px 8px 13px 14px;cursor:pointer;text-align:left}
+.group-t b{font-size:15px}
+.group-t .dot{flex:none;width:10px;height:10px;border-radius:50%;background:var(--dv)}
+.group-t svg{margin-left:auto;flex:none;color:var(--muted);transition:transform .2s}
+.group.open .group-t svg{transform:rotate(180deg)}
+.group.open .group-h{background:color-mix(in srgb,var(--dv) 10%,transparent)}
+.chips{display:none;padding:12px 14px 14px;gap:8px}
+.group.open .chips,.groups.searching .chips{display:flex}
+.chip[hidden],.group[hidden]{display:none!important}
+.chip{border:1.5px solid color-mix(in srgb,var(--dv,#999) 35%,transparent);transform:none!important;transition:background-color .15s,color .15s,border-color .15s}
+.chip:hover{border-color:var(--dv,#d6cfc1)}
+.chip[aria-pressed="true"]{background:var(--sel,var(--brand));border-color:var(--sel,var(--brand));color:var(--sel-ink,#fff)}
+.chip[aria-pressed="true"]::before{content:none}
+.sw:hover{transform:none}
+@media (min-width:901px){.picker{top:calc(var(--hh) + 14px);max-height:calc(100vh - var(--hh) - 28px)}}
+@media (max-width:560px){html{--hh:59px}}
+@media (min-width:1024px){:root{--hh:122px}}
+.hero.vid{aspect-ratio:16/9;display:flex;flex-direction:column;justify-content:center;padding:clamp(10px,3vw,40px);border-radius:clamp(14px,2.4vw,28px);margin-bottom:clamp(16px,2.4vw,28px)}
+.hero.vid .hero-slides{width:100%}
+.hero.vid .hslide{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero.vid .pill{font-size:clamp(10px,1.3vw,14px);padding:clamp(3px,.5vw,6px) clamp(8px,1.1vw,12px)}
+.hero.vid h1,.hero.vid h2.hh{font-size:clamp(18px,4.2vw,54px);margin:clamp(8px,1.6vw,18px) auto clamp(6px,1.2vw,16px)}
+.hero.vid p{font-size:clamp(12px,1.7vw,18px);margin:0 auto clamp(10px,2vw,28px);max-width:min(560px,88%)}
+.hero.vid .cta{font-size:clamp(12px,1.5vw,16px);padding:clamp(8px,1.2vw,14px) clamp(14px,2vw,22px)}
+.hero-dots{margin-top:clamp(6px,1.6vw,24px)}
+.hero-dots{ transform: translateY(35px);}
+.hero-dots button{width:clamp(20px,2.4vw,26px);height:clamp(20px,2.4vw,26px);padding:clamp(6px,.8vw,8px)}
+.hero-dots button[aria-current]{width:clamp(34px,4vw,44px)}
+@media (max-width:640px){.hero.vid p{display:none}}
+.stage-top{align-items:center}
+.opts{flex:1 1 340px;min-width:0;gap:14px 18px}
+.me{display:flex;align-items:center;gap:12px;flex:1 1 280px;min-width:0}
+.me-r{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.me-r .name{width:100%;min-width:0}
+.upload{position:relative;flex:none;width:104px;height:auto;aspect-ratio:1/1;flex-direction:column;justify-content:center;gap:6px;padding:0;overflow:hidden;border-radius:16px;text-align:center;font-size:12px;line-height:1.3}
+.upload .avatar{width:40px;height:40px;border-radius:12px}
+.upload .avatar[style*="background-image"]{position:absolute;inset:0;width:auto;height:auto;border-radius:0}
+.upload .avatar[style*="background-image"]~span{position:absolute;left:0;right:0;bottom:0;padding:4px 2px;background:rgba(0,0,0,.55);color:#fff}
+@media (max-width:380px){.upload{width:88px}.stage,.picker{padding:12px}}
+img,video,canvas{max-width:100%}
+.app>*,.stage-top>*,.opts>*{min-width:0}
+.dl{flex-wrap:wrap}
+.themes{flex-wrap:wrap}
+html:not([data-lang=en]) .en,html[data-lang=en] .bn{display:none!important}
+.pvwrap{max-width:1200px;margin:0 auto;padding:8px 0 40px}
+.pvc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:0 2px 10px rgba(0,0,0,.025);line-height:1.75}
+.pvc .seg{margin:0}
+.pvc .seg button{padding:4px 14px}
+.pvc h1{font-size:29px;line-height:1.3;margin:12px 0 4px;letter-spacing:-.2px}
+.pvc h2{font-size:19px;line-height:1.4;margin:26px 0 7px}
+.pvc p{margin:8px 0 12px}
+.pvc .meta{color:var(--muted);font-size:14px;margin:0 0 10px}
+.pvc ul{padding-left:22px;margin:7px 0 14px}
+.pvc li{margin:5px 0}
+.pvc a{color:var(--brand);text-decoration:underline;text-underline-offset:2px}
+@media(max-width:600px){.pvc{padding:22px 18px;border-radius:14px}.pvc h1{font-size:25px}.pvc h2{font-size:18px}}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+@media (max-width:560px){.container{padding:0 16px}}
+</style>
+<link rel="stylesheet" href="./assets/css/components.css">
+</head>
+<body>
+<!-- sc:header:start -->
+<header class="sc-header">
+  <div class="sc-header-in">
+    <button class="sc-menu-btn" id="sc-menu-btn" type="button" aria-label="মেনু খুলুন" aria-controls="sc-side" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <a class="sc-logo" href="/#top"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</a>
+    <nav class="sc-header-nav" aria-label="প্রধান মেনু">
+      <a href="/#top" data-k="home">আমার ম্যাপ</a>
+      <span class="sc-menu-divider">|</span>
+      <a href="./guide/">ভ্রমণ গাইড</a>
+    </nav>
+  </div>
+</header>
+<!-- sc:header:end -->
+<!-- sc:side-menu:start -->
+<div class="sc-scrim" id="sc-scrim"></div>
+<aside class="sc-side" id="sc-side" aria-label="মেনু">
+  <div class="sc-side-h">
+    <span class="sc-logo"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</span>
+    <button class="sc-menu-btn" id="sc-menu-x" type="button" aria-label="মেনু বন্ধ করুন"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <nav class="sc-side-nav">
+    <a href="/#top">হোম</a>
+    <a href="./guide/">ভ্রমণ গাইড</a>
+    <button type="button" id="sc-side-about">সম্পর্কে</button>
+    <a href="./privacy.html">গোপনীয়তা নীতি</a>
+  </nav>
+  <p class="sc-side-f">৬৪ জেলা · ৮ বিভাগ</p>
+</aside>
+<!-- sc:side-menu:end -->
+<div class="container" id="top">
+<main class="pvwrap">
+<article class="pvc">
+<span class="seg" role="group" aria-label="ভাষা / Language"><button type="button" data-setlang="bn" aria-pressed="true">বাংলা</button><button type="button" data-setlang="en" aria-pressed="false">English</button></span>
+<div class="bn">
+
+<h1>গোপনীয়তা নীতি</h1>
+
+<p class="meta">
+  সর্বশেষ হালনাগাদ: ৭ অক্টোবর ২০২৬
+</p>
+
+<h2>১. সংক্ষেপে</h2>
+
+<p>
+Unseen Bangladesh 2.0 ব্যবহারকারীর গোপনীয়তাকে গুরুত্ব দেয়।
+এই গোপনীয়তা নীতিতে আমাদের ওয়েবসাইট ও অ্যান্ড্রয়েড অ্যাপ
+ব্যবহারের সময় তথ্য কীভাবে সংরক্ষণ, ব্যবহার ও প্রক্রিয়া করা হয়,
+তা সহজভাবে ব্যাখ্যা করা হয়েছে।
+</p>
+
+<ul>
+  <li>
+    এই সেবা ব্যবহারের জন্য কোনো অ্যাকাউন্ট বা সাইন-আপের
+    প্রয়োজন নেই।
+  </li>
+
+  <li>
+    আমরা কোনো বিজ্ঞাপন নেটওয়ার্ক বা নিজস্ব অ্যানালিটিক্স ও
+    ট্র্যাকিং ব্যবস্থা ব্যবহার করি না।
+  </li>
+
+  <li>
+    আপনি যে জেলা বা স্থান নির্বাচন করেন, ম্যাপে যে নাম বা ছবি
+    যোগ করেন এবং আপনার ট্রিপ-সংক্রান্ত তথ্য সাধারণত আপনার
+    নিজস্ব ডিভাইসেই সংরক্ষিত থাকে।
+  </li>
+
+  <li>
+    আপনার নির্বাচিত জেলা বা স্থানগুলোর বিস্তারিত তালিকা,
+    আপনার নাম বা আপনার ছবি আমাদের সার্ভারে পাঠানো হয় না।
+  </li>
+
+  <li>
+    ম্যাপ ডাউনলোডের সময় শুধুমাত্র নির্বাচিত জেলার সংখ্যা
+    পরিসংখ্যান তৈরির উদ্দেশ্যে আমাদের সার্ভারে পাঠানো হতে পারে।
+  </li>
+</ul>
+
+
+<h2>২. শীর্ষ কত % হিসাব</h2>
+
+<p>
+বাংলাদেশ ম্যাপ ডাউনলোড করার সময় আপনি কতটি জেলা নির্বাচন করেছেন,
+শুধুমাত্র সেই সংখ্যাটি (উদাহরণস্বরূপ: ২৩টি) একটি এলোমেলো
+অ-ব্যক্তিগত আইডির সঙ্গে আমাদের সার্ভারে পাঠানো হতে পারে।
+</p>
+
+<p>
+এই তথ্য ব্যবহার করে আপনার নির্বাচিত জেলার সংখ্যার ভিত্তিতে
+আপনি আনুমানিকভাবে কত শতাংশ ব্যবহারকারীর তুলনায় এগিয়ে আছেন,
+তা প্রদর্শন করা হয়।
+</p>
+
+<p>
+এই প্রক্রিয়ায় কোন কোন জেলা নির্বাচন করেছেন, আপনার নাম,
+আপনার ছবি বা অন্য কোনো ব্যক্তিগত তথ্য পাঠানো হয় না।
+পরিসংখ্যান কোনো ব্যক্তির নামের সঙ্গে প্রকাশ করা হয় না।
+</p>
+
+<p>
+অপব্যবহার, স্বয়ংক্রিয় অনুরোধ বা একই ডিভাইস থেকে বারবার
+ভুয়া অনুরোধ প্রতিরোধের উদ্দেশ্যে IP ঠিকানার একটি সংক্ষিপ্ত
+ক্রিপ্টোগ্রাফিক হ্যাশ সীমিত সময়ের জন্য, সর্বোচ্চ এক দিন পর্যন্ত,
+ব্যবহার করা হতে পারে। এই উদ্দেশ্যে আসল IP ঠিকানা সংরক্ষণ করা হয় না।
+</p>
+
+
+<h2>৩. আপনার ডিভাইসে সংরক্ষিত তথ্য</h2>
+
+<p>
+আপনি পরবর্তীতে সাইট বা অ্যাপটি ব্যবহার করলে আগের নির্বাচন ও
+সেটিংস যেন পাওয়া যায়, সেজন্য কিছু তথ্য আপনার ডিভাইসের
+ব্রাউজার বা অ্যাপের স্থানীয় স্টোরেজে সংরক্ষিত হতে পারে।
+</p>
+
+<p>এর মধ্যে থাকতে পারে:</p>
+
+<ul>
+  <li>আপনি যে জেলা ও অন্যান্য স্থান নির্বাচন করেছেন;</li>
+
+  <li>ম্যাপে প্রদর্শনের জন্য আপনার দেওয়া নাম;</li>
+
+  <li>
+    ম্যাপে যোগ করা ছবি। এসব ছবি আপনার ডিভাইসেই প্রক্রিয়াজাত
+    হয় এবং আমাদের সার্ভারে আপলোড করা হয় না;
+  </li>
+
+  <li>থিম ও অন্যান্য প্রদর্শন-সংক্রান্ত সেটিংস;</li>
+
+  <li>ট্রিপ বা ম্যাপ তৈরির অন্যান্য স্থানীয় সেটিংস।</li>
+</ul>
+
+<p>
+আপনার তৈরি করা PNG বা JPG ম্যাপও আপনার ডিভাইসেই তৈরি ও
+ডাউনলোড করা হয়।
+</p>
+
+
+<h2>৪. তৃতীয় পক্ষের সেবা</h2>
+
+<p>
+ওয়েবসাইট ও অ্যাপের নির্দিষ্ট কার্যক্রম পরিচালনার জন্য
+কিছু তৃতীয় পক্ষের সেবা ব্যবহার করা হতে পারে। এসব প্রতিষ্ঠানের
+নিজস্ব গোপনীয়তা নীতি ও তথ্য ব্যবহারের নিয়ম প্রযোজ্য হবে।
+</p>
+
+<ul>
+
+  <li>
+    <b>Cloudflare:</b>
+    ওয়েবসাইটের অবকাঠামো, নিরাপত্তা ও কর্মক্ষমতা বজায় রাখতে
+    Cloudflare-এর সেবা ব্যবহার করা হতে পারে। এ ধরনের সেবার
+    অংশ হিসেবে Cloudflare IP ঠিকানা, ব্রাউজারের ধরন এবং
+    অন্যান্য প্রযুক্তিগত তথ্য প্রক্রিয়া করতে পারে।
+    <br><br>
+
+    <a
+      href="https://www.cloudflare.com/privacypolicy/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Cloudflare-এর গোপনীয়তা নীতি
+    </a>
+  </li>
+
+  <li>
+    <b>Google Maps:</b>
+    কোনো স্থান বা ম্যাপ Google Maps-এর মাধ্যমে প্রদর্শন করা হলে
+    Google-এর সেবা ব্যবহার করা হয়। সে ক্ষেত্রে Google-এর
+    নিজস্ব গোপনীয়তা নীতি ও তথ্য ব্যবহারের নিয়ম প্রযোজ্য হবে।
+    <br><br>
+
+    <a
+      href="https://policies.google.com/privacy"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Google-এর গোপনীয়তা নীতি
+    </a>
+  </li>
+
+  <li>
+    <b>সামাজিক যোগাযোগমাধ্যম:</b>
+    Facebook, Instagram বা LinkedIn-এর কোনো লিংকে ক্লিক করলে
+    আপনি সংশ্লিষ্ট প্রতিষ্ঠানের ওয়েবসাইট বা প্ল্যাটফর্মে
+    চলে যাবেন। সেখানে আপনার তথ্য কীভাবে ব্যবহৃত হবে, তা
+    সংশ্লিষ্ট প্রতিষ্ঠানের নিজস্ব গোপনীয়তা নীতি দ্বারা
+    নিয়ন্ত্রিত হবে।
+  </li>
+
+</ul>
+
+
+<h2>৫. শিশুদের গোপনীয়তা</h2>
+
+<p>
+Unseen Bangladesh 2.0 সব বয়সের মানুষের ব্যবহারের উপযোগী করে
+তৈরি করা হয়েছে। আমরা শিশু বা অন্য কোনো ব্যবহারকারীর কাছ থেকে
+ইচ্ছাকৃতভাবে ব্যক্তিগত তথ্য সংগ্রহ করার উদ্দেশ্যে এই সেবা
+পরিচালনা করি না।
+</p>
+
+
+<h2>৬. তথ্য মুছে ফেলা</h2>
+
+<p>
+আপনার ডিভাইসে স্থানীয়ভাবে সংরক্ষিত তথ্য মুছে ফেলতে
+ব্রাউজারের সাইট ডেটা বা লোকাল স্টোরেজ মুছে ফেলতে পারেন।
+অ্যান্ড্রয়েড অ্যাপ ব্যবহার করলে অ্যাপটি আনইনস্টল করার মাধ্যমে
+অ্যাপের স্থানীয়ভাবে সংরক্ষিত তথ্য মুছে যেতে পারে।
+</p>
+
+<p>
+আমাদের পক্ষ থেকে ব্যবহারকারীর অ্যাকাউন্ট, নির্বাচিত জেলা,
+নাম বা ছবি সংরক্ষণের কোনো ব্যবস্থা নেই। তবে পরিসংখ্যান তৈরির
+জন্য পাঠানো সীমিত তথ্যের ক্ষেত্রে এই নীতিতে বর্ণিত নিয়ম
+প্রযোজ্য হবে।
+</p>
+
+
+<h2>৭. গোপনীয়তা নীতির পরিবর্তন</h2>
+
+<p>
+প্রয়োজন অনুযায়ী এই গোপনীয়তা নীতিতে পরিবর্তন, সংশোধন বা
+সংযোজন করা হতে পারে। কোনো পরিবর্তন করা হলে এই পাতায়
+সংশোধিত “সর্বশেষ হালনাগাদ” তারিখ প্রকাশ করা হবে।
+</p>
+
+
+<h2>৮. যোগাযোগ</h2>
+
+<p>
+এই গোপনীয়তা নীতি সম্পর্কে কোনো প্রশ্ন, পরামর্শ বা অনুরোধ
+থাকলে Unseen Bangladesh 2.0-এর সঙ্গে যোগাযোগ করতে পারেন।
+</p>
+
+</div>
+<div class="en"><h1>Privacy Policy</h1>
+<p class="meta">Last updated: October 7, 2026</p>
+<h2>1. In brief</h2>
+<p>Unseen Bangladesh 2.0 values your privacy. This policy explains in simple terms how information is stored, used and processed when you use our website and Android app.</p>
+<ul>
+<li>No account or sign-up is needed to use this service.</li>
+<li>We do not use any advertising network, or our own analytics and tracking system.</li>
+<li>The districts or places you select, the name or photo you add to the map, and your trip-related details are generally stored only on your own device.</li>
+<li>The detailed list of districts or places you select, your name and your photo are not sent to our server.</li>
+<li>When you download a map, only the number of selected districts may be sent to our server, for statistics.</li>
+</ul>
+<h2>2. The "top %" calculation</h2>
+<p>When you download the Bangladesh map, only the number of districts you selected (for example, 23) may be sent to our server together with a random, non-personal ID.</p>
+<p>This is used to show roughly what percentage of users you are ahead of, based on the number of districts you selected.</p>
+<p>This process does not send which districts you selected, your name, your photo or any other personal information. Statistics are never published together with any person's name.</p>
+<p>To prevent misuse, automated requests, or repeated fake requests from the same device, a short cryptographic hash of the IP address may be used for a limited time, for up to one day. The actual IP address is not stored for this purpose.</p>
+<h2>3. Information stored on your device</h2>
+<p>So that your earlier selections and settings are available the next time you use the site or app, some information may be saved in your browser's or app's local storage on your device.</p>
+<p>This may include:</p>
+<ul>
+<li>the districts and other places you selected;</li>
+<li>the name you provided for display on the map;</li>
+<li>photos added to the map. These are processed on your device and are not uploaded to our server;</li>
+<li>theme and other display settings;</li>
+<li>other local settings for creating trips or maps.</li>
+</ul>
+<p>The PNG or JPG maps you create are also generated and downloaded on your own device.</p>
+<h2>4. Third-party services</h2>
+<p>Some third-party services may be used to operate certain functions of the website and app. Those companies' own privacy policies and terms of data use apply.</p>
+<ul>
+<li><b>Cloudflare:</b> Cloudflare services may be used to maintain the website's infrastructure, security and performance. As part of such services, Cloudflare may process IP addresses, browser type and other technical information.<br><br><a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Cloudflare's Privacy Policy</a></li>
+<li><b>Google Maps:</b> When a place or map is shown through Google Maps, Google's services are used, and Google's own privacy policy and terms of data use apply.<br><br><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google's Privacy Policy</a></li>
+<li><b>Social media:</b> If you click a Facebook, Instagram or LinkedIn link, you will go to that company's website or platform. How your information is used there is governed by that company's own privacy policy.</li>
+</ul>
+<h2>5. Children's privacy</h2>
+<p>Unseen Bangladesh 2.0 is designed to be suitable for people of all ages. We do not operate this service for the purpose of knowingly collecting personal information from children or any other users.</p>
+<h2>6. Deleting your data</h2>
+<p>To delete information stored locally on your device, you can clear your browser's site data or local storage. If you use the Android app, uninstalling the app may remove its locally stored data.</p>
+<p>We have no system for storing user accounts, selected districts, names or photos. The rules described in this policy apply to the limited information sent for statistics.</p>
+<h2>7. Changes to this policy</h2>
+<p>This privacy policy may be changed, corrected or extended as needed. If any change is made, the revised "Last updated" date will be published on this page.</p>
+<h2>8. Contact</h2>
+<p>If you have any questions, suggestions or requests about this privacy policy, you can contact Unseen Bangladesh 2.0.</p></div>
+</article>
+</main>
+</div>
+<!-- sc:footer:start -->
+<footer class="sc-footer">
+  <div class="sc-f-top">
+    <div class="sc-f-inner">
+      <div class="sc-f-brand">
+        <div class="sc-f-logo"><img class="sc-logo-mark" src="./assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</div>
+        <p class="sc-tagline">সৌন্দর্যে ভরা প্রিয় বাংলাদেশ</p>
+      </div>
+    </div>
+  </div>
+  <div class="sc-f-bar">
+    <div class="sc-f-inner">
+      <div class="sc-f-links">
+        <a href="./privacy.html"><span class="sc-bn">গোপনীয়তা নীতি</span><span class="sc-en">Privacy Policy</span></a>
+        <button type="button" id="sc-footer-about"><span class="sc-bn">সম্পর্কে</span><span class="sc-en">About</span></button>
+      </div>
+      © ২০২৬ Unseen Bangladesh 2.0 — সর্বস্বত্ব সংরক্ষিত।
+    </div>
+  </div>
+</footer>
+<dialog class="sc-about" id="sc-about" aria-labelledby="sc-about-t">
+  <button class="sc-about-x" type="button" aria-label="বন্ধ করুন" data-close>×</button>
+  <img class="sc-about-hero" decoding="async" src="./assets/images/about_image.webp" alt="অদেখা বাংলাদেশ ২.০" loading="lazy" width="800" height="640">
+  <div class="sc-about-body">
+    <h2 id="sc-about-t"><span class="sc-bn">অদেখা বাংলাদেশ ২.০</span><span class="sc-en">Unseen Bangladesh 2.0</span></h2>
+    <p class="sc-about-desc">🇧🇩 Unseen Bangladesh 2.0<span class="sc-bn"> নিজের দেশকে নতুন করে আবিষ্কারের গল্প। অজানা সৌন্দর্য খুঁজে বের করুন, ভ্রমণের স্মৃতি ধরে রাখুন! ভালোবাসায় চিনে নিন আমাদের বাংলাদেশ।</span><span class="sc-en"> a story of rediscovering our own country. Find hidden beauty, keep your travel memories alive, and get to know our Bangladesh with love.</span></p>
+  </div>
+</dialog>
+<!-- sc:footer:end -->
+<script>
+(()=>{
+const d=document,h=d.documentElement;
+const L=d.querySelectorAll("[data-setlang]");
+const T={bn:"গোপনীয়তা নীতি — Unseen Bangladesh 2.0",en:"Privacy Policy — Unseen Bangladesh 2.0"};
+const setLang=l=>{h.dataset.lang=l;h.lang=l;d.title=T[l];L.forEach(x=>x.setAttribute("aria-pressed",x.dataset.setlang===l));try{localStorage.setItem("bdmap.lang",l)}catch(e){}};
+L.forEach(x=>x.onclick=()=>setLang(x.dataset.setlang));
+let sv="bn";try{sv=localStorage.getItem("bdmap.lang")==="en"?"en":"bn"}catch(e){}
+setLang(sv);
+})();
+</script>
+<script type="module" src="assets/js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362_7d77c9.js" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"abd3853f56ce4115afe9554ae1697c2f","r":1,"spa":2}' crossorigin="anonymous"></script>
+<script src="./assets/js/components.js" defer></script>
+</body>
+</html>
+
