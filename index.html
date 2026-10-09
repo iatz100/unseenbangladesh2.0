@@ -762,7 +762,7 @@ setOpen("Dhaka");
 /* ---------- sound: speaks the name when something is picked (not when it is un-picked) ---------- */
 let soundOn=store.get("bdmap.sound",true)!==false;
 const sndBtn=document.getElementById("snd");
-function paintSound(){sndBtn.setAttribute("aria-pressed",soundOn);document.getElementById("sndIco").textContent=soundOn?"🔊":"🔇";document.getElementById("sndTxt").textContent=soundOn?"সাউন্ড চালু":"সাউন্ড বন্ধ"}
+function paintSound(){sndBtn.setAttribute("aria-pressed",soundOn);document.getElementById("sndIco").textContent=soundOn?"🔊":"🔇";document.getElementById("sndTxt").textContent=soundOn?"চালু":"বন্ধ"}
 paintSound();
 sndBtn.onclick=()=>{soundOn=!soundOn;store.set("bdmap.sound",soundOn);paintSound();if(!soundOn&&window.speechSynthesis)speechSynthesis.cancel()};
 let bnVoice=null;
