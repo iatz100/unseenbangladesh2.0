@@ -1,9 +1,46 @@
-/* Unseen Bangladesh 2.0 — shared component behaviour: side menu, about dialog, current-page link.
+/* Unseen Bangladesh 2.0 — shared component behaviour: theme (light/dark), side menu, about dialog, current-page link.
    Markup and styles come from the build (assets/components + assets/css/components.css). No design here. */
 (() => {
-  const d = document, body = d.body;
-  requestAnimationFrame(() => d.documentElement.classList.add("sc-components-ready"));
+  const d = document, root = d.documentElement, body = d.body;
+  requestAnimationFrame(() => root.classList.add("sc-components-ready"));
 
+  /* ---------- theme (light / dark) ---------- */
+  const THEME_KEY = "ub-theme";
+  const mq = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+
+  const savedTheme = () => {
+    try {
+      const v = localStorage.getItem(THEME_KEY);
+      return v === "dark" || v === "light" ? v : null;
+    } catch (e) { return null; }
+  };
+  const saveTheme = t => { try { localStorage.setItem(THEME_KEY, t); } catch (e) {} };
+  const isDark = () => root.getAttribute("data-theme") === "dark";
+
+  const applyTheme = t => {
+    root.setAttribute("data-theme", t);
+    d.querySelectorAll("[data-theme-toggle]").forEach(b => b.setAttribute("aria-pressed", String(t === "dark")));
+  };
+
+  // saved preference wins; otherwise follow the device setting
+  applyTheme(savedTheme() || (mq && mq.matches ? "dark" : "light"));
+
+  d.querySelectorAll("[data-theme-toggle]").forEach(b => {
+    b.addEventListener("click", () => {
+      const next = isDark() ? "light" : "dark";
+      applyTheme(next);
+      saveTheme(next);
+    });
+  });
+
+  // follow the device setting only while the visitor has not chosen a theme
+  const onSystemChange = e => { if (!savedTheme()) applyTheme(e.matches ? "dark" : "light"); };
+  if (mq) {
+    if (mq.addEventListener) mq.addEventListener("change", onSystemChange);
+    else if (mq.addListener) mq.addListener(onSystemChange);
+  }
+
+  /* ---------- side menu ---------- */
   const btn = d.getElementById("sc-menu-btn");
   const closeBtn = d.getElementById("sc-menu-x");
   const scrim = d.getElementById("sc-scrim");
@@ -33,6 +70,7 @@
     });
   }
 
+  /* ---------- about dialog ---------- */
   const about = d.getElementById("sc-about");
   if (about) {
     const openAbout = () => about.showModal();
