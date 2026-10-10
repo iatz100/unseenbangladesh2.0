@@ -7,7 +7,7 @@
 <link rel="icon" type="image/png" sizes="96x96" href="../assets/images/favicon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/icon-192.png">
 <title>প্ল্যানার | Unseen Bangladesh 2.0</title>
-<meta name="description" content="জেলা বেছে নিন, রুট ও আনুমানিক বাজেট দেখুন, তারপর ভ্রমণ পরিকল্পনা সেভ বা প্রিন্ট করুন।">
+<meta name="description" content="জেলা বেছে নিন, রুট ও আনুমানিক বাজেট দেখুন, তারপর ভ্রমণ পরিকল্পনা সেভ করুন।">
 <style>
 :root{--bg:#faf8f4;--surface:#fff;--text:#17201c;--muted:#6b716d;--line:#ebe6dc;--green:#0f6b4f;--green2:#e8f5ee;--shadow:0 8px 28px rgba(25,60,42,.07);--danger:#b42318}
 *{box-sizing:border-box}
@@ -15,10 +15,10 @@ body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Anek Bangla"
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 .app{max-width:1080px;margin:0 auto;padding:22px 16px 42px}
-.hero{margin-bottom:18px}
+.hero{margin-bottom:18px;text-align:center}
 .eyebrow{font-size:13px;font-weight:700;color:var(--green)}
 .hero h1{font-size:clamp(24px,4vw,34px);line-height:1.25;margin:4px 0 8px}
-.hero p{color:var(--muted);margin:0;max-width:700px}
+.hero p{color:var(--muted);margin:0 auto;max-width:700px}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.86fr);gap:18px;align-items:start}
 .stack{display:grid;gap:16px;min-width:0}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);min-width:0}
@@ -35,9 +35,6 @@ select:focus,input:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--gr
 .card.center{text-align:center}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .grid2 .field{margin-bottom:0}
-.destinations{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:7px;margin-top:9px;width:100%}
-.chip{white-space:nowrap;display:inline-flex;align-items:center;gap:4px;padding:4px 6px 4px 12px;border-radius:999px;background:var(--green2);color:var(--green);font-size:13px;font-weight:700}
-.chip button{border:0;background:transparent;color:inherit;padding:2px 5px;font-size:14px;line-height:1}
 .hint{font-size:12px;color:var(--muted);margin:5px 0 0}
 .toast{display:none;margin-bottom:12px;padding:10px 12px;background:var(--green2);color:var(--green);border-radius:10px;font-size:13px;font-weight:700}
 .section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
@@ -66,6 +63,11 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .cost-amount{font-weight:800;white-space:nowrap}
 .total{margin-top:12px;padding:14px;border-radius:14px;background:var(--green2);display:flex;justify-content:space-between;gap:10px;align-items:center}
 .total strong{font-size:22px;color:var(--green)}
+.sub-h{font-size:14px;margin:16px 0 8px}
+.bar-row{display:grid;grid-template-columns:110px 1fr 42px;gap:8px;align-items:center;font-size:13px;margin-bottom:7px}
+.bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green);border-radius:6px}
+.bar-row b{text-align:right;font-weight:700}
 .itinerary{display:grid;gap:10px}
 .day{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:12px;border:1px solid var(--line);border-radius:13px}
 .day-badge{background:var(--green2);color:var(--green);border-radius:10px;text-align:center;padding:8px 4px;font-weight:800;font-size:12px;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -133,6 +135,47 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   .tc-name{font-size:16px}
   .tc-actions{margin:14px 14px 16px;gap:8px}
 }
+/* ---- Route card ---- */
+select,input[type=number],input[type=date]{background-color:#fff;transition:border-color .2s ease,box-shadow .2s ease}
+select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230f6b4f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+select:hover,input:hover{border-color:#d6d0c2}
+.route-card .field label{font-size:12.5px;letter-spacing:.2px}
+.add-row{display:flex;justify-content:center;margin:14px 0 4px}
+.add-btn{min-width:110px;padding:6px 18px;border:0;border-radius:999px;background:var(--green);color:#fff;font:inherit;font-size:14px;font-weight:400;line-height:1.4;cursor:pointer;transition:transform .15s ease,box-shadow .2s ease}
+.add-btn:hover{box-shadow:0 8px 18px rgba(15,107,79,.25);transform:translateY(-1px)}
+.add-btn:active{transform:scale(.97)}
+.add-btn:focus-visible{outline:3px solid var(--green2);outline-offset:2px}
+.destinations{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;min-height:34px}
+.destinations:empty::before{content:"কোনো গন্তব্য যোগ হয়নি";font-size:13px;color:var(--muted);padding:6px 0}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:4px 4px 4px 4px;border-radius:999px;background:var(--green2);border:1px solid #cfe8da;color:var(--green);font-size:13.5px;font-weight:700;animation:chipIn .28s ease both}
+.chip-acts{display:inline-flex;gap:2px;margin-right:2px}
+.chip-acts button{width:26px;height:26px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.85);color:var(--green);font-size:11px;padding:0;cursor:pointer;transition:background .15s ease,box-shadow .15s ease}
+.chip-acts button:hover:not(:disabled){background:#fff;box-shadow:0 2px 6px rgba(15,107,79,.18)}
+.chip-acts button:disabled{opacity:.35;cursor:default}
+@keyframes chipIn{from{opacity:0;transform:translateY(-4px) scale(.95)}to{opacity:1;transform:none}}
+.route-meta{display:grid;gap:12px;margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+.route-meta .field{margin-bottom:0}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+.chip{padding:0 4px 0 0;gap:4px}
+.chip-name-btn{border:0;background:transparent;color:var(--green);font:inherit;font-size:13.5px;font-weight:700;line-height:1.4;padding:6px 12px 6px 14px;border-radius:999px;cursor:pointer;transition:background .15s ease,color .15s ease}
+.chip-name-btn:hover{background:#fbe4e1;color:var(--danger)}
+.chip-name-btn:focus-visible{outline:2px solid var(--green);outline-offset:1px}
+.chip{align-items:stretch;padding:0 4px 0 0}
+.chip-name-btn{display:flex;align-items:center}
+.chip-acts{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;margin:3px 3px 3px 0}
+.chip-acts button{width:22px;height:17px;padding:0;display:grid;place-items:center;border:0;border-radius:6px;background:rgba(255,255,255,.9);color:var(--green);font-size:9px;line-height:1;cursor:pointer;transition:background .15s ease,color .15s ease}
+.chip-acts button:hover:not(:disabled){background:#fff;box-shadow:0 2px 5px rgba(15,107,79,.18)}
+.chip-acts button:disabled{opacity:.35;cursor:default}
+.chip-acts .chip-close{font-size:13px;color:var(--danger)}
+.chip-acts .chip-close:hover{background:#fbe4e1}
+.chip-name-btn:hover{background:#d6eee2}
+.chip.open{background:var(--green);border-color:var(--green);color:#fff;padding:4px 6px;box-shadow:0 6px 16px rgba(15,107,79,.22);animation:chipIn .2s ease both}
+.chip.open .chip-acts{display:flex;flex-direction:row;align-items:center;gap:6px;margin:0}
+.chip.open .chip-acts button{width:32px;height:28px;padding:0;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.2);color:#fff;font-size:12px;line-height:1;cursor:pointer;transition:background .15s ease}
+.chip.open .chip-acts button:hover:not(:disabled){background:rgba(255,255,255,.36)}
+.chip.open .chip-acts button:disabled{opacity:.4;cursor:default}
+.chip.open .chip-acts .chip-close{background:#fff;color:var(--danger);font-size:16px}
+.chip.open .chip-acts .chip-close:hover{background:#fbe4e1}
 </style>
 <link rel="stylesheet" href="../assets/css/components.css">
 </head>
@@ -150,31 +193,35 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
   <div class="layout">
     <div class="stack">
-      <section class="card">
+      <section class="card route-card">
         <h2>যাত্রা ও গন্তব্য</h2>
-        <div class="field">
-          <label for="origin">শুরুর জেলা</label>
-          <select id="origin"></select>
-        </div>
-        <div class="field">
-          <label for="destination">গন্তব্য জেলা যোগ করুন</label>
-          <select id="destination"></select>
-          <button class="btn" id="addDest" type="button" style="width:100%;margin-top:8px">+ যোগ</button>
-          <div class="destinations" id="chips"></div>
-          <p class="hint">প্রথম জেলাটি বাছলেই যোগ হবে। এরপর জেলা বেছে নিচের "+ যোগ" বাটনে চাপুন। ▲ ▼ দিয়ে ক্রম বদলান।</p>
-        </div>
-        <div class="field">
-          <label for="startDate">শুরুর তারিখ (ঐচ্ছিক)</label>
-          <input id="startDate" type="date">
-        </div>
         <div class="grid2">
           <div class="field">
-            <label for="people">ভ্রমণকারীর সংখ্যা</label>
-            <input id="people" type="number" min="1" max="100" value="1">
+            <label for="origin">শুরুর জেলা</label>
+            <select id="origin"></select>
           </div>
           <div class="field">
-            <label for="days">ভ্রমণের দিন</label>
-            <input id="days" type="number" min="1" max="30" value="1">
+            <label for="destination">গন্তব্য জেলা যোগ করুন</label>
+            <select id="destination"></select>
+          </div>
+        </div>
+        <div class="add-row"><button class="btn add-btn" id="addDest" type="button">যোগ করুন</button></div>
+        <div class="destinations" id="chips"></div>
+        <p class="hint">প্রথম জেলা বাছলেই যোগ হবে।</p>
+        <div class="route-meta">
+          <div class="field">
+            <label for="startDate">শুরুর তারিখ (ঐচ্ছিক)</label>
+            <input id="startDate" type="date">
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="people">ভ্রমণকারীর সংখ্যা</label>
+              <input id="people" type="number" min="1" max="100" value="1">
+            </div>
+            <div class="field">
+              <label for="days">ভ্রমণের দিন</label>
+              <input id="days" type="number" min="1" max="30" value="1">
+            </div>
           </div>
         </div>
       </section>
@@ -189,16 +236,17 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
           <span class="map-pill r" id="mapDistance">মোট: —</span>
           <div class="map-brand">Unseen Bangladesh 2.0</div>
           <svg id="mapSvg" viewBox="0 0 600 828" role="img" aria-label="বাংলাদেশের মানচিত্রে ভ্রমণ রুট"></svg>
-          <div class="map-fallback" id="mapFallback" hidden>মানচিত্র লোড করা যায়নি। ইন্টারনেট সংযোগ দেখুন।</div>
+          <div class="map-fallback" id="mapFallback" hidden>মানচিত্র লোড করা যায়নি
+          </div>
         </div>
         <p class="map-note" id="mapNote"></p>
         <div class="btn-row no-print" style="margin-top:12px">
-          <button class="btn" id="googleMaps" type="button">Google Maps ↗</button>
+          <button class="btn" id="googleMaps" type="button">গুগল ম্যাপে খুলুন ↗</button>
         </div>
       </section>
 
       <section class="card">
-        <h2>দিনভিত্তিক ভ্রমণসূচি</h2>
+        <h2>দিন ভিত্তিক ভ্রমণ সূচি</h2>
         <div class="itinerary" id="itinerary"></div>
       </section>
     </div>
@@ -216,19 +264,24 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
       <section class="card">
         <h2>আনুমানিক বাজেট</h2>
-        <div class="field"><label for="rate">যাতায়াত ভাড়া (৳ প্রতি কিমি, জনপ্রতি)</label><input id="rate" type="number" min="0" step="0.5" value="3"></div>
-        <div class="field"><label for="food">জনপ্রতি দৈনিক খাবার (৳)</label><input id="food" type="number" min="0" value="500"></div>
-        <div class="field"><label for="hotel">প্রতি রুম প্রতি রাত (৳)</label><input id="hotel" type="number" min="0" value="1500"></div>
-        <div class="field"><label for="rooms">হোটেল রুম সংখ্যা</label><input id="rooms" type="number" min="0" value="1"></div>
-        <div class="field"><label for="tickets">টিকিট ও অন্যান্য খরচ (৳)</label><input id="tickets" type="number" min="0" value="1000"></div>
+        <div class="grid2">
+          <div class="field"><label for="rate">যাতায়াত ভাড়া (৳ প্রতি কিমি, জনপ্রতি)</label><input id="rate" type="number" min="0" step="0.5" value="3"></div>
+          <div class="field"><label for="local">স্থানীয় যাতায়াত (৳ জনপ্রতি দৈনিক)</label><input id="local" type="number" min="0" value="200"></div>
+          <div class="field"><label for="food">জনপ্রতি দৈনিক খাবার (৳)</label><input id="food" type="number" min="0" value="500"></div>
+          <div class="field"><label for="tickets">প্রবেশ ফি ও টিকিট (৳ জনপ্রতি)</label><input id="tickets" type="number" min="0" value="300"></div>
+        </div>
+        <div class="field"><label for="contPct">আকস্মিক খরচ (মোট খরচের %)</label><input id="contPct" type="number" min="0" max="50" value="5"></div>
         <div class="cost-row"><div class="cost-icon">🚌</div><div class="cost-name"><strong>যাতায়াত</strong><small id="transportFormula"></small></div><span class="cost-amount" id="transportOut">৳ ০</span></div>
+        <div class="cost-row"><div class="cost-icon">🛺</div><div class="cost-name"><strong>স্থানীয় যাতায়াত</strong><small id="localFormula"></small></div><span class="cost-amount" id="localOut">৳ ০</span></div>
         <div class="cost-row"><div class="cost-icon">🍲</div><div class="cost-name"><strong>খাবার</strong><small id="foodFormula"></small></div><span class="cost-amount" id="foodOut">৳ ০</span></div>
-        <div class="cost-row"><div class="cost-icon">🏨</div><div class="cost-name"><strong>হোটেল</strong><small id="hotelFormula"></small></div><span class="cost-amount" id="hotelOut">৳ ০</span></div>
-        <div class="cost-row"><div class="cost-icon">🎟️</div><div class="cost-name"><strong>টিকিট ও অন্যান্য</strong><small>পুরো দলের জন্য</small></div><span class="cost-amount" id="ticketsOut">৳ ০</span></div>
+        <div class="cost-row"><div class="cost-icon">🎟️</div><div class="cost-name"><strong>প্রবেশ ফি ও টিকিট</strong><small id="ticketsFormula"></small></div><span class="cost-amount" id="ticketsOut">৳ ০</span></div>
+        <div class="cost-row"><div class="cost-icon">🧾</div><div class="cost-name"><strong>আকস্মিক খরচ</strong><small id="contFormula"></small></div><span class="cost-amount" id="contOut">৳ ০</span></div>
         <div class="total">
-          <div><div>মোট আনুমানিক খরচ</div><div class="hint" id="perPerson"></div></div>
+          <div><div>মোট আনুমানিক খরচ</div><div class="hint" id="perPerson"></div><div class="hint" id="perDay"></div></div>
           <strong id="grandTotal">৳ ০</strong>
         </div>
+        <h3 class="sub-h">খরচের বিভাজন</h3>
+        <div id="breakdown"></div>
         <p class="hint">যাতায়াত খরচ মানচিত্রের মোট দূরত্ব অনুযায়ী হিসাব করা হয়েছে। সব খরচ আনুমানিক; প্রকৃত ভাড়া ও দাম ভিন্ন হতে পারে।</p>
       </section>
 
@@ -236,7 +289,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     </div>
   </div>
   <div class="bottom-actions">
-    <button class="btn-primary" id="previewBtn" type="button">Preview</button>
+    <button class="btn-primary" id="previewBtn" type="button">প্রিভিউ</button>
   </div>
 </main>
 
@@ -364,34 +417,52 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
   /* ---------- Selects & chips ---------- */
   function fillSelects() {
+    const DIV_ORDER = ["ঢাকা", "চট্টগ্রাম", "রাজশাহী", "খুলনা", "বরিশাল", "সিলেট", "রংপুর", "ময়মনসিংহ"];
     const groups = {};
     GEO.forEach(g => (groups[g[4]] = groups[g[4]] || []).push(g[1]));
-    const html = Object.entries(groups).map(([div, list]) =>
-      `<optgroup label="${div} বিভাগ">${list.map(n => `<option>${n}</option>`).join("")}</optgroup>`).join("");
+    const html = DIV_ORDER.filter(div => groups[div]).map(div =>
+      `<optgroup label="${div} বিভাগ">${groups[div].map(n => `<option>${n}</option>`).join("")}</optgroup>`).join("");
     $("origin").innerHTML = html;
     $("destination").innerHTML = `<option value="" disabled selected hidden>গন্তব্য জেলা বেছে নিন</option>` + html;
     $("origin").value = "ঢাকা";
     $("destination").value = "";
   }
 
+  let openChip = -1, openTimer = null;
+  function setOpen(i) {
+    clearTimeout(openTimer);
+    openChip = i;
+    if (i >= 0) openTimer = setTimeout(() => { openChip = -1; renderChips(); }, 2000);
+    renderChips();
+  }
   function renderChips() {
-    $("chips").innerHTML = destinations.map((d, i) => `
-      <span class="chip">${d}
-        <button type="button" aria-label="${d} উপরে সরান" data-act="up" data-i="${i}" ${i === 0 ? "disabled" : ""}>▲</button>
-        <button type="button" aria-label="${d} নিচে সরান" data-act="down" data-i="${i}" ${i === destinations.length - 1 ? "disabled" : ""}>▼</button>
-        <button type="button" aria-label="${d} সরান" data-act="rm" data-i="${i}">×</button>
-      </span>`).join("");
+    $("chips").innerHTML = destinations.map((d, i) => {
+      const last = destinations.length - 1;
+      const body = openChip === i
+        ? `<span class="chip-acts">
+             <button class="chip-up" type="button" aria-label="${d} উপরে সরান" data-act="up" data-i="${i}" ${i === 0 ? "disabled" : ""}>▲</button>
+             <button class="chip-close" type="button" aria-label="${d} সরান" data-act="rm" data-i="${i}">×</button>
+             <button class="chip-down" type="button" aria-label="${d} নিচে সরান" data-act="down" data-i="${i}" ${i === last ? "disabled" : ""}>▼</button>
+           </span>`
+        : `<button class="chip-name-btn" type="button" title="নিয়ন্ত্রণ দেখতে ক্লিক করুন" data-act="toggle" data-i="${i}">${d}</button>`;
+      return `<span class="chip${openChip === i ? " open" : ""}" data-i="${i}">${body}</span>`;
+    }).join("");
     $("routeCount").textContent = bnDigits(destinations.length) + " টি গন্তব্য";
   }
 
   $("chips").addEventListener("click", e => {
     const b = e.target.closest("[data-act]");
-    if (!b) return;
+    if (!b) {
+      // Clicking the open chip's empty area closes it
+      const chip = e.target.closest(".chip");
+      if (chip && +chip.dataset.i === openChip) setOpen(-1);
+      return;
+    }
     const i = +b.dataset.i, act = b.dataset.act;
-    if (act === "rm") destinations.splice(i, 1);
-    if (act === "up" && i > 0) [destinations[i - 1], destinations[i]] = [destinations[i], destinations[i - 1]];
-    if (act === "down" && i < destinations.length - 1) [destinations[i + 1], destinations[i]] = [destinations[i], destinations[i + 1]];
-    renderChips(); update();
+    if (act === "toggle") return setOpen(openChip === i ? -1 : i);
+    if (act === "rm") { destinations.splice(i, 1); setOpen(-1); return update(); }
+    if (act === "up" && i > 0) { [destinations[i - 1], destinations[i]] = [destinations[i], destinations[i - 1]]; setOpen(i - 1); return update(); }
+    if (act === "down" && i < destinations.length - 1) { [destinations[i + 1], destinations[i]] = [destinations[i], destinations[i + 1]]; setOpen(i + 1); return update(); }
   });
 
   /* ---------- Map (real district shapes from districts.json) ---------- */
@@ -421,12 +492,12 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     const approx = legs.some(l => !l.exact);
 
     $("mapOrigin").textContent = "শুরু: " + pts[0];
-    $("mapDistance").textContent = "মোট: " + bnDigits(total) + " km" + (approx ? " (আনুমানিক)" : "");
-    $("summaryDistance").textContent = bnDigits(total) + " km";
+    $("mapDistance").textContent = "মোট: " + bnDigits(total) + " কি.মি" + (approx ? " (আনুমানিক)" : "");
+    $("summaryDistance").textContent = bnDigits(total) + " কি.মি";
     $("summaryDistanceSub").textContent = approx ? "সরলরেখার দূরত্ব × ১.৩০" : "যাচাইকৃত সড়ক দূরত্ব";
     $("summaryPlaces").textContent = bnDigits(destinations.length) + " টি";
     $("mapNote").textContent = destinations.length
-      ? "দূরত্ব আনুমানিক। নির্ভুল সড়ক দূরত্ব ও ভাড়ার জন্য Google Maps দেখুন।"
+      ? "দূরত্ব আনুমানিক। নির্ভুল সড়ক দূরত্ব ও ভাড়ার জন্য গুগল ম্যাপ দেখুন।"
       : "গন্তব্য যোগ করলে রুট মানচিত্রে দেখাবে।";
 
     if (!mapReady) { $("mapFallback").hidden = false; return; }
@@ -453,7 +524,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
       const a = xy[i], b = xy[i + 1];
       if (!a || !b) return "";
       const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-      return `<text x="${mx}" y="${my}" font-size="13" font-weight="800" fill="#0f6b4f" stroke="#fff" stroke-width="4" paint-order="stroke">${bnDigits(l.km)} km</text>`;
+      return `<text x="${mx}" y="${my}" font-size="13" font-weight="800" fill="#0f6b4f" stroke="#fff" stroke-width="4" paint-order="stroke">${bnDigits(l.km)} কি.মি</text>`;
     }).join("");
 
     layer.innerHTML = `<path d="${line}" fill="none" stroke="#0f6b4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 0"/>${dots}${labels}${names}`;
@@ -506,29 +577,46 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
   /* ---------- Budget ---------- */
   function budget() {
-    const people = peopleN(), days = daysN(), nights = Math.max(0, days - 1);
+    const people = peopleN(), days = daysN();
     const v = id => Math.max(0, +$(id).value || 0);
     const km = legList(points()).reduce((s, l) => s + l.km, 0);
-    const rate = Math.max(0, +$("rate").value || 0);
+    const rate = v("rate"), localRate = v("local"), foodRate = v("food"), ticketRate = v("tickets"), contPct = v("contPct");
     const transport = Math.round(km * rate * people);
-    const food = v("food") * people * days;
-    const rooms = v("rooms");
-    const hotel = v("hotel") * rooms * nights;
-    const tickets = v("tickets");
-    return { people, days, nights, rooms, km, rate, transport, food, hotel, tickets, total: transport + food + hotel + tickets };
+    const local = Math.round(localRate * people * days);
+    const food = Math.round(foodRate * people * days);
+    const tickets = Math.round(ticketRate * people);
+    const subtotal = transport + local + food + tickets;
+    const contingency = Math.round(subtotal * contPct / 100);
+    const total = subtotal + contingency;
+    return { people, days, km, rate, localRate, foodRate, ticketRate, contPct,
+             transport, local, food, tickets, contingency, total };
   }
 
   function updateBudget() {
     const b = budget();
+    const pct = x => (b.total > 0 ? Math.round(x / b.total * 100) : 0);
     $("transportOut").textContent = money(b.transport);
-    $("transportFormula").textContent = `${bnDigits(Math.round(b.km))} km × ৳${bnDigits(b.rate)} × ${bnDigits(b.people)} জন`;
+    $("localOut").textContent = money(b.local);
     $("foodOut").textContent = money(b.food);
-    $("hotelOut").textContent = money(b.hotel);
     $("ticketsOut").textContent = money(b.tickets);
+    $("contOut").textContent = money(b.contingency);
+    $("transportFormula").textContent = `${bnDigits(Math.round(b.km))} কি.মি × ৳${bnDigits(b.rate)} × ${bnDigits(b.people)} জন`;
+    $("localFormula").textContent = `${bnDigits(b.people)} জন × ${bnDigits(b.days)} দিন × ৳${bnDigits(b.localRate)}`;
+    $("foodFormula").textContent = `${bnDigits(b.people)} জন × ${bnDigits(b.days)} দিন × ৳${bnDigits(b.foodRate)}`;
+    $("ticketsFormula").textContent = `${bnDigits(b.people)} জন × ৳${bnDigits(b.ticketRate)}`;
+    $("contFormula").textContent = `মোট খরচের ${bnDigits(b.contPct)}%`;
     $("grandTotal").textContent = money(b.total);
     $("perPerson").textContent = "জনপ্রতি " + money(b.total / b.people);
-    $("foodFormula").textContent = `${bnDigits(b.people)} জন × ${bnDigits(b.days)} দিন`;
-    $("hotelFormula").textContent = `${bnDigits(b.rooms)} রুম × ${bnDigits(b.nights)} রাত`;
+    $("perDay").textContent = "দৈনিক গড় " + money(b.total / b.days);
+
+    const items = [
+      ["যাতায়াত", b.transport], ["স্থানীয় যাতায়াত", b.local], ["খাবার", b.food],
+      ["প্রবেশ ফি ও টিকিট", b.tickets], ["আকস্মিক খরচ", b.contingency]
+    ];
+    $("breakdown").innerHTML = items.map(([name, amt]) => {
+      const p = pct(amt);
+      return `<div class="bar-row"><span>${name}</span><div class="bar"><i style="width:${p}%"></i></div><b>${bnDigits(p)}%</b></div>`;
+    }).join("");
     $("summaryDays").textContent = bnDigits(b.days) + " দিন";
     $("summaryPeople").textContent = bnDigits(b.people) + " জন";
   }
@@ -800,7 +888,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     destinations = destinations.filter(d => d !== $("origin").value);
     renderChips(); update();
   };
-  ["people", "days", "startDate", "rate", "food", "hotel", "rooms", "tickets"]
+  ["people", "days", "startDate", "rate", "local", "food", "tickets", "contPct"]
     .forEach(id => $(id).addEventListener("input", update));
   $("googleMaps").onclick = () => {
     const url = mapsUrl(points());
