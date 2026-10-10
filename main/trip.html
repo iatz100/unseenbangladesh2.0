@@ -32,18 +32,16 @@ select:focus,input:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--gr
 .btn-row{display:flex;gap:8px;flex-wrap:wrap}
 .btn-row .btn{flex:1 1 auto}
 .btn.danger{color:var(--danger)}
-.row-inline{display:flex;gap:8px}
-.row-inline select{flex:1}
+.card.center{text-align:center}
 .destinations{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
 .chip{display:inline-flex;align-items:center;gap:4px;padding:4px 6px 4px 12px;border-radius:999px;background:var(--green2);color:var(--green);font-size:13px;font-weight:700}
 .chip button{border:0;background:transparent;color:inherit;padding:2px 5px;font-size:14px;line-height:1}
 .hint{font-size:12px;color:var(--muted);margin:5px 0 0}
-.empty{color:var(--muted);font-size:13px;margin:0}
 .toast{display:none;margin-bottom:12px;padding:10px 12px;background:var(--green2);color:var(--green);border-radius:10px;font-size:13px;font-weight:700}
 .section-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .section-heading h2{margin-bottom:0}
-.map{position:relative;border-radius:15px;overflow:hidden;border:1px solid var(--line);background:#eaf3ed}
-#mapSvg{width:100%;height:auto;max-height:460px;display:block}
+.map{position:relative;aspect-ratio:3/4;border-radius:15px;overflow:hidden;border:1px solid var(--line);background:#eaf3ed}
+#mapSvg{width:100%;height:100%;display:block}
 path.dist{fill:#dcebe2;stroke:#9fc3ad;stroke-width:.6}
 path.dist.on{fill:#9ed4b8;stroke:#137653;stroke-width:1.2}
 path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
@@ -72,22 +70,12 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .day h3{font-size:15px;margin:0 0 3px}
 .day p{font-size:13px;color:var(--muted);margin:0}
 .day .places{margin-top:4px;color:var(--text)}
-.checklist{display:grid;gap:9px}
-.checklist label{display:flex;gap:9px;align-items:center;font-size:14px}
-.checklist input{accent-color:var(--green);width:18px;height:18px}
-.saved-list{display:grid;gap:8px}
-.saved-item{border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;gap:8px;align-items:center;justify-content:space-between}
-.saved-item small{display:block;color:var(--muted);font-size:12px}
-.saved-item .btn{padding:6px 10px;font-size:13px}
-.footer-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.footer-actions button{padding:10px 6px;font-size:13px}
 @media(max-width:780px){
   .layout{grid-template-columns:minmax(0,1fr)}
   .app{padding:16px 12px 30px}
   .card{padding:15px}
 }
 @media(max-width:390px){
-  .footer-actions{grid-template-columns:1fr}
   .stats{gap:8px}
   .stat{padding:10px}
   .stat strong{font-size:18px}
@@ -95,12 +83,11 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 @media print{
   body{background:#fff;color:#111}
   .app{max-width:none;padding:0}
-  .no-print,.btn-row,.footer-actions,.chip button{display:none!important}
+  .no-print,.btn-row,.chip button{display:none!important}
   .layout{display:block}
   .stack{display:block}
   .card{box-shadow:none;break-inside:avoid;margin-bottom:12px;border-color:#ccc}
   .map{break-inside:avoid}
-  #mapSvg{max-height:300px}
   .hero p{color:#444}
 }
 </style>
@@ -159,12 +146,10 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
         </div>
         <div class="field">
           <label for="destination">গন্তব্য জেলা যোগ করুন</label>
-          <div class="row-inline">
-            <select id="destination"></select>
-            <button class="btn" id="addDest" type="button">+ যোগ</button>
-          </div>
+          <select id="destination"></select>
+          <button class="btn" id="addDest" type="button" style="width:100%;margin-top:8px">+ যোগ</button>
           <div class="destinations" id="chips"></div>
-          <p class="hint">একাধিক গন্তব্য যোগ করতে পারেন। ▲ ▼ দিয়ে ক্রম বদলান।</p>
+          <p class="hint">প্রথম জেলাটি বাছলেই যোগ হবে। এরপর জেলা বেছে নিচের "+ যোগ" বাটনে চাপুন। ▲ ▼ দিয়ে ক্রম বদলান।</p>
         </div>
         <div class="field">
           <label for="startDate">শুরুর তারিখ (ঐচ্ছিক)</label>
@@ -172,13 +157,12 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
         </div>
         <div class="field">
           <label for="people">ভ্রমণকারীর সংখ্যা</label>
-          <input id="people" type="number" min="1" max="100" value="2">
+          <input id="people" type="number" min="1" max="100" value="1">
         </div>
         <div class="field">
           <label for="days">ভ্রমণের দিন</label>
-          <input id="days" type="number" min="1" max="30" value="3">
+          <input id="days" type="number" min="1" max="30" value="1">
         </div>
-        <button class="btn-primary" id="generate" type="button">ভ্রমণ পরিকল্পনা আপডেট করুন</button>
       </section>
 
       <section class="card">
@@ -205,7 +189,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     </div>
 
     <div class="stack">
-      <section class="card">
+      <section class="card center">
         <h2>📊 ভ্রমণের সারসংক্ষেপ</h2>
         <div class="stats">
           <div class="stat"><span class="label">মোট দূরত্ব</span><strong id="summaryDistance">—</strong><span class="sub" id="summaryDistanceSub">আনুমানিক</span></div>
@@ -217,12 +201,12 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
       <section class="card">
         <h2>💰 আনুমানিক বাজেট</h2>
-        <div class="field"><label for="transport">মোট যাতায়াত খরচ (৳)</label><input id="transport" type="number" min="0" value="3000"></div>
+        <div class="field"><label for="rate">যাতায়াত ভাড়া (৳ প্রতি কিমি, জনপ্রতি)</label><input id="rate" type="number" min="0" step="0.5" value="2.5"></div>
         <div class="field"><label for="food">জনপ্রতি দৈনিক খাবার (৳)</label><input id="food" type="number" min="0" value="500"></div>
         <div class="field"><label for="hotel">প্রতি রুম প্রতি রাত (৳)</label><input id="hotel" type="number" min="0" value="1500"></div>
         <div class="field"><label for="rooms">হোটেল রুম সংখ্যা</label><input id="rooms" type="number" min="0" value="1"></div>
         <div class="field"><label for="tickets">টিকিট ও অন্যান্য খরচ (৳)</label><input id="tickets" type="number" min="0" value="1000"></div>
-        <div class="cost-row"><div class="cost-icon">🚌</div><div class="cost-name"><strong>যাতায়াত</strong><small>Transport</small></div><span class="cost-amount" id="transportOut">৳ ০</span></div>
+        <div class="cost-row"><div class="cost-icon">🚌</div><div class="cost-name"><strong>যাতায়াত</strong><small id="transportFormula"></small></div><span class="cost-amount" id="transportOut">৳ ০</span></div>
         <div class="cost-row"><div class="cost-icon">🍲</div><div class="cost-name"><strong>খাবার</strong><small id="foodFormula"></small></div><span class="cost-amount" id="foodOut">৳ ০</span></div>
         <div class="cost-row"><div class="cost-icon">🏨</div><div class="cost-name"><strong>হোটেল</strong><small id="hotelFormula"></small></div><span class="cost-amount" id="hotelOut">৳ ০</span></div>
         <div class="cost-row"><div class="cost-icon">🎟️</div><div class="cost-name"><strong>টিকিট ও অন্যান্য</strong><small>পুরো দলের জন্য</small></div><span class="cost-amount" id="ticketsOut">৳ ০</span></div>
@@ -230,37 +214,10 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
           <div><div>মোট আনুমানিক খরচ</div><div class="hint" id="perPerson"></div></div>
           <strong id="grandTotal">৳ ০</strong>
         </div>
-        <p class="hint">খরচগুলো আপনার দেওয়া অনুমান; প্রকৃত ভাড়া ও দাম ভিন্ন হতে পারে।</p>
+        <p class="hint">যাতায়াত খরচ মানচিত্রের মোট দূরত্ব অনুযায়ী হিসাব করা হয়েছে। সব খরচ আনুমানিক; প্রকৃত ভাড়া ও দাম ভিন্ন হতে পারে।</p>
       </section>
 
-      <section class="card">
-        <h2>🎒 ভ্রমণ চেকলিস্ট</h2>
-        <div class="checklist">
-          <label><input type="checkbox"> পরিচয়পত্র ও প্রয়োজনীয় কাগজপত্র</label>
-          <label><input type="checkbox"> হোটেল ও যাতায়াত বুকিং</label>
-          <label><input type="checkbox"> ফোন, চার্জার ও পাওয়ার ব্যাংক</label>
-          <label><input type="checkbox"> প্রয়োজনীয় ওষুধ ও ব্যক্তিগত সামগ্রী</label>
-          <label><input type="checkbox"> পর্যাপ্ত টাকা ও জরুরি যোগাযোগ</label>
-        </div>
-      </section>
 
-      <section class="card">
-        <h2>💾 সেভ করা প্ল্যান</h2>
-        <div class="btn-row no-print" style="margin-bottom:12px">
-          <button class="btn-primary" id="savePlan" type="button">＋ প্ল্যান সেভ করুন</button>
-        </div>
-        <div class="saved-list" id="savedList"></div>
-      </section>
-
-      <section class="card no-print">
-        <h2>প্ল্যান ব্যবস্থাপনা</h2>
-        <div class="footer-actions">
-          <button class="btn" id="printBtn" type="button">🖨️ প্রিন্ট / PDF</button>
-          <button class="btn" id="resetBtn" type="button">↻ রিসেট</button>
-          <button class="btn danger" id="deleteAll" type="button">সব সেভ মুছুন</button>
-        </div>
-        <p class="hint">PDF সেভ করতে প্রিন্ট ডায়ালগে "Save as PDF" বেছে নিন।</p>
-      </section>
     </div>
   </div>
 </main>
@@ -299,7 +256,6 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 (() => {
   const $ = id => document.getElementById(id);
   const NS = "http://www.w3.org/2000/svg";
-  const STORE_KEY = "ub-trip-plans";
 
   /* ---------- Data ----------
      [district key matching assets/data/districts.json, Bengali name, lat, lng, division]
@@ -374,10 +330,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   }
 
   /* ---------- State ---------- */
-  let destinations = ["চট্টগ্রাম", "কক্সবাজার"];
-  let saved = [];
-  try { saved = JSON.parse(localStorage.getItem(STORE_KEY) || "[]"); } catch (e) { saved = []; }
-  let editing = null;
+  let destinations = [];
 
   const points = () => [$("origin").value, ...destinations];
   const legList = pts => pts.slice(1).map((b, i) => ({ from: pts[i], to: b, ...legKm(pts[i], b) }));
@@ -391,9 +344,9 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     const html = Object.entries(groups).map(([div, list]) =>
       `<optgroup label="${div} বিভাগ">${list.map(n => `<option>${n}</option>`).join("")}</optgroup>`).join("");
     $("origin").innerHTML = html;
-    $("destination").innerHTML = html;
+    $("destination").innerHTML = `<option value="" disabled selected hidden>গন্তব্য জেলা বেছে নিন</option>` + html;
     $("origin").value = "ঢাকা";
-    $("destination").value = "চট্টগ্রাম";
+    $("destination").value = "";
   }
 
   function renderChips() {
@@ -532,17 +485,20 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   function budget() {
     const people = peopleN(), days = daysN(), nights = Math.max(0, days - 1);
     const v = id => Math.max(0, +$(id).value || 0);
-    const transport = v("transport");
+    const km = legList(points()).reduce((s, l) => s + l.km, 0);
+    const rate = Math.max(0, +$("rate").value || 0);
+    const transport = Math.round(km * rate * people);
     const food = v("food") * people * days;
     const rooms = v("rooms");
     const hotel = v("hotel") * rooms * nights;
     const tickets = v("tickets");
-    return { people, days, nights, rooms, transport, food, hotel, tickets, total: transport + food + hotel + tickets };
+    return { people, days, nights, rooms, km, rate, transport, food, hotel, tickets, total: transport + food + hotel + tickets };
   }
 
   function updateBudget() {
     const b = budget();
     $("transportOut").textContent = money(b.transport);
+    $("transportFormula").textContent = `${bnDigits(Math.round(b.km))} km × ৳${bnDigits(b.rate)} × ${bnDigits(b.people)} জন`;
     $("foodOut").textContent = money(b.food);
     $("hotelOut").textContent = money(b.hotel);
     $("ticketsOut").textContent = money(b.tickets);
@@ -566,108 +522,33 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     return u;
   }
 
-  /* ---------- Saved plans ---------- */
-  function persist() {
-    try { localStorage.setItem(STORE_KEY, JSON.stringify(saved)); return true; }
-    catch (e) { toast("এই ব্রাউজারে সেভ করা যাচ্ছে না।"); return false; }
-  }
-  function getPlan() {
-    const b = budget();
-    return {
-      title: points().join(" → "),
-      origin: $("origin").value,
-      destinations: [...destinations],
-      startDate: $("startDate").value,
-      people: b.people, days: b.days,
-      transport: +$("transport").value || 0, food: +$("food").value || 0,
-      hotel: +$("hotel").value || 0, rooms: +$("rooms").value || 0, tickets: +$("tickets").value || 0,
-      total: b.total, savedAt: new Date().toISOString()
-    };
-  }
-  function applyPlan(p) {
-    $("origin").value = p.origin;
-    destinations = [...p.destinations];
-    $("startDate").value = p.startDate || "";
-    $("people").value = p.people; $("days").value = p.days;
-    $("transport").value = p.transport; $("food").value = p.food; $("hotel").value = p.hotel;
-    $("rooms").value = p.rooms; $("tickets").value = p.tickets;
-    renderChips(); update();
-  }
-  function renderSaved() {
-    const list = $("savedList");
-    if (!saved.length) { list.innerHTML = `<p class="empty">এখনো কোনো প্ল্যান সেভ করা হয়নি।</p>`; return; }
-    list.innerHTML = saved.map((p, i) => `
-      <div class="saved-item">
-        <div><strong>${p.title}</strong>
-          <small>${bnDigits(p.days)} দিন · ${bnDigits(p.destinations.length)} গন্তব্য · ${money(p.total)}</small></div>
-        <div class="btn-row">
-          <button class="btn" data-load="${i}" type="button">Edit</button>
-          <button class="btn danger" data-del="${i}" type="button" aria-label="মুছুন">×</button>
-        </div>
-      </div>`).join("");
-  }
-  $("savedList").addEventListener("click", e => {
-    const L = e.target.closest("[data-load]"), D = e.target.closest("[data-del]");
-    if (L) {
-      const i = +L.dataset.load;
-      applyPlan(saved[i]); editing = i;
-      toast("প্ল্যান লোড হয়েছে। পরিবর্তন করে আবার সেভ করুন।");
-    }
-    if (D) {
-      const i = +D.dataset.del;
-      saved.splice(i, 1);
-      if (editing === i) editing = null; else if (editing > i) editing--;
-      persist(); renderSaved();
-    }
-  });
-
   /* ---------- Events ---------- */
-  $("addDest").onclick = () => {
+  function addSelected() {
     const d = $("destination").value;
+    if (!d) return toast("প্রথমে একটি গন্তব্য জেলা বেছে নিন।");
     if (d === $("origin").value) return toast("শুরুর জেলাকে গন্তব্য হিসেবে যোগ করা যাবে না।");
     if (destinations.includes(d)) return toast("এই জেলা ইতিমধ্যে যোগ করা আছে।");
     destinations.push(d); renderChips(); update();
-  };
+  }
+  $("addDest").onclick = addSelected;
+  // First pick adds automatically; later picks need the "+ যোগ" button.
+  $("destination").onchange = () => { if (destinations.length === 0) addSelected(); };
   $("origin").onchange = () => {
     destinations = destinations.filter(d => d !== $("origin").value);
     renderChips(); update();
   };
-  ["people", "days", "startDate", "transport", "food", "hotel", "rooms", "tickets"]
+  ["people", "days", "startDate", "rate", "food", "hotel", "rooms", "tickets"]
     .forEach(id => $(id).addEventListener("input", update));
-  $("generate").onclick = () => { update(); toast("আপনার পরিকল্পনা আপডেট করা হয়েছে।"); };
   $("googleMaps").onclick = () => {
     const url = mapsUrl(points());
     if (!url) return toast("অন্তত একটি গন্তব্য যোগ করুন।");
     window.open(url, "_blank", "noopener");
-  };
-  $("savePlan").onclick = () => {
-    if (!destinations.length) return toast("সেভ করার আগে অন্তত একটি গন্তব্য যোগ করুন।");
-    const p = getPlan();
-    if (editing !== null && saved[editing]) { saved[editing] = p; editing = null; }
-    else saved.unshift(p);
-    if (persist()) { renderSaved(); toast("প্ল্যান এই ব্রাউজারে সেভ হয়েছে।"); }
-  };
-  $("printBtn").onclick = () => window.print();
-  $("resetBtn").onclick = () => {
-    destinations = ["চট্টগ্রাম", "কক্সবাজার"];
-    $("origin").value = "ঢাকা"; $("startDate").value = "";
-    $("people").value = 2; $("days").value = 3;
-    $("transport").value = 3000; $("food").value = 500; $("hotel").value = 1500;
-    $("rooms").value = 1; $("tickets").value = 1000;
-    renderChips(); update(); toast("ফর্ম রিসেট হয়েছে।");
-  };
-  $("deleteAll").onclick = () => {
-    if (!confirm("সব সেভ করা প্ল্যান মুছে ফেলবেন?")) return;
-    saved = []; editing = null;
-    try { localStorage.removeItem(STORE_KEY); } catch (e) {}
-    renderSaved(); toast("সব সেভ করা প্ল্যান মুছে ফেলা হয়েছে।");
   };
 
   /* ---------- Boot ---------- */
   fillSelects();
   renderChips();
   update();
-  renderSaved();
 
   const load = url => fetch(url).then(r => { if (!r.ok) throw new Error(url); return r.json(); });
   Promise.allSettled([load("../assets/data/districts.json"), load("../assets/data/tourist.json")])
