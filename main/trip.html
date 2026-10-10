@@ -79,14 +79,15 @@ input[type=checkbox]{accent-color:var(--green);width:16px;height:16px;margin:0}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* ---------- Map ---------- */
-.map{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg,#eef6f1,#e2efe7)}
-#mapSvg{width:100%;height:auto;max-height:440px;display:block}
+.map{position:relative;aspect-ratio:3/4;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(180deg,#eef6f1,#e2efe7)}
+#mapSvg{position:absolute;inset:0;width:100%;height:100%;display:block}
 path.dist{fill:#d6e9de;stroke:#a5c8b3;stroke-width:.6}
 path.dist.on{fill:#9fd6bb;stroke:#137a5c;stroke-width:1.2}
 path.dist.origin{fill:#0d5f47;stroke:#083b2c;stroke-width:1.2}
-.map-pill{position:absolute;top:12px;background:rgba(255,255,255,.95);color:#174b35;padding:5px 10px;border-radius:9px;font-size:12px;font-weight:700;box-shadow:0 3px 12px #153b2a22}
+.map-pill{position:absolute;top:12px;z-index:2;background:rgba(255,255,255,.95);color:#174b35;padding:5px 10px;border-radius:9px;font-size:12px;font-weight:700;box-shadow:0 3px 12px #153b2a22}
 .map-pill.l{left:12px}.map-pill.r{right:12px}
-.map-fallback{min-height:200px;display:grid;place-items:center;font-size:24px;font-weight:800;color:var(--green)}
+.map-fallback{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);letter-spacing:.03em}
+.map-fallback[hidden]{display:none}
 .map-brand{font-size:11px;color:var(--muted);text-align:center;margin:8px 0 0;letter-spacing:.03em}
 .map-note{font-size:12px;color:var(--muted);margin:8px 0 0}
 
@@ -108,41 +109,36 @@ path.dist.origin{fill:#0d5f47;stroke:#083b2c;stroke-width:1.2}
 .total .hint{margin:0}
 .opt{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;margin:4px 0 12px;cursor:pointer}
 
-/* ---------- Itinerary (timeline) ---------- */
-.tl{position:relative;display:grid;gap:12px}
-.tl-item{position:relative;display:grid;grid-template-columns:92px 1fr;gap:14px}
-.tl-item:not(:last-child)::before{content:"";position:absolute;left:45px;top:58px;bottom:-14px;width:2px;background:repeating-linear-gradient(to bottom,#bcd9c8 0 5px,transparent 5px 9px)}
-.tl-marker{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center}
-.tl-day{width:90px;padding:7px 4px;border-radius:14px;background:linear-gradient(135deg,var(--green),var(--green-2));color:#fff;font-weight:800;font-size:13.5px;box-shadow:0 6px 14px rgba(13,95,71,.2)}
-.tl-date{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.3}
-.tl-body{border:1px solid var(--line);border-radius:16px;padding:12px 14px;background:linear-gradient(180deg,#fff,#fcfbf7)}
-.tl-body h3{font-size:15px;margin:0 0 4px;font-weight:800}
-.tl-desc{font-size:13px;color:var(--muted);margin:0}
-.tl-km{display:inline-block;margin-bottom:6px;padding:2px 9px;border-radius:99px;background:var(--gold-soft);color:#8a6418;font-size:12px;font-weight:700;border:1px solid #f1e2b8}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.tag{font-size:12px;padding:3px 9px;border-radius:99px;background:var(--green-soft);color:var(--green);font-weight:600}
+/* ---------- Itinerary (serial day cards) ---------- */
+.itinerary{display:grid;gap:10px}
+.day{display:grid;grid-template-columns:86px 1fr;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.day-badge{background:var(--green-soft);color:var(--green);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8px 4px;font-weight:800;font-size:14px;line-height:1.3}
+.day-badge small{font-weight:600;font-size:11px;color:var(--muted);margin-top:2px}
+.day h3{font-size:15px;margin:0 0 3px;font-weight:800}
+.day p{font-size:13px;color:var(--muted);margin:0}
+.day .places{margin-top:4px;color:var(--text)}
 
 /* ---------- Checklist ---------- */
 .checklist{display:grid;gap:8px}
 .checklist label{display:flex;gap:10px;align-items:center;font-size:14px;cursor:pointer}
 
-/* ---------- Trip card (preview, PDF, PNG) ---------- */
-.tc{width:100%;max-width:420px;margin:0 auto;background:#fff;border-radius:22px;overflow:hidden;border:1px solid #e3ddcd;box-shadow:0 18px 44px rgba(13,95,71,.16);text-align:center}
-.tc-hero{position:relative;height:150px;overflow:hidden;background:#0d5f47}
+/* ---------- Trip card (3:4, plain) ---------- */
+.tc{width:100%;max-width:380px;aspect-ratio:3/4;margin:0 auto;display:flex;flex-direction:column;background:#fff;border:1px solid #e3ddcd;border-radius:18px;overflow:hidden;text-align:center}
+.tc-hero{position:relative;flex:0 0 28%;overflow:hidden;background:#0d5f47}
 .tc-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.tc-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,40,30,.25),rgba(6,40,30,.78))}
-.tc-hero-in{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;padding:16px 18px;color:#fff}
-.tc-title{font-size:23px;font-weight:800;line-height:1.25}
-.tc-gold{width:46px;height:3px;border-radius:3px;background:#d9a945;margin:8px auto 0}
-.tc-route{padding:14px 18px 6px;font-size:14.5px;font-weight:700;color:var(--green)}
-.tc-stats{display:grid;grid-template-columns:repeat(4,1fr);margin:6px 14px 10px;border:1px solid #e6e1d5;border-radius:14px;overflow:hidden}
-.tc-stat{padding:10px 4px;background:#fbfaf6}
+.tc-hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.35)}
+.tc-hero-in{position:absolute;inset:0;z-index:1;display:flex;align-items:center;justify-content:center;color:#fff;padding:10px}
+.tc-title{font-size:22px;font-weight:800;line-height:1.25}
+.tc-gold{display:none}
+.tc-route{flex:none;padding:12px 14px 4px;font-size:14px;font-weight:700;color:var(--green)}
+.tc-stats{flex:none;display:grid;grid-template-columns:repeat(4,1fr);margin:6px 12px;border:1px solid #e6e1d5;border-radius:12px;overflow:hidden}
+.tc-stat{padding:8px 2px}
 .tc-stat+.tc-stat{border-left:1px solid #e6e1d5}
-.tc-stat b{display:block;font-size:14px;color:var(--green);line-height:1.3}
-.tc-stat span{font-size:11px;color:var(--muted)}
-.tc-map{padding:0 14px}
-.tc-map img{display:block;width:100%;max-height:300px;object-fit:contain}
-.tc-brand{padding:12px 14px 14px;font-size:11.5px;color:var(--muted);letter-spacing:.04em}
+.tc-stat b{display:block;font-size:13px;color:var(--green);line-height:1.3}
+.tc-stat span{font-size:10.5px;color:var(--muted)}
+.tc-map{flex:1;min-height:0;padding:4px 12px;display:flex}
+.tc-map img{width:100%;height:100%;object-fit:contain;display:block}
+.tc-brand{flex:none;padding:6px 12px 12px;font-size:11px;color:var(--muted);letter-spacing:.03em}
 
 /* ---------- Card dialog ---------- */
 .cd{border:0;border-radius:24px;padding:22px 18px 18px;width:min(480px,calc(100% - 24px));background:#f6f4ee;box-shadow:0 30px 80px rgba(0,0,0,.35)}
@@ -153,7 +149,7 @@ path.dist.origin{fill:#0d5f47;stroke:#083b2c;stroke-width:1.2}
 .cd-x:hover{color:var(--green);border-color:var(--green-2)}
 .cd-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
 #cardSlot{display:block}
-.offscreen{position:fixed;left:-10000px;top:0;width:420px;pointer-events:none}
+.offscreen{position:fixed;left:-10000px;top:0;width:380px;pointer-events:none}
 
 @media(max-width:780px){
   .layout{grid-template-columns:minmax(0,1fr)}
@@ -165,12 +161,7 @@ path.dist.origin{fill:#0d5f47;stroke:#083b2c;stroke-width:1.2}
   .stats{gap:8px}
   .stat{padding:10px}
   .stat strong{font-size:17px}
-  .tl-item{grid-template-columns:80px 1fr;gap:10px}
-  .tl-item:not(:last-child)::before{left:39px}
-  .tl-day{width:76px}
-  .tc-stats{grid-template-columns:repeat(2,1fr)}
-  .tc-stat:nth-child(3){border-left:0}
-  .tc-stat:nth-child(n+3){border-top:1px solid #e6e1d5}
+  .day{grid-template-columns:76px 1fr}
 }
 @media print{
   body{background:#fff}
@@ -271,7 +262,7 @@ path.dist.origin{fill:#0d5f47;stroke:#083b2c;stroke-width:1.2}
 
       <section class="card">
         <h2 class="center">🗓️ দিনভিত্তিক ভ্রমণসূচি</h2>
-        <div class="tl" id="itinerary"></div>
+        <div class="itinerary" id="itinerary"></div>
       </section>
     </div>
 
@@ -642,18 +633,13 @@ path.dist.origin{fill:#0d5f47;stroke:#083b2c;stroke-width:1.2}
   }
 
   function renderItinerary(days) {
-    if (!days.length) return;
     $("itinerary").innerHTML = days.map(d => `
-      <div class="tl-item">
-        <div class="tl-marker">
-          <div class="tl-day">দিন ${bnDigits(d.n)}</div>
-          ${d.date ? `<div class="tl-date">${fmtDate(d.date)}</div>` : ""}
-        </div>
-        <div class="tl-body">
+      <div class="day">
+        <div class="day-badge">দিন ${bnDigits(d.n)}${d.date ? `<small>${fmtDate(d.date)}</small>` : ""}</div>
+        <div>
           <h3>${d.title}</h3>
-          ${d.km ? `<span class="tl-km">${bnDigits(d.km.km)} km${d.km.exact ? "" : " · আনুমানিক"}</span>` : ""}
-          <p class="tl-desc">${d.desc}</p>
-          ${d.places.length ? `<div class="tags">${d.places.map(p => `<span class="tag">${p}</span>`).join("")}</div>` : ""}
+          <p>${d.desc}${d.km ? ` · ${bnDigits(d.km.km)} km${d.km.exact ? "" : " (আনুমানিক)"}` : ""}</p>
+          ${d.places.length ? `<p class="places">দর্শনীয়: ${d.places.join("، ")}</p>` : ""}
         </div>
       </div>`).join("");
   }
