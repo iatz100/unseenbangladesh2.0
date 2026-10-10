@@ -296,7 +296,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
       </div>
     </div>
     <div class="tc-actions">
-      <button class="tc-save" id="saveBtn" type="button">Save</button>
+      <button class="tc-save" id="dlBtn" type="button">ডাউনলোড</button>
       <button class="tc-share" id="shareBtn" type="button">শেয়ার করুন</button>
     </div>
   </article>
@@ -601,28 +601,6 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     return u;
   }
 
-  /* ---------- Save current plan ---------- */
-  const CURRENT_KEY = "ub-trip-current";
-  function savePlanState() {
-    const state = {
-      origin: $("origin").value, destinations: [...destinations], startDate: $("startDate").value,
-      people: $("people").value, days: $("days").value, rate: $("rate").value,
-      food: $("food").value, hotel: $("hotel").value, rooms: $("rooms").value, tickets: $("tickets").value
-    };
-    try { localStorage.setItem(CURRENT_KEY, JSON.stringify(state)); toast("প্ল্যান সেভ হয়েছে।"); }
-    catch (e) { toast("এই ব্রাউজারে সেভ করা যাচ্ছে না।"); }
-  }
-  function loadPlanState() {
-    let st = null;
-    try { st = JSON.parse(localStorage.getItem(CURRENT_KEY) || "null"); } catch (e) { st = null; }
-    if (!st) return;
-    if (st.origin) $("origin").value = st.origin;
-    destinations = Array.isArray(st.destinations) ? st.destinations : [];
-    ["startDate", "people", "days", "rate", "food", "hotel", "rooms", "tickets"].forEach(id => {
-      if (st[id] !== undefined) $(id).value = st[id];
-    });
-  }
-
   /* ---------- Trip card ---------- */
   let photoUrl = "";
   function cardText() {
@@ -679,16 +657,173 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   $("previewBtn").onclick = () => { renderCard(); $("cardDialog").showModal(); };
   $("pickPhoto").onclick = () => $("cardPhoto").click();
   $("cardClose").onclick = () => $("cardDialog").close();
+
+  /* ---------- PNG card ---------- */
+  const CARD_W = 420, PAD = 18, PH = 76, S = 2;
+  const FONT = '"Anek Bangla","Noto Sans Bengali",system-ui,sans-serif';
+  function loadImg(src) {
+    return new Promise(res => {
+      if (!src) return res(null);
+      const im = new Image();
+      im.onload = () => res(im);
+      im.onerror = () => res(null);
+      im.src = src;
+    });
+  }
+  function wrapLines(ctx, text, maxW) {
+    const out = []; let cur = "";
+    text.split(" ").forEach(w => {
+      const t = cur ? cur + " " + w : w;
+      if (cur && ctx.measureText(t).width > maxW) { out.push(cur); cur = w; }
+      else cur = t;
+    });
+    if (cur) out.push(cur);
+    return out;
+  }
+  function rr(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  function drawCover(ctx, img, x, y, w, h) {
+    const r = Math.max(w / img.width, h / img.height);
+    const sw = w / r, sh = h / r;
+    ctx.drawImage(img, (img.width - sw) / 2, (img.height - sh) / 2, sw, sh, x, y, w, h);
+  }
+  // Map SVG with its page-only CSS classes turned into inline styles, so it draws on its own.
+  function mapSvgBlob() {
+    const src = $("mapSvg");
+    const vb = src.viewBox.baseVal;
+    const clone = src.cloneNode(true);
+    clone.removeAttribute("id"); clone.removeAttribute("style");
+    clone.setAttribute("xmlns", NS);
+    clone.setAttribute("viewBox", `${vb.x} ${vb.y} ${vb.width} ${vb.height}`);
+    clone.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
+    clone.querySelectorAll("path.dist").forEach(p => {
+      const c = p.getAttribute("class") || "";
+      let fill = "#dcebe2", stroke = "#9fc3ad", sw = "0.6";
+      if (c.includes("origin")) { fill = "#137653"; stroke = "#0b4d36"; sw = "1.2"; }
+      else if (c.includes("on")) { fill = "#9ed4b8"; stroke = "#137653"; sw = "1.2"; }
+      p.setAttribute("fill", fill); p.setAttribute("stroke", stroke); p.setAttribute("stroke-width", sw);
+      p.removeAttribute("class");
+    });
+    const str = new XMLSerializer().serializeToString(clone);
+    return { url: "data:image/svg+xml;charset=utf-8," + encodeURIComponent(str), w: vb.width, h: vb.height };
+  }
+  async function buildCardCanvas() {
+    const b = budget();
+    const km = Math.round(legList(points()).reduce((s, l) => s + l.km, 0));
+    const name = $("cardName").value.trim();
+    const sd = $("startDate").value;
+    const mapInfo = mapSvgBlob();
+    const [coverImg, photoImg, logoImg, mapImg] = await Promise.all([
+      loadImg("../assets/images/travel-1.webp"), loadImg(photoUrl || null),
+      loadImg("../assets/images/favicon-64.png"), loadImg(mapInfo.url)
+    ]);
+
+    const canvas = document.createElement("canvas");
+    canvas.width = CARD_W * S; canvas.height = 10 * S;
+    const ctx = canvas.getContext("2d");
+
+    // Text layout (measured in CSS px)
+    ctx.font = `700 18px ${FONT}`;
+    const textX = photoImg ? PAD + PH + 14 : PAD;
+    const maxW = CARD_W - textX - PAD;
+    const nameLines = name ? wrapLines(ctx, name + " - এর পরিকল্পনা", maxW) : [];
+    ctx.font = `400 14px ${FONT}`;
+    const destLines = wrapLines(ctx, points().join(" - ") + "।", maxW);
+    const statsText = `দূরত্ব: ${bnDigits(km)} কি.মি     দিন: ${bnDigits(b.days)}     জন: ${bnDigits(b.people)}`;
+    const textH = nameLines.length * 22 + destLines.length * 20 + 3 + 18;
+    const bandH = PAD * 2 + Math.max(photoImg ? PH : 0, textH);
+
+    const mapW = CARD_W - 2;
+    const mapH = mapW * mapInfo.h / mapInfo.w;
+    const footH = 10 + 2 * 20 + 4;
+    const H = bandH + mapH + footH + 2;
+
+    canvas.height = H * S;
+    ctx.setTransform(S, 0, 0, S, 0, 0);
+    ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, CARD_W, H);
+
+    // Band
+    ctx.fillStyle = "#6a3cb8"; ctx.fillRect(0, 0, CARD_W, bandH);
+    if (coverImg) {
+      drawCover(ctx, coverImg, 0, 0, CARD_W, bandH);
+      ctx.fillStyle = "rgba(106,60,184,.85)"; ctx.fillRect(0, 0, CARD_W, bandH);
+    }
+    if (photoImg) {
+      const py = (bandH - PH) / 2;
+      ctx.fillStyle = "#fff"; rr(ctx, PAD, py, PH, PH, 16); ctx.fill();
+      ctx.save(); rr(ctx, PAD + 3, py + 3, PH - 6, PH - 6, 13); ctx.clip();
+      drawCover(ctx, photoImg, PAD + 3, py + 3, PH - 6, PH - 6);
+      ctx.restore();
+    }
+    let ty = (bandH - textH) / 2;
+    ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.font = `700 18px ${FONT}`;
+    nameLines.forEach(l => { ty += 22; ctx.fillText(l, textX, ty - 6); });
+    ctx.font = `400 14px ${FONT}`;
+    destLines.forEach(l => { ty += 20; ctx.fillText(l, textX, ty - 6); });
+    ty += 3 + 18;
+    ctx.font = `400 13px ${FONT}`;
+    ctx.fillText(statsText, textX, ty - 5);
+
+    // Map box with light border, no inner padding
+    const y0 = bandH;
+    ctx.fillStyle = "#ebe6dc"; ctx.fillRect(0, y0, CARD_W, mapH + footH + 2);
+    ctx.fillStyle = "#fff"; ctx.fillRect(1, y0 + 1, CARD_W - 2, mapH + footH);
+    if (mapImg) ctx.drawImage(mapImg, 1, y0 + 1, mapW, mapH);
+    if (sd) {
+      const [y, m, d] = sd.split("-").map(Number);
+      ctx.font = `700 12px ${FONT}`; ctx.fillStyle = "#174b35";
+      ctx.textAlign = "right"; ctx.textBaseline = "top";
+      ctx.fillText(new Date(y, m - 1, d).toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" }), CARD_W - 9, y0 + 7);
+    }
+
+    // Footer inside the map box
+    const fy = y0 + 1 + mapH;
+    ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.font = `400 13px ${FONT}`; ctx.fillStyle = "#111";
+    ctx.fillText("চলো ভ্রমণ করি,", 7, fy + 10 + 14);
+    ctx.fillText("বাংলাদেশ নতুন করে চিনি।", 7, fy + 10 + 34);
+    ctx.font = `400 12px ${FONT}`; ctx.fillStyle = "#333";
+    const brand = "Unseen Bangladesh 2.0";
+    const bw = ctx.measureText(brand).width;
+    const bx = CARD_W - 7 - bw;
+    const by = fy + footH - 4 - 9;
+    ctx.fillText(brand, bx, by + 4);
+    if (logoImg) ctx.drawImage(logoImg, bx - 6 - 18, by - 9, 18, 18);
+
+    return canvas;
+  }
+  function cardBlob() {
+    return buildCardCanvas().then(c => new Promise(res => c.toBlob(res, "image/png")));
+  }
+  $("dlBtn").onclick = async () => {
+    const blob = await cardBlob();
+    if (!blob) return toast("ছবি তৈরি করা যাচ্ছে না।");
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "trip-card.png";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    toast("কার্ড PNG হিসেবে ডাউনলোড হচ্ছে।");
+  };
   $("shareBtn").onclick = async () => {
-    const text = cardText();
-    if (navigator.share) {
-      try { await navigator.share({ title: "ভ্রমণ কার্ড", text }); return; }
+    const blob = await cardBlob();
+    if (!blob) return toast("ছবি তৈরি করা যাচ্ছে না।");
+    const file = new File([blob], "trip-card.png", { type: "image/png" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try { await navigator.share({ title: "ভ্রমণ কার্ড", text: cardText(), files: [file] }); return; }
       catch (e) { if (e && e.name === "AbortError") return; }
     }
-    try { await navigator.clipboard.writeText(text); toast("কার্ডের বিবরণ কপি হয়েছে।"); }
-    catch (e) { toast("শেয়ার করা যাচ্ছে না।"); }
+    $("dlBtn").click();
+    toast("এই ব্রাউজারে সরাসরি শেয়ার করা যাচ্ছে না। ছবিটি ডাউনলোড হয়েছে।");
   };
-  $("saveBtn").onclick = savePlanState;
 
   /* ---------- Events ---------- */
   function addSelected() {
@@ -715,7 +850,6 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
   /* ---------- Boot ---------- */
   fillSelects();
-  loadPlanState();
   renderChips();
   update();
 
