@@ -105,7 +105,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .tc-editor input[type=text]:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green2)}
 .tc-photo[hidden],.tc-name[hidden]{display:none}
 .tc-card{background:#fff;color:#111;border-radius:14px;overflow:hidden;text-align:left;min-width:0;display:flex;flex-direction:column;aspect-ratio:3/4}
-.tc-band{position:relative;background:linear-gradient(rgba(106,60,184,.85),rgba(106,60,184,.85)),url("../assets/images/travel-1.webp") center/cover no-repeat,#6a3cb8;color:#fff;display:flex;gap:14px;align-items:center;padding:18px}
+.tc-band{position:relative;background:linear-gradient(rgba(106,60,184,.5),rgba(106,60,184,.5)),url("../assets/images/travel-1.webp") center/cover no-repeat,#6a3cb8;color:#fff;display:flex;gap:14px;align-items:center;padding:18px}
 .tc-band::after{content:"";position:absolute;left:0;right:0;bottom:0;height:24px;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24'%3E%3Cpath d='M0,12 Q15,0 30,12 T60,12 T90,12 T120,12 V24 H0 Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x 0 100%/120px 24px,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24'%3E%3Cpath d='M0,12 Q15,0 30,12 T60,12 T90,12 T120,12 V24 H0 Z' fill='%23ffffff' fill-opacity='.5'/%3E%3C/svg%3E") repeat-x 30px 100%/120px 24px}
 .tc-photo{flex:none;width:76px;height:76px;border-radius:16px;border:3px solid #fff;background:#fff;color:#111;display:grid;place-items:center;font-size:16px;overflow:hidden}
 .tc-photo img{width:100%;height:100%;object-fit:cover}
@@ -137,44 +137,13 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 <link rel="stylesheet" href="../assets/css/components.css">
 </head>
 <body>
-<!-- sc:header:start -->
-<header class="sc-header">
-  <div class="sc-header-in">
-    <button class="sc-menu-btn" id="sc-menu-btn" type="button" aria-label="মেনু খুলুন" aria-controls="sc-side" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    <a class="sc-logo" href="/"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</a>
-    <nav class="sc-header-nav" aria-label="প্রধান মেনু">
-    <a href="/" data-k="home">আমার ম্যাপ</a>
-    <span class="sc-menu-divider">|</span>
-    <a href="/guide/">ভ্রমণ গাইড</a>
-    <span class="sc-menu-divider">|</span>
-    <a href="/main/emergency.html">জরুরি সেবা</a>
-</nav>
-  </div>
-</header>
-<!-- sc:header:end -->
-<!-- sc:side-menu:start -->
-<div class="sc-scrim" id="sc-scrim"></div>
-<aside class="sc-side" id="sc-side" aria-label="মেনু">
-  <div class="sc-side-h">
-    <span class="sc-logo"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</span>
-    <button class="sc-menu-btn" id="sc-menu-x" type="button" aria-label="মেনু বন্ধ করুন"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  </div>
-<nav class="sc-side-nav">
-  <a href="/">হোম</a>
-  <a href="/guide/">ভ্রমণ গাইড</a>
-  <a href="/main/emergency.html">জরুরি সেবা</a>
-  <button type="button" id="sc-side-about">সম্পর্কে</button>
-  <a href="/privacy.html">গোপনীয়তা নীতি</a>
-</nav>
-  <p class="sc-side-f">৬৪ জেলা · ৮ বিভাগ</p>
-</aside>
-<!-- sc:side-menu:end -->
+<div data-component="header"></div>
+<div data-component="side-menu"></div>
 
 <main class="app">
   <section class="hero">
-    <div class="eyebrow">আপনার পরবর্তী ভ্রমণ</div>
     <h1>নিজের মতো করে ভ্রমণ পরিকল্পনা করুন</h1>
-    <p>জেলা বেছে নিন, রুট ও আনুমানিক বাজেট দেখুন, তারপর আপনার পরিকল্পনা সেভ বা প্রিন্ট করুন।</p>
+    <p>জেলা বেছে নিন, রুট ও আনুমানিক বাজেট দেখুন, তারপর আপনার পরিকল্পনা সেভ করুন।</p>
   </section>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -182,7 +151,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   <div class="layout">
     <div class="stack">
       <section class="card">
-        <h2>📍 যাত্রা ও গন্তব্য</h2>
+        <h2>যাত্রা ও গন্তব্য</h2>
         <div class="field">
           <label for="origin">শুরুর জেলা</label>
           <select id="origin"></select>
@@ -212,7 +181,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
       <section class="card">
         <div class="section-heading">
-          <h2>🗺️ আপনার ভ্রমণ রুট</h2>
+          <h2>আপনার ভ্রমণ রুট</h2>
           <span class="hint" id="routeCount"></span>
         </div>
         <div class="map" style="margin-top:12px">
@@ -224,19 +193,19 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
         </div>
         <p class="map-note" id="mapNote"></p>
         <div class="btn-row no-print" style="margin-top:12px">
-          <button class="btn" id="googleMaps" type="button">Google Maps-এ রুট খুলুন ↗</button>
+          <button class="btn" id="googleMaps" type="button">Google Maps ↗</button>
         </div>
       </section>
 
       <section class="card">
-        <h2>🗓️ দিনভিত্তিক ভ্রমণসূচি</h2>
+        <h2>দিনভিত্তিক ভ্রমণসূচি</h2>
         <div class="itinerary" id="itinerary"></div>
       </section>
     </div>
 
     <div class="stack">
       <section class="card center">
-        <h2>📊 ভ্রমণের সারসংক্ষেপ</h2>
+        <h2>ভ্রমণের সারসংক্ষেপ</h2>
         <div class="stats">
           <div class="stat"><span class="label">মোট দূরত্ব</span><strong id="summaryDistance">—</strong><span class="sub" id="summaryDistanceSub">আনুমানিক</span></div>
           <div class="stat"><span class="label">মোট দিন</span><strong id="summaryDays">৩ দিন</strong><span class="sub">আপনার নির্বাচন অনুযায়ী</span></div>
@@ -246,8 +215,8 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
       </section>
 
       <section class="card">
-        <h2>💰 আনুমানিক বাজেট</h2>
-        <div class="field"><label for="rate">যাতায়াত ভাড়া (৳ প্রতি কিমি, জনপ্রতি)</label><input id="rate" type="number" min="0" step="0.5" value="2.5"></div>
+        <h2>আনুমানিক বাজেট</h2>
+        <div class="field"><label for="rate">যাতায়াত ভাড়া (৳ প্রতি কিমি, জনপ্রতি)</label><input id="rate" type="number" min="0" step="0.5" value="3"></div>
         <div class="field"><label for="food">জনপ্রতি দৈনিক খাবার (৳)</label><input id="food" type="number" min="0" value="500"></div>
         <div class="field"><label for="hotel">প্রতি রুম প্রতি রাত (৳)</label><input id="hotel" type="number" min="0" value="1500"></div>
         <div class="field"><label for="rooms">হোটেল রুম সংখ্যা</label><input id="rooms" type="number" min="0" value="1"></div>
@@ -294,7 +263,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
       <div class="tc-date" id="tcDate" hidden></div>
       <div id="tcMapSvg"></div>
       <div class="tc-foot">
-      <div>চলো ভ্রমণ করি,<br>বাংলাদেশ নতুন করে চিনি।</div>
+      <div>সৌন্দর্যে ভরা প্রিয় বাংলাদেশ</div>
       <div class="tc-brand"><img src="../assets/images/favicon-64.png" alt="" width="18" height="18">Unseen Bangladesh 2.0</div>
       </div>
     </div>
@@ -306,35 +275,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 </dialog>
 </main>
 
-<!-- sc:footer:start -->
-<footer class="sc-footer">
-  <div class="sc-f-top">
-    <div class="sc-f-inner">
-      <div class="sc-f-brand">
-        <div class="sc-f-logo"><img class="sc-logo-mark" src="../assets/images/favicon-64.png" alt="" width="28" height="28">Unseen Bangladesh 2.0</div>
-        <p class="sc-tagline">সৌন্দর্যে ভরা প্রিয় বাংলাদেশ</p>
-      </div>
-    </div>
-  </div>
-  <div class="sc-f-bar">
-    <div class="sc-f-inner">
-      <div class="sc-f-links">
-        <a href="/privacy"><span class="sc-bn">গোপনীয়তা নীতি</span><span class="sc-en">Privacy Policy</span></a>
-        <button type="button" id="sc-footer-about"><span class="sc-bn">সম্পর্কে</span><span class="sc-en">About</span></button>
-      </div>
-      © ২০২৬ Unseen Bangladesh 2.0 — সর্বস্বত্ব সংরক্ষিত।
-    </div>
-  </div>
-</footer>
-<dialog class="sc-about" id="sc-about" aria-labelledby="sc-about-t">
-  <button class="sc-about-x" type="button" aria-label="বন্ধ করুন" data-close>×</button>
-  <img class="sc-about-hero" decoding="async" src="../assets/images/about_image.webp" alt="অদেখা বাংলাদেশ ২.০" loading="lazy" width="800" height="640">
-  <div class="sc-about-body">
-    <h2 id="sc-about-t"><span class="sc-bn">অদেখা বাংলাদেশ ২.০</span><span class="sc-en">Unseen Bangladesh 2.0</span></h2>
-    <p class="sc-about-desc">🇧🇩 Unseen Bangladesh 2.0<span class="sc-bn"> নিজের দেশকে নতুন করে আবিষ্কারের গল্প। অজানা সৌন্দর্য খুঁজে বের করুন, ভ্রমণের স্মৃতি ধরে রাখুন! ভালোবাসায় চিনে নিন আমাদের বাংলাদেশ।</span><span class="sc-en"> a story of rediscovering our own country. Find hidden beauty, keep your travel memories alive, and get to know our Bangladesh with love.</span></p>
-  </div>
-</dialog>
-<!-- sc:footer:end -->
+<div data-component="footer"></div>
 
 <script>
 (() => {
@@ -662,7 +603,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   $("cardClose").onclick = () => $("cardDialog").close();
 
   /* ---------- PNG card ---------- */
-  const CARD_W = 420, PAD = 18, PH = 76, S = 2;
+  const CARD_W = 420, PAD = 18, PH = 76, S = 3;
   const FONT = '"Anek Bangla","Noto Sans Bengali",system-ui,sans-serif';
   function loadImg(src) {
     return new Promise(res => {
@@ -750,13 +691,15 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
     canvas.height = H * S;
     ctx.setTransform(S, 0, 0, S, 0, 0);
+    ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high";
+    ctx.save(); rr(ctx, 0, 0, CARD_W, H, 14); ctx.clip();
     ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, CARD_W, H);
 
     // Band
     ctx.fillStyle = "#6a3cb8"; ctx.fillRect(0, 0, CARD_W, bandH);
     if (coverImg) {
       drawCover(ctx, coverImg, 0, 0, CARD_W, bandH);
-      ctx.fillStyle = "rgba(106,60,184,.85)"; ctx.fillRect(0, 0, CARD_W, bandH);
+      ctx.fillStyle = "rgba(106,60,184,.5)"; ctx.fillRect(0, 0, CARD_W, bandH);
     }
     // Two layers of water ripples along the bottom edge of the header
     const waveEdge = (x, shift) => bandH - 15 - 3 * Math.cos(2 * Math.PI * (x - shift - 15) / 60);
@@ -814,6 +757,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     ctx.fillText(brand, bx, by + 4);
     if (logoImg) ctx.drawImage(logoImg, bx - 6 - 18, by - 9, 18, 18);
 
+    ctx.restore();
     return canvas;
   }
   function cardBlob() {
