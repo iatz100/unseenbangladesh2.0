@@ -56,7 +56,6 @@ window.__D=window.__load();
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://unseenbangladesh2-0.vercel.app/assets/og-image.jpg?v=2">
 <link rel="canonical" href="https://unseenbangladesh2-0.vercel.app/">
-<link rel="preload" href="assets/fonts/anek-bangla-bengali.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 /* Anek Bangla (SIL OFL 1.1, see assets/fonts/OFL.txt), self-hosted so the page has no third-party requests */
 /* bengali */
@@ -326,9 +325,10 @@ img,video,canvas{max-width:100%}
 .dl{flex-wrap:wrap}
 .themes{flex-wrap:wrap}
 </style>
+<link rel="stylesheet" href="./assets/css/theme.css">
 <link rel="stylesheet" href="./assets/css/components.css">
 </head>
-<body>
+<body data-page="index">
 <div data-component="header"></div>
 <div data-component="side-menu"></div>
 <div class="container" id="top">
@@ -534,7 +534,7 @@ function placeLabels(ctx,names){
 /* Some phone browsers ignore ctx.textAlign (text drawn as if left-aligned, so right-aligned text runs
    off the canvas). Always draw left-aligned and work out the x offset ourselves. */
 function alignX(ctx,text,x,align){ctx.textAlign="left";const w=ctx.measureText(text).width;return align==="right"?x-w:align==="center"?x-w/2:x}
-function textAt(ctx,text,x,y,align,stroke){const ax=alignX(ctx,text,x,align);if(stroke)ctx.strokeText(text,ax,y);ctx.fillText(text,ax,y)}
+function textAt(ctx,text,x,y,align,stroke){const ax=alignX(ctx,text,x,align);if(stroke)ctx.strokeText(text,ax,y);ctx.fillText(ubT(text),ax,y)}
 // header shared by the Bangladesh and world posters: photo, subtitle, title, big "n/total" count
 function drawHeader(ctx,t,W,sub,title,n,total){
   ctx.textBaseline="alphabetic";
@@ -552,13 +552,13 @@ function drawHeader(ctx,t,W,sub,title,n,total){
     tx=x+size+40;
   }
   ctx.fillStyle=t.muted;ctx.font=`700 20px ${FONT}`;
-  ctx.font=`600 24px ${FONT}`;ctx.fillText(sub,tx,112);
+  ctx.font=`600 24px ${FONT}`;ctx.fillText(ubT(sub),tx,112);
   ctx.fillStyle=t.ink;ctx.font=`800 64px ${FONT}`;
   ctx.font=`700 40px ${FONT}`;const slashW=ctx.measureText("/"+total).width;ctx.font=`800 96px ${FONT}`;
   const countW=ctx.measureText(bnNum(n)).width+slashW+6, maxW=W-80-countW-40-tx; // keep the title clear of the count
   ctx.font=`800 64px ${FONT}`;
   let fs=64;while(ctx.measureText(title).width>maxW&&fs>28){fs-=2;ctx.font=`800 ${fs}px ${FONT}`}
-  ctx.fillText(title,tx,184);
+  ctx.fillText(ubT(title),tx,184);
 
   // big count
   ctx.textAlign="left";
@@ -579,15 +579,15 @@ function drawBrand(ctx,t,W,H){
   let x=(W-(s+gap+nw+sw+dw))/2;
   if(BRAND_IMG.complete&&BRAND_IMG.naturalWidth){ctx.save();roundRect(ctx,x,y-s/2,s,s,10);ctx.clip();ctx.drawImage(BRAND_IMG,x,y-s/2,s,s);ctx.restore()}
   x+=s+gap;
-  ctx.font=`800 24px ${FONT}`;ctx.fillStyle=t.ink;ctx.textAlign="left";ctx.fillText(name,x,y+1);x+=nw;
-  ctx.font=`500 21px ${FONT}`;ctx.fillStyle=t.muted;ctx.fillText(sep+dom,x,y+1);
+  ctx.font=`800 24px ${FONT}`;ctx.fillStyle=t.ink;ctx.textAlign="left";ctx.fillText(ubT(name),x,y+1);x+=nw;
+  ctx.font=`500 21px ${FONT}`;ctx.fillStyle=t.muted;ctx.fillText(ubT(sep+dom),x,y+1);
   ctx.textBaseline="alphabetic";
 }
 function drawFooter(ctx,t,W,H,frac,left,right,extra=0){
   const fy=H-160-extra;                                   // extra: room kept free above the divider (sponsor strip)
   ctx.fillStyle=t.track;roundRect(ctx,80,fy,W-160,12,6);ctx.fill();
   if(frac>0){const pg=ctx.createLinearGradient(80,0,W-80,0);pg.addColorStop(0,t.v1);pg.addColorStop(1,t.v2);ctx.fillStyle=pg;roundRect(ctx,80,fy,Math.max(12,(W-160)*Math.min(1,frac)),12,6);ctx.fill()}
-  ctx.font=`700 24px ${FONT}`;ctx.fillStyle=t.ink;ctx.fillText(left,80,fy+52);
+  ctx.font=`700 24px ${FONT}`;ctx.fillStyle=t.ink;ctx.fillText(ubT(left),80,fy+52);
   ctx.font=`500 20px ${FONT}`;ctx.fillStyle=t.muted;textAt(ctx,right,W-80,fy+52,"right");
   ctx.fillStyle=t.track;ctx.fillRect(80,H-84,W-160,1.5);
   drawBrand(ctx,t,W,H);
@@ -1193,17 +1193,12 @@ window.addEventListener("hashchange",route);
 const LB_DID=(()=>{let d=store.get("bdmap.did","");if(!/^[a-z0-9]{12,32}$/.test(d)){d=[...crypto.getRandomValues(new Uint8Array(12))].map(x=>(x%36).toString(36)).join("");store.set("bdmap.did",d)}return d})();
 
 /* ---------- about ---------- */
+const ubReady=f=>document.getElementById("sc-about")?f():document.addEventListener("ub:components-ready",f,{once:true});
+ubReady(()=>{
 const aboutDlg = document.getElementById("sc-about");
 const aboutMenuBtn = document.getElementById("aboutMenuBtn");
-
-aboutMenuBtn?.addEventListener("click", () => {
-  aboutDlg.showModal();
-});
-
-aboutDlg.addEventListener("click", e => {
-  if (e.target === aboutDlg || e.target.closest("[data-close]")) {
-    aboutDlg.close();
-  }
+aboutMenuBtn?.addEventListener("click", () => { aboutDlg.showModal(); });
+aboutDlg.addEventListener("click", e => { if (e.target === aboutDlg || e.target.closest("[data-close]")) aboutDlg.close(); });
 });
 /* ---------- hero background video ---------- */
 // skipped (poster image only) for reduced motion, data saver and slow connections; smaller file on phones
@@ -1261,7 +1256,7 @@ if(inApp)document.documentElement.classList.add("in-app");
 }
 
 /* ---------- animated horizontal menu (PC / laptop) ---------- */
-{
+ubReady(()=>{
   const box=document.getElementById("hlinks")||document.querySelector(".sc-header-nav");
   if(box){
   const ind=document.getElementById("hind"),items=[...box.querySelectorAll("a,button")];
@@ -1277,14 +1272,14 @@ if(inApp)document.documentElement.classList.add("in-app");
   home&&home.classList.add("on");spy();mv(cur);
   document.fonts.ready.then(()=>mv(cur));
   }
-}
+});
 
 /* ---------- boot ---------- */
 route();
 applyMode(mode);if(mode==="u")loadUpa();
 render();
 if(bootWorld)loadWorld().then(ok=>{if(ok){applyMode("w");render()}});
-document.fonts.ready.then(()=>Promise.all(["500","600","700","800"].map(w=>document.fonts.load(`${w} 40px ${FONT}`,"বাংলাদেশ ০১২৩")))).then(render);
+document.fonts.ready.then(()=>Promise.all(["500","600","700","800"].map(w=>document.fonts.load(`${w} 40px ${FONT}`,"বাংলাদেশ ০১২৩")))).then(render,render);
 /* warm the cache with the two lazy data files once the page is idle, so the first tap on "বিশ্ব ম্যাপ" / upazila is instant; skipped on data saver and 2G */
 __onLoad(()=>{const c=navigator.connection||{};if(c.saveData||/(^|-)2g$/.test(c.effectiveType||""))return;
   (window.requestIdleCallback||(f=>setTimeout(f,3000)))(()=>["assets/data/world.json","assets/data/upazila.json"].forEach(u=>fetch(u,{priority:"low"}).then(r=>r.ok&&r.arrayBuffer()).catch(()=>{})),{timeout:8000})});
@@ -1297,7 +1292,8 @@ if("serviceWorker" in navigator) __onLoad(()=>navigator.serviceWorker.register("
   window.__D.then(run,function(){addEventListener("online",function(){window.__load().then(run)},{once:true})});
 })();
 </script>
-<script type="module" src="assets/js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362_7d77c9.js" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"abd3853f56ce4115afe9554ae1697c2f","r":1,"spa":2}' crossorigin="anonymous"></script>
-<script src="./assets/js/components.js" defer></script>
+<script type="module" src="assets/js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362_7d77c9.js" integrity="sha512-GZ2zeTuut4x+DWknMFJzovQRVmzsNdBjuWQBHPX2vkvg8F9zv3J+tI+gppZsazzMZHCLhFXrnTkMppdqlFRZzA==" data-cf-beacon='{"version":"2024.11.0","token":"abd3853f56ce4115afe9554ae1697c2f","r":1,"spa":2}' crossorigin="anonymous"></script>
+<script src="./assets/js/i18n.js"></script>
+<script src="./assets/js/components.js"></script>
 </body>
 </html>
