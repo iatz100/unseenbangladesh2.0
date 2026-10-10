@@ -106,26 +106,29 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .tc-photo[hidden],.tc-name[hidden]{display:none}
 .tc-card{background:#fff;color:#111;border-radius:14px;overflow:hidden;text-align:left;min-width:0}
 .tc-band{background:linear-gradient(rgba(106,60,184,.85),rgba(106,60,184,.85)),url("../assets/images/travel-1.webp") center/cover no-repeat,#6a3cb8;color:#fff;display:flex;gap:14px;align-items:center;padding:18px}
-.tc-photo{flex:none;width:84px;height:84px;border-radius:18px;background:#fff;color:#111;display:grid;place-items:center;font-size:16px;overflow:hidden}
+.tc-photo{flex:none;width:76px;height:76px;border-radius:16px;border:3px solid #fff;background:#fff;color:#111;display:grid;place-items:center;font-size:16px;overflow:hidden}
 .tc-photo img{width:100%;height:100%;object-fit:cover}
 .tc-info{min-width:0;flex:1}
-.tc-name{font-size:18px;font-weight:700;line-height:1.35;overflow-wrap:anywhere}
-.tc-dest{font-size:14px;margin-top:4px;overflow-wrap:anywhere}
-.tc-stats{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:13px;margin-top:6px}
-.tc-map{margin:0;border:1px solid var(--line);border-radius:0;padding:0;background:#fff;min-width:0;overflow:hidden}
+.tc-name{font-size:18px;font-weight:700;line-height:1.2;overflow-wrap:anywhere}
+.tc-dest{font-size:14px;margin-top:1px;overflow-wrap:anywhere}
+.tc-stats{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:13px;margin-top:3px}
+.tc-map{position:relative;margin:0;border:1px solid var(--line);border-radius:0;padding:0;background:#fff;min-width:0;overflow:hidden}
+.tc-date{position:absolute;top:6px;right:8px;font-size:12px;font-weight:700;color:#174b35}
+.tc-date[hidden]{display:none}
 .tc-map svg{width:100%;height:auto;display:block}
 .tc-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 12px;padding:10px 6px 4px;font-size:13px;line-height:1.5}
 .tc-brand{display:flex;align-items:center;gap:6px;font-size:12px;color:#333;white-space:nowrap}
 .tc-brand img{width:18px;height:18px;flex:none}
-.tc-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:14px 18px 18px}
-.tc-actions button{flex:0 1 160px;border:0;border-radius:12px;padding:8px 18px;font-size:14px;font-weight:400;font-family:inherit;color:#fff;cursor:pointer}
+.tc-actions{display:flex;flex-wrap:nowrap;justify-content:center;gap:10px;margin:14px 18px 18px}
+.tc-actions button{flex:1 1 0;max-width:180px;min-width:0;white-space:nowrap;border:0;border-radius:12px;padding:8px 12px;font-size:14px;font-weight:400;font-family:inherit;color:#fff;cursor:pointer}
 .tc-save{background:#0f6b4f}
 .tc-share{background:#8a1152}
 .tc-editor>*{min-width:0}
 @media (max-width:480px){
   .tc-band{padding:14px;gap:12px}
-  .tc-photo{width:68px;height:68px;border-radius:14px}
+  .tc-photo{width:62px;height:62px;border-radius:13px}
   .tc-name{font-size:16px}
+  .tc-actions{margin:14px 14px 16px;gap:8px}
 }
 </style>
 <link rel="stylesheet" href="../assets/css/components.css">
@@ -285,6 +288,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
       </div>
     </div>
     <div class="tc-map">
+      <div class="tc-date" id="tcDate" hidden></div>
       <div id="tcMapSvg"></div>
       <div class="tc-foot">
       <div>চলো ভ্রমণ করি,<br>বাংলাদেশ নতুন করে চিনি।</div>
@@ -654,6 +658,15 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     const svg = $("mapSvg").cloneNode(true);
     svg.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
     $("tcMapSvg").replaceChildren(svg);
+    const sd = $("startDate").value, dateEl = $("tcDate");
+    if (sd) {
+      const [y, m, d] = sd.split("-").map(Number);
+      dateEl.textContent = new Date(y, m - 1, d).toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" });
+      dateEl.hidden = false;
+    } else {
+      dateEl.textContent = "";
+      dateEl.hidden = true;
+    }
   }
   $("cardPhoto").addEventListener("change", e => {
     const f = e.target.files && e.target.files[0];
