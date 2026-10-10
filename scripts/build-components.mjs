@@ -10,9 +10,8 @@
  *   assets/js/components.js            (behaviour only)
  *
  * For every .html page in the project it:
- *   1. replaces <div data-component="..."></div> (or the block a previous build injected)
- *      with the master markup, rewriting relative URLs for the page's folder depth
- *      (guide/index.html gets ../assets/..., root pages get ./assets/...);
+ *   1. keeps exactly one <div data-component="..."></div> placeholder per component and removes any
+ *      copy of the master markup (components.js loads the master file once, at run time);
  *   2. makes sure components.css is the last stylesheet in <head> and components.js
  *      is loaded before </body>, with correct relative paths;
  *   3. fails if a page holds its own copy of a component, or page CSS targets sc- classes.
@@ -67,30 +66,32 @@ function buildPage(src, file, masters) {
   const errors = [], warnings = [];
   let html = src;
 
+  // every page holds ONE placeholder per component; the master is loaded by components.js at run time
   for (const { name } of COMPONENTS) {
-    const block = `<!-- sc:${name}:start -->\n${rewriteUrls(masters[name], depth)}\n<!-- sc:${name}:end -->`;
-    if (blockRe(name).test(html)) html = html.replace(blockRe(name), block);
-    else if (placeholderRe(name).test(html)) html = html.replace(placeholderRe(name), block);
+    const placeholder = `<div data-component="${name}"></div>`;
+    if (blockRe(name).test(html)) html = html.replace(blockRe(name), placeholder);
+    else if (placeholderRe(name).test(html)) html = html.replace(placeholderRe(name), placeholder);
     else errors.push(`no <div data-component="${name}"></div> placeholder`);
+    const count = html.split(`data-component="${name}"`).length - 1;
+    if (count !== 1) errors.push(`data-component="${name}" appears ${count} times (expected 1)`);
   }
 
   // load the shared CSS (last in <head>) and JS (before </body>), depth-correct, exactly once
   html = html.replace(/<link[^>]*components\.css"[^>]*>\s*/g, "");
   html = html.replace(/<script[^>]*components\.js"[^>]*><\/script>\s*/g, "");
   const cssTag = `<link rel="stylesheet" href="${toPageUrl(CSS_FILE, depth)}">`;
-  const jsTag = `<script src="${toPageUrl(JS_FILE, depth)}" defer></script>`;
+  const jsTag = `<script src="${toPageUrl(JS_FILE, depth)}"></script>`;
   if (/<\/head>/i.test(html)) html = html.replace(/<\/head>/i, `${cssTag}\n</head>`);
   else errors.push("no </head>");
   if (/<\/body>/i.test(html)) html = html.replace(/<\/body>/i, `${jsTag}\n</body>`);
   else errors.push("no </body>");
 
-  // no hand-written copies of components outside the managed blocks
-  const outside = html.replace(new RegExp(`<!-- sc:(header|side-menu|footer):start -->[\\s\\S]*?<!-- sc:\\1:end -->`, "g"), "");
-  if (/(class|id)="[^"]*\bsc-/.test(outside)) errors.push("a component copy exists outside the managed block");
+  // no copies of any component markup may be written into a page
+  if (/<(header|footer|aside|dialog)\b[^>]*class="sc-|class="sc-(header|footer|side|scrim|about|lang|menu-btn|logo|f-)/.test(html)) errors.push("a component copy is written into the page");
   for (const id of REQUIRED_IDS) {
-    const n = html.split(`id="${id}"`).length - 1;
-    if (n !== 1) errors.push(`id="${id}" appears ${n} times (expected 1)`);
+    if (html.includes(`id="${id}"`)) errors.push(`id="${id}" is written into the page (it belongs to the master component)`);
   }
+  if (/<!-- sc:(header|side-menu|footer):(start|end) -->/.test(html)) errors.push("old injected block markers are still present");
 
   // page CSS must not target shared components
   for (const [, raw] of html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)) {
