@@ -177,9 +177,10 @@ select:hover,input:hover{border-color:#d6d0c2}
 .chip.open .chip-acts .chip-close{background:#fff;color:var(--danger);font-size:16px}
 .chip.open .chip-acts .chip-close:hover{background:#fbe4e1}
 </style>
+<link rel="stylesheet" href="../assets/css/theme.css">
 <link rel="stylesheet" href="../assets/css/components.css">
 </head>
-<body>
+<body data-page="plan">
 <div data-component="header"></div>
 <div data-component="side-menu"></div>
 
@@ -808,12 +809,12 @@ select:hover,input:hover{border-color:#d6d0c2}
     let ty = (bandH - textH) / 2;
     ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
     ctx.font = `700 18px ${FONT}`;
-    nameLines.forEach(l => { ty += 22; ctx.fillText(l, textX, ty - 6); });
+    nameLines.forEach(l => { ty += 22; ctx.fillText(ubT(l), textX, ty - 6); });
     ctx.font = `400 14px ${FONT}`;
-    destLines.forEach(l => { ty += 20; ctx.fillText(l, textX, ty - 6); });
+    destLines.forEach(l => { ty += 20; ctx.fillText(ubT(l), textX, ty - 6); });
     ty += 3 + 18;
     ctx.font = `400 13px ${FONT}`;
-    ctx.fillText(statsText, textX, ty - 5);
+    ctx.fillText(ubT(statsText), textX, ty - 5);
 
     // Map box with light border, no inner padding
     const y0 = bandH;
@@ -828,21 +829,21 @@ select:hover,input:hover{border-color:#d6d0c2}
       const [y, m, d] = sd.split("-").map(Number);
       ctx.font = `700 12px ${FONT}`; ctx.fillStyle = "#174b35";
       ctx.textAlign = "right"; ctx.textBaseline = "top";
-      ctx.fillText(new Date(y, m - 1, d).toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" }), CARD_W - 9, y0 + 7);
+      ctx.fillText(ubT(new Date(y, m - 1, d).toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" })), CARD_W - 9, y0 + 7);
     }
 
     // Footer inside the map box
     const fy = y0 + 1 + mapH;
     ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
     ctx.font = `400 13px ${FONT}`; ctx.fillStyle = "#111";
-    ctx.fillText("চলো ভ্রমণ করি,", 7, fy + 10 + 14);
-    ctx.fillText("বাংলাদেশ নতুন করে চিনি।", 7, fy + 10 + 34);
+    ctx.fillText(ubT("চলো ভ্রমণ করি,"), 7, fy + 10 + 14);
+    ctx.fillText(ubT("বাংলাদেশ নতুন করে চিনি।"), 7, fy + 10 + 34);
     ctx.font = `400 12px ${FONT}`; ctx.fillStyle = "#333";
     const brand = "Unseen Bangladesh 2.0";
     const bw = ctx.measureText(brand).width;
     const bx = CARD_W - 7 - bw;
     const by = fy + footH - 4 - 9;
-    ctx.fillText(brand, bx, by + 4);
+    ctx.fillText(ubT(brand), bx, by + 4);
     if (logoImg) ctx.drawImage(logoImg, bx - 6 - 18, by - 9, 18, 18);
 
     ctx.restore();
@@ -910,6 +911,7 @@ select:hover,input:hover{border-color:#d6d0c2}
     });
 })();
 </script>
-<script src="../assets/js/components.js" defer></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/components.js"></script>
 </body>
 </html>
