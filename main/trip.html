@@ -33,8 +33,10 @@ select:focus,input:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--gr
 .btn-row .btn{flex:1 1 auto}
 .btn.danger{color:var(--danger)}
 .card.center{text-align:center}
-.destinations{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
-.chip{display:inline-flex;align-items:center;gap:4px;padding:4px 6px 4px 12px;border-radius:999px;background:var(--green2);color:var(--green);font-size:13px;font-weight:700}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid2 .field{margin-bottom:0}
+.destinations{display:flex;flex-direction:row;flex-wrap:wrap;align-items:center;gap:7px;margin-top:9px;width:100%}
+.chip{white-space:nowrap;display:inline-flex;align-items:center;gap:4px;padding:4px 6px 4px 12px;border-radius:999px;background:var(--green2);color:var(--green);font-size:13px;font-weight:700}
 .chip button{border:0;background:transparent;color:inherit;padding:2px 5px;font-size:14px;line-height:1}
 .hint{font-size:12px;color:var(--muted);margin:5px 0 0}
 .toast{display:none;margin-bottom:12px;padding:10px 12px;background:var(--green2);color:var(--green);border-radius:10px;font-size:13px;font-weight:700}
@@ -47,6 +49,7 @@ path.dist.on{fill:#9ed4b8;stroke:#137653;stroke-width:1.2}
 path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .map-pill{position:absolute;top:12px;background:rgba(255,255,255,.94);color:#174b35;padding:6px 10px;border-radius:10px;font-size:12px;font-weight:700;box-shadow:0 3px 12px #153b2a22}
 .map-pill.l{left:12px}.map-pill.r{right:12px}
+.map-brand{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:11px;font-weight:700;color:#174b35;opacity:.75;pointer-events:none}
 .map-note{font-size:12px;color:var(--muted);margin:9px 0 0}
 .map-fallback{padding:40px 16px;text-align:center;color:var(--muted);font-size:14px}
 .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -65,7 +68,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .total strong{font-size:22px;color:var(--green)}
 .itinerary{display:grid;gap:10px}
 .day{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:12px;border:1px solid var(--line);border-radius:13px}
-.day-badge{background:var(--green2);color:var(--green);border-radius:10px;text-align:center;padding:8px 4px;font-weight:800;font-size:12px;line-height:1.3}
+.day-badge{background:var(--green2);color:var(--green);border-radius:10px;text-align:center;padding:8px 4px;font-weight:800;font-size:12px;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .day-badge small{font-weight:600;font-size:11px;color:var(--muted)}
 .day h3{font-size:15px;margin:0 0 3px}
 .day p{font-size:13px;color:var(--muted);margin:0}
@@ -90,6 +93,24 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   .map{break-inside:avoid}
   .hero p{color:#444}
 }
+.bottom-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.tc-dialog{border:0;border-radius:18px;padding:18px;width:min(460px,calc(100% - 24px));max-height:92vh;overflow:auto;background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+.tc-dialog::backdrop{background:rgba(20,40,30,.45)}
+.tc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.tc-head h2{font-size:17px;margin:0}
+.tc-form{display:grid;gap:10px;margin-bottom:14px}
+.tc-pick{text-align:center;cursor:pointer}
+.tc-card{border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center}
+.tc-top{display:flex;flex-direction:column;align-items:center;gap:6px;margin-bottom:10px}
+.tc-photo{width:96px;height:96px;border-radius:50%;background:var(--green2);overflow:hidden;display:grid;place-items:center;font-size:28px;color:var(--green)}
+.tc-photo img{width:100%;height:100%;object-fit:cover}
+.tc-name{font-size:20px;font-weight:800}
+.tc-sub{font-size:12px;color:var(--muted)}
+.tc-dest{font-weight:700;color:var(--green);margin:8px 0}
+.tc-map svg{width:100%;height:auto;display:block}
+.tc-stats{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin:10px 0;font-size:13px;color:var(--muted)}
+.tc-stats strong{color:var(--text)}
+.tc-card .btn-primary{margin-top:14px}
 </style>
 <link rel="stylesheet" href="../assets/css/components.css">
 </head>
@@ -155,13 +176,15 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
           <label for="startDate">শুরুর তারিখ (ঐচ্ছিক)</label>
           <input id="startDate" type="date">
         </div>
-        <div class="field">
-          <label for="people">ভ্রমণকারীর সংখ্যা</label>
-          <input id="people" type="number" min="1" max="100" value="1">
-        </div>
-        <div class="field">
-          <label for="days">ভ্রমণের দিন</label>
-          <input id="days" type="number" min="1" max="30" value="1">
+        <div class="grid2">
+          <div class="field">
+            <label for="people">ভ্রমণকারীর সংখ্যা</label>
+            <input id="people" type="number" min="1" max="100" value="1">
+          </div>
+          <div class="field">
+            <label for="days">ভ্রমণের দিন</label>
+            <input id="days" type="number" min="1" max="30" value="1">
+          </div>
         </div>
       </section>
 
@@ -173,6 +196,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
         <div class="map" style="margin-top:12px">
           <span class="map-pill l" id="mapOrigin">শুরু: ঢাকা</span>
           <span class="map-pill r" id="mapDistance">মোট: —</span>
+          <div class="map-brand">Unseen Bangladesh 2.0</div>
           <svg id="mapSvg" viewBox="0 0 600 828" role="img" aria-label="বাংলাদেশের মানচিত্রে ভ্রমণ রুট"></svg>
           <div class="map-fallback" id="mapFallback" hidden>মানচিত্র লোড করা যায়নি। ইন্টারনেট সংযোগ দেখুন।</div>
         </div>
@@ -220,6 +244,34 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
     </div>
   </div>
+  <div class="bottom-actions">
+    <button class="btn-primary" id="saveBtn" type="button">Save</button>
+    <button class="btn-primary" id="cardBtn" type="button">কার্ড</button>
+  </div>
+</main>
+
+<dialog class="tc-dialog" id="cardDialog" aria-labelledby="tcTitle">
+  <div class="tc-head">
+    <h2 id="tcTitle">ভ্রমণ কার্ড</h2>
+    <button class="icon-btn" id="cardClose" type="button" aria-label="বন্ধ করুন">×</button>
+  </div>
+  <div class="tc-form">
+    <label class="btn tc-pick" for="cardPhoto">📷 ছবি বসান</label>
+    <input id="cardPhoto" type="file" accept="image/*" hidden>
+    <input id="cardName" type="text" maxlength="60" placeholder="আপনার নাম">
+  </div>
+  <article class="tc-card" id="tcCard">
+    <div class="tc-top">
+      <div class="tc-photo" id="tcPhoto">📷</div>
+      <div class="tc-name" id="tcName"></div>
+      <div class="tc-sub" id="tcSub"></div>
+    </div>
+    <div class="tc-dest" id="tcDest"></div>
+    <div class="tc-map" id="tcMap"></div>
+    <div class="tc-stats" id="tcStats"></div>
+    <button class="btn-primary" id="shareBtn" type="button">শেয়ার করুন</button>
+  </article>
+</dialog>
 </main>
 
 <!-- sc:footer:start -->
@@ -449,35 +501,33 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   /* ---------- Itinerary ---------- */
   function renderItinerary() {
     const n = daysN(), pts = points(), D = destinations.length;
+    if (!D) {
+      $("itinerary").innerHTML = `<p class="empty">গন্তব্য যোগ করলে এখানে ভ্রমণসূচি দেখাবে।</p>`;
+      return;
+    }
     const startVal = $("startDate").value;
     let start = null;
     if (startVal) { const [y, m, d] = startVal.split("-").map(Number); start = new Date(y, m - 1, d); }
+    const fmt = dayNo => start
+      ? new Date(start.getTime() + (dayNo - 1) * 864e5).toLocaleDateString("bn-BD", { day: "numeric", month: "short", year: "numeric" })
+      : "";
 
-    let html = "", prev = null;
-    for (let i = 0; i < n; i++) {
-      const stopIdx = D ? Math.min(D - 1, Math.floor(i * D / n)) : -1;
-      const stop = stopIdx >= 0 ? destinations[stopIdx] : pts[0];
-      let title, desc;
-      if (!D) {
-        title = pts[0]; desc = "গন্তব্য যোগ করলে এখানে ভ্রমণসূচি দেখাবে।";
-      } else if (stop !== prev) {
-        const from = prev ?? pts[0];
-        const km = legKm(from, stop);
-        title = `${from} → ${stop}`;
-        desc = `যাত্রা · ${bnDigits(km.km)} km${km.exact ? "" : " (আনুমানিক)"}`;
-      } else if (i === n - 1) {
-        title = stop; desc = "ফেরার প্রস্তুতি বা পরবর্তী যাত্রা।";
-      } else {
-        title = stop; desc = "দর্শনীয় স্থান ঘুরে দেখা ও রাতযাপন।";
-      }
-      const list = D ? placesOf(stop).slice(0, 4) : [];
+    // Each selected district gets its own row; the chosen days are shared among them.
+    const base = Math.floor(n / D), extra = n % D;
+    let day = 0, html = "";
+    destinations.forEach((stop, i) => {
+      const from = i === 0 ? pts[0] : destinations[i - 1];
+      const km = legKm(from, stop);
+      const count = n >= D ? base + (i < extra ? 1 : 0) : 1;
+      const first = day + 1, last = day + count;
+      day = last;
+      const badge = first === last ? `দিন ${bnDigits(first)}` : `দিন ${bnDigits(first)}–${bnDigits(last)}`;
+      const dateHtml = start ? `<small>${fmt(first)}</small>` : "";
+      const list = placesOf(stop).slice(0, 4);
       const placesHtml = list.length ? `<p class="places">দর্শনীয়: ${list.join("، ")}</p>` : "";
-      const dateHtml = start
-        ? `<small>${new Date(start.getTime() + i * 864e5).toLocaleDateString("bn-BD", { day: "numeric", month: "short", year: "numeric" })}</small>` : "";
-      html += `<div class="day"><div class="day-badge">দিন ${bnDigits(i + 1)}${dateHtml ? "<br>" + dateHtml : ""}</div>
-        <div><h3>${title}</h3><p>${desc}</p>${placesHtml}</div></div>`;
-      prev = stop;
-    }
+      html += `<div class="day"><div class="day-badge">${badge}${dateHtml ? "<br>" + dateHtml : ""}</div>
+        <div><h3>${from} → ${stop}</h3><p>যাত্রা · ${bnDigits(km.km)} কি.মি${km.exact ? "" : " (আনুমানিক)"}</p>${placesHtml}</div></div>`;
+    });
     $("itinerary").innerHTML = html;
   }
 
@@ -522,6 +572,81 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
     return u;
   }
 
+  /* ---------- Save current plan ---------- */
+  const CURRENT_KEY = "ub-trip-current";
+  function savePlanState() {
+    const state = {
+      origin: $("origin").value, destinations: [...destinations], startDate: $("startDate").value,
+      people: $("people").value, days: $("days").value, rate: $("rate").value,
+      food: $("food").value, hotel: $("hotel").value, rooms: $("rooms").value, tickets: $("tickets").value
+    };
+    try { localStorage.setItem(CURRENT_KEY, JSON.stringify(state)); toast("প্ল্যান সেভ হয়েছে।"); }
+    catch (e) { toast("এই ব্রাউজারে সেভ করা যাচ্ছে না।"); }
+  }
+  function loadPlanState() {
+    let st = null;
+    try { st = JSON.parse(localStorage.getItem(CURRENT_KEY) || "null"); } catch (e) { st = null; }
+    if (!st) return;
+    if (st.origin) $("origin").value = st.origin;
+    destinations = Array.isArray(st.destinations) ? st.destinations : [];
+    ["startDate", "people", "days", "rate", "food", "hotel", "rooms", "tickets"].forEach(id => {
+      if (st[id] !== undefined) $(id).value = st[id];
+    });
+  }
+
+  /* ---------- Trip card ---------- */
+  let photoUrl = "";
+  function cardText() {
+    const b = budget();
+    const km = legList(points()).reduce((s, l) => s + l.km, 0);
+    const name = $("cardName").value.trim();
+    return [
+      name ? name + " — ভ্রমণ কার্ড" : "ভ্রমণ কার্ড",
+      "রুট: " + points().join(" → "),
+      "মোট দূরত্ব: " + km + " কি.মি (আনুমানিক)",
+      b.days + " দিন · " + b.people + " জন",
+      "আনুমানিক মোট খরচ: " + money(b.total)
+    ].join("\n");
+  }
+  function renderCard() {
+    const b = budget();
+    const km = legList(points()).reduce((s, l) => s + l.km, 0);
+    const name = $("cardName").value.trim();
+    $("tcName").textContent = name || "আপনার নাম";
+    $("tcPhoto").innerHTML = photoUrl ? `<img src="${photoUrl}" alt="">` : "📷";
+    $("tcDest").textContent = points().join(" → ");
+    $("tcSub").textContent = $("startDate").value ? "শুরু: " + $("startDate").value : "";
+    $("tcStats").innerHTML = `
+      <span>মোট দূরত্ব <strong>${bnDigits(km)} কি.মি</strong></span>
+      <span>দিন <strong>${bnDigits(b.days)}</strong></span>
+      <span>জন <strong>${bnDigits(b.people)}</strong></span>
+      <span>খরচ <strong>${money(b.total)}</strong></span>`;
+    const svg = $("mapSvg").cloneNode(true);
+    svg.removeAttribute("id");
+    svg.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
+    $("tcMap").replaceChildren(svg);
+  }
+  $("cardPhoto").addEventListener("change", e => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const r = new FileReader();
+    r.onload = () => { photoUrl = r.result; renderCard(); };
+    r.readAsDataURL(f);
+  });
+  $("cardName").addEventListener("input", renderCard);
+  $("cardBtn").onclick = () => { renderCard(); $("cardDialog").showModal(); };
+  $("cardClose").onclick = () => $("cardDialog").close();
+  $("shareBtn").onclick = async () => {
+    const text = cardText();
+    if (navigator.share) {
+      try { await navigator.share({ title: "ভ্রমণ কার্ড", text }); return; }
+      catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    try { await navigator.clipboard.writeText(text); toast("কার্ডের বিবরণ কপি হয়েছে।"); }
+    catch (e) { toast("শেয়ার করা যাচ্ছে না।"); }
+  };
+  $("saveBtn").onclick = savePlanState;
+
   /* ---------- Events ---------- */
   function addSelected() {
     const d = $("destination").value;
@@ -547,6 +672,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 
   /* ---------- Boot ---------- */
   fillSelects();
+  loadPlanState();
   renderChips();
   update();
 
