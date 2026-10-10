@@ -66,6 +66,7 @@ button,input{font:inherit;color:inherit}
 .chips a{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:3px 12px;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none}
 .chips a:hover{border-color:var(--brand);color:var(--brand)}
 </style>
+<link rel="stylesheet" href="../assets/css/theme.css">
 <link rel="stylesheet" href="../assets/css/components.css">
 </head>
 <body>
@@ -174,6 +175,7 @@ $("list").addEventListener("click",open_);
 $("list").addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.matches("[data-go]"))open_(e)});
 route();   // কার্ড এখনই দেখায়; জেলার নম্বর পরে JSON থেকে আসে
 </script>
-<script src="../assets/js/components.js" defer></script>
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/components.js"></script>
 </body>
 </html>
