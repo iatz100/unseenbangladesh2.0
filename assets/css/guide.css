@@ -12,7 +12,7 @@ a{color:var(--brand)}
 .top nav a:hover{color:var(--ink);background:var(--surface)}
 .crumbs{font-size:14px;color:var(--muted);margin:4px 0 16px}
 .crumbs a{color:var(--muted)}
-main{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;overflow:hidden}
+main{border-radius:20px;padding:24px;overflow:hidden}
 h1{font-size:clamp(28px,5vw,40px);line-height:1.25;margin:4px 0 8px;letter-spacing:-.02em}
 h2{font-size:21px;line-height:1.35;margin:28px 0 8px;text-align:center;text-decoration:none;color:#0072ff}
 .kicker{margin:0;color:var(--muted);font-size:15px}
