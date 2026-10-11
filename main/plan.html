@@ -124,7 +124,10 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .tc-date[hidden]{display:none}
 .tc-map svg{position:absolute;inset:0;width:100%;height:100%;display:block}
 .tc-foot{flex:none}
-.tc-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 12px;padding:10px 6px 4px;font-size:13px;line-height:1.5}
+.tc-foot{display:flex;flex-wrap:nowrap;justify-content:space-between;align-items:center;gap:8px;padding:5px 8px 4px;font-size:12px;line-height:1.25;white-space:nowrap}
+.tc-foot>div:first-child{flex:1 1 auto;min-width:0;text-align:left;font-size:clamp(9px,2.8vw,13px);white-space:nowrap}
+.tc-brand{flex:0 0 auto;gap:4px;font-size:clamp(9px,2.7vw,12px);white-space:nowrap}
+.tc-brand img{width:16px;height:16px;flex:none}
 .tc-brand{display:flex;align-items:center;gap:6px;font-size:12px;color:#333;white-space:nowrap}
 .tc-brand img{width:18px;height:18px;flex:none}
 .tc-actions{display:flex;flex-wrap:nowrap;justify-content:center;gap:10px;margin:14px 18px 18px}
@@ -796,7 +799,7 @@ select:hover,input:hover{border-color:#d6d0c2}
     const bandH = PAD * 2 + Math.max(photoImg ? PH : 0, textH);
 
     const mapW = CARD_W - 2;
-    const footH = 10 + 2 * 20 + 4;
+    const footH = 34; // Compact single-row footer gives the map more space while preserving 3:4 card ratio.
     const mapH = Math.max(160, Math.round(CARD_W * 4 / 3) - bandH - footH - 2);
     const H = bandH + mapH + footH + 2;
 
@@ -858,14 +861,14 @@ select:hover,input:hover{border-color:#d6d0c2}
     const fy = y0 + 1 + mapH;
     ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
     ctx.font = `400 13px ${FONT}`; ctx.fillStyle = "#111";
-    ctx.fillText(ubT("সৌন্দর্যে ভরা, প্রিয় বাংলাদেশ"), 7, fy + 10 + 14);
-    ctx.font = `400 12px ${FONT}`; ctx.fillStyle = "#333";
+    ctx.fillText(ubT("সৌন্দর্যে ভরা প্রিয় বাংলাদেশ"), 7, fy + 24);
+    ctx.font = `400 11px ${FONT}`; ctx.fillStyle = "#333";
     const brand = "Unseen Bangladesh 2.0";
     const bw = ctx.measureText(brand).width;
     const bx = CARD_W - 7 - bw;
-    const by = fy + footH - 4 - 9;
+    const by = fy + 21;
     ctx.fillText(ubT(brand), bx, by + 4);
-    if (logoImg) ctx.drawImage(logoImg, bx - 6 - 18, by - 9, 18, 18);
+    if (logoImg) ctx.drawImage(logoImg, bx - 4 - 16, by - 8, 16, 16);
 
     ctx.restore();
     return canvas;
