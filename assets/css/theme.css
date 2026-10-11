@@ -341,7 +341,7 @@ html.sc-no-anim *,html.sc-no-anim *::before,html.sc-no-anim *::after{transition:
 .tools.fade-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent 100%);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent 100%)}
 
 /* "কতগুলো জেলা ঘুরেছেন?" card: 10px corners, background from the current theme */
-.cta.cta-count{border-radius:10px;background:#0f6b4f;color:#fff;border:1px solid var(--line);box-shadow:none}
+.cta.cta-count{border-radius:10px;background:#D7FCDC;color:#fff;border:1px solid var(--line);box-shadow:none}
 .cta.cta-count b{color:var(--brand)}
 .cta.cta-count:hover{box-shadow:none}
 
