@@ -8,6 +8,7 @@
 
 /* ---------- tokens ---------- */
 :root{
+  --ctl-line:#cbc2ae; --tip-bg:#14231f; --tip-fg:#ffffff;
   --paper:#f6f1e6;          /* sun-bleached cream */
   --bg:var(--paper);
   --surface:#fffdf8;
@@ -72,8 +73,6 @@ button{cursor:pointer}
 /* ---------- entrance motion ---------- */
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
-main>section,main>.hero,main>.app,main>.pvwrap,main>.container,.app,.pvwrap,.wrap{animation:rise .7s var(--ease) both}
-main>section:nth-child(2),main>.app:nth-of-type(2){animation-delay:.06s}
 
 /* ---------- containers ---------- */
 .container{max-width:1200px;margin:0 auto;padding:0 clamp(16px,3vw,28px)}
@@ -103,7 +102,7 @@ main>section:nth-child(2),main>.app:nth-of-type(2){animation-delay:.06s}
 .hero-dots button[aria-current]{background-color:var(--sun)}
 
 /* ---------- buttons ---------- */
-.btn,.btn-primary,.add-btn,.cta,.ss-btn,.map,.act .map,.call{
+.btn,.btn-primary,.add-btn,.cta,.ss-btn,a.map,button.map,.act .map,.call{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   font-weight:700;text-decoration:none;border-radius:999px;
   transition:transform .3s var(--ease),box-shadow .3s var(--ease),background-color .25s ease,border-color .25s ease,color .25s ease,filter .25s ease;
@@ -116,8 +115,8 @@ main>section:nth-child(2),main>.app:nth-of-type(2){animation-delay:.06s}
 .btn:disabled{opacity:.5;cursor:wait;transform:none}
 .cta{background:var(--ink);color:#fff;padding:14px 24px;box-shadow:0 10px 24px rgba(20,35,31,.22)}
 .cta:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(20,35,31,.28);color:#fff}
-.map,.act .map{background:var(--river);color:#fff;padding:8px 16px;font-size:13.5px;box-shadow:0 6px 16px rgba(13,92,99,.25)}
-.map:hover{background:var(--river-deep);color:#fff;transform:translateY(-1px)}
+a.map,button.map,.act .map{background:var(--river);color:#fff;padding:8px 16px;font-size:13.5px;box-shadow:0 6px 16px rgba(13,92,99,.25)}
+a.map:hover,button.map:hover{background:var(--river-deep);color:#fff;transform:translateY(-1px)}
 .call{background:var(--river);color:#fff;padding:10px 18px;box-shadow:0 8px 18px rgba(13,92,99,.22)}
 .call:hover{transform:translateY(-1px);filter:brightness(1.06);color:#fff}
 .call.sos{background:linear-gradient(135deg,#c23a2e,#d92d20)}
@@ -145,7 +144,7 @@ main>section:nth-child(2),main>.app:nth-of-type(2){animation-delay:.06s}
 .search input:focus,.name:focus{border-color:var(--river);box-shadow:0 0 0 4px rgba(13,92,99,.14)}
 .search input{padding:12px 16px 12px 42px}
 .tools input,.tools select{border-radius:999px}
-input,select,textarea{border-color:var(--line)}
+input,select,textarea{border-color:var(--ctl-line)}
 input:focus,select:focus,textarea:focus{border-color:var(--river);box-shadow:0 0 0 4px rgba(13,92,99,.14);outline:none}
 
 /* cards and surfaces */
@@ -261,7 +260,215 @@ body[data-page="privacy"] .pvc{
   box-shadow:none;
 }
 /* plan: the travel-route map keeps its square edges and shows the map at its real proportions */
-body[data-page="plan"] .route-card .map{
+body[data-page="plan"] div.map{
   border-radius:0!important;
   aspect-ratio:600 / 828!important;
 }
+
+/* =========================================================================
+   Page background (set by components.js from the scroll position)
+   light green at the top of the page, easing to light red at the bottom
+   ========================================================================= */
+:root{--page-bg:rgb(233,245,231)}
+html{background:var(--page-bg)!important}
+body{background-color:var(--page-bg)!important;background-image:none!important}
+body::before{display:none!important}
+
+/* =========================================================================
+   Minimal layout: no card surfaces, borders or shadows.
+   Content sits on the page background. Pressed / open / current states keep their fill so the
+   user can still see what is selected. Interactive controls keep a thin outline so they remain
+   recognisable as controls; form inputs keep their outline so they stay usable.
+   ========================================================================= */
+*,*::before,*::after{box-shadow:none!important;text-shadow:none!important}
+.card,.picker,.stage,.big,.sec,.pvc,.box,.route-card,.naming,.fam,.group,.tc,.pl,.upa,.ac,
+.row,.day,.rank,.total,.iab-note,.upa-note,.warn,.stat,.facts .f,.bdg,.tag,.src,.tabs,
+.seg,.box-note,.hint-box,.group-h,.ah,.ap,.in,.pop,.pop-track,.total-card,.card.center,
+section.card,article.card,div.card,aside.card,.chip-card,.mapbox,.naming,.credits{
+  background:transparent!important;border:0!important;border-color:transparent!important;
+  border-radius:0!important;padding-left:0;padding-right:0;
+}
+.ac.open .ah,.group.open .group-h,.tc:hover,.pl:hover{background:transparent!important}
+/* selected, current and open states keep their own fill (they are not in the list above) */
+.ac.open .ah{background:linear-gradient(120deg,var(--river-deep),var(--river) 75%)!important;color:#fff}
+.group.open .group-h{background:color-mix(in srgb,var(--dv,var(--river)) 12%,transparent)!important}
+/* the planner map keeps its own frame, drawn by the map */
+body[data-page="plan"] div.map{background:#eaf3ed!important;border:1px solid var(--line)!important}
+/* the photo hero keeps its image; its frame goes */
+.hero.vid{background:var(--river-deep)}
+/* controls keep an outline, without the shadow */
+.btn,.tb,.cat,.been,.chip,.map,.search input,.tools input,.tools select{border:1px solid var(--line)!important}
+.btn.primary,.btn-primary,.add-btn,.cta,.call,.sos,.chip[aria-pressed="true"],.cat[aria-pressed="true"],
+.been[aria-pressed="true"],.tb[aria-pressed="true"],.sc-lang{border-color:transparent!important}
+.sc-lang{border:1px solid #0d5c63!important}
+/* the footer keeps its own background, as before */
+/* footer background: only the footer body paints it (see components.css .sc-f-body); the wave area stays transparent */
+
+/* ---------- dark theme (design tokens) ----------
+   data-theme="dark" on <html> is set by the bootstrap script in <head>, before the first paint. */
+:root[data-theme="dark"]{
+  --paper:#0f1a18; --bg:var(--paper); --surface:#162522; --ink:#e8efe9; --text:var(--ink);
+  --muted:#9fb1aa; --mut:var(--muted); --line:#2c3f3a; --line-soft:#1f302c; --chip:#1d302c;
+  --river:#5cc4bc; --river-deep:#a6e6df; --river-mist:#17383a; --brand:var(--river); --brand-ink:#06201e;
+  --green:var(--river); --green2:var(--river-mist); --paddy:#7cc27a; --paddy-soft:#1d3322;
+  --clay:#e08a5f; --sun:#f2b65c; --danger:#ff8a7a; --warn:#e8a866;
+  --g1:var(--river-deep); --g2:var(--river); --g3:var(--river-mist); --g4:#15292a; --sel:var(--river);
+  --shadow-1:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3);
+  --shadow-2:0 2px 4px rgba(0,0,0,.35),0 14px 34px rgba(0,0,0,.4);
+  --shadow-3:0 4px 8px rgba(0,0,0,.4),0 26px 60px rgba(0,0,0,.5);
+  --page-bg:rgb(15,26,24);
+  --tip-bg:#e8efe9; --tip-fg:#0f1a18; --ctl-line:#3a5550;
+  color-scheme:dark;
+}
+:root[data-theme="dark"] body{background-image:radial-gradient(900px 420px at 100% -10%,rgba(92,196,188,.08),transparent 60%),radial-gradient(700px 380px at -10% 35%,rgba(124,194,122,.06),transparent 60%)}
+:root[data-theme="dark"] ::selection{background:#24524e;color:#e8efe9}
+:root[data-theme="dark"] a{color:#7fd6cf}
+:root[data-theme="dark"] a:hover{color:#a6e6df}
+:root[data-theme="dark"] input,:root[data-theme="dark"] select,:root[data-theme="dark"] textarea{background:var(--surface);color:var(--ink);border-color:var(--ctl-line)}
+
+/* switching theme: no colour fade, so nothing flickers */
+html.sc-no-anim *,html.sc-no-anim *::before,html.sc-no-anim *::after{transition:none!important;animation:none!important}
+
+/* ==========================================================================
+   Round 6 — thin controls, map-mode borders, option-row edge, count card
+   ========================================================================== */
+
+/* map mode buttons (জেলা / উপজেলা / বিশ্ব ম্যাপ): fine light border, clearer when selected */
+.seg button{border:1px solid var(--line);background:transparent;transition:border-color .15s,background-color .15s,color .15s}
+.seg button:hover{border-color:var(--brand)}
+.seg button[aria-pressed="true"]{border-color:var(--brand);background:var(--surface)}
+
+/* option row: a soft fade at the right edge only while more chips are hidden there */
+.tools.fade-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent 100%);mask-image:linear-gradient(90deg,#000 calc(100% - 36px),transparent 100%)}
+
+/* "কতগুলো জেলা ঘুরেছেন?" card: 10px corners, background from the current theme */
+.cta.cta-count{border-radius:10px;background:var(--surface);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.cta.cta-count b{color:var(--brand)}
+.cta.cta-count:hover{box-shadow:none}
+
+/* slimmer buttons everywhere: lower height and padding, 1px borders; still a comfortable touch target (40px) */
+.btn,.btn-primary,.add-btn,.call,.ss-btn{min-height:36px;padding:6px 14px;font-size:14px;line-height:1.2;border-width:1px;border-radius:8px}
+.cta{padding:6px 16px;font-size:14px;line-height:1.2;border-radius:99px;min-height:36px}
+.hero.vid .cta{padding:clamp(7px,1vw,10px) clamp(12px,1.6vw,18px)}
+.tb,.been{padding:4px 11px;font-size:12.5px;line-height:1.3;border-width:1px}
+.chip{padding:5px 11px;font-size:13px;line-height:1.3}
+.seg button{padding:3px 11px;font-size:12.5px;line-height:1.3}
+.tab{padding:6px 12px;font-size:14px;line-height:1.2}
+.sc-lang{min-height:34px;padding:5px 12px;font-size:13px;line-height:1.2}
+.sc-side-nav .sc-lang-side{padding:9px 14px}
+.sc-menu-btn{width:40px;height:40px}
+/* link-styled buttons keep white text on their coloured fill in dark mode */
+:root[data-theme="dark"] a.btn,:root[data-theme="dark"] a.btn:hover{color:#fff}
+
+/* ==========================================================================
+   Round 7 — one dropdown design, date hint, switch placement
+   ========================================================================== */
+
+/* every select: thin light border, same radius and colours in both themes, clear hover/focus */
+select{border:1px solid var(--ctl-line);border-radius:10px;background-color:var(--surface);color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
+select:hover{border-color:var(--brand)}
+select:focus,select:focus-visible{border-color:var(--brand);box-shadow:0 0 0 3px rgba(13,92,99,.12);outline:none}
+select option{background-color:var(--surface);color:var(--ink)}
+select option:checked{background-color:var(--chip)}
+:root[data-theme="dark"] select{color-scheme:dark}
+
+/* start date: the dd/mm/yyyy hint is hidden while the field is empty (the picker icon stays) */
+input[type="date"]:not(.has-value){color:transparent}
+input[type="date"]:not(.has-value)::-webkit-datetime-edit{color:transparent}
+input[type="date"]:not(.has-value)::-webkit-datetime-edit-fields-wrapper{color:transparent}
+input[type="date"]:not(.has-value)::-webkit-calendar-picker-indicator{opacity:.7}
+input[type="date"]:not(.has-value):focus::-webkit-datetime-edit-month-field,input[type="date"]:not(.has-value):focus::-webkit-datetime-edit-day-field,input[type="date"]:not(.has-value):focus::-webkit-datetime-edit-year-field{background:transparent!important;color:transparent!important}
+input[type="date"]:not(.has-value)::selection{background:transparent;color:transparent}
+/* dark mode dropdowns: a visible-but-thin border and an arrow that reads on the dark surface */
+:root[data-theme="dark"] select{border-color:#3a5550;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%235cc4bc' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+:root[data-theme="dark"] select:hover,:root[data-theme="dark"] select:focus{border-color:#5cc4bc}
+
+/* map level selector (জেলা / উপজেলা / বিশ্ব ম্যাপ): 5px corners on the group and on each option */
+.seg{border-radius:99px}
+.seg button{border-radius:999px}
+/* the group carries the border (thin, light) with 5px corners; options inside are plain and fill when selected */
+.seg{border:1px solid var(--line)!important;border-radius:999px!important;background:transparent!important}
+.seg button,.seg button:hover{border-color:transparent}
+.seg button[aria-pressed="true"]{border-color:var(--brand)}
+.seg button[aria-pressed="true"]{background:var(--surface)}
+:root[data-theme="dark"] .seg{border-color:#3a5550!important}
+
+/* ==========================================================================
+   Round 8 — homepage district list: division accordions, pill districts, aligned controls
+   Scoped to the homepage (body[data-page="index"]). Data, selection and counting are untouched.
+   ========================================================================== */
+/* each division (and each district / world continent in the same list) is its own rounded box in the division colour */
+body[data-page="index"] #groups .group,
+body[data-page="index"] #ugroups .group,
+body[data-page="index"] #wgroups .group{
+  background:var(--surface)!important;border:1px solid color-mix(in srgb,var(--dv,var(--line)) 75%,transparent)!important;border-radius:12px!important;
+  padding:0!important;margin:0 0 8px!important;overflow:hidden;
+}
+body[data-page="index"] .group-t{padding:6px 10px 6px 14px;min-height:36px}
+body[data-page="index"] .group-h{align-items:center;gap:8px;padding-right:12px}
+body[data-page="index"] .group-h .link{white-space:nowrap;flex:none}
+body[data-page="index"] .group-t .dot{background:var(--dv)}
+body[data-page="index"] .group-t svg{color:var(--dv)}
+body[data-page="index"] .group.open .group-h{background:color-mix(in srgb,var(--dv) 10%,transparent)!important}
+
+/* district pills: small, rounded, a light outline, equal gap and padding */
+body[data-page="index"] .chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px 12px}
+body[data-page="index"] .chip{
+  max-width:100%;border:1px solid color-mix(in srgb,var(--dv,#999) 45%,transparent)!important;
+  background:var(--surface)!important;color:var(--ink);border-radius:999px;padding:5px 12px;font-size:13px;line-height:1.3;
+}
+body[data-page="index"] .chip:hover{border-color:var(--dv)!important}
+body[data-page="index"] .chip[aria-pressed="true"]{background:var(--dv)!important;border-color:var(--dv)!important;color:#fff!important;font-weight:600}
+/* amber division: dark text on the selected fill keeps it readable */
+body[data-page="index"] .group[data-dv="Barishal"] .chip[aria-pressed="true"]{color:#14231f!important}
+
+/* controls share one height: search box and the map-level selector */
+body[data-page="index"] .search input{height:36px;padding-top:0;padding-bottom:0}
+body[data-page="index"] .seg{height:36px;align-items:center;padding:2px}
+body[data-page="index"] .seg button{height:28px;display:inline-flex;align-items:center;justify-content:center}
+/* closed divisions stay closed: the pills show only in the open division (or while searching) */
+body[data-page="index"] .chips{display:none}
+body[data-page="index"] .group.open .chips,body[data-page="index"] .groups.searching .chips{display:flex}
+
+/* ==========================================================================
+   Round 9 — rounder map selector, guide division borders, emergency card borders
+   ========================================================================== */
+.seg button:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* travel guide: each division is a thin, rounded box in the division colour (the same palette as the homepage) */
+#grid > section.ac{border:1px solid var(--dvc,var(--line))!important;border-radius:14px!important;background:var(--surface)!important;box-shadow:none!important;overflow:hidden}
+#grid > section.ac.open{border-color:var(--dvc,var(--line))!important}
+#grid > section.ac[data-v="ঢাকা"]{--dvc:#0f6b4f}
+#grid > section.ac[data-v="চট্টগ্রাম"]{--dvc:#2563eb}
+#grid > section.ac[data-v="সিলেট"]{--dvc:#7c3aed}
+#grid > section.ac[data-v="বরিশাল"]{--dvc:#f59e0b}
+#grid > section.ac[data-v="খুলনা"]{--dvc:#db2777}
+#grid > section.ac[data-v="রাজশাহী"]{--dvc:#0891b2}
+#grid > section.ac[data-v="রংপুর"]{--dvc:#ea580c}
+#grid > section.ac[data-v="ময়মনসিংহ"]{--dvc:#65a30d}
+#grid > section.ac .ah{align-items:center;padding-left:12px;padding-right:12px}
+#grid > section.ac.open .ah{background:color-mix(in srgb,var(--dvc,var(--river)) 10%,var(--surface))!important;color:var(--ink)!important}
+#grid > section.ac.open .ah .no{background:var(--dvc,var(--river));color:#fff}
+
+/* planner: the intro block is shorter so the form starts closer to the heading */
+body[data-page="plan"] .hero{padding-top:28px;padding-bottom:20px}
+
+/* emergency services: every service card has a light, clear border and the same radius and padding */
+#hot .card,#list .card{background:var(--surface)!important;border:1px solid var(--line)!important;border-radius:14px!important;padding:12px 14px!important;box-shadow:none!important}
+#hot .card:hover,#list .card:hover{border-color:var(--brand)!important}
+
+/* ==========================================================================
+   Round 10 — dark theme: the pieces that still kept light colours
+   ========================================================================== */
+:root[data-theme="dark"] a.call{color:#06201e}
+:root[data-theme="dark"] .upload{border-color:#3a5550}
+:root[data-theme="dark"] body[data-page="plan"] div.map{background:#15282a!important}
+:root[data-theme="dark"] .map-pill{background:rgba(15,26,24,.92);color:#e8efe9}
+:root[data-theme="dark"] .map-brand{color:#e8efe9}
+/* planner route map: the SVG keeps its shapes, the colours follow the dark palette */
+:root[data-theme="dark"] #mapSvg path.dist{fill:#1f3a36;stroke:#3d6258}
+:root[data-theme="dark"] #mapSvg path.dist.on{fill:#2e6b57;stroke:#5cc4bc}
+:root[data-theme="dark"] #mapSvg path.dist.origin{fill:#5cc4bc;stroke:#a6e6df}
+:root[data-theme="dark"] #mapSvg text{fill:#e8efe9!important;stroke:#0f1a18!important}
+:root[data-theme="dark"] #mapSvg path[stroke="#0f6b4f"]{stroke:#7fd6cf}
+:root[data-theme="dark"] #mapSvg circle[stroke="#0f6b4f"]{stroke:#7fd6cf}
