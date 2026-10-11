@@ -170,35 +170,49 @@ body.sc-menu-open #sc-menu-btn svg{transform:rotate(90deg)}
 :root[data-theme="dark"] .sc-theme{border-color:#5cc4bc;color:#5cc4bc}
 :root[data-theme="dark"] .sc-theme:hover{background:#5cc4bc;color:#06201e}
 
-/* ---------- side menu v3: hover only with a mouse, no accent bar, tools at the very bottom ---------- */
-.sc-side{overflow-y:auto}
+/* ---------- side menu FINAL: flex column; nav scrolls and fills the space; tools pinned to the bottom ---------- */
+.sc-side{display:flex;flex-direction:column;overflow:hidden}
+.sc-side-h{flex:none}
 
-.sc-side-nav{gap:2px;padding:12px 0 0;flex:0 0 auto}
+.sc-side-nav{
+  flex:1 1 auto;min-height:0;margin:0;
+  display:flex;flex-direction:column;gap:2px;
+  padding:12px 0;overflow-y:auto;overscroll-behavior:contain;
+  align-items:stretch
+}
 .sc-side-nav a,.sc-side-nav button{
-  position:relative;padding:9px 14px;border-radius:12px;
+  position:relative;flex:none;
+  padding:9px 14px;border-radius:12px;
   font-size:15px;font-weight:600;line-height:1.4;
   transition:background-color .25s ease,color .25s ease,transform .3s cubic-bezier(.22,.7,.2,1)
 }
 
-/* touch screens: no sticky hover state after a tap */
+/* touch screens: no sticky hover after a tap */
 @media (hover:none){
   .sc-side-nav a:hover,.sc-side-nav button:hover{background:transparent;color:var(--sc-ink,#14231f);transform:none}
 }
-
-/* mouse: slide right and tint on hover */
+/* mouse: slide right and tint */
 @media (hover:hover) and (pointer:fine){
   .sc-side-nav a:hover,.sc-side-nav button:hover{background:rgba(15,107,79,.10);color:#0f6b4f;transform:translateX(4px)}
   :root[data-theme="dark"] .sc-side-nav a:hover,
   :root[data-theme="dark"] .sc-side-nav button:hover{background:rgba(92,196,188,.12);color:#5cc4bc}
 }
 
-/* bottom block: always the last thing in the panel */
-.sc-side-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--sc-line,#e4dbc8)}
-.sc-side .sc-side-f{margin:0 0 12px;padding:0;font-size:12.5px;text-align:center}
+/* bottom block: never shrinks, always at the bottom of the panel */
+.sc-side-bottom{flex:none;margin-top:auto;padding-top:14px;border-top:1px solid var(--sc-line,#e4dbc8)}
+.sc-side .sc-side-f{margin:0 0 12px;padding:0;font-size:12.5px;line-height:1.5;text-align:center;color:var(--sc-muted,#5f6b65)}
+
+/* one row: wide language button on the left, square theme button on the right */
 .sc-side .sc-side-tools{display:grid;grid-template-columns:minmax(0,1fr) 40px;align-items:center;gap:10px;margin:0}
-.sc-side .sc-lang-side{width:auto;min-width:0;height:38px;margin:0;padding:0 12px;border-radius:12px;font-size:14px;justify-content:center}
-.sc-side .sc-theme{width:40px;height:38px;min-height:38px;margin:0;border-radius:12px}
-.sc-side .sc-theme svg{width:18px;height:18px}
+.sc-side .sc-side-tools .sc-lang-side{
+  width:auto;min-width:0;height:40px;margin:0;padding:0 12px;
+  border-radius:12px;font-size:14px;justify-content:center;text-align:center
+}
+.sc-side .sc-side-tools .sc-theme{
+  width:40px;height:40px;min-width:40px;min-height:40px;margin:0;padding:0;
+  border-radius:12px;justify-content:center;align-items:center
+}
+.sc-side .sc-side-tools .sc-theme svg{width:18px;height:18px}
 
 @media (prefers-reduced-motion:reduce){
   .sc-side-nav a,.sc-side-nav button{transition:none!important}
