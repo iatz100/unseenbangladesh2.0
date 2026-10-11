@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="bn">
 <head>
+<script id="sc-theme-init">(function(){var r=document.documentElement,t="light";try{t=localStorage.getItem("ub.theme")==="dark"?"dark":"light"}catch(e){}r.setAttribute("data-theme",t);r.style.background=t==="dark"?"#0f1a18":"#f6f1e6"})();</script>
+<script src="../assets/js/components-data.js"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="../assets/images/favicon.ico" sizes="48x48">
@@ -15,20 +17,21 @@ body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 "Anek Bangla"
 button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 .app{max-width:1080px;margin:0 auto;padding:22px 16px 42px}
-.hero{margin-bottom:18px;text-align:center}
+.hero{margin-bottom:12px;text-align:center}
 .eyebrow{font-size:13px;font-weight:700;color:var(--green)}
 .hero h1{font-size:clamp(24px,4vw,34px);line-height:1.25;margin:4px 0 8px}
 .hero p{color:var(--muted);margin:0 auto;max-width:700px}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.86fr);gap:18px;align-items:start}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.86fr);gap:12px;align-items:start}
 .stack{display:grid;gap:16px;min-width:0}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow);min-width:0}
-.card h2{font-size:17px;margin:0 0 14px}
-.field{display:grid;gap:6px;margin-bottom:13px}
-.field label{font-size:13px;font-weight:700;color:var(--muted)}
-select,input[type=number],input[type=date]{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:var(--surface);outline:none;min-width:0}
+.app .card{border:1px solid var(--ctl-line)!important;border-radius:12px!important;padding:12px!important;box-shadow:none;min-width:0}
+.app .card.route-section{background:transparent!important;border:0!important;border-radius:0!important;padding:0 2px!important;box-shadow:none}
+.card h2{font-size:16px;margin:0 0 10px}
+.field{display:grid;gap:4px;margin-bottom:10px}
+.field label{font-size:12px;font-weight:700;color:var(--muted)}
+.field select,.field input[type=number],.field input[type=date],.field input[type=text]{box-sizing:border-box;width:100%;height:38px;padding:0 12px;border:1px solid var(--ctl-line);border-radius:8px;background:var(--surface);outline:none;min-width:0}
 select:focus,input:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green2)}
-.btn,.icon-btn{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:9px 12px}
-.btn-primary{background:var(--green);color:#fff;border:1px solid var(--green);font-weight:800;padding:12px 16px;border-radius:12px;width:100%}
+.btn,.icon-btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px}
+.btn-primary{background:var(--green);color:#fff;border:1px solid var(--green);font-weight:800;padding:6px 14px;border-radius:8px;width:100%}
 .btn-row{display:flex;gap:8px;flex-wrap:wrap}
 .btn-row .btn{flex:1 1 auto}
 .btn.danger{color:var(--danger)}
@@ -49,27 +52,27 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .map-brand{position:absolute;left:0;right:0;bottom:8px;text-align:center;font-size:11px;font-weight:700;color:#174b35;opacity:.75;pointer-events:none}
 .map-note{font-size:12px;color:var(--muted);margin:9px 0 0}
 .map-fallback{padding:40px 16px;text-align:center;color:var(--muted);font-size:14px}
-.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.stat{border:1px solid var(--line);border-radius:14px;padding:13px}
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.stat{border:1px solid var(--ctl-line);border-radius:10px;padding:9px 10px}
 .stat .label{color:var(--muted);font-size:12px;display:block}
 .stat strong{display:block;font-size:20px;margin-top:4px}
 .stat .sub{font-size:11px;color:var(--muted)}
-.cost-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+.cost-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
 .cost-row:last-of-type{border-bottom:0}
-.cost-icon{width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:11px;background:var(--green2);font-size:18px}
+ .cost-icon{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:11px;background:var(--green2);font-size:18px}
 .cost-name{flex:1;min-width:0}
 .cost-name strong{display:block;font-size:14px}
 .cost-name small{color:var(--muted);font-size:12px}
 .cost-amount{font-weight:800;white-space:nowrap}
 .total{margin-top:12px;padding:14px;border-radius:14px;background:var(--green2);display:flex;justify-content:space-between;gap:10px;align-items:center}
 .total strong{font-size:22px;color:var(--green)}
-.sub-h{font-size:14px;margin:16px 0 8px}
+.sub-h{font-size:14px;margin:12px 0 6px}
 .bar-row{display:grid;grid-template-columns:110px 1fr 42px;gap:8px;align-items:center;font-size:13px;margin-bottom:7px}
 .bar{height:8px;background:var(--line);border-radius:6px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--green);border-radius:6px}
 .bar-row b{text-align:right;font-weight:700}
 .itinerary{display:grid;gap:10px}
-.day{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:12px;border:1px solid var(--line);border-radius:13px}
+.day{display:grid;grid-template-columns:64px 1fr;gap:10px;padding:10px;border:1px solid var(--ctl-line);border-radius:10px}
 .day-badge{background:var(--green2);color:var(--green);border-radius:10px;text-align:center;padding:8px 4px;font-weight:800;font-size:12px;line-height:1.3;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .day-badge small{font-weight:600;font-size:11px;color:var(--muted)}
 .day h3{font-size:15px;margin:0 0 3px}
@@ -78,11 +81,11 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 @media(max-width:780px){
   .layout{grid-template-columns:minmax(0,1fr)}
   .app{padding:16px 12px 30px}
-  .card{padding:15px}
+  .app .card{padding:10px!important}
 }
 @media(max-width:390px){
   .stats{gap:8px}
-  .stat{padding:10px}
+  .stat{padding:8px}
   .stat strong{font-size:18px}
 }
 @media print{
@@ -103,7 +106,7 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
 .tc-head h2{font-size:17px;margin:0;text-align:center}
 .tc-editor{display:grid;grid-template-columns:88px 1fr;gap:14px;align-items:center;margin-bottom:14px}
 .tc-editor .tc-photo{border:1px dashed #b9b9b9;color:var(--muted)}
-.tc-editor input[type=text]{width:100%;font:inherit;font-size:16px;padding:12px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--text);outline:none}
+.tc-editor input[type=text]{box-sizing:border-box;width:100%;height:38px;font:inherit;font-size:15px;padding:0 12px;border:1px solid var(--ctl-line);border-radius:8px;background:var(--surface);color:var(--text);outline:none}
 .tc-editor input[type=text]:focus{border-color:var(--green);box-shadow:0 0 0 3px var(--green2)}
 .tc-photo[hidden],.tc-name[hidden]{display:none}
 .tc-card{background:#fff;color:#111;border-radius:14px;overflow:hidden;text-align:left;min-width:0;display:flex;flex-direction:column;aspect-ratio:3/4}
@@ -136,16 +139,16 @@ path.dist.origin{fill:#137653;stroke:#0b4d36;stroke-width:1.2}
   .tc-actions{margin:14px 14px 16px;gap:8px}
 }
 /* ---- Route card ---- */
-select,input[type=number],input[type=date]{background-color:#fff;transition:border-color .2s ease,box-shadow .2s ease}
+.field select,.field input[type=number],.field input[type=date],.field input[type=text]{background-color:var(--surface);transition:border-color .2s ease,box-shadow .2s ease}
 select{appearance:none;-webkit-appearance:none;padding-right:38px;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%230f6b4f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 select:hover,input:hover{border-color:#d6d0c2}
 .route-card .field label{font-size:12.5px;letter-spacing:.2px}
-.add-row{display:flex;justify-content:center;margin:14px 0 4px}
+.add-row{display:flex;justify-content:center;margin:10px 0 2px}
 .add-btn{min-width:110px;padding:6px 18px;border:0;border-radius:999px;background:var(--green);color:#fff;font:inherit;font-size:14px;font-weight:400;line-height:1.4;cursor:pointer;transition:transform .15s ease,box-shadow .2s ease}
 .add-btn:hover{box-shadow:0 8px 18px rgba(15,107,79,.25);transform:translateY(-1px)}
 .add-btn:active{transform:scale(.97)}
 .add-btn:focus-visible{outline:3px solid var(--green2);outline-offset:2px}
-.destinations{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;min-height:34px}
+.destinations{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;min-height:30px}
 .destinations:empty::before{content:"কোনো গন্তব্য যোগ হয়নি";font-size:13px;color:var(--muted);padding:6px 0}
 .chip{display:inline-flex;align-items:center;gap:8px;padding:4px 4px 4px 4px;border-radius:999px;background:var(--green2);border:1px solid #cfe8da;color:var(--green);font-size:13.5px;font-weight:700;animation:chipIn .28s ease both}
 .chip-acts{display:inline-flex;gap:2px;margin-right:2px}
@@ -153,7 +156,7 @@ select:hover,input:hover{border-color:#d6d0c2}
 .chip-acts button:hover:not(:disabled){background:#fff;box-shadow:0 2px 6px rgba(15,107,79,.18)}
 .chip-acts button:disabled{opacity:.35;cursor:default}
 @keyframes chipIn{from{opacity:0;transform:translateY(-4px) scale(.95)}to{opacity:1;transform:none}}
-.route-meta{display:grid;gap:12px;margin-top:16px;padding-top:16px;border-top:1px dashed var(--line)}
+.route-meta{display:grid;gap:10px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
 .route-meta .field{margin-bottom:0}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 .chip{padding:0 4px 0 0;gap:4px}
@@ -177,12 +180,24 @@ select:hover,input:hover{border-color:#d6d0c2}
 .chip.open .chip-acts .chip-close{background:#fff;color:var(--danger);font-size:16px}
 .chip.open .chip-acts .chip-close:hover{background:#fbe4e1}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&display=swap">
 <link rel="stylesheet" href="../assets/css/theme.css">
+<script src="../assets/js/i18n.js"></script>
+<style>
+.field .date-field{position:relative}
+.field .date-field #startDateText{padding-right:36px;cursor:pointer}
+.field .date-field .date-overlay{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:1;margin:0;border:0;padding:0}
+.field .date-field .date-overlay::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:100%;height:100%;cursor:pointer}
+.field .date-field .date-clear{position:absolute;right:6px;top:50%;transform:translateY(-50%);z-index:2;width:26px;height:26px;border:0;border-radius:50%;background:transparent;color:var(--muted,#7a7f78);font-size:18px;line-height:1;cursor:pointer}
+.field .date-field .date-clear[hidden]{display:none}
+</style>
 <link rel="stylesheet" href="../assets/css/components.css">
 </head>
 <body data-page="plan">
 <div data-component="header"></div>
+<script src="../assets/js/mount.js"></script>
 <div data-component="side-menu"></div>
+<script src="../assets/js/mount.js"></script>
 
 <main class="app">
   <section class="hero">
@@ -208,11 +223,15 @@ select:hover,input:hover{border-color:#d6d0c2}
         </div>
         <div class="add-row"><button class="btn add-btn" id="addDest" type="button">যোগ করুন</button></div>
         <div class="destinations" id="chips"></div>
-        <p class="hint">প্রথম জেলা বাছলেই যোগ হবে।</p>
+        <p class="hint" id="destHint">প্রথম জেলা বাছলেই যোগ হবে।</p>
         <div class="route-meta">
           <div class="field">
             <label for="startDate">শুরুর তারিখ (ঐচ্ছিক)</label>
-            <input id="startDate" type="date">
+            <div class="date-field">
+              <input id="startDateText" type="text" readonly tabindex="-1" aria-hidden="true" autocomplete="off">
+              <input id="startDate" type="date" class="date-overlay" aria-label="শুরুর তারিখ">
+              <button type="button" id="startDateClear" class="date-clear" aria-label="তারিখ মুছুন" hidden>&times;</button>
+            </div>
           </div>
           <div class="grid2">
             <div class="field">
@@ -227,7 +246,7 @@ select:hover,input:hover{border-color:#d6d0c2}
         </div>
       </section>
 
-      <section class="card">
+      <section class="card route-section">
         <div class="section-heading">
           <h2>আপনার ভ্রমণ রুট</h2>
           <span class="hint" id="routeCount"></span>
@@ -330,6 +349,7 @@ select:hover,input:hover{border-color:#d6d0c2}
 </main>
 
 <div data-component="footer"></div>
+<script src="../assets/js/mount.js"></script>
 
 <script>
 (() => {
@@ -449,6 +469,7 @@ select:hover,input:hover{border-color:#d6d0c2}
       return `<span class="chip${openChip === i ? " open" : ""}" data-i="${i}">${body}</span>`;
     }).join("");
     $("routeCount").textContent = bnDigits(destinations.length) + " টি গন্তব্য";
+    $("destHint").hidden = destinations.length > 0;
   }
 
   $("chips").addEventListener("click", e => {
@@ -484,6 +505,7 @@ select:hover,input:hover{border-color:#d6d0c2}
     svg.appendChild(base);
     svg.appendChild(layer);
     mapReady = true;
+    $("mapFallback").hidden = true;
   }
 
   function renderMap() {
@@ -550,7 +572,7 @@ select:hover,input:hover{border-color:#d6d0c2}
       $("itinerary").innerHTML = `<p class="empty">গন্তব্য যোগ করলে এখানে ভ্রমণসূচি দেখাবে।</p>`;
       return;
     }
-    const startVal = $("startDate").value;
+    const startVal = startISO();
     let start = null;
     if (startVal) { const [y, m, d] = startVal.split("-").map(Number); start = new Date(y, m - 1, d); }
     const fmt = dayNo => start
@@ -669,7 +691,7 @@ select:hover,input:hover{border-color:#d6d0c2}
     const svg = $("mapSvg").cloneNode(true);
     svg.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
     $("tcMapSvg").replaceChildren(svg);
-    const sd = $("startDate").value, dateEl = $("tcDate");
+    const sd = startISO(), dateEl = $("tcDate");
     if (sd) {
       const [y, m, d] = sd.split("-").map(Number);
       dateEl.textContent = new Date(y, m - 1, d).toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" });
@@ -751,7 +773,7 @@ select:hover,input:hover{border-color:#d6d0c2}
     const b = budget();
     const km = Math.round(legList(points()).reduce((s, l) => s + l.km, 0));
     const name = $("cardName").value.trim();
-    const sd = $("startDate").value;
+    const sd = startISO();
     const mapInfo = mapSvgBlob();
     const [coverImg, photoImg, logoImg, mapImg] = await Promise.all([
       loadImg("../assets/images/travel-1.webp"), loadImg(photoUrl || null),
@@ -889,6 +911,21 @@ select:hover,input:hover{border-color:#d6d0c2}
     destinations = destinations.filter(d => d !== $("origin").value);
     renderChips(); update();
   };
+  // the date hint stays hidden until a date is chosen (CSS keys off the has-value class)
+  // start date (optional): the box stays empty until a date is picked in the calendar; the calendar opens
+  // from the transparent date input over it. Clearing it puts the plan back to "no start date".
+  const sdEl = $("startDate"), sdText = $("startDateText"), sdClear = $("startDateClear");
+  const startISO = () => sdEl.value || "";
+  const syncStartDate = () => {
+    const iso = sdEl.value;
+    sdText.value = iso ? iso.split("-").reverse().join("/") : "";
+    sdEl.classList.toggle("has-value", !!iso);
+    sdClear.hidden = !iso;
+  };
+  sdEl.addEventListener("input", syncStartDate); sdEl.addEventListener("change", syncStartDate);
+  sdEl.addEventListener("click", () => { try { if (sdEl.showPicker) sdEl.showPicker(); } catch (e) {} });
+  sdClear.addEventListener("click", () => { sdEl.value = ""; sdEl.dispatchEvent(new Event("input", { bubbles: true })); });
+  syncStartDate();
   ["people", "days", "startDate", "rate", "local", "food", "tickets", "contPct"]
     .forEach(id => $(id).addEventListener("input", update));
   $("googleMaps").onclick = () => {
@@ -911,7 +948,6 @@ select:hover,input:hover{border-color:#d6d0c2}
     });
 })();
 </script>
-<script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/components.js"></script>
 </body>
 </html>
