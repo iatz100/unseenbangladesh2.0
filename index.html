@@ -472,9 +472,14 @@ new MutationObserver(()=>{
   if(isDarkSite()){
     if(!darkSession()&&!sharedThemeLink){startDarkSession();themeChosen="midnight";theme=THEMES.find(t=>t.id==="midnight");if(typeof render==="function")render()}
   }else{
-    setDarkSession(false);                                  // dark mode ended: the visitor's own map theme is used again
-    if(!themeChosen){theme=defaultTheme();if(typeof render==="function")render()}
+  setDarkSession(false);
+  if(!themeChosen || theme.id!=="emerald"){
+    themeChosen="emerald";
+    theme=THEMES.find(t=>t.id==="emerald");
+    store.set("bdmap.theme","emerald");
+    if(typeof render==="function")render();
   }
+}
 }).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 let showLabels=store.get("bdmap.labels",true);
 let userName=store.get("bdmap.name","");
