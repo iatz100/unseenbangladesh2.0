@@ -7,7 +7,7 @@
     },
     {
       "source": "/tourist",
-      "destination": "/guide/tourist.html"
+      "destination": "/main/guide.html"
     }
   ]
 }
