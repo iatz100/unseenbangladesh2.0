@@ -98,7 +98,6 @@ button{cursor:pointer}
 .hero.vid .cta{background:var(--sun);color:var(--ink);box-shadow:0 10px 26px rgba(242,165,65,.35)}
 .hero.vid .cta:hover{background:#ffb858}
 .hero.vid p{color:rgba(255,255,255,.9)}
-.hero-dots button{background:rgba(255,255,255,.4)}
 .hero-dots button[aria-current]{background-color:var(--sun)}
 
 /* ---------- buttons ---------- */
