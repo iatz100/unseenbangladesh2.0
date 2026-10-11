@@ -170,36 +170,36 @@ body.sc-menu-open #sc-menu-btn svg{transform:rotate(90deg)}
 :root[data-theme="dark"] .sc-theme{border-color:#5cc4bc;color:#5cc4bc}
 :root[data-theme="dark"] .sc-theme:hover{background:#5cc4bc;color:#06201e}
 
-/* ---------- side menu v2: slim options, hover motion, bottom-pinned tools ---------- */
+/* ---------- side menu v3: hover only with a mouse, no accent bar, tools at the very bottom ---------- */
 .sc-side{overflow-y:auto}
 
 .sc-side-nav{gap:2px;padding:12px 0 0;flex:0 0 auto}
 .sc-side-nav a,.sc-side-nav button{
-  position:relative;padding:9px 14px 9px 18px;border-radius:12px;
+  position:relative;padding:9px 14px;border-radius:12px;
   font-size:15px;font-weight:600;line-height:1.4;
   transition:background-color .25s ease,color .25s ease,transform .3s cubic-bezier(.22,.7,.2,1)
 }
-/* accent bar that grows on hover / on the current page */
-.sc-side-nav a::before,.sc-side-nav button::before{
-  content:"";position:absolute;left:6px;top:50%;width:3px;height:0;border-radius:3px;
-  background:#0f6a72;transform:translateY(-50%);
-  transition:height .3s cubic-bezier(.22,.7,.2,1)
-}
-.sc-side-nav a:hover,.sc-side-nav button:hover{transform:translateX(4px)}
-.sc-side-nav a:hover::before,.sc-side-nav button:hover::before,
-.sc-side-nav a[aria-current="page"]::before{height:55%}
-.sc-side-nav a[aria-current="page"]{padding-top:9px;padding-bottom:9px;border-width:1px}
-:root[data-theme="dark"] .sc-side-nav a::before,
-:root[data-theme="dark"] .sc-side-nav button::before{background:#5cc4bc}
 
-/* bottom block: pinned to the bottom of the panel */
+/* touch screens: no sticky hover state after a tap */
+@media (hover:none){
+  .sc-side-nav a:hover,.sc-side-nav button:hover{background:transparent;color:var(--sc-ink,#14231f);transform:none}
+}
+
+/* mouse: slide right and tint on hover */
+@media (hover:hover) and (pointer:fine){
+  .sc-side-nav a:hover,.sc-side-nav button:hover{background:rgba(15,107,79,.10);color:#0f6b4f;transform:translateX(4px)}
+  :root[data-theme="dark"] .sc-side-nav a:hover,
+  :root[data-theme="dark"] .sc-side-nav button:hover{background:rgba(92,196,188,.12);color:#5cc4bc}
+}
+
+/* bottom block: always the last thing in the panel */
 .sc-side-bottom{margin-top:auto;padding-top:14px;border-top:1px solid var(--sc-line,#e4dbc8)}
+.sc-side .sc-side-f{margin:0 0 12px;padding:0;font-size:12.5px;text-align:center}
 .sc-side .sc-side-tools{display:grid;grid-template-columns:minmax(0,1fr) 40px;align-items:center;gap:10px;margin:0}
 .sc-side .sc-lang-side{width:auto;min-width:0;height:38px;margin:0;padding:0 12px;border-radius:12px;font-size:14px;justify-content:center}
 .sc-side .sc-theme{width:40px;height:38px;min-height:38px;margin:0;border-radius:12px}
 .sc-side .sc-theme svg{width:18px;height:18px}
-.sc-side .sc-side-f{margin:12px 0 0;padding:0;font-size:12.5px}
 
 @media (prefers-reduced-motion:reduce){
-  .sc-side-nav a,.sc-side-nav button,.sc-side-nav a::before,.sc-side-nav button::before{transition:none!important}
+  .sc-side-nav a,.sc-side-nav button{transition:none!important}
 }
