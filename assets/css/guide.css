@@ -228,7 +228,7 @@ h2 small{color:var(--mut);font-weight:400;font-size:.8rem}
 .cta b{display:block;color:#0f6b4f;font-size:1.15rem}
 .cta p{margin:4px 0 0;color:#6b716d;font-size:.92rem;max-width:620px}
 .cta .btn{display:inline-block;background:#0f6b4f;color:#fff;text-decoration:none;white-space:nowrap}
-.cta .btn:hover{background:var(--g1)}
+.cta .btn:hover{background:#e3f2fd}
 /* ---- জনপ্রিয় স্লাইডার: মাউস ড্র্যাগ ও টাচ স্ক্রল ---- */
 .pop-track{cursor:grab;overscroll-behavior-x:contain}
 .pop-track.drag{cursor:grabbing;user-select:none}
