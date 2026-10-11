@@ -59,7 +59,7 @@ html:not(.sc-components-ready) .sc-side{transition:none!important}
 .sc-side-nav{display:flex;flex-direction:column;gap:4px;padding:16px 0;align-items:stretch}
 .sc-side-nav a,.sc-side-nav button{display:flex;align-items:center;width:100%;margin:0;text-align:left;border:1px solid transparent;background:transparent;padding:13px 16px;border-radius:14px;font:inherit;font-size:16px;font-weight:700;color:var(--sc-ink,#14231f);text-decoration:none;cursor:pointer;transition:background-color .2s ease,color .2s ease,border-color .2s ease}
 .sc-side-nav a:hover,.sc-side-nav button:hover{background:rgba(15,107,79,.10);color:#0f6b4f;border-color:transparent}
-.sc-side-nav a[aria-current="page"]{background:rgba(15,107,79,.08);color:#0f6b4f;border:1px solid rgba(15,107,79,.45)}
+.sc-side-nav a[aria-current="page"]{background:rgba(15,107,79,.08);color:#0f6b4f;border:1px solid rgba(15,107,79,.25)}
 .sc-side-f{margin:auto 0 0;color:var(--sc-muted,#5f6b65);font-size:13px;text-align:center;padding-top:18px}
 body.sc-menu-open{overflow:hidden}
 body.sc-menu-open .sc-scrim{opacity:1;visibility:visible;transition-delay:0s}
