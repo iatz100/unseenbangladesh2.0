@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="bn" translate="no">
 <head>
+<script id="sc-theme-init">(function(){var r=document.documentElement,t="light";try{t=localStorage.getItem("ub.theme")==="dark"?"dark":"light"}catch(e){}r.setAttribute("data-theme",t);r.style.background=t==="dark"?"#0f1a18":"#f6f1e6"})();</script>
+<script src="./assets/js/components-data.js"></script>
 <meta charset="utf-8">
 <!-- opened on the old workers.dev address (shared before the domain moved): hide the page, the script below moves to unseenbangladesh2-0.vercel.app -->
 <script>if(/\.workers\.dev$/.test(location.hostname))document.documentElement.style.visibility="hidden"</script>
@@ -39,7 +41,7 @@ window.__D=window.__load();
 <meta name="theme-color" content="#0f6b4f">
 <link rel="icon" href="assets/images/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon-96.png">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-19.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/images/icon-192.png">
 <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png">
 <meta name="apple-mobile-web-app-title" content="Unseen Bangladesh 2.0">
 <!-- link previews (Facebook, Messenger, WhatsApp, X): the share banner, not a random photo from the page -->
@@ -59,35 +61,8 @@ window.__D=window.__load();
 <style>
 /* Anek Bangla (SIL OFL 1.1, see assets/fonts/OFL.txt), self-hosted so the page has no third-party requests */
 /* bengali */
-@font-face {
-  font-family: 'Anek Bangla';
-  font-style: normal;
-  font-weight: 400 800;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url(assets/fonts/anek-bangla-bengali.woff2) format('woff2');
-  unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+1CD0, U+1CD2, U+1CD5-1CD6, U+1CD8, U+1CE1, U+1CEA, U+1CED, U+1CF2, U+1CF5-1CF7, U+200C-200D, U+20B9, U+25CC, U+A8F1;
-}
 /* latin-ext */
-@font-face {
-  font-family: 'Anek Bangla';
-  font-style: normal;
-  font-weight: 400 800;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url(assets/fonts/anek-bangla-latin-ext.woff2) format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
 /* latin */
-@font-face {
-  font-family: 'Anek Bangla';
-  font-style: normal;
-  font-weight: 400 800;
-  font-stretch: 100%;
-  font-display: swap;
-  src: url(assets/fonts/anek-bangla-latin.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 :root{
   --bg:#faf8f4;--surface:#fff;--ink:#17201c;--muted:#6b716d;--line:#ebe6dc;
   --brand:#0f6b4f;--brand-ink:#fff;--chip:#f3efe7;--radius:16px;
@@ -180,7 +155,7 @@ button,input{font:inherit;color:inherit}
 .toggle input{accent-color:var(--brand);width:16px;height:16px}
 .canvas-wrap{position:relative;border-radius:12px;overflow:hidden;background:var(--chip)}
 canvas#preview{display:block;width:100%;height:auto;cursor:pointer}
-.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:12px;font-weight:500;padding:5px 10px;border-radius:8px;white-space:nowrap;opacity:0;transform:translate(-50%,-140%);transition:opacity .1s}
+.tip{position:absolute;pointer-events:none;background:var(--tip-bg,#14231f);color:var(--tip-fg,#fff);font-size:12px;font-weight:500;padding:5px 10px;border-radius:8px;white-space:nowrap;opacity:0;transform:translate(-50%,-140%);transition:opacity .1s}
 .hint{font-size:12px;color:var(--muted);text-align:center;margin:10px 0 0}
 .iab-note{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin:14px 0 0;padding:10px 14px;border-radius:12px;background:#fff8ec;border:1px solid #f1e3c8;font-size:14px;line-height:1.5}
 .iab-note a{font-weight:700;color:var(--brand);white-space:nowrap}
@@ -313,11 +288,11 @@ button,.chip,.sw{touch-action:manipulation;-webkit-tap-highlight-color:transpare
 .me{display:flex;align-items:center;gap:12px;flex:1 1 280px;min-width:0}
 .me-r{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
 .me-r .name{width:100%;min-width:0}
-.upload{position:relative;flex:none;width:104px;height:auto;aspect-ratio:1/1;flex-direction:column;justify-content:center;gap:6px;padding:0;overflow:hidden;border-radius:16px;text-align:center;font-size:12px;line-height:1.3}
-.upload .avatar{width:40px;height:40px;border-radius:12px}
+.upload{position:relative;flex:none;width:88px;height:auto;aspect-ratio:1/1;flex-direction:column;justify-content:center;gap:4px;padding:0;overflow:hidden;border-radius:14px;text-align:center;font-size:11px;line-height:1.25}
+.upload .avatar{width:32px;height:32px;border-radius:10px}
 .upload .avatar[style*="background-image"]{position:absolute;inset:0;width:auto;height:auto;border-radius:0}
 .upload .avatar[style*="background-image"]~span{position:absolute;left:0;right:0;bottom:0;padding:4px 2px;background:rgba(0,0,0,.55);color:#fff}
-@media (max-width:380px){.upload{width:88px}.stage,.picker{padding:12px}}
+@media (max-width:380px){.upload{width:76px}.stage,.picker{padding:12px}}
 
 /* nothing may overflow at any width */
 img,video,canvas{max-width:100%}
@@ -325,12 +300,16 @@ img,video,canvas{max-width:100%}
 .dl{flex-wrap:wrap}
 .themes{flex-wrap:wrap}
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&display=swap">
 <link rel="stylesheet" href="./assets/css/theme.css">
+<script src="./assets/js/i18n.js"></script>
 <link rel="stylesheet" href="./assets/css/components.css">
 </head>
 <body data-page="index">
 <div data-component="header"></div>
+<script src="./assets/js/mount.js"></script>
 <div data-component="side-menu"></div>
+<script src="./assets/js/mount.js"></script>
 <div class="container" id="top">
   <div id="view-map">
 
@@ -421,6 +400,7 @@ img,video,canvas{max-width:100%}
 
 </div>
 <div data-component="footer"></div>
+<script src="./assets/js/mount.js"></script>
 
 <!-- Big map data is lazy-loaded: assets/data/upazila.json (upazila mode) and assets/data/world.json (world map); fetched on first use, warmed when the page is idle. -->
 <script type="text/plain" id="app-js">
@@ -476,7 +456,27 @@ let selected=new Set(store.get("bdmap.sel",[]).filter(n=>ALL.includes(n)));
 let mode=store.get("bdmap.mode","d")==="u"?"u":"d";                       // "d" district / "u" upazila: two separate selections
 let selU=new Set(store.get("bdmap.selu",[]).filter(k=>typeof k==="string"));
 let UPA=null;const UBN={};
-let theme=THEMES.find(t=>t.id===store.get("bdmap.theme","emerald"))||THEMES[0];
+// the map theme the user picked (kept on this device). Until the user picks one, dark mode starts on the navy-violet theme.
+const isDarkSite=()=>document.documentElement.getAttribute("data-theme")==="dark";
+const defaultTheme=()=>(isDarkSite()&&THEMES.find(t=>t.id==="midnight"))||THEMES[0];
+/* a "dark session" lasts as long as the site stays in dark mode in this tab. Each time dark mode starts
+   (light -> dark, or the first dark visit in this tab) the map goes to Blue-Violet, replacing an earlier pick.
+   Any theme the visitor picks during that session is kept until dark mode ends. A shared link's ?t= is respected. */
+const darkSession=()=>{try{return sessionStorage.getItem("ub.darkSession")==="1"}catch(e){return false}};
+const setDarkSession=on=>{try{on?sessionStorage.setItem("ub.darkSession","1"):sessionStorage.removeItem("ub.darkSession")}catch(e){}};
+const sharedThemeLink=new URLSearchParams(location.search).has("t");
+const startDarkSession=()=>{store.set("bdmap.theme","midnight");setDarkSession(true)};
+if(isDarkSite()&&!darkSession()&&!sharedThemeLink)startDarkSession();
+let themeChosen=store.get("bdmap.theme",null);
+let theme=THEMES.find(t=>t.id===themeChosen)||defaultTheme();
+new MutationObserver(()=>{
+  if(isDarkSite()){
+    if(!darkSession()&&!sharedThemeLink){startDarkSession();themeChosen="midnight";theme=THEMES.find(t=>t.id==="midnight");if(typeof render==="function")render()}
+  }else{
+    setDarkSession(false);                                  // dark mode ended: the visitor's own map theme is used again
+    if(!themeChosen){theme=defaultTheme();if(typeof render==="function")render()}
+  }
+}).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 let showLabels=store.get("bdmap.labels",true);
 let userName=store.get("bdmap.name","");
 let rankHist=null;     // travellers per district count, once a map has been downloaded ("top X%")
@@ -492,7 +492,7 @@ const OV={z:1,cx:DATA.w/2,cy:DATA.h/2},V={z:1,cx:OV.cx,cy:OV.cy,a:{from:null,to:
 const vis=d=>{const a=V.a,f=x=>x==null?1:(x.includes(d)?1:0);return f(a.from)+(f(a.to)-f(a.from))*a.e};
 let _BB=null;const bboxOf=n=>(_BB||(_BB=Object.fromEntries(DATA.f.map(f=>{const n=f.d.match(/-?\d+\.?\d*/g).map(Number);let a=1e9,b=-1e9,c=1e9,d=-1e9;for(let i=0;i<n.length;i+=2){a=Math.min(a,n[i]);b=Math.max(b,n[i]);c=Math.min(c,n[i+1]);d=Math.max(d,n[i+1])}return[f.n,[a,b,c,d]]}))))[n];   // computed on first use (upazila zoom), not at start-up
 const cur=()=>mode==="w"?selW:mode==="u"?selU:selected,curFeats=()=>mode==="u"?(UPA?UPA.f:[]):DATA.f;
-const save=()=>{store.set("bdmap.sel",[...selected]);store.set("bdmap.selu",[...selU]);store.set("bdmap.mode",mode==="w"?store.get("bdmap.mode","d"):mode);store.set("bdmap.world",[...selW]);store.set("bdmap.theme",theme.id);store.set("bdmap.labels",showLabels);store.set("bdmap.name",userName)};
+const save=()=>{store.set("bdmap.sel",[...selected]);store.set("bdmap.selu",[...selU]);store.set("bdmap.mode",mode==="w"?store.get("bdmap.mode","d"):mode);store.set("bdmap.world",[...selW]);store.set("bdmap.labels",showLabels);store.set("bdmap.name",userName)};
 // tidy the address bar: drop tracking codes Facebook and others add (?fbclid=…, utm_…)
 {const u=new URL(location.href);let changed=false;for(const k of [...u.searchParams.keys()])if(/^(fbclid|gclid|utm_\w+|mibextid)$/.test(k)){u.searchParams.delete(k);changed=true}
   if(changed)history.replaceState(null,"",u.pathname+(u.search.length>1?u.search:"")+u.hash)}
@@ -584,7 +584,7 @@ function drawBrand(ctx,t,W,H){
   ctx.textBaseline="alphabetic";
 }
 function drawFooter(ctx,t,W,H,frac,left,right,extra=0){
-  const fy=H-160-extra;                                   // extra: room kept free above the divider (sponsor strip)
+  const fy=H-160-extra;                                   // extra: room kept free above the divider
   ctx.fillStyle=t.track;roundRect(ctx,80,fy,W-160,12,6);ctx.fill();
   if(frac>0){const pg=ctx.createLinearGradient(80,0,W-80,0);pg.addColorStop(0,t.v1);pg.addColorStop(1,t.v2);ctx.fillStyle=pg;roundRect(ctx,80,fy,Math.max(12,(W-160)*Math.min(1,frac)),12,6);ctx.fill()}
   ctx.font=`700 24px ${FONT}`;ctx.fillStyle=t.ink;ctx.fillText(ubT(left),80,fy+52);
@@ -592,21 +592,8 @@ function drawFooter(ctx,t,W,H,frac,left,right,extra=0){
   ctx.fillStyle=t.track;ctx.fillRect(80,H-84,W-160,1.5);
   drawBrand(ctx,t,W,H);
 }
-// sponsor strip on both posters (GoZayaan brand collaboration), kept low: their text on the left, their app
-// icon on the right, as vectors with transparent backgrounds; a light and a dark version (assets/partners/)
-const AD_SPACE=100,AD_ICON=66,AD_TEXT={w:460.18,h:72.14},AD={};    // AD_TEXT: artwork size; icon artwork is 90.91 square
-for(const v of ["light","dark"])for(const k of ["text","icon"]){
-  const img=new Image();img.src=`assets/partners/gz-${k}-${v}.svg`;AD[k+v]=img;
-  img.onload=()=>{if(typeof render==="function")render()};
-}
-function drawAd(ctx,t,W,H){
-  const v=t.ink==="#ffffff"?"dark":"light",text=AD["text"+v],icon=AD["icon"+v];   // dark themes have white text
-  const s=AD_ICON,y=H-112-s,th=66;                        // ends 28px above the divider line
-  ctx.save();ctx.globalAlpha=.88;                         // a little softer than the map's own content
-  if(icon.complete&&icon.naturalWidth)ctx.drawImage(icon,W-80-s,y,s,s);
-  if(text.complete&&text.naturalWidth)ctx.drawImage(text,80,y+(s-th)/2,th*AD_TEXT.w/AD_TEXT.h,th);
-  ctx.restore();
-}
+// sponsor-strip spacing on both posters: the space above the footer divider is kept so the poster layout stays unchanged
+const AD_SPACE=100;
 function draw(ctx,scale){
   if(mode==="w"){drawWorld(ctx,scale);return}
   const t=theme;
@@ -634,15 +621,15 @@ function draw(ctx,scale){
 
   // labels
   if(showLabels&&n){
+    ctx.font=`800 22px ${FONT}`;
     const L=placeLabels(ctx,[...S].filter(k=>!U||vis(FBY[k].dist)>.5));
     for(const l of L){ctx.beginPath();ctx.arc(l.cx,l.cy,4.5,0,Math.PI*2);ctx.fillStyle=t.dot;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=t.dotHalo||t.halo;ctx.stroke()}
-    ctx.font=`600 20px ${FONT}`;ctx.lineJoin="round";
-    for(const l of L){ctx.lineWidth=5;ctx.strokeStyle=t.halo;ctx.fillStyle=t.label;textAt(ctx,l.n,l.tx,l.ty,l.align,true)}
+    ctx.font=`800 22px ${FONT}`;ctx.lineJoin="round";
+    for(const l of L){ctx.lineWidth=6;ctx.strokeStyle=t.halo;ctx.fillStyle=t.label;textAt(ctx,l.n,l.tx,l.ty,l.align,true)}
   }
 
   const divs=ORDER.filter(d=>DATA.f.some(f=>f.dv===d&&selected.has(f.n))).length;
   drawFooter(ctx,t,PW,PH,TOT?n/TOT:0,`${bnNum(pct)}% বাংলাদেশ ঘোরা হয়েছে`,U?`${bnNum(n)}টি উপজেলা · ${bnNum(dc)}টি জেলা`:`${bnNum(n)}টি জেলা · ৮টির মধ্যে ${bnNum(divs)}টি বিভাগ`,AD_SPACE);
-  drawAd(ctx,t,PW,PH);
   ctx.restore();
 }
 function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
@@ -672,6 +659,7 @@ function hitTest(e){
 }
 const distInfo=n=>{const l=(UPA&&UPA.by[n])||[];return `${BN[n]} জেলা · ${bnNum(l.filter(f=>selU.has(f.n)).length)}/${bnNum(l.length)}`};
 const tip=document.getElementById("tip"),wrap=document.getElementById("wrap");
+const paintTip=()=>{tip.style.background=theme.ink;tip.style.color=theme.bg};   // tooltip follows the map theme
 const redraw=()=>draw(ctx,dpr);
 cv.addEventListener("mousemove",e=>{
   if(mode==="w"){worldMove(e);return}
@@ -682,7 +670,7 @@ cv.addEventListener("mousemove",e=>{
   cv.style.cursor="pointer";
   const r=wrap.getBoundingClientRect();
   tip.style.left=(e.clientX-r.left)+"px";tip.style.top=(e.clientY-r.top)+"px";
-  tip.textContent=mode==="u"&&!f.dist?distInfo(f.n):(f.dist?f.bn+", "+BN[f.dist]:BN[f.n])+(cur().has(f.n)?" ✓":"");tip.style.opacity=1;
+  tip.textContent=mode==="u"&&!f.dist?distInfo(f.n):(f.dist?f.bn+", "+BN[f.dist]:BN[f.n])+(cur().has(f.n)?" ✓":"");paintTip();tip.style.opacity=1;
 });
 cv.addEventListener("mouseleave",()=>{tip.style.opacity=0;if(hoverD){hoverD=null;redraw()}});
 cv.addEventListener("click",e=>{const f=hitTest(e);if(!f)return;if(mode==="u"&&!f.dist)focusDistrict(f.n);else toggle(f.n)});
@@ -905,7 +893,7 @@ function worldMove(e){
     if(!f){tip.style.opacity=0;cv.style.cursor="default";return}
     cv.style.cursor="pointer";const r=wrap.getBoundingClientRect();
     tip.style.left=(wmX-r.left)+"px";tip.style.top=(wmY-r.top)+"px";
-    tip.textContent=f.b+(selW.has(f.n)?" ✓":"");tip.style.opacity=1;
+    tip.textContent=f.b+(selW.has(f.n)?" ✓":"");paintTip();tip.style.opacity=1;
   });
 }
 function drawWorld(ctx,scale){
@@ -931,8 +919,8 @@ function drawWorld(ctx,scale){
     }
     ctx.restore();
     if(showLabels&&n){
-      const fs=n>120?12:n>80?14:n>45?16:n>20?18:20,h=fs+6,placed=[],L=[];
-      ctx.font=`600 ${fs}px ${FONT}`;
+      const fs=n>120?13:n>80?15:n>45?18:n>20?20:22,h=fs+6,placed=[],L=[];
+      ctx.font=`700 ${fs}px ${FONT}`;
       const tries=[[0,-10],[0,fs+6],[12,5],[-12,5],[0,-fs-12],[0,fs*2+8],[28,-10],[-28,-10],[28,fs+4],[-28,fs+4]];
       for(const d of [36,62,92])for(const [ux,uy] of [[0,-1],[1,0],[-1,0],[0,1],[.7,-.7],[-.7,-.7],[.7,.7],[-.7,.7]])tries.push([ux*d*1.5,uy*d,1]);   // crowded areas: name placed a little further out, joined by a thin line
       for(const f of sel){                                      // biggest countries first, they keep the best spot
@@ -959,7 +947,6 @@ function drawWorld(ctx,scale){
   }
   const conts=new Set(sel.map(f=>f.c)).size;
   drawFooter(ctx,t,PW,PHW,TOT?n/TOT:0,`${bnNum(pct)}% বিশ্ব ঘোরা হয়েছে`,`${bnNum(n)}টি দেশ ও অঞ্চল · ${bnNum(conts)}টি মহাদেশ`,AD_SPACE);
-  drawAd(ctx,t,PW,PHW);
   ctx.restore();
 }
 document.getElementById("mWorld").onclick=()=>{loadWorld().then(ok=>{if(!ok)return;applyMode("w");render()})};
@@ -978,12 +965,16 @@ document.getElementById("mWorld").onclick=()=>{loadWorld().then(ok=>{if(!ok)retu
   addEventListener("pointermove",e=>{if(!drag)return;const dx=e.clientX-drag.x;if(!moved&&Math.abs(dx)>5){moved=true;el.classList.add("drag")}if(moved)el.scrollLeft=drag.l-dx});
   addEventListener("pointerup",()=>{if(!drag)return;drag=null;pause();setTimeout(()=>{moved=false;el.classList.remove("drag")},0)});
   el.addEventListener("click",e=>{if(moved){e.stopPropagation();e.preventDefault()}},true);   // a drag is not a click
+  // automatic left-to-right drift: one small step every 3 s, back to the start at the end.
+  // any touch, wheel, drag, key or focus pauses it for a few seconds; hovering with a mouse pauses it too.
   setInterval(()=>{
-    if(reduce||hover||drag||document.hidden||Date.now()<resumeAt)return;
-    const m=max();if(m<=2)return;                           // nothing to scroll: stay still
+    const m=max();if(reduce||m<=1||hover||drag||Date.now()<resumeAt)return;
     const l=el.scrollLeft;
-    el.scrollTo({left:l>=m-2?0:Math.min(m,l+Math.max(120,el.clientWidth*.5)),behavior:"smooth"});
+    el.scrollTo({left:l>=m-2?0:Math.min(m,l+120),behavior:"smooth"});
   },3000);
+  // a soft fade marks the right edge only while there is more to scroll (no cut-off chip, no motion)
+  const fadeEdge=()=>el.classList.toggle("fade-r",max()>2&&el.scrollLeft<max()-2);
+  el.addEventListener("scroll",fadeEdge,{passive:true});addEventListener("resize",fadeEdge);fadeEdge();
 }
 document.getElementById("mUpa").onclick=()=>{applyMode("u");loadUpa();render()};
 document.getElementById("none").onclick=()=>{cur().clear();render()};
@@ -1023,10 +1014,12 @@ function updateUI(){
 ["themes"].forEach(id=>{const themesEl=document.getElementById(id);THEMES.forEach(t=>{
   const b=document.createElement("button");b.className="sw";b.dataset.id=t.id;b.setAttribute("role","radio");b.title=t.name;b.setAttribute("aria-label",t.name+" থিম");
   b.innerHTML=`<i style="background:${t.bg}"></i><i style="background:linear-gradient(135deg,${t.v1},${t.v2})"></i>`;
-  b.onclick=()=>{theme=t;render()};themesEl.appendChild(b);
+  b.onclick=()=>{theme=t;themeChosen=t.id;store.set("bdmap.theme",t.id);render()};themesEl.appendChild(b);
 })});
 const labelsEl=document.getElementById("labels");labelsEl.checked=showLabels;
 labelsEl.onchange=()=>{showLabels=labelsEl.checked;render()};
+/* canvas labels are translated by ubT(): redraw when the site language changes, keep the selection */
+document.addEventListener("ub:lang-change",()=>render());
 const nameEls=[document.getElementById("name")];
 nameEls.forEach(el=>{el.value=userName;el.oninput=()=>{userName=el.value;nameEls.forEach(o=>{if(o!==el)o.value=userName});render()}});
 
@@ -1292,8 +1285,6 @@ if("serviceWorker" in navigator) __onLoad(()=>navigator.serviceWorker.register("
   window.__D.then(run,function(){addEventListener("online",function(){window.__load().then(run)},{once:true})});
 })();
 </script>
-<script type="module" src="assets/js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362_7d77c9.js" integrity="sha512-GZ2zeTuut4x+DWknMFJzovQRVmzsNdBjuWQBHPX2vkvg8F9zv3J+tI+gppZsazzMZHCLhFXrnTkMppdqlFRZzA==" data-cf-beacon='{"version":"2024.11.0","token":"abd3853f56ce4115afe9554ae1697c2f","r":1,"spa":2}' crossorigin="anonymous"></script>
-<script src="./assets/js/i18n.js"></script>
 <script src="./assets/js/components.js"></script>
 </body>
 </html>
