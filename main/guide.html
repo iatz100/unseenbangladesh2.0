@@ -46,7 +46,7 @@
   var POPD = ["কক্সবাজার", "সিলেট", "বান্দরবান", "রাঙ্গামাটি", "মৌলভীবাজার", "সুনামগঞ্জ", "পটুয়াখালী", "খুলনা", "খাগড়াছড়ি"];
   var DEN = {"ঢাকা":"Dhaka","গাজীপুর":"Gazipur","কিশোরগঞ্জ":"Kishoreganj","মানিকগঞ্জ":"Manikganj","মুন্সিগঞ্জ":"Munshiganj","নারায়ণগঞ্জ":"Narayanganj","নরসিংদী":"Narsingdi","টাঙ্গাইল":"Tangail","ফরিদপুর":"Faridpur","গোপালগঞ্জ":"Gopalganj","মাদারীপুর":"Madaripur","রাজবাড়ী":"Rajbari","শরীয়তপুর":"Shariatpur","চট্টগ্রাম":"Chattogram","কক্সবাজার":"Cox's Bazar","রাঙ্গামাটি":"Rangamati","বান্দরবান":"Bandarban","খাগড়াছড়ি":"Khagrachhari","ফেনী":"Feni","লক্ষ্মীপুর":"Lakshmipur","নোয়াখালী":"Noakhali","কুমিল্লা":"Comilla","চাঁদপুর":"Chandpur","ব্রাহ্মণবাড়িয়া":"Brahmanbaria","রাজশাহী":"Rajshahi","চাঁপাইনবাবগঞ্জ":"Chapainawabganj","নওগাঁ":"Naogaon","নাটোর":"Natore","পাবনা":"Pabna","সিরাজগঞ্জ":"Sirajganj","বগুড়া":"Bogra","জয়পুরহাট":"Joypurhat","খুলনা":"Khulna","বাগেরহাট":"Bagerhat","সাতক্ষীরা":"Satkhira","যশোর":"Jessore","নড়াইল":"Narail","মাগুরা":"Magura","ঝিনাইদহ":"Jhenaidah","কুষ্টিয়া":"Kushtia","চুয়াডাঙ্গা":"Chuadanga","মেহেরপুর":"Meherpur","বরিশাল":"Barishal","ভোলা":"Bhola","পটুয়াখালী":"Patuakhali","পিরোজপুর":"Pirojpur","বরগুনা":"Barguna","ঝালকাঠি":"Jhalokathi","সিলেট":"Sylhet","মৌলভীবাজার":"Moulvibazar","হবিগঞ্জ":"Habiganj","সুনামগঞ্জ":"Sunamganj","রংপুর":"Rangpur","দিনাজপুর":"Dinajpur","গাইবান্ধা":"Gaibandha","কুড়িগ্রাম":"Kurigram","লালমনিরহাট":"Lalmonirhat","নীলফামারী":"Nilphamari","পঞ্চগড়":"Panchagarh","ঠাকুরগাঁও":"Thakurgaon","ময়মনসিংহ":"Mymensingh","জামালপুর":"Jamalpur","নেত্রকোণা":"Netrokona","শেরপুর":"Sherpur"};
   var DIVEN = {"ঢাকা":"Dhaka","চট্টগ্রাম":"Chattogram","রাজশাহী":"Rajshahi","খুলনা":"Khulna","বরিশাল":"Barishal","সিলেট":"Sylhet","রংপুর":"Rangpur","ময়মনসিংহ":"Mymensingh"};
-  var T = {}, SPOTS = {}, IMGS = {}, loaded = false;
+  var T = {}, SPOTS = {}, SPOTS_EN = {}, IMGS = {}, loaded = false;
   var conv = function (p) {
     return { n: p.name, e: p.emoji || '📍', img: p.image || '', cr: p.image_credit || '', popular: !!p.popular,
       i: p.intro || '', h: p.history || '', w: p.why_famous || '', g: p.how_to_go || '', d: p.distance || '',
@@ -59,18 +59,19 @@
     if (J.popular_districts && J.popular_districts.length) POPD = J.popular_districts;
     (J.divisions || []).forEach(function (dv) {
       (dv.districts || []).forEach(function (ds) {
-        var areas = [], names = [];
+        var areas = [], names = [], namesEn = [];
         (ds.areas || []).forEach(function (a) {
           var ready = [];
           (a.places || []).forEach(function (p) {
             names.push(p.name);
+            namesEn.push(p.name_en || p.name);
             if (!IMGS[ds.name] && /^(https?:)?\/|^[\w.-]+\/[\w.\/-]+\.\w+$/.test(p.image || '')) IMGS[ds.name] = p.image;
             if (p.status === 'ready') ready.push(conv(p));
           });
           if (ready.length) areas.push({ n: a.name || '', ne: a.name_en || '', a: a.about || '', p: ready });
         });
         if (areas.length) T[ds.name] = areas;
-        if (names.length) SPOTS[ds.name] = names;
+        if (names.length) { SPOTS[ds.name] = names; SPOTS_EN[ds.name] = namesEn; }
       });
     });
     loaded = true;
@@ -133,9 +134,9 @@
   function spotList(name) {
     if (!loaded) return [];
     var t = [];
-    (T[name] || []).forEach(function (u) { u.p.forEach(function (p) { t.push(p.n); }); });
+    (T[name] || []).forEach(function (u) { u.p.forEach(function (p) { t.push(isEn() && p.en && p.en.n ? p.en.n : p.n); }); });
     if (t.length) return t.slice(0, 3);
-    if (SPOTS[name]) return SPOTS[name];
+    if (SPOTS[name]) return isEn() && SPOTS_EN[name] ? SPOTS_EN[name] : SPOTS[name];
     var d = D.filter(function (x) { return x[0] === name; })[0];
     return [d ? d[1] + ' বিভাগ' : ''];
   }
@@ -184,8 +185,8 @@
         var isDhaka = d[0] === 'ঢাকা';
         var grad = getGradient(D.indexOf(d));
         var total = (SPOTS[d[0]] || []).length;
-        return '<button class="dc' + (isDhaka ? ' has-img' : '') + '" type="button" data-n="' + esc(d[0]) + '" style="background:' + (IMGS[d[0]] ? imgBg(IMGS[d[0]]) : isDhaka ? dhakaBg() : grad) + '"><div class="dc__content"><b>' + esc(d[0]) +
-          (total ? '<small>' + bn(total) + 'টি স্থান</small>' : '') + '</b>' +
+        return '<button class="dc' + (isDhaka ? ' has-img' : '') + '" type="button" data-n="' + esc(d[0]) + '" style="background:' + (IMGS[d[0]] ? imgBg(IMGS[d[0]]) : isDhaka ? dhakaBg() : grad) + '"><div class="dc__content"><b>' + esc(isEn() ? (DEN[d[0]] || d[0]) : d[0]) +
+          (total ? '<small>' + (isEn() ? total + ' places' : bn(total) + 'টি স্থান') + '</small>' : '') + '</b>' +
           '<i>' + esc(spotList(d[0]).join(', ')) + '</i></div></button>';
       }).join('');
       return '<section class="ac' + (open ? ' open' : '') + '" data-v="' + esc(g.v) + '">' +
@@ -226,10 +227,14 @@
     $('pop').innerHTML = POPD.map(function (n) {
       var di = -1; D.forEach(function (d, k) { if (d[0] === n) di = k; });
       if (di < 0) return '';
-      return '<button class="dc" type="button" data-n="' + esc(n) + '" style="background:' + getGradient(di) + '"><span class="bdg">⭐ জনপ্রিয়</span><div class="dc__content"><b>' + esc(n) + '</b><i>' + esc(spotList(n).join(' · ')) + '</i></div></button>';
+      return '<button class="dc" type="button" data-n="' + esc(n) + '" style="background:' + getGradient(di) + '"><span class="bdg">' + (isEn() ? '⭐ Popular' : '⭐ জনপ্রিয়') + '</span><div class="dc__content"><b>' + esc(isEn() ? (DEN[n] || n) : n) + '</b><i>' + esc(spotList(n).join(' · ')) + '</i></div></button>';
     }).join('');
   }
   renderPop();
+  document.addEventListener('ub:lang-change', function () {
+    if (!loaded) return;
+    renderPop(); fill(); grid();
+  });
   (function () {
     var tr = $('pop'), dir = 1, paused = false, acc = 0, resumeT;
     if (window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches) return;
