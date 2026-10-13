@@ -31,7 +31,7 @@ figcaption a{color:inherit}
 ul{padding-left:22px;margin:6px 0}
 li{margin:4px 0}
 .links li{margin:6px 0}
-.map{width:100%;height:320px;border:0;border-radius:14px;background:var(--chip)}
+iframe.map{width:100%;height:320px;border:0;border-radius:14px;background:var(--chip)}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
 .card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden;color:inherit;text-decoration:none;background:var(--surface)}
 .card:hover{border-color:var(--brand)}
@@ -93,7 +93,7 @@ footer a{color:inherit}
   .facts dd{margin-bottom:8px}
   .top nav{font-size:14px}
   .top nav a{padding:5px 9px}
-  .map{height:240px}
+  iframe.map{height:240px}
 }
 
 /* ---- page styles (moved from guide.html) ---- */
@@ -176,6 +176,7 @@ h2 small{color:var(--mut);font-weight:400;font-size:.8rem}
 .tpic{height:150px}
 .bdg{position:absolute;top:12px;left:12px;background:#f59e0b;color:#fff;font-size:.78rem;font-weight:700;padding:3px 12px;border-radius:99px}
 .tb{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.tc .tb{border-radius:0;border:0;box-shadow:none}
 .tb h4{margin:6px 0;font-size:1.05rem;line-height:1.35;color:var(--g1)}
 .tb p{margin:0 0 12px;color:var(--mut);font-size:.85rem;line-height:1.55}
 .up{align-self:flex-start;font-size:.75rem;background:var(--g3);color:var(--g1);padding:1px 10px;border-radius:99px}
@@ -208,6 +209,11 @@ h2 small{color:var(--mut);font-weight:400;font-size:.8rem}
 .cr{position:absolute;bottom:10px;right:10px;z-index:3;max-width:70%;background:rgba(0,0,0,.55);color:#fff;font-size:.72rem;line-height:1.4;padding:2px 10px;border-radius:99px;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .act{flex-wrap:nowrap!important}
 .act .more{white-space:nowrap}
+.tc .act{margin-top:10px;gap:6px}
+.tc .act .more,.tc .act .map{width:auto;height:auto;min-height:0;margin:0;padding:6px 12px;font-size:13px;line-height:1.2;border-radius:99px;box-shadow:none}
+.tc .act .more{background:var(--g2);color:#fff}
+.tc .act .more:hover{background:var(--g1);color:#fff}
+.tc .act .map{background:var(--river);color:#fff}
 .act .map{white-space:nowrap;flex:0 0 auto}
 .tb h4,.tb p{cursor:pointer}
 .mapbox{position:relative;width:100%;aspect-ratio:4/3;border-radius:14px;overflow:hidden;margin:10px 0;background:var(--g3)}
