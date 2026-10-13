@@ -44,12 +44,15 @@
   // ৬৪ জেলার নাম ও জনপ্রিয় তালিকা static (UI আগে render হয়); tourist.json শুধু ডেটার উৎস
   var D = [["ঢাকা", "ঢাকা"], ["গাজীপুর", "ঢাকা"], ["কিশোরগঞ্জ", "ঢাকা"], ["মানিকগঞ্জ", "ঢাকা"], ["মুন্সিগঞ্জ", "ঢাকা"], ["নারায়ণগঞ্জ", "ঢাকা"], ["নরসিংদী", "ঢাকা"], ["টাঙ্গাইল", "ঢাকা"], ["ফরিদপুর", "ঢাকা"], ["গোপালগঞ্জ", "ঢাকা"], ["মাদারীপুর", "ঢাকা"], ["রাজবাড়ী", "ঢাকা"], ["শরীয়তপুর", "ঢাকা"], ["চট্টগ্রাম", "চট্টগ্রাম"], ["কক্সবাজার", "চট্টগ্রাম"], ["রাঙ্গামাটি", "চট্টগ্রাম"], ["বান্দরবান", "চট্টগ্রাম"], ["খাগড়াছড়ি", "চট্টগ্রাম"], ["ফেনী", "চট্টগ্রাম"], ["লক্ষ্মীপুর", "চট্টগ্রাম"], ["নোয়াখালী", "চট্টগ্রাম"], ["কুমিল্লা", "চট্টগ্রাম"], ["চাঁদপুর", "চট্টগ্রাম"], ["ব্রাহ্মণবাড়িয়া", "চট্টগ্রাম"], ["রাজশাহী", "রাজশাহী"], ["চাঁপাইনবাবগঞ্জ", "রাজশাহী"], ["নওগাঁ", "রাজশাহী"], ["নাটোর", "রাজশাহী"], ["পাবনা", "রাজশাহী"], ["সিরাজগঞ্জ", "রাজশাহী"], ["বগুড়া", "রাজশাহী"], ["জয়পুরহাট", "রাজশাহী"], ["খুলনা", "খুলনা"], ["বাগেরহাট", "খুলনা"], ["সাতক্ষীরা", "খুলনা"], ["যশোর", "খুলনা"], ["নড়াইল", "খুলনা"], ["মাগুরা", "খুলনা"], ["ঝিনাইদহ", "খুলনা"], ["কুষ্টিয়া", "খুলনা"], ["চুয়াডাঙ্গা", "খুলনা"], ["মেহেরপুর", "খুলনা"], ["বরিশাল", "বরিশাল"], ["ভোলা", "বরিশাল"], ["পটুয়াখালী", "বরিশাল"], ["পিরোজপুর", "বরিশাল"], ["বরগুনা", "বরিশাল"], ["ঝালকাঠি", "বরিশাল"], ["সিলেট", "সিলেট"], ["মৌলভীবাজার", "সিলেট"], ["হবিগঞ্জ", "সিলেট"], ["সুনামগঞ্জ", "সিলেট"], ["রংপুর", "রংপুর"], ["দিনাজপুর", "রংপুর"], ["গাইবান্ধা", "রংপুর"], ["কুড়িগ্রাম", "রংপুর"], ["লালমনিরহাট", "রংপুর"], ["নীলফামারী", "রংপুর"], ["পঞ্চগড়", "রংপুর"], ["ঠাকুরগাঁও", "রংপুর"], ["ময়মনসিংহ", "ময়মনসিংহ"], ["জামালপুর", "ময়মনসিংহ"], ["নেত্রকোণা", "ময়মনসিংহ"], ["শেরপুর", "ময়মনসিংহ"]];
   var POPD = ["কক্সবাজার", "সিলেট", "বান্দরবান", "রাঙ্গামাটি", "মৌলভীবাজার", "সুনামগঞ্জ", "পটুয়াখালী", "খুলনা", "খাগড়াছড়ি"];
+  var DEN = {"ঢাকা":"Dhaka","গাজীপুর":"Gazipur","কিশোরগঞ্জ":"Kishoreganj","মানিকগঞ্জ":"Manikganj","মুন্সিগঞ্জ":"Munshiganj","নারায়ণগঞ্জ":"Narayanganj","নরসিংদী":"Narsingdi","টাঙ্গাইল":"Tangail","ফরিদপুর":"Faridpur","গোপালগঞ্জ":"Gopalganj","মাদারীপুর":"Madaripur","রাজবাড়ী":"Rajbari","শরীয়তপুর":"Shariatpur","চট্টগ্রাম":"Chattogram","কক্সবাজার":"Cox's Bazar","রাঙ্গামাটি":"Rangamati","বান্দরবান":"Bandarban","খাগড়াছড়ি":"Khagrachhari","ফেনী":"Feni","লক্ষ্মীপুর":"Lakshmipur","নোয়াখালী":"Noakhali","কুমিল্লা":"Comilla","চাঁদপুর":"Chandpur","ব্রাহ্মণবাড়িয়া":"Brahmanbaria","রাজশাহী":"Rajshahi","চাঁপাইনবাবগঞ্জ":"Chapainawabganj","নওগাঁ":"Naogaon","নাটোর":"Natore","পাবনা":"Pabna","সিরাজগঞ্জ":"Sirajganj","বগুড়া":"Bogra","জয়পুরহাট":"Joypurhat","খুলনা":"Khulna","বাগেরহাট":"Bagerhat","সাতক্ষীরা":"Satkhira","যশোর":"Jessore","নড়াইল":"Narail","মাগুরা":"Magura","ঝিনাইদহ":"Jhenaidah","কুষ্টিয়া":"Kushtia","চুয়াডাঙ্গা":"Chuadanga","মেহেরপুর":"Meherpur","বরিশাল":"Barishal","ভোলা":"Bhola","পটুয়াখালী":"Patuakhali","পিরোজপুর":"Pirojpur","বরগুনা":"Barguna","ঝালকাঠি":"Jhalokathi","সিলেট":"Sylhet","মৌলভীবাজার":"Moulvibazar","হবিগঞ্জ":"Habiganj","সুনামগঞ্জ":"Sunamganj","রংপুর":"Rangpur","দিনাজপুর":"Dinajpur","গাইবান্ধা":"Gaibandha","কুড়িগ্রাম":"Kurigram","লালমনিরহাট":"Lalmonirhat","নীলফামারী":"Nilphamari","পঞ্চগড়":"Panchagarh","ঠাকুরগাঁও":"Thakurgaon","ময়মনসিংহ":"Mymensingh","জামালপুর":"Jamalpur","নেত্রকোণা":"Netrokona","শেরপুর":"Sherpur"};
+  var DIVEN = {"ঢাকা":"Dhaka","চট্টগ্রাম":"Chattogram","রাজশাহী":"Rajshahi","খুলনা":"Khulna","বরিশাল":"Barishal","সিলেট":"Sylhet","রংপুর":"Rangpur","ময়মনসিংহ":"Mymensingh"};
   var T = {}, SPOTS = {}, IMGS = {}, loaded = false;
   var conv = function (p) {
     return { n: p.name, e: p.emoji || '📍', img: p.image || '', cr: p.image_credit || '', popular: !!p.popular,
       i: p.intro || '', h: p.history || '', w: p.why_famous || '', g: p.how_to_go || '', d: p.distance || '',
       c: p.cost || '', s: p.best_time || '', m: p.map || p.name, t: p.tips || [], x: p.warnings || [], nb: p.nearby || [],
-      src: (p.source || []).map(function (x) { return { t: x.title, u: x.url }; }) };
+      src: (p.source || []).map(function (x) { return { t: x.title, u: x.url, te: x.title_en || '' }; }),
+      en: { n: p.name_en, i: p.intro_en, h: p.history_en, w: p.why_famous_en, g: p.how_to_go_en, d: p.distance_en, c: p.cost_en, s: p.best_time_en, t: p.tips_en, x: p.warnings_en, nb: p.nearby_en } };
   };
   // JSON লোড হলে ডেটা বসায়
   function ingest(J) {
@@ -64,7 +67,7 @@
             if (!IMGS[ds.name] && /^(https?:)?\/|^[\w.-]+\/[\w.\/-]+\.\w+$/.test(p.image || '')) IMGS[ds.name] = p.image;
             if (p.status === 'ready') ready.push(conv(p));
           });
-          if (ready.length) areas.push({ n: a.name || '', a: a.about || '', p: ready });
+          if (ready.length) areas.push({ n: a.name || '', ne: a.name_en || '', a: a.about || '', p: ready });
         });
         if (areas.length) T[ds.name] = areas;
         if (names.length) SPOTS[ds.name] = names;
@@ -282,7 +285,20 @@
   })();
 
   var crOf = function (p) { return '<span class="cr">' + esc(p.cr || 'ছবি') + '</span>'; };
+  function isEn() { return document.documentElement.getAttribute('data-lang') === 'en'; }
+  function pick(p) {
+    if (!isEn() || !p.en) return p;
+    var o = {}, k;
+    for (k in p) o[k] = p[k];
+    for (k in p.en) {
+      var v = p.en[k];
+      if (v != null && v !== '' && !(Array.isArray(v) && !v.length)) o[k] = v;
+    }
+    o.src = p.src.map(function (s) { return { t: s.te || s.t, u: s.u }; });
+    return o;
+  }
   function place(p) {
+    p = pick(p);
     var img = p.img ? '<img src="' + esc(p.img) + '" alt="' + esc(p.n) + '" loading="lazy" onerror="this.parentNode.textContent=\'' + p.e + '\'">' : p.e;
     var map = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.m);
     return '<article class="pl"><div class="pw"><div class="pic">' + img + '</div>' + crOf(p) + '</div><div class="pb"><h4>' + esc(p.n) + '</h4>' +
@@ -293,7 +309,7 @@
       (p.nb.length ? '<div class="sec"><h5>কাছাকাছি স্থান</h5><div class="chips">' +
       p.nb.map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join('') + '</div></div>' : '') +
       '<div class="sec"><h5>ম্যাপ</h5><div class="mapbox"><iframe src="https://www.google.com/maps?q=' + encodeURIComponent(p.m) + '&output=embed" title="' + esc(p.n) + ' ম্যাপ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div>' +
-      (p.src.length ? '<div class="src">তথ্যসূত্র: ' + p.src.map(function (s) {
+      (p.src.length ? '<div class="src">' + (isEn() ? 'Sources: ' : 'তথ্যসূত্র: ') + p.src.map(function (s) {
         return '<a href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">' + esc(s.t) + '</a>';
       }).join(', ') + '</div>' : '') + '</div></article>';
   }
@@ -301,14 +317,15 @@
   var cur = [];
 
   function card(x, i) {
-    var p = x.p;
+    var p = pick(x.p);
+    var en = isEn();
     var img = p.img ? '<img src="' + esc(p.img) + '" alt="' + esc(p.n) + '" loading="lazy" onerror="this.parentNode.textContent=\'' + p.e + '\'">' : p.e;
     var map = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.m);
     return '<article class="tc" data-i="' + i + '"><div class="tw"><div class="pic tpic">' + img + '</div>' + crOf(p) +
-      (p.popular ? '<span class="bdg">জনপ্রিয়</span>' : '') + '</div>' +
-      '<div class="tb"><span class="up">' + esc(x.u) + '</span><h4>' + esc(p.n) + '</h4><p>' + esc(p.i) + '</p>' +
-      '<div class="act"><button class="more" type="button" data-i="' + i + '">বিস্তারিত দেখুন →</button>' +
-      '<a class="map" href="' + esc(map) + '" target="_blank" rel="noopener noreferrer">📍 ম্যাপ</a></div></div></article>';
+      (p.popular ? '<span class="bdg">' + (en ? 'Popular' : 'জনপ্রিয়') + '</span>' : '') + '</div>' +
+      '<div class="tb"><span class="up">' + esc(en && x.ue ? x.ue : x.u) + '</span><h4>' + esc(p.n) + '</h4><p>' + esc(p.i) + '</p>' +
+      '<div class="act"><button class="more" type="button" data-i="' + i + '">' + (en ? 'View details →' : 'বিস্তারিত দেখুন →') + '</button>' +
+      '<a class="map" href="' + esc(map) + '" target="_blank" rel="noopener noreferrer">' + (en ? '📍 Map' : '📍 ম্যাপ') + '</a></div></div></article>';
   }
 
   var curName = '';
@@ -323,12 +340,14 @@
     if (!d) return false;
     curName = name;
     cur = [];
-    (T[name] || []).forEach(function (u) { u.p.forEach(function (p) { cur.push({ p: p, u: u.n }); }); });
-    var h = '<div class="dh"><h2>' + esc(d[0]) + ' জেলার দর্শনীয় স্থান</h2><p>' + esc(d[1]) + ' বিভাগ' +
-      (cur.length ? ' · মোট ' + cur.length + 'টি স্থান' : '') + '</p></div>';
+    (T[name] || []).forEach(function (u) { u.p.forEach(function (p) { cur.push({ p: p, u: u.n, ue: u.ne }); }); });
+    var en = isEn();
+    var h = '<div class="dh"><h2>' + (en ? esc(DEN[d[0]] || d[0]) + ' District Attractions' : esc(d[0]) + ' জেলার দর্শনীয় স্থান') + '</h2><p>' +
+      (en ? esc(DIVEN[d[1]] || d[1]) + ' Division' : esc(d[1]) + ' বিভাগ') +
+      (cur.length ? (en ? ' · ' + cur.length + (cur.length === 1 ? ' place' : ' places') + ' in total' : ' · মোট ' + cur.length + 'টি স্থান') : '') + '</p></div>';
     h += cur.length
       ? '<div class="cards">' + cur.map(card).join('') + '</div>'
-      : '<div class="empty">🌱 এই জেলার দর্শনীয় স্থানের তথ্য এখনো যোগ করা হয়নি।</div>';
+      : (en ? '<div class="empty">🌱 No attraction information has been added for this district yet.</div>' : '<div class="empty">🌱 এই জেলার দর্শনীয় স্থানের তথ্য এখনো যোগ করা হয়নি।</div>');
     $('body').innerHTML = h;
     return true;
   }
@@ -345,7 +364,15 @@
     return { v: 'h' };
   }
 
+  var lastSt = null;
+  document.addEventListener('ub:lang-change', function () {
+    if (!lastSt || !loaded) return;
+    var y = window.scrollY;
+    go(lastSt, false);
+    window.scrollTo(0, y);
+  });
   function go(st, push) {
+    lastSt = st;
     if (st.v === 'h' || !build(st.n)) {
       st = { v: 'h' };
       $('det').hidden = true; $('home').hidden = false;
