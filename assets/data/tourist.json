@@ -48,18 +48,38 @@
                   "source": [
                     {
                       "title": "Wikipedia: Lalbagh Fort",
-                      "url": "https://en.wikipedia.org/wiki/Lalbagh_Fort"
+                      "url": "https://en.wikipedia.org/wiki/Lalbagh_Fort",
+                      "title_en": "Wikipedia: Lalbagh Fort"
                     },
                     {
                       "title": "শিক্ষক বাতায়ন (সরকারি): লালবাগের কেল্লা",
-                      "url": "https://www.teachers.gov.bd/content/details/1534292"
+                      "url": "https://www.teachers.gov.bd/content/details/1534292",
+                      "title_en": "Shikkhak Batayan (government): Lalbagh Fort"
                     },
                     {
                       "title": "প্রথম আলো: ঐতিহ্যের সান্নিধ্যে রসনাবিলাস",
-                      "url": "https://www.prothomalo.com/bangladesh/capital/vd74bb9g80"
+                      "url": "https://www.prothomalo.com/bangladesh/capital/vd74bb9g80",
+                      "title_en": "Prothom Alo: Culinary delights in a heritage setting"
                     }
                   ],
-                  "emoji": "🏰"
+                  "emoji": "🏰",
+                  "name_en": "Lalbagh Fort",
+                  "intro_en": "An unfinished Mughal fort in the old part of Dhaka; its original name was Aurangabad Fort.",
+                  "history_en": "Prince Muhammad Azam Shah began building the fort in 1678. When he left Dhaka, work stopped. Subahdar Shaista Khan restarted it in 1680, but construction ended after the death of his daughter Pari Bibi, and the fort was never completed. In 1844 the area was renamed from Aurangabad to Lalbagh.",
+                  "why_famous_en": "The complex has the tomb of Pari Bibi, the Diwan-i-Am and a three-domed mosque. This Mughal architectural site, surrounded by gardens, fountains and water channels, is now used as a museum.",
+                  "how_to_go_en": "From Gulistan you can reach Lalbagh Fort by rickshaw or CNG.",
+                  "distance_en": "About 3–4 km",
+                  "cost_en": "Round-trip transport may cost Tk 50–150 per person.",
+                  "best_time_en": "Winter (November–February) is comfortable for visiting.",
+                  "tips_en": [
+                    "Wear comfortable clothes and shoes, and be mindful of preserving the fort's historic structures."
+                  ],
+                  "warnings_en": [
+                    "According to a Prothom Alo report, the fort is closed on Sundays every week. Check that it is open before you go."
+                  ],
+                  "nearby_en": [
+                    "Ahsan Manzil"
+                  ]
                 },
                 {
                   "name": "আহসান মঞ্জিল",
@@ -159,20 +179,42 @@
                   "source": [
                     {
                       "title": "Wikipedia: Bhawal National Park",
-                      "url": "https://en.wikipedia.org/wiki/Bhawal_National_Park"
+                      "url": "https://en.wikipedia.org/wiki/Bhawal_National_Park",
+                      "title_en": "Wikipedia: Bhawal National Park"
                     },
                     {
                       "title": "দ্য ডেইলি স্টার বাংলা: গাজীপুরের ৫ স্থান",
-                      "url": "https://bangla.thedailystar.net/life-living/travel/news-508426"
+                      "url": "https://bangla.thedailystar.net/life-living/travel/news-508426",
+                      "title_en": "The Daily Star Bangla: 5 places in Gazipur"
                     },
                     {
                       "title": "টিবিএস বাংলা: ভাওয়াল জাতীয় উদ্যান",
-                      "url": "https://www.tbsnews.net/bangla/node/517356"
+                      "url": "https://www.tbsnews.net/bangla/node/517356",
+                      "title_en": "TBS Bangla: Bhawal National Park"
                     },
                     {
                       "title": "প্রথম আলো: গাজীপুর সিটিতে সংরক্ষিত বনে ভাগাড় নির্মাণ",
-                      "url": "https://www.prothomalo.com/bangladesh/environment/yiwin2sgvs"
+                      "url": "https://www.prothomalo.com/bangladesh/environment/yiwin2sgvs",
+                      "title_en": "Prothom Alo: Dumping ground built in a reserved forest in Gazipur City"
                     }
+                  ],
+                  "name_en": "Bhawal National Park",
+                  "intro_en": "A national park in Gazipur covered in sal forest, about 40 km north of Dhaka city.",
+                  "history_en": "It was originally part of the Madhupur forest under the Bhawal Estate. It was brought under protection under the Wildlife Act of 1974, and officially declared a national park in 1982.",
+                  "why_famous_en": "The Kapis sal forest spreads over about 5,022 hectares. It is home to deer, wild boar, mongooses and many bird and reptile species, and is also known as a family picnic spot.",
+                  "how_to_go_en": "It is located beside the Dhaka–Mymensingh highway.",
+                  "distance_en": "About 40 km north of Dhaka city; about 20 km from Gazipur and Kapasia.",
+                  "cost_en": "Not yet verified",
+                  "best_time_en": "Not yet verified",
+                  "tips_en": [
+                    "A popular place for family and friends' picnics (The Daily Star Bangla)."
+                  ],
+                  "warnings_en": [
+                    "According to a Prothom Alo report, this is a reserved forest area declared under the Forest Act 1927, and entry is not allowed without permission from the Forest Department."
+                  ],
+                  "nearby_en": [
+                    "Bangabandhu Safari Park",
+                    "Nuhash Polli"
                   ]
                 },
                 {
@@ -954,8 +996,31 @@
                   "source": [
                     {
                       "title": "বাংলাদেশ পর্যটন কর্পোরেশন",
-                      "url": "https://www.parjatan.gov.bd"
+                      "url": "https://www.parjatan.gov.bd",
+                      "title_en": "Bangladesh Parjatan Corporation"
                     }
+                  ],
+                  "name_en": "Cox's Bazar Sea Beach",
+                  "intro_en": "A continuous natural beach about 120 km long.",
+                  "history_en": "The area is named after British officer Captain Hiram Cox, who was in charge of resettling Arakanese refugees. Later it became the country's main tourist destination.",
+                  "why_famous_en": "One of the longest natural sea beaches in the world, famous for its sunsets.",
+                  "how_to_go_en": "From Dhaka you can fly directly to Cox's Bazar, or go by bus or train via Chattogram. From the town, reach the beach by auto-rickshaw or rickshaw.",
+                  "distance_en": "About 390–420 km by road from Dhaka; 1–3 km from the town to the beach.",
+                  "cost_en": "Beach entry is free. Transport and hotel costs vary by season, so check before booking.",
+                  "best_time_en": "November–March",
+                  "tips_en": [
+                    "Go in the afternoon to see the sunset.",
+                    "Book hotels early during holidays."
+                  ],
+                  "warnings_en": [
+                    "Follow red flags and lifeguard instructions.",
+                    "Be careful during low tide and in strong currents.",
+                    "Agree on the fare in advance."
+                  ],
+                  "nearby_en": [
+                    "Himchari",
+                    "Inani Beach",
+                    "Labani Point"
                   ]
                 },
                 {
@@ -987,11 +1052,34 @@
                   "source": [
                     {
                       "title": "বাংলাদেশ পর্যটন কর্পোরেশন",
-                      "url": "https://www.parjatan.gov.bd"
+                      "url": "https://www.parjatan.gov.bd",
+                      "title_en": "Bangladesh Parjatan Corporation"
                     }
+                  ],
+                  "name_en": "Himchari",
+                  "intro_en": "A meeting place of hills, sea and waterfalls; part of Himchari National Park.",
+                  "history_en": "A popular recreation spot on the Cox's Bazar–Teknaf Marine Drive route.",
+                  "why_famous_en": "Famous for views of the sea from the hills and for its waterfall.",
+                  "how_to_go_en": "From Cox's Bazar town, take an auto-rickshaw, CNG or hired car along Marine Drive.",
+                  "distance_en": "About 12 km from Cox's Bazar town.",
+                  "cost_en": "The entry fee is small; transport fares vary by vehicle.",
+                  "best_time_en": "October–March; for the waterfall, after the monsoon",
+                  "tips_en": [
+                    "Going in the morning means fewer crowds.",
+                    "Wear comfortable shoes."
+                  ],
+                  "warnings_en": [
+                    "In the dry season there is little water in the waterfall.",
+                    "Be careful at the edges of the hill."
+                  ],
+                  "nearby_en": [
+                    "Inani Beach",
+                    "Ramu"
                   ]
                 }
-              ]
+              ],
+              "name_en": "Cox's Bazar Sadar",
+              "about_en": "A tourist city on the Bay of Bengal coast."
             },
             {
               "name": "টেকনাফ",
@@ -1026,11 +1114,34 @@
                   "source": [
                     {
                       "title": "বাংলাদেশ পর্যটন কর্পোরেশন",
-                      "url": "https://www.parjatan.gov.bd"
+                      "url": "https://www.parjatan.gov.bd",
+                      "title_en": "Bangladesh Parjatan Corporation"
                     }
+                  ],
+                  "name_en": "Saint Martin's Island",
+                  "intro_en": "Bangladesh's only coral island, surrounded by clear water and coconut groves.",
+                  "history_en": "Locally known as Narikel Jinjira. It is an important protected area because of its coral and biodiversity.",
+                  "why_famous_en": "Famous for its crystal-clear water, coral reefs and rare fish species.",
+                  "how_to_go_en": "From Teknaf town, about 1 hour by speedboat or boat.",
+                  "distance_en": "About 15–20 km by sea from Teknaf.",
+                  "cost_en": "Speedboat tickets are available for individuals or groups.",
+                  "best_time_en": "November–February; avoid the monsoon",
+                  "tips_en": [
+                    "Choose a morning trip.",
+                    "Carry sunscreen and a towel."
+                  ],
+                  "warnings_en": [
+                    "There are strong currents in the sea.",
+                    "Go with a guide."
+                  ],
+                  "nearby_en": [
+                    "Chhuri Island",
+                    "Teknaf Beach"
                   ]
                 }
-              ]
+              ],
+              "name_en": "Teknaf",
+              "about_en": "The southernmost upazila on Bangladesh's land border."
             }
           ]
         },
@@ -1042,45 +1153,67 @@
               "about": null,
               "places": [
                 {
-              "name": "কাপ্তাই লেক",
-              "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Hanging_Bridge%2C_Kaptai_Lake.jpg",
-              "image_credit": "Shakhawat Hossen Shafat — CC BY-SA 4.0",
-              "popular": false,
-              "status": "ready",
-              "intro": "কাপ্তাই লেক বাংলাদেশের সবচেয়ে বড় কৃত্রিম হ্রদ। এটি রাঙ্গামাটি জেলার কাপ্তাই উপজেলায় কর্ণফুলী নদীর ওপর কাপ্তাই বাঁধ নির্মাণের ফলে সৃষ্টি হয়েছে।",
-              "history": "কর্ণফুলী জলবিদ্যুৎ কেন্দ্রের জন্য জলাধার নির্মাণের কাজ ১৯৫৬ সালে তৎকালীন পূর্ব পাকিস্তান সরকারের উদ্যোগে শুরু হয়। কাপ্তাই বাঁধ নির্মাণের ফলে ১৯৬১ সালে হ্রদটি সৃষ্টি হয়। হ্রদ সৃষ্টির সময় রাঙ্গামাটি জেলার প্রায় ৫৪,০০০ একর কৃষিজমি পানিতে তলিয়ে যায় এবং প্রায় ১ লাখ মানুষ বাস্তুচ্যুত হয়। চাকমা রাজার প্রাসাদও পানির নিচে তলিয়ে যায়।",
-              "why_famous": "কাপ্তাই লেক বাংলাদেশের সবচেয়ে বড় কৃত্রিম হ্রদ এবং এর বিস্তীর্ণ জলরাশি, পাহাড় ও দ্বীপসমৃদ্ধ প্রাকৃতিক দৃশ্যের জন্য পরিচিত। কর্ণফুলী নদীর ওপর নির্মিত কাপ্তাই বাঁধ ও জলবিদ্যুৎ প্রকল্পের সঙ্গে হ্রদটির ঐতিহাসিক ও ভৌগোলিক গুরুত্ব রয়েছে।",
-              "how_to_go": "রাঙ্গামাটি শহর থেকে বাস, সিএনজি বা নৌপথে কাপ্তাই লেকে যাওয়া যায়। নৌভ্রমণের জন্য রিজার্ভ বাজার, তবলছড়ি ও পর্যটন ঘাট থেকে নৌযান বা স্পিডবোট পাওয়া যায়।",
-              "distance": "রাঙ্গামাটি শহর থেকে প্রায় ৫–১০ কিলোমিটার",
-              "cost": "দেশীয় নৌযান ঘণ্টায় ৫০০–৮০০ টাকা; স্পিডবোট ঘণ্টায় ১,২০০–১,৫০০ টাকা।",
-              "best_time": "নভেম্বর থেকে ফেব্রুয়ারি",
-              "map": "কাপ্তাই লেক, রাঙ্গামাটি, Bangladesh",
-              "tips": [
-              "নৌভ্রমণের সময় লাইফ জ্যাকেট ব্যবহার করুন।",
-              "হ্রদ ও আশপাশের প্রাকৃতিক পরিবেশ পরিষ্কার-পরিচ্ছন্ন রাখুন।"
-              ],
-              "warnings": [
-              "বর্ষাকালে অতিরিক্ত বৃষ্টি ও পানির উচ্চতা বাড়ার কারণে নৌভ্রমণের সময় স্থানীয় কর্তৃপক্ষের নির্দেশনা মেনে চলুন।"
-              ],
-              "nearby": [
-              "ঝুলন্ত সেতু",
-              "সাজেক ভ্যালি"
-              ],
-              "source": [
-              {
-              "title": "Wikipedia: Kaptai Lake",
-              "url": "https://en.wikipedia.org/wiki/Kaptai_Lake"
-              },
-              {
-              "title": "Wikipedia: Kaptai Dam",
-              "url": "https://en.wikipedia.org/wiki/Kaptai_Dam"
-              },
-            {
-              "title": "Wikimedia Commons: Kaptai Lake seen from Berannye Lake",
-              "url": "https://commons.wikimedia.org/wiki/File:Kaptai_Lake_seen_from_Berannye_Lake_(01).jpg"
-            }
-          ] 
-        },
+                  "name": "কাপ্তাই লেক",
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Hanging_Bridge%2C_Kaptai_Lake.jpg",
+                  "image_credit": "Shakhawat Hossen Shafat — CC BY-SA 4.0",
+                  "popular": false,
+                  "status": "ready",
+                  "intro": "কাপ্তাই লেক বাংলাদেশের সবচেয়ে বড় কৃত্রিম হ্রদ। এটি রাঙ্গামাটি জেলার কাপ্তাই উপজেলায় কর্ণফুলী নদীর ওপর কাপ্তাই বাঁধ নির্মাণের ফলে সৃষ্টি হয়েছে।",
+                  "history": "কর্ণফুলী জলবিদ্যুৎ কেন্দ্রের জন্য জলাধার নির্মাণের কাজ ১৯৫৬ সালে তৎকালীন পূর্ব পাকিস্তান সরকারের উদ্যোগে শুরু হয়। কাপ্তাই বাঁধ নির্মাণের ফলে ১৯৬১ সালে হ্রদটি সৃষ্টি হয়। হ্রদ সৃষ্টির সময় রাঙ্গামাটি জেলার প্রায় ৫৪,০০০ একর কৃষিজমি পানিতে তলিয়ে যায় এবং প্রায় ১ লাখ মানুষ বাস্তুচ্যুত হয়। চাকমা রাজার প্রাসাদও পানির নিচে তলিয়ে যায়।",
+                  "why_famous": "কাপ্তাই লেক বাংলাদেশের সবচেয়ে বড় কৃত্রিম হ্রদ এবং এর বিস্তীর্ণ জলরাশি, পাহাড় ও দ্বীপসমৃদ্ধ প্রাকৃতিক দৃশ্যের জন্য পরিচিত। কর্ণফুলী নদীর ওপর নির্মিত কাপ্তাই বাঁধ ও জলবিদ্যুৎ প্রকল্পের সঙ্গে হ্রদটির ঐতিহাসিক ও ভৌগোলিক গুরুত্ব রয়েছে।",
+                  "how_to_go": "রাঙ্গামাটি শহর থেকে বাস, সিএনজি বা নৌপথে কাপ্তাই লেকে যাওয়া যায়। নৌভ্রমণের জন্য রিজার্ভ বাজার, তবলছড়ি ও পর্যটন ঘাট থেকে নৌযান বা স্পিডবোট পাওয়া যায়।",
+                  "distance": "রাঙ্গামাটি শহর থেকে প্রায় ৫–১০ কিলোমিটার",
+                  "cost": "দেশীয় নৌযান ঘণ্টায় ৫০০–৮০০ টাকা; স্পিডবোট ঘণ্টায় ১,২০০–১,৫০০ টাকা।",
+                  "best_time": "নভেম্বর থেকে ফেব্রুয়ারি",
+                  "map": "কাপ্তাই লেক, রাঙ্গামাটি, Bangladesh",
+                  "tips": [
+                    "নৌভ্রমণের সময় লাইফ জ্যাকেট ব্যবহার করুন।",
+                    "হ্রদ ও আশপাশের প্রাকৃতিক পরিবেশ পরিষ্কার-পরিচ্ছন্ন রাখুন।"
+                  ],
+                  "warnings": [
+                    "বর্ষাকালে অতিরিক্ত বৃষ্টি ও পানির উচ্চতা বাড়ার কারণে নৌভ্রমণের সময় স্থানীয় কর্তৃপক্ষের নির্দেশনা মেনে চলুন।"
+                  ],
+                  "nearby": [
+                    "ঝুলন্ত সেতু",
+                    "সাজেক ভ্যালি"
+                  ],
+                  "source": [
+                    {
+                      "title": "Wikipedia: Kaptai Lake",
+                      "url": "https://en.wikipedia.org/wiki/Kaptai_Lake",
+                      "title_en": "Wikipedia: Kaptai Lake"
+                    },
+                    {
+                      "title": "Wikipedia: Kaptai Dam",
+                      "url": "https://en.wikipedia.org/wiki/Kaptai_Dam",
+                      "title_en": "Wikipedia: Kaptai Dam"
+                    },
+                    {
+                      "title": "Wikimedia Commons: Kaptai Lake seen from Berannye Lake",
+                      "url": "https://commons.wikimedia.org/wiki/File:Kaptai_Lake_seen_from_Berannye_Lake_(01).jpg",
+                      "title_en": "Wikimedia Commons: Kaptai Lake seen from Berannye Lake"
+                    }
+                  ],
+                  "name_en": "Kaptai Lake",
+                  "intro_en": "Kaptai Lake is Bangladesh's largest artificial lake. It was formed in Kaptai upazila of Rangamati district by the Kaptai Dam built across the Karnaphuli River.",
+                  "history_en": "Work on the reservoir for the Karnaphuli hydroelectric plant began in 1956 under the then East Pakistan government. The lake was formed in 1961 after the Kaptai Dam was built. When the lake formed, about 54,000 acres of farmland in Rangamati district were submerged and about 100,000 people were displaced. The palace of the Chakma king was also submerged.",
+                  "why_famous_en": "Kaptai Lake is Bangladesh's largest artificial lake, known for its vast water, hills and islands. It has historical and geographical importance linked to the Kaptai Dam and the hydroelectric project on the Karnaphuli River.",
+                  "how_to_go_en": "From Rangamati town you can reach Kaptai Lake by bus, CNG or waterways. For boat trips, boats and speedboats are available at Reserve Bazar, Tablchhari and the tourist ghat.",
+                  "distance_en": "About 5–10 km from Rangamati town",
+                  "cost_en": "Local boats cost Tk 500–800 per hour; speedboats cost Tk 1,200–1,500 per hour.",
+                  "best_time_en": "November to February",
+                  "tips_en": [
+                    "Wear a life jacket during boat trips.",
+                    "Keep the lake and its surroundings clean."
+                  ],
+                  "warnings_en": [
+                    "During the monsoon, heavy rain and rising water levels mean you should follow local authority guidance for boat trips."
+                  ],
+                  "nearby_en": [
+                    "Jhulanta Bridge",
+                    "Sajek Valley"
+                  ]
+                },
                 {
                   "name": "ঝুলন্ত সেতু",
                   "emoji": null,
@@ -1146,21 +1279,53 @@
                   "cost": "প্রবেশ টিকিট জনপ্রতি ৫০ টাকা; গাড়ির পার্কিং ফি ৩০০ টাকা।",
                   "best_time": null,
                   "map": "নীলগিরি, বান্দরবান, Bangladesh",
-                  "tips": ["পাহাড়ি পথে ভ্রমণের জন্য আরামদায়ক পোশাক ও জুতা ব্যবহার করুন।",
-                  "মেঘ ও কুয়াশার সৌন্দর্য উপভোগ করতে সকালে যাওয়া ভালো।",
-                  "পাহাড়ি পরিবেশ পরিষ্কার-পরিচ্ছন্ন রাখুন এবং ময়লা নির্দিষ্ট স্থানে ফেলুন।"],
-                  "warnings": ["পাহাড়ি পথে চলাচলের সময় সতর্ক থাকুন এবং নির্ধারিত পথের বাইরে যাবেন না।",
-                  "বৃষ্টির সময় পাহাড়ি রাস্তা পিচ্ছিল হতে পারে, তাই অতিরিক্ত সতর্কতা অবলম্বন করুন।",
-                  "স্থানীয় নিরাপত্তা নির্দেশনা ও কর্তৃপক্ষের নিয়ম মেনে চলুন।"],
-                  "nearby": ["নীলাচল",
-                  "বগা লেক"],
-                  "source": [{
-                  "title": "Wikipedia: Nilgiri",
-                  "url": "https://en.wikipedia.org/wiki/Nilgiri"},
-                {
-                  "title": "Wikimedia Commons: Nilgiri Hill Resort, Nilgiri, Bandarban",
-                  "url": "https://commons.wikimedia.org/wiki/File:Nilgiri_Hill_Resort,_Nilgiri,_Bandarban_(9789).jpg"
+                  "tips": [
+                    "পাহাড়ি পথে ভ্রমণের জন্য আরামদায়ক পোশাক ও জুতা ব্যবহার করুন।",
+                    "মেঘ ও কুয়াশার সৌন্দর্য উপভোগ করতে সকালে যাওয়া ভালো।",
+                    "পাহাড়ি পরিবেশ পরিষ্কার-পরিচ্ছন্ন রাখুন এবং ময়লা নির্দিষ্ট স্থানে ফেলুন।"
+                  ],
+                  "warnings": [
+                    "পাহাড়ি পথে চলাচলের সময় সতর্ক থাকুন এবং নির্ধারিত পথের বাইরে যাবেন না।",
+                    "বৃষ্টির সময় পাহাড়ি রাস্তা পিচ্ছিল হতে পারে, তাই অতিরিক্ত সতর্কতা অবলম্বন করুন।",
+                    "স্থানীয় নিরাপত্তা নির্দেশনা ও কর্তৃপক্ষের নিয়ম মেনে চলুন।"
+                  ],
+                  "nearby": [
+                    "নীলাচল",
+                    "বগা লেক"
+                  ],
+                  "source": [
+                    {
+                      "title": "Wikipedia: Nilgiri",
+                      "url": "https://en.wikipedia.org/wiki/Nilgiri",
+                      "title_en": "Wikipedia: Nilgiri"
+                    },
+                    {
+                      "title": "Wikimedia Commons: Nilgiri Hill Resort, Nilgiri, Bandarban",
+                      "url": "https://commons.wikimedia.org/wiki/File:Nilgiri_Hill_Resort,_Nilgiri,_Bandarban_(9789).jpg",
+                      "title_en": "Wikimedia Commons: Nilgiri Hill Resort, Nilgiri, Bandarban"
                     }
+                  ],
+                  "name_en": "Nilgiri",
+                  "intro_en": "Nilgiri is a hill resort in Bandarban district, Bangladesh.",
+                  "history_en": "From the start of the 21st century, Nilgiri gradually became known across the country as a tourist spot. The whole resort was established by the Bangladesh Army, which still runs it today.",
+                  "why_famous_en": "Nilgiri is known for its hill scenery, cloud-covered hills and pleasant views.",
+                  "how_to_go_en": "You can reach Nilgiri by the hill road along the Alikadam–Thanchi road in Bandarban.",
+                  "distance_en": "About 50 km from Bandarban district town",
+                  "cost_en": "Entry ticket Tk 50 per person; parking fee for vehicles Tk 300.",
+                  "best_time_en": null,
+                  "tips_en": [
+                    "Wear comfortable clothes and shoes for hill travel.",
+                    "Mornings are best for enjoying the clouds and mist.",
+                    "Keep the hill environment clean and put waste in the designated places."
+                  ],
+                  "warnings_en": [
+                    "Be careful on hill roads and do not go beyond the designated route.",
+                    "Hill roads can be slippery in the rain, so take extra care.",
+                    "Follow local security guidance and the rules of the authorities."
+                  ],
+                  "nearby_en": [
+                    "Nilachal",
+                    "Boga Lake"
                   ]
                 },
                 {
@@ -2739,11 +2904,33 @@
                   "source": [
                     {
                       "title": "বাংলাদেশ পর্যটন কর্পোরেশন",
-                      "url": "https://www.parjatan.gov.bd"
+                      "url": "https://www.parjatan.gov.bd",
+                      "title_en": "Bangladesh Parjatan Corporation"
                     }
+                  ],
+                  "name_en": "Jaflong",
+                  "intro_en": "Where the crystal-clear Pekhua river meets the border hills.",
+                  "history_en": "The area is known for its Khasi and other communities and for stone extraction. Across the border lies Meghalaya in India.",
+                  "why_famous_en": "Famous for its hill and river scenery and clear water.",
+                  "how_to_go_en": "Go directly from Sylhet city by bus, CNG or hired car.",
+                  "distance_en": "About 60 km from Sylhet city.",
+                  "cost_en": "Transport and boat fares are extra; check prices in advance.",
+                  "best_time_en": "June–September and October–December",
+                  "tips_en": [
+                    "You can go and come back the same day.",
+                    "Carry your ID with you."
+                  ],
+                  "warnings_en": [
+                    "Do not go beyond the designated limits in the border area.",
+                    "Be careful of river currents during the monsoon."
+                  ],
+                  "nearby_en": [
+                    "Ratargul",
+                    "Tamabil"
                   ]
                 }
-              ]
+              ],
+              "name_en": "Jaflong"
             }
           ]
         },
