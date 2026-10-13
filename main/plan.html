@@ -409,11 +409,18 @@ select:hover,input:hover{border-color:#d6d0c2}
 
   let cents = {};          // English district name -> [x, y] map centroid (from districts.json)
   let touristByName = {};  // Bengali district name -> ready places
+  let touristEn = {};      // Bengali district name -> English names of the same ready places
   let mapReady = false;
 
   /* ---------- Helpers ---------- */
-  const bnDigits = n => new Intl.NumberFormat("bn-BD", { maximumFractionDigits: 0 }).format(Math.round(n || 0));
-  const money = n => "৳ " + new Intl.NumberFormat("bn-BD", { maximumFractionDigits: 0 }).format(Math.round(n || 0));
+  const isEn = () => document.documentElement.getAttribute("data-lang") === "en";
+  const tx = (bn, en) => (isEn() ? en : bn);
+  const DEN = {"ঢাকা":"Dhaka","গাজীপুর":"Gazipur","কিশোরগঞ্জ":"Kishoreganj","মানিকগঞ্জ":"Manikganj","মুন্সিগঞ্জ":"Munshiganj","নারায়ণগঞ্জ":"Narayanganj","নরসিংদী":"Narsingdi","টাঙ্গাইল":"Tangail","ফরিদপুর":"Faridpur","গোপালগঞ্জ":"Gopalganj","মাদারীপুর":"Madaripur","রাজবাড়ী":"Rajbari","শরীয়তপুর":"Shariatpur","চট্টগ্রাম":"Chattogram","কক্সবাজার":"Cox's Bazar","রাঙ্গামাটি":"Rangamati","বান্দরবান":"Bandarban","খাগড়াছড়ি":"Khagrachhari","ফেনী":"Feni","লক্ষ্মীপুর":"Lakshmipur","নোয়াখালী":"Noakhali","কুমিল্লা":"Comilla","চাঁদপুর":"Chandpur","ব্রাহ্মণবাড়িয়া":"Brahmanbaria","রাজশাহী":"Rajshahi","চাঁপাইনবাবগঞ্জ":"Chapainawabganj","নওগাঁ":"Naogaon","নাটোর":"Natore","পাবনা":"Pabna","সিরাজগঞ্জ":"Sirajganj","বগুড়া":"Bogra","জয়পুরহাট":"Joypurhat","খুলনা":"Khulna","বাগেরহাট":"Bagerhat","সাতক্ষীরা":"Satkhira","যশোর":"Jessore","নড়াইল":"Narail","মাগুরা":"Magura","ঝিনাইদহ":"Jhenaidah","কুষ্টিয়া":"Kushtia","চুয়াডাঙ্গা":"Chuadanga","মেহেরপুর":"Meherpur","বরিশাল":"Barishal","ভোলা":"Bhola","পটুয়াখালী":"Patuakhali","পিরোজপুর":"Pirojpur","বরগুনা":"Barguna","ঝালকাঠি":"Jhalokathi","সিলেট":"Sylhet","মৌলভীবাজার":"Moulvibazar","হবিগঞ্জ":"Habiganj","সুনামগঞ্জ":"Sunamganj","রংপুর":"Rangpur","দিনাজপুর":"Dinajpur","গাইবান্ধা":"Gaibandha","কুড়িগ্রাম":"Kurigram","লালমনিরহাট":"Lalmonirhat","নীলফামারী":"Nilphamari","পঞ্চগড়":"Panchagarh","ঠাকুরগাঁও":"Thakurgaon","ময়মনসিংহ":"Mymensingh","জামালপুর":"Jamalpur","নেত্রকোণা":"Netrokona","শেরপুর":"Sherpur"};
+  const DIVEN = {"ঢাকা":"Dhaka","চট্টগ্রাম":"Chattogram","রাজশাহী":"Rajshahi","খুলনা":"Khulna","বরিশাল":"Barishal","সিলেট":"Sylhet","রংপুর":"Rangpur","ময়মনসিংহ":"Mymensingh"};
+  const dn = n => (isEn() && DEN[n]) || n;
+  const divName = d => (isEn() ? (DIVEN[d] || d) + " Division" : d + " বিভাগ");
+  const bnDigits = n => new Intl.NumberFormat(isEn() ? "en-US" : "bn-BD", { maximumFractionDigits: 0 }).format(Math.round(n || 0));
+  const money = n => "৳ " + bnDigits(n);
   const clamp = (v, min, max, fb) => { const n = Math.floor(+v); return Number.isFinite(n) ? Math.min(max, Math.max(min, n)) : fb; };
   const toast = msg => { const t = $("toast"); t.textContent = msg; t.style.display = "block"; clearTimeout(toast._t); toast._t = setTimeout(() => t.style.display = "none", 2600); };
 
@@ -446,9 +453,9 @@ select:hover,input:hover{border-color:#d6d0c2}
     const groups = {};
     GEO.forEach(g => (groups[g[4]] = groups[g[4]] || []).push(g[1]));
     const html = DIV_ORDER.filter(div => groups[div]).map(div =>
-      `<optgroup label="${div} বিভাগ">${groups[div].map(n => `<option>${n}</option>`).join("")}</optgroup>`).join("");
+      `<optgroup label="${divName(div)}">${groups[div].map(n => `<option value="${n}">${dn(n)}</option>`).join("")}</optgroup>`).join("");
     $("origin").innerHTML = html;
-    $("destination").innerHTML = `<option value="" disabled selected hidden>গন্তব্য জেলা বেছে নিন</option>` + html;
+    $("destination").innerHTML = `<option value="" disabled selected hidden>${tx("গন্তব্য জেলা বেছে নিন", "Choose a destination district")}</option>` + html;
     $("origin").value = "ঢাকা";
     $("destination").value = "";
   }
@@ -465,14 +472,14 @@ select:hover,input:hover{border-color:#d6d0c2}
       const last = destinations.length - 1;
       const body = openChip === i
         ? `<span class="chip-acts">
-             <button class="chip-up" type="button" aria-label="${d} উপরে সরান" data-act="up" data-i="${i}" ${i === 0 ? "disabled" : ""}>▲</button>
-             <button class="chip-close" type="button" aria-label="${d} সরান" data-act="rm" data-i="${i}">×</button>
-             <button class="chip-down" type="button" aria-label="${d} নিচে সরান" data-act="down" data-i="${i}" ${i === last ? "disabled" : ""}>▼</button>
+             <button class="chip-up" type="button" aria-label="${dn(d)} ${tx("উপরে সরান", "move up")}" data-act="up" data-i="${i}" ${i === 0 ? "disabled" : ""}>▲</button>
+             <button class="chip-close" type="button" aria-label="${dn(d)} ${tx("সরান", "remove")}" data-act="rm" data-i="${i}">×</button>
+             <button class="chip-down" type="button" aria-label="${dn(d)} ${tx("নিচে সরান", "move down")}" data-act="down" data-i="${i}" ${i === last ? "disabled" : ""}>▼</button>
            </span>`
-        : `<button class="chip-name-btn" type="button" title="নিয়ন্ত্রণ দেখতে ক্লিক করুন" data-act="toggle" data-i="${i}">${d}</button>`;
+        : `<button class="chip-name-btn" type="button" title="${tx("নিয়ন্ত্রণ দেখতে ক্লিক করুন", "Click to see controls")}" data-act="toggle" data-i="${i}">${dn(d)}</button>`;
       return `<span class="chip${openChip === i ? " open" : ""}" data-i="${i}">${body}</span>`;
     }).join("");
-    $("routeCount").textContent = bnDigits(destinations.length) + " টি গন্তব্য";
+    $("routeCount").textContent = bnDigits(destinations.length) + tx(" টি গন্তব্য", " destinations");
     $("destHint").hidden = destinations.length > 0;
   }
 
@@ -518,14 +525,14 @@ select:hover,input:hover{border-color:#d6d0c2}
     const total = legs.reduce((s, l) => s + l.km, 0);
     const approx = legs.some(l => !l.exact);
 
-    $("mapOrigin").textContent = "শুরু: " + pts[0];
-    $("mapDistance").textContent = "মোট: " + bnDigits(total) + " কি.মি" + (approx ? " (আনুমানিক)" : "");
-    $("summaryDistance").textContent = bnDigits(total) + " কি.মি";
-    $("summaryDistanceSub").textContent = approx ? "সরলরেখার দূরত্ব × ১.৩০" : "যাচাইকৃত সড়ক দূরত্ব";
-    $("summaryPlaces").textContent = bnDigits(destinations.length) + " টি";
+    $("mapOrigin").textContent = tx("শুরু: ", "Start: ") + dn(pts[0]);
+    $("mapDistance").textContent = tx("মোট: ", "Total: ") + bnDigits(total) + tx(" কি.মি", " km") + (approx ? tx(" (আনুমানিক)", " (estimated)") : "");
+    $("summaryDistance").textContent = bnDigits(total) + tx(" কি.মি", " km");
+    $("summaryDistanceSub").textContent = approx ? tx("সরলরেখার দূরত্ব × ১.৩০", "Straight-line distance × 1.30") : tx("যাচাইকৃত সড়ক দূরত্ব", "Verified road distance");
+    $("summaryPlaces").textContent = bnDigits(destinations.length) + tx(" টি", "");
     $("mapNote").textContent = destinations.length
-      ? "দূরত্ব আনুমানিক। নির্ভুল সড়ক দূরত্ব ও ভাড়ার জন্য গুগল ম্যাপ দেখুন।"
-      : "গন্তব্য যোগ করলে রুট মানচিত্রে দেখাবে।";
+      ? tx("দূরত্ব আনুমানিক। নির্ভুল সড়ক দূরত্ব ও ভাড়ার জন্য গুগল ম্যাপ দেখুন।", "Distances are estimates. Check Google Maps for exact road distances and fares.")
+      : tx("গন্তব্য যোগ করলে রুট মানচিত্রে দেখাবে।", "Add a destination to see the route on the map.");
 
     if (!mapReady) { $("mapFallback").hidden = false; return; }
 
@@ -546,12 +553,12 @@ select:hover,input:hover{border-color:#d6d0c2}
     const dots = xy.map((v, i) =>
       `<circle cx="${v.x}" cy="${v.y}" r="${i === 0 ? 9 : 7}" fill="#fff" stroke="#0f6b4f" stroke-width="4"/>`).join("");
     const names = xy.map(v =>
-      `<text x="${v.x + 10}" y="${v.y - 9}" font-size="15" font-weight="700" fill="#173f2c" stroke="#fff" stroke-width="4" paint-order="stroke">${v.bn}</text>`).join("");
+      `<text x="${v.x + 10}" y="${v.y - 9}" font-size="15" font-weight="700" fill="#173f2c" stroke="#fff" stroke-width="4" paint-order="stroke">${dn(v.bn)}</text>`).join("");
     const labels = legs.map((l, i) => {
       const a = xy[i], b = xy[i + 1];
       if (!a || !b) return "";
       const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-      return `<text x="${mx}" y="${my}" font-size="13" font-weight="800" fill="#0f6b4f" stroke="#fff" stroke-width="4" paint-order="stroke">${bnDigits(l.km)} কি.মি</text>`;
+      return `<text x="${mx}" y="${my}" font-size="13" font-weight="800" fill="#0f6b4f" stroke="#fff" stroke-width="4" paint-order="stroke">${bnDigits(l.km)}${tx(" কি.মি", " km")}</text>`;
     }).join("");
 
     layer.innerHTML = `<path d="${line}" fill="none" stroke="#0f6b4f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 0"/>${dots}${labels}${names}`;
@@ -560,27 +567,28 @@ select:hover,input:hover{border-color:#d6d0c2}
   /* ---------- Tourist places ---------- */
   function initTourist(data) {
     (data.divisions || []).forEach(dv => (dv.districts || []).forEach(ds => {
-      const list = [];
+      const list = [], listEn = [];
       (ds.areas || []).forEach(a => (a.places || []).forEach(p => {
-        if (p.status === "ready" && p.name) list.push(p.name);
+        if (p.status === "ready" && p.name) { list.push(p.name); listEn.push(p.name_en || p.name); }
       }));
       touristByName[ds.name] = list;
+      touristEn[ds.name] = listEn;
     }));
   }
-  const placesOf = bn => touristByName[bn] || [];
+  const placesOf = bn => (isEn() && touristEn[bn]) || touristByName[bn] || [];
 
   /* ---------- Itinerary ---------- */
   function renderItinerary() {
     const n = daysN(), pts = points(), D = destinations.length;
     if (!D) {
-      $("itinerary").innerHTML = `<p class="empty">গন্তব্য যোগ করলে এখানে ভ্রমণসূচি দেখাবে।</p>`;
+      $("itinerary").innerHTML = `<p class="empty">${tx("গন্তব্য যোগ করলে এখানে ভ্রমণসূচি দেখাবে।", "Add a destination to see your itinerary here.")}</p>`;
       return;
     }
     const startVal = startISO();
     let start = null;
     if (startVal) { const [y, m, d] = startVal.split("-").map(Number); start = new Date(y, m - 1, d); }
     const fmt = dayNo => start
-      ? new Date(start.getTime() + (dayNo - 1) * 864e5).toLocaleDateString("bn-BD", { day: "numeric", month: "short", year: "numeric" })
+      ? new Date(start.getTime() + (dayNo - 1) * 864e5).toLocaleDateString(isEn() ? "en-GB" : "bn-BD", { day: "numeric", month: "short", year: "numeric" })
       : "";
 
     // Each selected district gets its own row; the chosen days are shared among them.
@@ -592,12 +600,12 @@ select:hover,input:hover{border-color:#d6d0c2}
       const count = n >= D ? base + (i < extra ? 1 : 0) : 1;
       const first = day + 1, last = day + count;
       day = last;
-      const badge = first === last ? `দিন ${bnDigits(first)}` : `দিন ${bnDigits(first)}–${bnDigits(last)}`;
+      const badge = first === last ? `${tx("দিন", "Day")} ${bnDigits(first)}` : `${tx("দিন", "Day")} ${bnDigits(first)}–${bnDigits(last)}`;
       const dateHtml = start ? `<small>${fmt(first)}</small>` : "";
       const list = placesOf(stop).slice(0, 4);
-      const placesHtml = list.length ? `<p class="places">দর্শনীয়: ${list.join("، ")}</p>` : "";
+      const placesHtml = list.length ? `<p class="places">${tx("দর্শনীয়", "Highlights")}: ${list.join(tx("، ", ", "))}</p>` : "";
       html += `<div class="day"><div class="day-badge">${badge}${dateHtml ? "<br>" + dateHtml : ""}</div>
-        <div><h3>${from} → ${stop}</h3><p>যাত্রা · ${bnDigits(km.km)} কি.মি${km.exact ? "" : " (আনুমানিক)"}</p>${placesHtml}</div></div>`;
+        <div><h3>${dn(from)} → ${dn(stop)}</h3><p>${tx("যাত্রা", "Leg")} · ${bnDigits(km.km)}${tx(" কি.মি", " km")}${km.exact ? "" : tx(" (আনুমানিক)", " (estimated)")}</p>${placesHtml}</div></div>`;
     });
     $("itinerary").innerHTML = html;
   }
@@ -627,14 +635,14 @@ select:hover,input:hover{border-color:#d6d0c2}
     $("foodOut").textContent = money(b.food);
     $("ticketsOut").textContent = money(b.tickets);
     $("contOut").textContent = money(b.contingency);
-    $("transportFormula").textContent = `${bnDigits(Math.round(b.km))} কি.মি × ৳${bnDigits(b.rate)} × ${bnDigits(b.people)} জন`;
-    $("localFormula").textContent = `${bnDigits(b.people)} জন × ${bnDigits(b.days)} দিন × ৳${bnDigits(b.localRate)}`;
-    $("foodFormula").textContent = `${bnDigits(b.people)} জন × ${bnDigits(b.days)} দিন × ৳${bnDigits(b.foodRate)}`;
-    $("ticketsFormula").textContent = `${bnDigits(b.people)} জন × ৳${bnDigits(b.ticketRate)}`;
-    $("contFormula").textContent = `মোট খরচের ${bnDigits(b.contPct)}%`;
+    $("transportFormula").textContent = `${bnDigits(Math.round(b.km))}${tx(" কি.মি", " km")} × ৳${bnDigits(b.rate)} × ${bnDigits(b.people)}${tx(" জন", " people")}`;
+    $("localFormula").textContent = `${bnDigits(b.people)}${tx(" জন", " people")} × ${bnDigits(b.days)}${tx(" দিন", " days")} × ৳${bnDigits(b.localRate)}`;
+    $("foodFormula").textContent = `${bnDigits(b.people)}${tx(" জন", " people")} × ${bnDigits(b.days)}${tx(" দিন", " days")} × ৳${bnDigits(b.foodRate)}`;
+    $("ticketsFormula").textContent = `${bnDigits(b.people)}${tx(" জন", " people")} × ৳${bnDigits(b.ticketRate)}`;
+    $("contFormula").textContent = `${tx("মোট খরচের ", "of total cost: ")}${bnDigits(b.contPct)}%`;
     $("grandTotal").textContent = money(b.total);
-    $("perPerson").textContent = "জনপ্রতি " + money(b.total / b.people);
-    $("perDay").textContent = "দৈনিক গড় " + money(b.total / b.days);
+    $("perPerson").textContent = tx("জনপ্রতি ", "Per person: ") + money(b.total / b.people);
+    $("perDay").textContent = tx("দৈনিক গড় ", "Daily average: ") + money(b.total / b.days);
 
     const items = [
       ["যাতায়াত", b.transport], ["স্থানীয় যাতায়াত", b.local], ["খাবার", b.food],
@@ -644,8 +652,8 @@ select:hover,input:hover{border-color:#d6d0c2}
       const p = pct(amt);
       return `<div class="bar-row"><span>${name}</span><div class="bar"><i style="width:${p}%"></i></div><b>${bnDigits(p)}%</b></div>`;
     }).join("");
-    $("summaryDays").textContent = bnDigits(b.days) + " দিন";
-    $("summaryPeople").textContent = bnDigits(b.people) + " জন";
+    $("summaryDays").textContent = bnDigits(b.days) + tx(" দিন", " days");
+    $("summaryPeople").textContent = bnDigits(b.people) + tx(" জন", " people");
   }
 
   function update() { renderMap(); renderItinerary(); updateBudget(); }
@@ -667,11 +675,11 @@ select:hover,input:hover{border-color:#d6d0c2}
     const km = legList(points()).reduce((s, l) => s + l.km, 0);
     const name = $("cardName").value.trim();
     return [
-      name ? name + " — ভ্রমণ কার্ড" : "ভ্রমণ কার্ড",
-      "রুট: " + points().join(" → "),
-      "মোট দূরত্ব: " + km + " কি.মি (আনুমানিক)",
-      b.days + " দিন · " + b.people + " জন",
-      "আনুমানিক মোট খরচ: " + money(b.total)
+      name ? name + " — " + tx("ভ্রমণ কার্ড", "Trip card") : tx("ভ্রমণ কার্ড", "Trip card"),
+      tx("রুট: ", "Route: ") + points().map(dn).join(" → "),
+      tx("মোট দূরত্ব: ", "Total distance: ") + km + tx(" কি.মি (আনুমানিক)", " km (estimated)"),
+      b.days + tx(" দিন", " days") + " · " + b.people + tx(" জন", " people"),
+      tx("আনুমানিক মোট খরচ: ", "Estimated total: ") + money(b.total)
     ].join("\n");
   }
   function renderCard() {
@@ -685,20 +693,20 @@ select:hover,input:hover{border-color:#d6d0c2}
     $("tcPhoto").hidden = !photoUrl;
     $("tcPhoto").innerHTML = photoUrl ? showPhoto : "";
     $("tcName").hidden = !name;
-    $("tcName").textContent = name ? name + " - এর পরিকল্পনা" : "";
+    $("tcName").textContent = name ? name + tx(" - এর পরিকল্পনা", " - travel plan") : "";
 
-    $("tcDest").textContent = points().join(" - ") + "।";
+    $("tcDest").textContent = points().map(dn).join(" - ") + tx("।", ".");
     $("tcStats").innerHTML = `
-      <span>দূরত্ব: ${bnDigits(Math.round(km))} কি.মি</span>
-      <span>সময়: ${bnDigits(b.days)} দিন</span>
-      <span>ব্যাক্তি: ${bnDigits(b.people)} জন</span>`;
+      <span>${tx("দূরত্ব", "Distance")}: ${bnDigits(Math.round(km))}${tx(" কি.মি", " km")}</span>
+      <span>${tx("সময়", "Duration")}: ${bnDigits(b.days)}${tx(" দিন", " days")}</span>
+      <span>${tx("ব্যাক্তি", "Travellers")}: ${bnDigits(b.people)}${tx(" জন", " people")}</span>`;
     const svg = $("mapSvg").cloneNode(true);
     svg.querySelectorAll("[id]").forEach(el => el.removeAttribute("id"));
     $("tcMapSvg").replaceChildren(svg);
     const sd = startISO(), dateEl = $("tcDate");
     if (sd) {
       const [y, m, d] = sd.split("-").map(Number);
-      dateEl.textContent = new Date(y, m - 1, d).toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" });
+      dateEl.textContent = new Date(y, m - 1, d).toLocaleDateString(isEn() ? "en-GB" : "bn-BD", { day: "numeric", month: "long", year: "numeric" });
       dateEl.hidden = false;
     } else {
       dateEl.textContent = "";
@@ -792,10 +800,10 @@ select:hover,input:hover{border-color:#d6d0c2}
     ctx.font = `700 18px ${FONT}`;
     const textX = photoImg ? PAD + PH + 14 : PAD;
     const maxW = CARD_W - textX - PAD;
-    const nameLines = name ? wrapLines(ctx, name + " - এর পরিকল্পনা", maxW) : [];
+    const nameLines = name ? wrapLines(ctx, name + tx(" - এর পরিকল্পনা", " - travel plan"), maxW) : [];
     ctx.font = `400 14px ${FONT}`;
-    const destLines = wrapLines(ctx, points().join(" - ") + "।", maxW);
-    const statsText = `দূরত্ব: ${bnDigits(km)} কি.মি     সময়: ${bnDigits(b.days)} দিন     ব্যাক্তি: ${bnDigits(b.people)} জন`;
+    const destLines = wrapLines(ctx, points().map(dn).join(" - ") + tx("।", "."), maxW);
+    const statsText = `${tx("দূরত্ব", "Distance")}: ${bnDigits(km)}${tx(" কি.মি", " km")}     ${tx("সময়", "Duration")}: ${bnDigits(b.days)}${tx(" দিন", " days")}     ${tx("ব্যাক্তি", "Travellers")}: ${bnDigits(b.people)}${tx(" জন", " people")}`;
     const textH = nameLines.length * 22 + destLines.length * 20 + 3 + 18;
     const bandH = PAD * 2 + Math.max(photoImg ? PH : 0, textH);
 
@@ -855,7 +863,7 @@ select:hover,input:hover{border-color:#d6d0c2}
       const [y, m, d] = sd.split("-").map(Number);
       ctx.font = `700 12px ${FONT}`; ctx.fillStyle = "#174b35";
       ctx.textAlign = "right"; ctx.textBaseline = "top";
-      ctx.fillText(ubT(new Date(y, m - 1, d).toLocaleDateString("bn-BD", { day: "numeric", month: "long", year: "numeric" })), CARD_W - 9, y0 + 7);
+      ctx.fillText(ubT(new Date(y, m - 1, d).toLocaleDateString(isEn() ? "en-GB" : "bn-BD", { day: "numeric", month: "long", year: "numeric" })), CARD_W - 9, y0 + 7);
     }
 
     // Footer inside the map box
@@ -892,7 +900,7 @@ select:hover,input:hover{border-color:#d6d0c2}
     if (!blob) return toast("ছবি তৈরি করা যাচ্ছে না।");
     const file = new File([blob], "trip-card.png", { type: "image/png" });
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      try { await navigator.share({ title: "ভ্রমণ কার্ড", text: cardText(), files: [file] }); return; }
+      try { await navigator.share({ title: tx("ভ্রমণ কার্ড", "Trip card"), text: cardText(), files: [file] }); return; }
       catch (e) { if (e && e.name === "AbortError") return; }
     }
     $("dlBtn").click();
@@ -902,9 +910,9 @@ select:hover,input:hover{border-color:#d6d0c2}
   /* ---------- Events ---------- */
   function addSelected() {
     const d = $("destination").value;
-    if (!d) return toast("প্রথমে একটি গন্তব্য জেলা বেছে নিন।");
-    if (d === $("origin").value) return toast("শুরুর জেলাকে গন্তব্য হিসেবে যোগ করা যাবে না।");
-    if (destinations.includes(d)) return toast("এই জেলা ইতিমধ্যে যোগ করা আছে।");
+    if (!d) return toast(tx("প্রথমে একটি গন্তব্য জেলা বেছে নিন।", "Please choose a destination district first."));
+    if (d === $("origin").value) return toast(tx("শুরুর জেলাকে গন্তব্য হিসেবে যোগ করা যাবে না।", "The starting district cannot be added as a destination."));
+    if (destinations.includes(d)) return toast(tx("এই জেলা ইতিমধ্যে যোগ করা আছে।", "This district is already added."));
     destinations.push(d); renderChips(); update();
   }
   $("addDest").onclick = addSelected;
@@ -933,7 +941,7 @@ select:hover,input:hover{border-color:#d6d0c2}
     .forEach(id => $(id).addEventListener("input", update));
   $("googleMaps").onclick = () => {
     const url = mapsUrl(points());
-    if (!url) return toast("অন্তত একটি গন্তব্য যোগ করুন।");
+    if (!url) return toast(tx("অন্তত একটি গন্তব্য যোগ করুন।", "Add at least one destination."));
     window.open(url, "_blank", "noopener");
   };
 
@@ -941,6 +949,13 @@ select:hover,input:hover{border-color:#d6d0c2}
   fillSelects();
   renderChips();
   update();
+  document.addEventListener("ub:lang-change", () => {
+    const keep = $("origin").value;
+    fillSelects();
+    if (keep) $("origin").value = keep;
+    renderChips();
+    update();
+  });
 
   const load = url => fetch(url).then(r => { if (!r.ok) throw new Error(url); return r.json(); });
   Promise.allSettled([load("../assets/data/districts.json"), load("../assets/data/tourist.json")])
