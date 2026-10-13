@@ -5,6 +5,14 @@
    Data files (tourist places, emergency notes) keep their own text: they are content, not UI. */
 (() => {
   const D = {
+    "জেলা বেছে নিন, রুট ও আনুমানিক বাজেট দেখুন, আপনার পরিকল্পনা সেভ করুন।": "Choose districts, see the route and estimated budget, then save your plan.",
+    "তারিখ মুছুন": "Clear date",
+    "মানচিত্রে ভ্রমণ রুট": "Travel route on the map",
+    "আনুমানিক": "Estimated",
+    "৩ দিন": "3 days",
+    "২টি": "2",
+    "২ জন": "2 people",
+    "প্রিভিউ দেখুন": "View preview",
     "টিপস: ম্যাপের জেলায় সরাসরি ক্লিক করেও বাছাই করতে পারেন।":"Tip: you can also select districts by clicking them on the map.",
     "নিজের দেশকে নতুন করে আবিষ্কারের গল্প। অজানা সৌন্দর্য খুঁজে বের করুন, ভ্রমণের স্মৃতি ধরে রাখুন! ভালোবাসায় চিনে নিন আমাদের বাংলাদেশ।":"A story of rediscovering our own country. Find hidden beauty, keep your travel memories alive, and get to know Bangladesh with love.",
     "৬৪ জেলার পরিচিত ও অল্পচেনা দর্শনীয় স্থান ঘুরে দেখুন। কীভাবে যাবেন, কখন যাবেন, আনুমানিক খরচ ও থাকার ব্যবস্থা সব তথ্য একসাথে।":"Explore well-known and lesser-known places across all 64 districts. How to get there, when to go, estimated costs and where to stay, all in one place.",
