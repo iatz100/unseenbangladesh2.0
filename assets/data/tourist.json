@@ -3074,6 +3074,56 @@
                 }
               ]
             },
+{
+  "name": "Moulvibazar",
+  "areas": [
+    {
+      "name": "Kamalganj",
+      "about": null,
+      "places": [
+        {
+          "name": "Lawachara National Park",
+          "image": "https://upload.wikimedia.org/wikipedia/commons/4/4f/Life_around_jungle.jpg",
+          "image_credit": "PALLAB CC BY-SA 4.0",
+          "popular": false,
+          "status": "ready",
+          "intro": "A national park and protected natural area located in Kamalganj Upazila, Moulvibazar District. It covers approximately 1,250 hectares (12.5 square kilometers) of semi-evergreen and mixed deciduous forest.",
+          "history": "The park is part of the 2,740-hectare West Bhanugach Reserved Forest. It was declared a national park on July 7, 1996, under the Wildlife Act of 1974.",
+          "why_famous": "Home to more than 460 species of plants and animals, including the endangered western hoolock gibbon. The forest also features trekking and walking trails.",
+          "how_to_go": "From Dhaka, travel by train (Upaban, Jayantika, Parabat, or Kalni Express) or by bus to Sreemangal or Moulvibazar. From Chattogram, travel by Paharika or Udayan Express to Sreemangal; these trains operate six days a week.",
+          "distance": "Approximately 30 km from Moulvibazar District town.",
+          "cost": "Approximately BDT 100–200 per person for admission; transportation costs are separate.",
+          "best_time": "November to February, when the weather is generally cooler and drier.",
+          "map": "24.3404436,91.7966361",
+          "tips": [
+            "Avoid disturbing the forest environment and the natural movements of wildlife.",
+            "Follow designated walking trails when exploring the forest."
+          ],
+          "warnings": [
+            "Lawachara is a protected forest area. Avoid harming wildlife or damaging the natural environment."
+          ],
+          "nearby": [
+            "Tea Gardens of Sreemangal",
+            "Madhabpur Lake",
+            "Nilkantha Tea Cabin",
+            "Baikka Beel"
+          ],
+          "source": [
+            {
+              "title": "Bangladesh Tourism Board – Lawachara National Park",
+              "url": "https://beautifulbangladesh.gov.bd/loc/sylhet/23"
+            },
+            {
+              "title": "Wikipedia – Lawachara National Park",
+              "url": "https://en.wikipedia.org/wiki/Lawachara_National_Park"
+            }
+          ],
+          "name_en": "Lawachara National Park"
+        }
+      ]
+    }
+  ]
+},
             {
               "name": "বড়লেখা",
               "about": null,
