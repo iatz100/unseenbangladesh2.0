@@ -128,7 +128,7 @@
                 },
                 {
                   "name": "জাতীয় সংসদ ভবন",
-                  "image": "https://commons.wikimedia.org/wiki/File:বাংলাদেশের_জাতীয়_সংসদ_ভবন_24.jpg",
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/9/98/%E0%A6%AC%E0%A6%BE%E0%A6%82%E0%A6%B2%E0%A6%BE%E0%A6%A6%E0%A7%87%E0%A6%B6%E0%A7%87%E0%A6%B0_%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A7%80%E0%A6%AF%E0%A6%BC_%E0%A6%B8%E0%A6%82%E0%A6%B8%E0%A6%A6_%E0%A6%AD%E0%A6%AC%E0%A6%A8_24.jpg",
                   "image_credit": "MD SAIFUL AMIN, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
@@ -253,8 +253,8 @@
                 },
                 {
                   "name": "বঙ্গবন্ধু সাফারি পার্ক",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/e/eb/%E0%A6%AC%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%AC%E0%A6%A8%E0%A7%8D%E0%A6%A7%E0%A7%81_%E0%A6%B8%E0%A6%BE%E0%A6%AB%E0%A6%BE%E0%A6%B0%E0%A7%80_%E0%A6%AA%E0%A6%BE%E0%A6%B0%E0%A7%8D%E0%A6%95%2C_%E0%A6%97%E0%A6%BE%E0%A6%9C%E0%A7%80%E0%A6%AA%E0%A7%81%E0%A6%B0.jpg",
+                  "image_credit": "Sarkershuvro, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "বঙ্গবন্ধু সাফারি পার্ক বাংলাদেশের গাজীপুর জেলার একটি প্রাকৃতিক দর্শনীয় স্থান। ভ্রমণের আগে স্থানীয় প্রবেশনীতি, আবহাওয়া ও যাতায়াতের অবস্থা যাচাই করুন।",
@@ -293,8 +293,8 @@
                 },
                 {
                   "name": "নুহাশ পল্লী",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Nuhash_Polli_01.JPG",
+                  "image_credit": "Khondkar Mostaque ahmed, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "নুহাশ পল্লী গাজীপুর জেলার একটি পরিচিত স্থান বা স্থানীয় দর্শনীয় গন্তব্য। ভ্রমণের আগে স্থানীয়ভাবে যাতায়াত ও প্রবেশের তথ্য নিশ্চিত করুন।",
@@ -344,8 +344,8 @@
               "places": [
                 {
                   "name": "এগারসিন্দুর দুর্গ",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/3/30/Egarosindur_.jpg",
+                  "image_credit": "Tisuchi, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "এগারসিন্দুর দুর্গ কিশোরগঞ্জ জেলার একটি ঐতিহাসিক বা সাংস্কৃতিক দর্শনীয় স্থান। স্থাপনাটির নির্দিষ্ট ইতিহাস ও দর্শনসূচি প্রকাশের আগে নির্ভরযোগ্য সূত্রে যাচাই করা উচিত।",
@@ -384,8 +384,8 @@
                 },
                 {
                   "name": "শোলাকিয়া ঈদগাহ",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "http://upload.wikimedia.org/wikipedia/commons/c/c3/Sholakia_Eidgah%2C_a_locality_near_Kishoreganj_town%2C_Bangladesh..jpg",
+                  "image_credit": "Salim Khandoker, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "শোলাকিয়া ঈদগাহ কিশোরগঞ্জ জেলার একটি ধর্মীয়/ঐতিহ্যবাহী স্থান। দর্শনের সময় স্থানীয় রীতি ও উপাসনালয়ের নিয়ম মেনে চলুন।",
@@ -424,8 +424,8 @@
                 },
                 {
                   "name": "মিঠামইন হাওর",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/9/90/Nikli_Haor_Ayon_1.jpg",
+                  "image_credit": "Nafis Fuad Ayon, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "মিঠামইন হাওর বাংলাদেশের কিশোরগঞ্জ জেলার একটি প্রাকৃতিক দর্শনীয় স্থান। ভ্রমণের আগে স্থানীয় প্রবেশনীতি, আবহাওয়া ও যাতায়াতের অবস্থা যাচাই করুন।",
@@ -489,8 +489,8 @@
                     "বর্তমান প্রবেশনীতি, নিরাপত্তা নির্দেশনা ও আবহাওয়ার অবস্থা যাচাই না করে যাত্রা করবেন না।"
                   ],
                   "nearby": [],
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/a/a3/All_weather_Road%2C_Kishorganj.jpg",
+                  "image_credit": "Ayon Rahman, CC BY-SA 4.0",
                   "intro_en": "Itna–Mithamain–Ashtagram Road is a destination in Kishoreganj, Bangladesh. Verify local access rules, weather and transport before visiting.",
                   "history_en": "The establishment date and detailed history of Itna–Mithamain–Ashtagram Road have not been verified in this file. Verify them with reliable local, government tourism or archaeology sources before publication.",
                   "why_famous_en": "Itna–Mithamain–Ashtagram Road is a local destination associated with landmark and regional interest. Its specific attractions and historical significance should be verified from reliable sources.",
@@ -520,8 +520,8 @@
               "places": [
                 {
                   "name": "বালিয়াটি জমিদার বাড়ি",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Baliati_Jamindar_Bari_%28140699635%29.jpeg",
+                  "image_credit": "Topu Saha, CC BY-SA 3.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "বালিয়াটি জমিদার বাড়ি মানিকগঞ্জ জেলার একটি ঐতিহাসিক বা সাংস্কৃতিক দর্শনীয় স্থান। স্থাপনাটির নির্দিষ্ট ইতিহাস ও দর্শনসূচি প্রকাশের আগে নির্ভরযোগ্য সূত্রে যাচাই করা উচিত।",
@@ -560,8 +560,8 @@
                 },
                 {
                   "name": "তেওতা জমিদার বাড়ি",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/9/92/Teota_Zamindar_Bari.jpg",
+                  "image_credit": "Asif Zaman, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "তেওতা জমিদার বাড়ি মানিকগঞ্জ জেলার একটি ঐতিহাসিক বা সাংস্কৃতিক দর্শনীয় স্থান। স্থাপনাটির নির্দিষ্ট ইতিহাস ও দর্শনসূচি প্রকাশের আগে নির্ভরযোগ্য সূত্রে যাচাই করা উচিত।",
@@ -611,8 +611,8 @@
               "places": [
                 {
                   "name": "ইদ্রাকপুর কেল্লা",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/4/4b/Idrakpur_kella_01.jpg",
+                  "image_credit": "Rayhan Ahmed, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "ইদ্রাকপুর কেল্লা মুন্সিগঞ্জ জেলার একটি ঐতিহাসিক বা সাংস্কৃতিক দর্শনীয় স্থান। স্থাপনাটির নির্দিষ্ট ইতিহাস ও দর্শনসূচি প্রকাশের আগে নির্ভরযোগ্য সূত্রে যাচাই করা উচিত।",
@@ -651,7 +651,7 @@
                 },
                 {
                   "name": "অতীশ দীপঙ্করের ভিটা",
-                  "image": null,
+                  "image": "https://objectstorage.ap-dcc-gazipur-1.oraclecloud15.com/n/axvjbnqprylg/b/V2Ministry/o/office-sadar-munshiganj/2024/12/d102defe6a0a4325a11f0ab8336c9e6b.jpg",
                   "image_credit": null,
                   "popular": false,
                   "status": "ready",
@@ -691,8 +691,8 @@
                 },
                 {
                   "name": "মাওয়া ঘাট",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/9/9a/Mawa_Launch_Ghat_in_Bangladesh.jpg",
+                  "image_credit": "Md Shaifuzzaman Ayon, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "মাওয়া ঘাট মুন্সিগঞ্জ জেলার একটি পরিচিত স্থান বা স্থানীয় দর্শনীয় গন্তব্য। ভ্রমণের আগে স্থানীয়ভাবে যাতায়াত ও প্রবেশের তথ্য নিশ্চিত করুন।",
@@ -742,8 +742,8 @@
               "places": [
                 {
                   "name": "পানাম নগর",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/9/96/%E0%A6%B8%E0%A7%8B%E0%A6%A8%E0%A6%BE%E0%A6%B0%E0%A6%97%E0%A6%BE%E0%A6%81%E0%A6%93_%E0%A6%AA%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%AE_%E0%A6%A8%E0%A6%97%E0%A6%B0_%E0%A6%AA%E0%A7%81%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A6%A8_%E0%A6%B8%E0%A7%8D%E0%A6%A5%E0%A6%BE%E0%A6%AA%E0%A6%A8%E0%A6%BE-2.jpg",
+                  "image_credit": "Fahad Faisal, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "পানাম নগর নারায়ণগঞ্জ জেলার একটি পরিচিত স্থান বা স্থানীয় দর্শনীয় গন্তব্য। ভ্রমণের আগে স্থানীয়ভাবে যাতায়াত ও প্রবেশের তথ্য নিশ্চিত করুন।",
@@ -782,8 +782,8 @@
                 },
                 {
                   "name": "লোকশিল্প জাদুঘর",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Lok_Shilpa_Jadughar_%28Folk_Arts_Museum%29_in_Sonargaon%2C_Bangladesh.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "Sourav Das, CC BY 2.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "লোকশিল্প জাদুঘর নারায়ণগঞ্জ জেলার একটি ঐতিহাসিক বা সাংস্কৃতিক দর্শনীয় স্থান। স্থাপনাটির নির্দিষ্ট ইতিহাস ও দর্শনসূচি প্রকাশের আগে নির্ভরযোগ্য সূত্রে যাচাই করা উচিত।",
@@ -822,8 +822,8 @@
                 },
                 {
                   "name": "গোয়ালদি মসজিদ",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Front_view_of_Goaldi_mosque%2C_Sonargaon.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "Ferdous, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "গোয়ালদি মসজিদ নারায়ণগঞ্জ জেলার একটি ধর্মীয়/ঐতিহ্যবাহী স্থান। দর্শনের সময় স্থানীয় রীতি ও উপাসনালয়ের নিয়ম মেনে চলুন।",
@@ -873,8 +873,8 @@
               "places": [
                 {
                   "name": "ওয়ারী-বটেশ্বর প্রত্নস্থান",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Wari-Boteshwar_Excavation_053.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "Omarshehab, CC BY-SA 3.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "ওয়ারী-বটেশ্বর প্রত্নস্থান নরসিংদী জেলার একটি ঐতিহাসিক বা সাংস্কৃতিক দর্শনীয় স্থান। স্থাপনাটির নির্দিষ্ট ইতিহাস ও দর্শনসূচি প্রকাশের আগে নির্ভরযোগ্য সূত্রে যাচাই করা উচিত।",
@@ -924,8 +924,8 @@
               "places": [
                 {
                   "name": "আতিয়া মসজিদ",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Atia_Mosque%2C_Tangail_22.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "IqbalHossain, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "আতিয়া মসজিদ টাঙ্গাইল জেলার একটি ধর্মীয়/ঐতিহ্যবাহী স্থান। দর্শনের সময় স্থানীয় রীতি ও উপাসনালয়ের নিয়ম মেনে চলুন।",
@@ -964,8 +964,8 @@
                 },
                 {
                   "name": "মধুপুর জাতীয় উদ্যান",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/b/b9/%E0%A6%AE%E0%A6%A7%E0%A7%81%E0%A6%AA%E0%A7%81%E0%A6%B0_%E0%A6%9C%E0%A6%BE%E0%A6%A4%E0%A7%80%E0%A6%AF%E0%A6%BC_%E0%A6%89%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8%2C_%E0%A6%9F%E0%A6%BE%E0%A6%99%E0%A7%8D%E0%A6%97%E0%A6%BE%E0%A6%87%E0%A6%B2.jpg",
+                  "image_credit": "ShuvoSarwar, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "মধুপুর জাতীয় উদ্যান টাঙ্গাইল জেলার একটি পরিচিত স্থান বা স্থানীয় দর্শনীয় গন্তব্য। ভ্রমণের আগে স্থানীয়ভাবে যাতায়াত ও প্রবেশের তথ্য নিশ্চিত করুন।",
@@ -1004,8 +1004,8 @@
                 },
                 {
                   "name": "করটিয়া জমিদার বাড়ি",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Korotia_Jamidar_Bari%2C_Tangail_05.jpg",
+                  "image_credit": "IqbalHossain, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "করটিয়া জমিদার বাড়ি টাঙ্গাইল জেলার একটি ঐতিহাসিক বা সাংস্কৃতিক দর্শনীয় স্থান। স্থাপনাটির নির্দিষ্ট ইতিহাস ও দর্শনসূচি প্রকাশের আগে নির্ভরযোগ্য সূত্রে যাচাই করা উচিত।",
@@ -1069,8 +1069,8 @@
                     "বর্তমান প্রবেশনীতি, নিরাপত্তা নির্দেশনা ও আবহাওয়ার অবস্থা যাচাই না করে যাত্রা করবেন না।"
                   ],
                   "nearby": [],
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/8/8d/Mahera_Jamidar_Bari.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "Chowdhury Santanu Barua, CC BY-SA 4.0",
                   "intro_en": "Mohera Zamindar Bari is a destination in Tangail, Bangladesh. Verify local access rules, weather and transport before visiting.",
                   "history_en": "The establishment date and detailed history of Mohera Zamindar Bari have not been verified in this file. Verify them with reliable local, government tourism or archaeology sources before publication.",
                   "why_famous_en": "Mohera Zamindar Bari is a local destination associated with heritage and regional interest. Its specific attractions and historical significance should be verified from reliable sources.",
@@ -1100,8 +1100,8 @@
               "places": [
                 {
                   "name": "মথুরাপুর দেউল",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/2/2e/Mothurar_Deol_Faridpur.jpg",
+                  "image_credit": "Imranforestry, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "মথুরাপুর দেউল ফরিদপুর জেলার একটি ঐতিহাসিক বা সাংস্কৃতিক দর্শনীয় স্থান। স্থাপনাটির নির্দিষ্ট ইতিহাস ও দর্শনসূচি প্রকাশের আগে নির্ভরযোগ্য সূত্রে যাচাই করা উচিত।",
@@ -1140,8 +1140,8 @@
                 },
                 {
                   "name": "কবি জসীমউদ্দীনের বাড়ি",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/c/ca/Kabi_Jasimuddin_Museum.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "মোঃ সাকিবুল হাসান, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "কবি জসীমউদ্দীনের বাড়ি ফরিদপুর জেলার একটি পরিচিত স্থান বা স্থানীয় দর্শনীয় গন্তব্য। ভ্রমণের আগে স্থানীয়ভাবে যাতায়াত ও প্রবেশের তথ্য নিশ্চিত করুন।",
@@ -1191,8 +1191,8 @@
               "places": [
                 {
                   "name": "টুঙ্গিপাড়া বঙ্গবন্ধু সমাধিসৌধ",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/7/79/Tomb_of_Sheikh_Mujibur_Rahman%2C_Tungipara.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "Ferdous, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "টুঙ্গিপাড়া বঙ্গবন্ধু সমাধিসৌধ বাংলাদেশের গোপালগঞ্জ জেলার একটি প্রাকৃতিক দর্শনীয় স্থান। ভ্রমণের আগে স্থানীয় প্রবেশনীতি, আবহাওয়া ও যাতায়াতের অবস্থা যাচাই করুন।",
@@ -1231,8 +1231,8 @@
                 },
                 {
                   "name": "মধুমতী নদী",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Madhumati_River.jpg",
+                  "image_credit": "Sd Raihan, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "মধুমতী নদী বাংলাদেশের গোপালগঞ্জ জেলার একটি প্রাকৃতিক দর্শনীয় স্থান। ভ্রমণের আগে স্থানীয় প্রবেশনীতি, আবহাওয়া ও যাতায়াতের অবস্থা যাচাই করুন।",
@@ -1282,8 +1282,8 @@
               "places": [
                 {
                   "name": "শকুনি লেক",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/3/35/%E0%A6%AE%E0%A6%BE%E0%A6%A6%E0%A6%BE%E0%A6%B0%E0%A7%80%E0%A6%AA%E0%A7%81%E0%A6%B0_%E0%A6%B6%E0%A6%95%E0%A7%81%E0%A6%A8%E0%A6%BF_%E0%A6%B2%E0%A7%87%E0%A6%95.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "LM Tanzil, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "শকুনি লেক বাংলাদেশের মাদারীপুর জেলার একটি প্রাকৃতিক দর্শনীয় স্থান। ভ্রমণের আগে স্থানীয় প্রবেশনীতি, আবহাওয়া ও যাতায়াতের অবস্থা যাচাই করুন।",
@@ -1322,8 +1322,8 @@
                 },
                 {
                   "name": "আড়িয়াল খাঁ নদ",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/1/1f/%E0%A6%86%E0%A6%A1%E0%A6%BC%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A6%BE%E0%A6%B2_%E0%A6%96%E0%A6%BE%E0%A6%81_%E0%A6%A8%E0%A6%A6%E0%A7%80%E0%A6%B0_%E0%A6%A4%E0%A7%80%E0%A6%B0%E0%A7%87_%E0%A6%AE%E0%A6%BE%E0%A6%9B_%E0%A6%A7%E0%A6%B0%E0%A6%BE%E0%A6%B0_%E0%A6%A6%E0%A7%83%E0%A6%B6%E0%A7%8D%E0%A6%AF.jpg",
+                  "image_credit": "ShazidSharif2001, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "আড়িয়াল খাঁ নদ মাদারীপুর জেলার একটি পরিচিত স্থান বা স্থানীয় দর্শনীয় গন্তব্য। ভ্রমণের আগে স্থানীয়ভাবে যাতায়াত ও প্রবেশের তথ্য নিশ্চিত করুন।",
@@ -1373,8 +1373,8 @@
               "places": [
                 {
                   "name": "গোয়ালন্দ ঘাট",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Goalanda_Ghat_Faridpur_Bangladesh_%282%29.JPG",
+                  "image_credit": "Shahnoor Habib Munmun, CC BY 3.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "গোয়ালন্দ ঘাট রাজবাড়ী জেলার একটি পরিচিত স্থান বা স্থানীয় দর্শনীয় গন্তব্য। ভ্রমণের আগে স্থানীয়ভাবে যাতায়াত ও প্রবেশের তথ্য নিশ্চিত করুন।",
@@ -1413,8 +1413,8 @@
                 },
                 {
                   "name": "পদ্মা নদীর চর",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/9/95/%E0%A6%AA%E0%A6%A6%E0%A7%8D%E0%A6%AE%E0%A6%BE_%E0%A6%9A%E0%A6%B0.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "পদ্মা চর - Wikimedia Commons",
                   "popular": false,
                   "status": "ready",
                   "intro": "পদ্মা নদীর চর বাংলাদেশের রাজবাড়ী জেলার একটি প্রাকৃতিক দর্শনীয় স্থান। ভ্রমণের আগে স্থানীয় প্রবেশনীতি, আবহাওয়া ও যাতায়াতের অবস্থা যাচাই করুন।",
@@ -1464,8 +1464,8 @@
               "places": [
                 {
                   "name": "পদ্মা সেতু (জাজিরা প্রান্ত)",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/1/16/The_padma_bridge_02.jpg?utm_source=bn.wikipedia.org&utm_campaign=index&utm_content=original",
+                  "image_credit": "Azim Khan Ronnie, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "পদ্মা সেতু (জাজিরা প্রান্ত) শরীয়তপুর জেলার একটি পরিচিত স্থান বা স্থানীয় দর্শনীয় গন্তব্য। ভ্রমণের আগে স্থানীয়ভাবে যাতায়াত ও প্রবেশের তথ্য নিশ্চিত করুন।",
@@ -1504,8 +1504,8 @@
                 },
                 {
                   "name": "পদ্মা নদী",
-                  "image": null,
-                  "image_credit": null,
+                  "image": "https://upload.wikimedia.org/wikipedia/commons/0/0d/%E0%A6%AA%E0%A6%A6%E0%A7%8D%E0%A6%AE%E0%A6%BE_%E0%A6%A8%E0%A6%A6%E0%A7%80_%28Padma_River%29.jpg",
+                  "image_credit": "Md Shaifuzzaman Ayon, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "পদ্মা নদী বাংলাদেশের শরীয়তপুর জেলার একটি প্রাকৃতিক দর্শনীয় স্থান। ভ্রমণের আগে স্থানীয় প্রবেশনীতি, আবহাওয়া ও যাতায়াতের অবস্থা যাচাই করুন।",
