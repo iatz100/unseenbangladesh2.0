@@ -63,3 +63,12 @@
   #pbody .dd-card{padding:14px 14px 16px;border-radius:14px!important}
   #pbody .dd-text,#pbody .dd-list,#pbody .dd-intro{font-size:.92rem}
 }
+
+
+#pbody .dd-history,
+#pbody .dd-why {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
