@@ -16,6 +16,7 @@
 <script>window.__TJ=fetch('../assets/data/tourist.json').then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()});</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@100..800&display=swap">
 <link rel="stylesheet" href="../assets/css/theme.css">
+<link rel="stylesheet" href="../assets/css/tourist-card.css">
 <script src="../assets/js/i18n.js"></script>
 <link rel="stylesheet" href="../assets/css/components.css">
 </head>
@@ -87,13 +88,22 @@
   var cnt = function (name) {
     return (T[name] || []).reduce(function (n, u) { return n + u.p.length; }, 0);
   };
-  var ul = function (title, a, cls) {
-    if (!a || !a.length) return '';
-    return '<div class="sec ' + cls + '"><h5>' + title + '</h5><ul>' +
-      a.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div>';
+  // ডিটেইল পেজের শিরোনাম ও লেবেল: বাংলা ও ইংরেজি আলাদা থাকবে, একটির সাথে অন্যটি মেশানো হবে না
+  var LB = {
+    bn: { hist: 'ইতিহাস', why: 'কেন বিখ্যাত', how: 'কীভাবে যাবেন', dist: 'দূরত্ব', cost: 'খরচ', best: 'উপযুক্ত সময়', tips: 'ভ্রমণ টিপস', warn: 'সতর্কতা', near: 'কাছাকাছি স্থান', map: 'ম্যাপ', mapT: ' ম্যাপ', src: 'তথ্যসূত্র:', photo: 'ছবি' },
+    en: { hist: 'History', why: 'Why It Is Famous', how: 'How to Get There', dist: 'Distance', cost: 'Cost', best: 'Best Time to Visit', tips: 'Travel Tips', warn: 'Warnings', near: 'Nearby Attractions', map: 'Map', mapT: ' map', src: 'Sources:', photo: 'Photo' }
   };
-  var sec = function (t, x) { return x ? '<div class="sec"><h5>' + t + '</h5><p>' + esc(x) + '</p></div>' : ''; };
-  var fact = function (t, x, w) { return x ? '<div class="f' + (w ? ' w' : '') + '"><b>' + t + '</b>' + esc(x) + '</div>' : ''; };
+  function lb() { return isEn() ? LB.en : LB.bn; }
+  function hasBn(x) { return /[\u0980-\u09FF]/.test(String(x || '')); }
+  function domainOf(u) { return String(u || '').replace(/^https?:\/\/(www\.)?/, '').split('/')[0]; }
+  var txt = function (x) { return x ? '<p class="dd-text">' + esc(x) + '</p>' : ''; };
+  var lst = function (a) {
+    return a && a.length ? '<ul class="dd-list">' + a.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' : '';
+  };
+  // একটি তথ্য-কার্ড; ভেতরের বিষয়বস্তু না থাকলে কার্ড বসে না
+  var dcard = function (cls, t, inner) {
+    return inner ? '<section class="dd-card ' + cls + '"><h5 class="dd-h">' + esc(t) + '</h5>' + inner + '</section>' : '';
+  };
 
   var gradients = [
     'linear-gradient(135deg,#667eea 0%,#764ba2 100%)',
@@ -289,7 +299,7 @@
     }, { passive: false });
   })();
 
-  var crOf = function (p) { return '<span class="cr">' + esc(p.cr || 'ছবি') + '</span>'; };
+  var crOf = function (p) { return '<span class="cr">' + esc(isEn() && (!p.cr || hasBn(p.cr)) ? LB.en.photo : (p.cr || LB.bn.photo)) + '</span>'; };
   function isEn() { return document.documentElement.getAttribute('data-lang') === 'en'; }
   function pick(p) {
     if (!isEn() || !p.en) return p;
@@ -299,22 +309,32 @@
       var v = p.en[k];
       if (v != null && v !== '' && !(Array.isArray(v) && !v.length)) o[k] = v;
     }
-    o.src = p.src.map(function (s) { return { t: s.te || s.t, u: s.u }; });
+    o.src = p.src.map(function (s) { return { t: s.te || (hasBn(s.t) ? domainOf(s.u) : s.t), u: s.u }; });
     return o;
   }
   function place(p) {
+    var raw = p, L = lb();
     p = pick(p);
     var img = p.img ? '<img src="' + esc(p.img) + '" alt="' + esc(p.n) + '" loading="lazy" onerror="this.parentNode.textContent=\'' + p.e + '\'">' : p.e;
-    var map = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(p.m);
+    // ইংরেজি মোডে কাছাকাছি স্থানের ইংরেজি তালিকা না থাকলে বাংলা নাম দেখানো হবে না
+    var nb = isEn() ? ((raw.en && raw.en.nb) || []) : (raw.nb || []);
+    var fcards = dcard('dd-full dd-how', L.how, txt(p.g)) +
+      dcard('dd-half dd-dist', L.dist, txt(p.d)) +
+      dcard('dd-half dd-cost', L.cost, txt(p.c)) +
+      dcard('dd-full dd-best', L.best, txt(p.s));
+    var facts = fcards ? '<div class="dd-facts">' + fcards + '</div>' : '';
+    var nbHtml = nb.length ? '<div class="dd-chips">' + nb.map(function (x) { return '<span class="dd-chip">' + esc(x) + '</span>'; }).join('') + '</div>' : '';
+    var mapHtml = '<div class="mapbox"><iframe src="https://www.google.com/maps?q=' + encodeURIComponent(p.m) + '&output=embed" title="' + esc(p.n + L.mapT) + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div>';
     return '<article class="pl"><div class="pw"><div class="pic">' + img + '</div>' + crOf(p) + '</div><div class="pb"><h4>' + esc(p.n) + '</h4>' +
-      (p.i ? '<p>' + esc(p.i) + '</p>' : '') +
-      sec('ইতিহাস', p.h) + sec('কেন বিখ্যাত', p.w) +
-      (p.g || p.d || p.c || p.s ? '<div class="facts">' + fact('কীভাবে যাবেন', p.g, 1) + fact('দূরত্ব', p.d) + fact('খরচ', p.c) + fact('উপযুক্ত সময়', p.s, 1) + '</div>' : '') +
-      ul('ভ্রমণ টিপস', p.t, '') + ul('সতর্কতা', p.x, 'warn') +
-      (p.nb.length ? '<div class="sec"><h5>কাছাকাছি স্থান</h5><div class="chips">' +
-      p.nb.map(function (x) { return '<span class="chip">' + esc(x) + '</span>'; }).join('') + '</div></div>' : '') +
-      '<div class="sec"><h5>ম্যাপ</h5><div class="mapbox"><iframe src="https://www.google.com/maps?q=' + encodeURIComponent(p.m) + '&output=embed" title="' + esc(p.n) + ' ম্যাপ" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe></div></div>' +
-      (p.src.length ? '<div class="src">' + (isEn() ? 'Sources: ' : 'তথ্যসূত্র: ') + p.src.map(function (s) {
+      (p.i ? '<p class="dd-intro">' + esc(p.i) + '</p>' : '') +
+      dcard('dd-history', L.hist, txt(p.h)) +
+      dcard('dd-why', L.why, txt(p.w)) +
+      facts +
+      dcard('dd-tips', L.tips, lst(p.t)) +
+      dcard('dd-warn', L.warn, lst(p.x)) +
+      dcard('dd-nearby', L.near, nbHtml) +
+      dcard('dd-map', L.map, mapHtml) +
+      (p.src.length ? '<div class="src">' + esc(L.src) + ' ' + p.src.map(function (s) {
         return '<a href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">' + esc(s.t) + '</a>';
       }).join(', ') + '</div>' : '') + '</div></article>';
   }
