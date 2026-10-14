@@ -128,8 +128,8 @@
                 },
                 {
                   "name": "জাতীয় সংসদ ভবন",
-                  "image": "সংগৃহীত",
-                  "image_credit": "সংগৃহীত",
+                  "image": "https://commons.wikimedia.org/wiki/File:বাংলাদেশের_জাতীয়_সংসদ_ভবন_24.jpg",
+                  "image_credit": "MD SAIFUL AMIN, CC BY-SA 4.0",
                   "popular": false,
                   "status": "ready",
                   "intro": "ঢাকার শেরেবাংলা নগরে অবস্থিত বাংলাদেশের জাতীয় সংসদ ভবন, স্থপতি লুই আই. কান।",
