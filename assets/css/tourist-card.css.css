@@ -1,0 +1,65 @@
+/*
+ * Destination detail page (main/guide.html, #pbody): card layout for each information section.
+ * Loaded after theme.css, which removes card surfaces across the site; these rules are scoped
+ * to #pbody so only the detail page gets cards. Colours come from the theme tokens, so light
+ * and dark mode both follow the site's own palette.
+ */
+
+:root{--dd-warn-bg:#fff8f2;--dd-warn-line:#efcdb4;--dd-warn-ink:#9a5520;--dd-chip:#efe8d6}
+:root[data-theme="dark"]{--dd-warn-bg:#2a2218;--dd-warn-line:#5a4530;--dd-warn-ink:#e8a866;--dd-chip:#1d302c}
+
+/* place header and intro */
+#pbody .pb{min-width:0;overflow-wrap:anywhere}
+#pbody .pb h4{margin:6px 0 8px;font-size:clamp(1.25rem,3.4vw,1.6rem);line-height:1.3;color:var(--river-deep)}
+#pbody .dd-intro{margin:0 0 16px;color:var(--ink);font-size:.98rem;line-height:1.75}
+
+/* card: subtle surface, thin border, rounded corners, soft shadow */
+#pbody .dd-card{
+  display:block;min-width:0;margin:0 0 14px;padding:16px 18px 18px;
+  background:var(--surface)!important;
+  border:1px solid var(--line)!important;
+  border-radius:16px!important;
+  box-shadow:0 1px 2px rgba(20,35,31,.05),0 6px 18px rgba(20,35,31,.07)!important;
+  overflow-wrap:anywhere;
+}
+:root[data-theme="dark"] #pbody .dd-card{
+  box-shadow:0 2px 6px rgba(0,0,0,.35),0 10px 26px rgba(0,0,0,.35)!important;
+}
+
+/* card heading and body text */
+#pbody .dd-h{margin:0 0 8px;color:var(--river-deep);font-size:1.02rem;font-weight:800;line-height:1.35}
+#pbody .dd-text{margin:0;color:var(--ink);font-size:.95rem;line-height:1.8}
+#pbody .dd-list{margin:0;padding-left:20px;color:var(--ink);font-size:.95rem;line-height:1.75}
+#pbody .dd-list li{margin:4px 0}
+
+/* distance and cost sit side by side; the other cards span the full width */
+#pbody .dd-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:0 0 14px}
+#pbody .dd-facts .dd-card{margin:0}
+#pbody .dd-facts .dd-full{grid-column:1/-1}
+@media (max-width:339px){
+  #pbody .dd-facts{grid-template-columns:minmax(0,1fr)}
+}
+
+/* warnings: same card, warm tint and accent bar */
+#pbody .dd-warn{background:var(--dd-warn-bg)!important;border-color:var(--dd-warn-line)!important;border-left:4px solid var(--dd-warn-ink)!important}
+#pbody .dd-warn .dd-h{color:var(--dd-warn-ink)}
+
+/* nearby attractions */
+#pbody .dd-chips{display:flex;flex-wrap:wrap;gap:8px}
+#pbody .dd-chip{display:inline-block;max-width:100%;padding:4px 12px;border-radius:99px;background:var(--dd-chip);color:var(--river-deep);font-size:.88rem;line-height:1.5;overflow-wrap:anywhere}
+
+/* map */
+#pbody .dd-map .mapbox{position:relative;width:100%;aspect-ratio:16/9;margin:0;border-radius:12px!important;overflow:hidden;background:var(--chip)!important}
+#pbody .dd-map .mapbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+@media (max-width:559px){
+  #pbody .dd-map .mapbox{aspect-ratio:4/3}
+}
+
+/* sources line under the cards */
+#pbody .src{margin:4px 0 0;color:var(--muted);font-size:.82rem;overflow-wrap:anywhere}
+
+/* phones: keep text comfortable and avoid sideways overflow */
+@media (max-width:559px){
+  #pbody .dd-card{padding:14px 14px 16px;border-radius:14px!important}
+  #pbody .dd-text,#pbody .dd-list,#pbody .dd-intro{font-size:.92rem}
+}
